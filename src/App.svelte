@@ -34,6 +34,7 @@
   import ProfRating from './lib/ratings/ProfRating.svelte';
   import { setRatingsData } from './lib/ratings/context';
   import { inferTaken } from './lib/implied';
+  import { done, notTaken, settings } from './lib/persist/store.svelte';
 
   interface Props {
     data: CourseData;
@@ -43,9 +44,6 @@
   let { data, offeringData }: Props = $props();
   const courses = untrack(() => data.courses);
   const nodeTypes = { course: CourseNode, junction: JunctionNode, other: OtherNode };
-  const STORAGE_KEY = 'sfu-prereqs:taken';
-  const NOT_TAKEN_KEY = 'sfu-prereqs:not-taken';
-  const ASSUME_KEY = 'sfu-prereqs:assume-prereqs';
 
   const { terms, offerings } = untrack(() => offeringData);
   setScheduleData({ terms, offerings });
@@ -76,23 +74,6 @@
     return code && code in courses ? code : null;
   }
 
-  function loadCodes(key: string): string[] {
-    try {
-      const saved = JSON.parse(localStorage.getItem(key) ?? '[]');
-      return Array.isArray(saved) ? saved.filter((c): c is string => typeof c === 'string') : [];
-    } catch {
-      return [];
-    }
-  }
-
-  function loadFlag(key: string, fallback: boolean): boolean {
-    try {
-      const v = localStorage.getItem(key);
-      return v === null ? fallback : v === 'true';
-    } catch {
-      return fallback;
-    }
-  }
 
   const narrow = () => matchMedia('(max-width: 700px)').matches;
   const initial = codeFromHash() ?? 'CMPT 410';
@@ -103,14 +84,12 @@
   let dockOpen = $state(false);
   let hideTaken = $state(true);
   let view = $state<View>(narrow() ? 'list' : 'graph');
-  // `done` is what you've ticked. Their prerequisites are filled in on top
-  // (`implied`): required ones for certain, a best guess for "one of"
-  // groups. `notTaken` holds guesses you've rejected. Everything that asks
-  // "has this been taken?" uses `known`, the two together.
-  const done = new SvelteSet<string>(loadCodes(STORAGE_KEY));
-  const notTaken = new SvelteSet<string>(loadCodes(NOT_TAKEN_KEY));
-  let assume = $state(loadFlag(ASSUME_KEY, true));
-  const implied = $derived(assume ? inferTaken(courses, done, notTaken) : new Map());
+  // `done` is what you've ticked (saved by persist/store). Their
+  // prerequisites are filled in on top (`implied`): required ones for
+  // certain, a best guess for "one of" groups. `notTaken` holds guesses
+  // you've rejected. Everything that asks "has this been taken?" uses
+  // `known`, the two together.
+  const implied = $derived(settings.assumePrereqs ? inferTaken(courses, done, notTaken) : new Map());
   const known = $derived(new Set([...done, ...implied.keys()]));
   // Svelte Flow unmounts without a pointerleave when switching views.
   $effect(() => {
@@ -166,14 +145,6 @@
     return counts;
   });
   const layoutKey = $derived(graph.nodes.map((n) => n.id).join() + target);
-
-  $effect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify([...done]));
-      localStorage.setItem(NOT_TAKEN_KEY, JSON.stringify([...notTaken]));
-      localStorage.setItem(ASSUME_KEY, String(assume));
-    } catch {}
-  });
 
   // Each new target gets a history entry so the Back button returns to the
   // previous course. The first one replaces, so Back can still leave the app.
@@ -554,7 +525,7 @@
       </div>
     {/if}
     <label class="assume-toggle">
-      <input type="checkbox" bind:checked={assume} />
+      <input type="checkbox" bind:checked={settings.assumePrereqs} />
       Fill in prerequisites of courses I've taken
     </label>
     <form

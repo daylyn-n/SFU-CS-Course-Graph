@@ -1,5 +1,6 @@
 <!-- Degree progress: checks the taken courses against a program's requirements. -->
 <script lang="ts">
+  import { settings } from './persist/store.svelte';
   import { PROGRAMS, DEFAULT_PROGRAM } from '../data/programs';
   import { evaluateProgram, type RequirementResult } from './degree';
   import { courseStatus } from './graph';
@@ -21,23 +22,11 @@
   let { courses, done, offeredIn = () => [], onselect, ontarget, implied = new Map() }: Props = $props();
   const isAssumed = (code: string) => implied.get(code)?.certain === false;
 
-  const STORAGE_KEY = 'sfu-prereqs:program';
   const SUGGESTIONS = 6;
 
-  function loadProgram(): string {
-    try {
-      const id = localStorage.getItem(STORAGE_KEY);
-      if (id && PROGRAMS.some((p) => p.id === id)) return id;
-    } catch {}
-    return DEFAULT_PROGRAM;
-  }
-
-  let programId = $state(loadProgram());
-  $effect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, programId);
-    } catch {}
-  });
+  // The chosen program is saved (and synced) by persist/store; '' or an
+  // unknown id falls back to the default.
+  const programId = $derived(PROGRAMS.some((p) => p.id === settings.program) ? settings.program : DEFAULT_PROGRAM);
 
   const program = $derived(PROGRAMS.find((p) => p.id === programId) ?? PROGRAMS[0]);
   const result = $derived(evaluateProgram(program, done, courses));
@@ -88,7 +77,7 @@
     <div class="summary-text">
       <label class="picker">
         <span class="eyebrow">Program</span>
-        <select bind:value={programId}>
+        <select value={programId} onchange={(e) => (settings.program = e.currentTarget.value)}>
           {#each PROGRAMS as p (p.id)}
             <option value={p.id}>{p.name} ({p.credential})</option>
           {/each}

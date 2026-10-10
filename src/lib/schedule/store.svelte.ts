@@ -1,5 +1,5 @@
 // Saved schedules (3 slots), shared between the schedule builder and the rest
-// of the app. Persisted to localStorage on every change.
+// of the app. Persisted by persist/store.svelte.ts.
 
 import { arrange, emptySlot, parseState, termForAdd, validateState, type Picks, type ScheduleState, type Slot } from './schedule';
 import type { Offerings, Term } from '../types';
@@ -18,14 +18,8 @@ export const scheduleState: ScheduleState = $state(load());
 /** Transient feedback, e.g. "Added CMPT 225 to Schedule 1". */
 export const scheduleNotice: { text: string; kind: 'info' | 'warn'; id: number } = $state({ text: '', kind: 'info', id: 0 });
 
-$effect.root(() => {
-  $effect(() => {
-    const json = JSON.stringify(scheduleState);
-    try {
-      localStorage.setItem(KEY, json);
-    } catch {}
-  });
-});
+// Saving (and stamping changes for sync) is done by persist/store.svelte.ts,
+// which owns all saved state; it writes this object to KEY.
 
 // Terms and offerings, once someone hands them over (see setScheduleData).
 let data: { terms: Term[]; offerings: Offerings } | null = null;
