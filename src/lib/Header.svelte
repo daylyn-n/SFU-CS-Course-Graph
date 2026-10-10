@@ -1,4 +1,17 @@
-<script>
+<script lang="ts">
+  import type { Courses, Term } from './types';
+
+  interface Props {
+    courses: Courses;
+    target: string;
+    progress: { done: number; ready: number; locked: number };
+    terms: Term[];
+    onpick: (code: string) => void;
+    view: 'graph' | 'list';
+    maxDepth: number;
+    hideTaken: boolean;
+  }
+
   let {
     courses,
     target,
@@ -8,13 +21,14 @@
     view = $bindable(),
     maxDepth = $bindable(),
     hideTaken = $bindable(),
-  } = $props();
+  }: Props = $props();
 
+  // svelte-ignore state_referenced_locally
   const codes = Object.keys(courses);
   const PICKS = ['CMPT 225', 'CMPT 300', 'CMPT 310', 'CMPT 354', 'CMPT 410'].filter((c) => c in courses);
 
   let search = $state('');
-  let input;
+  let input: HTMLInputElement;
 
   function submitSearch() {
     const m = search.trim().toUpperCase().match(/^([A-Z]{2,5})\s*(\d{3}[A-Z]?)/);
@@ -27,12 +41,12 @@
   }
 
   // "/" jumps to the search box, like on GitHub or YouTube.
-  function onkeydown(e) {
+  function onkeydown(e: KeyboardEvent) {
     const el = document.activeElement;
     const typing =
       el?.tagName === 'TEXTAREA' ||
       el?.tagName === 'SELECT' ||
-      (el?.tagName === 'INPUT' && !['checkbox', 'radio', 'button'].includes(el.type));
+      (el?.tagName === 'INPUT' && !['checkbox', 'radio', 'button'].includes((el as HTMLInputElement).type));
     if (e.key === '/' && !typing) {
       e.preventDefault();
       input.focus();
@@ -40,7 +54,7 @@
   }
 
   const total = $derived(progress.done + progress.ready + progress.locked);
-  const pct = (n) => (total ? (n / total) * 100 : 0);
+  const pct = (n: number) => (total ? (n / total) * 100 : 0);
 </script>
 
 <svelte:window {onkeydown} />

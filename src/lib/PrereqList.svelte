@@ -1,8 +1,24 @@
 <!-- Indented checklist version of the chart, for small screens. -->
-<script>
+<script lang="ts">
   import Self from './PrereqList.svelte';
   import { courseStatus, satisfied } from './graph';
   import TermPills from './TermPills.svelte';
+  import type { Courses, Prereq, Taken, Term } from './types';
+
+  interface Props {
+    tree: Prereq;
+    courses: Courses;
+    done: Taken;
+    hideTaken: boolean;
+    ontoggle: (code: string) => void;
+    onselect: (code: string) => void;
+    maxDepth: number;
+    expanded: ReadonlySet<string>;
+    onexpand: (code: string) => void;
+    offeredIn: (code: string) => Term[];
+    ancestors?: string[];
+    flat?: boolean;
+  }
 
   // tree: a course code string or { op, args }. `flat` is set for a course's
   // own prerequisites, where an AND just means "list them all" with no header.
@@ -19,7 +35,7 @@
     offeredIn,
     ancestors = [],
     flat = false,
-  } = $props();
+  }: Props = $props();
   const shared = $derived({
     courses,
     done,
@@ -55,7 +71,7 @@
     </div>
     {#if open}
       <ul>
-        <Self tree={course.prereq} {...shared} ancestors={[...ancestors, tree]} flat />
+        <Self tree={course.prereq!} {...shared} ancestors={[...ancestors, tree]} flat />
       </ul>
     {/if}
   </li>

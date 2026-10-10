@@ -2,21 +2,23 @@
 // src/data/courses.json with each course's prerequisites parsed into an
 // and/or tree.
 //
-// Usage: node scripts/fetch-courses.mjs [year/term] [dept ...]
-//   e.g. node scripts/fetch-courses.mjs 2026/fall cmpt macm math stat
+// Usage: node scripts/fetch-courses.ts [year/term] [dept ...]
+//   e.g. node scripts/fetch-courses.ts 2026/fall cmpt macm math stat
 
 import { writeFile, mkdir } from 'node:fs/promises';
-import { parsePrereqs } from './parse-prereqs.mjs';
-import { CALENDAR_API, getJson as getJsonFrom, missingPaths, pool } from './sfu-api.mjs';
+import type { Course, Prereq } from '../src/lib/types.ts';
+import { parsePrereqs } from './parse-prereqs.ts';
+import { CALENDAR_API, getJson as getJsonFrom, missingPaths, pool } from './sfu-api.ts';
 
 const [term = '2026/fall', ...deptArgs] = process.argv.slice(2);
 const depts = deptArgs.length ? deptArgs : ['cmpt', 'macm', 'math', 'stat'];
 const OUT = new URL('../src/data/courses.json', import.meta.url);
-const getJson = (path) => getJsonFrom(CALENDAR_API, `${term}/courses/${path}`);
+const getJson = (path: string) => getJsonFrom(CALENDAR_API, `${term}/courses/${path}`);
 
-const courses = {};
+/** null = claimed/being fetched, or not in the calendar */
+const courses: Record<string, Course | null> = {};
 
-async function fetchCourse(dept, number) {
+async function fetchCourse(dept: string, number: string) {
   const code = `${dept.toUpperCase()} ${number.toUpperCase()}`;
   if (code in courses) return;
   courses[code] = null; // claim it so we don't fetch twice
@@ -31,7 +33,7 @@ async function fetchCourse(dept, number) {
   };
 }
 
-function decode(s) {
+function decode(s: string): string {
   return s
     .replace(/&quot;/g, '"')
     .replace(/&#39;/g, "'")
@@ -40,7 +42,7 @@ function decode(s) {
     .trim();
 }
 
-function referencedCodes(tree, out = new Set()) {
+function referencedCodes(tree: Prereq | null | undefined, out = new Set<string>()): Set<string> {
   if (!tree) return out;
   if (typeof tree === 'string') out.add(tree);
   else tree.args.forEach((a) => referencedCodes(a, out));
@@ -49,7 +51,7 @@ function referencedCodes(tree, out = new Set()) {
 
 console.log(`Fetching ${term}: ${depts.join(', ')}`);
 for (const dept of depts) {
-  const list = (await getJson(dept)) ?? [];
+  const list: { value: string }[] = (await getJson(dept)) ?? [];
   console.log(`  ${dept.toUpperCase()}: ${list.length} courses`);
   await pool(list, 6, (c) => fetchCourse(dept, c.value));
 }
@@ -57,7 +59,7 @@ for (const dept of depts) {
 // Pull in prerequisites from other departments (e.g. PHYS 120) so every
 // box in the chart has a title. One extra level is enough for most charts.
 for (let round = 0; round < 2; round++) {
-  const missing = new Set();
+  const missing = new Set<string>();
   for (const c of Object.values(courses)) {
     for (const code of referencedCodes(c?.prereq)) {
       if (!(code in courses)) missing.add(code);
@@ -65,7 +67,7 @@ for (let round = 0; round < 2; round++) {
   }
   if (!missing.size) break;
   console.log(`  + ${missing.size} referenced courses from other departments`);
-  await pool([...missing], 6, (code) => {
+  await pool([...missing], 6, (code: string) => {
     const [dept, num] = code.split(' ');
     return fetchCourse(dept.toLowerCase(), num);
   });

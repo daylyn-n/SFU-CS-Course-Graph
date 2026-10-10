@@ -6,10 +6,19 @@
 // or null when no course prerequisites were found. The wording is not fully
 // regular, so this is best-effort: the UI always shows the original text too.
 
+import type { Prereq } from '../src/lib/types.ts';
+
+type Token =
+  | { t: 'course'; v: string }
+  | { t: 'oneof' | 'and' | 'or' | '(' | ')' | ',' | ';' };
+
+/** Parser output before simplify(): groups may be empty or nested. */
+type RawTree = string | { op: 'and' | 'or'; args: RawTree[] };
+
 const COURSE = /^([A-Z]{2,5})\s?(\d{3}[A-Z]?)\b/;
 const BARE_NUMBER = /^(\d{3}[A-Z]?)\b(?!\s*(units|credits|-level|level))/i;
 
-function tokenize(text) {
+function tokenize(text: string): Token[] {
   // Stop before trailing notes that aren't requirements.
   let s = text.replace(/^\s*prerequisites?:?(\s*or\s+corequisites?:?)?/i, '');
   s = s.split(/\b(recommended|corequisites?|students)\b/i)[0];
@@ -20,12 +29,12 @@ function tokenize(text) {
     .filter((sentence) => !/substitut|in place of|instead of/i.test(sentence))
     .join(' ');
 
-  const tokens = [];
-  let lastDept = null;
+  const tokens: Token[] = [];
+  let lastDept: string | null = null;
   let i = 0;
   while (i < s.length) {
     const rest = s.slice(i);
-    let m;
+    let m: RegExpMatchArray | null;
     if ((m = rest.match(COURSE))) {
       lastDept = m[1];
       tokens.push({ t: 'course', v: `${m[1]} ${m[2].toUpperCase()}` });
@@ -38,10 +47,10 @@ function tokenize(text) {
       tokens.push({ t: 'oneof' });
       i += m[0].length;
     } else if ((m = rest.match(/^(and|or)\b/i)) && /\W$|^$/.test(s.slice(Math.max(0, i - 1), i))) {
-      tokens.push({ t: m[1].toLowerCase() });
+      tokens.push({ t: m[1].toLowerCase() as 'and' | 'or' });
       i += m[0].length;
     } else if ('(),;'.includes(rest[0])) {
-      tokens.push({ t: rest[0] });
+      tokens.push({ t: rest[0] as '(' | ')' | ',' | ';' });
       i += 1;
     } else {
       i += 1;
@@ -53,8 +62,8 @@ function tokenize(text) {
 // Decide what each comma means. "A, B or C" is a list of ORs and
 // "A, B and C" a list of ANDs, so a comma takes the meaning of the next
 // connector at the same nesting level. After "one of", commas mean OR.
-function resolveCommas(tokens) {
-  const out = [];
+function resolveCommas(tokens: Token[]): Token[] {
+  const out: Token[] = [];
   for (let i = 0; i < tokens.length; i++) {
     const tok = tokens[i];
     if (tok.t === ';') {
@@ -70,7 +79,7 @@ function resolveCommas(tokens) {
     const next = tokens[i + 1];
     if (!next || next.t === 'and' || next.t === 'or' || next.t === ')') continue;
 
-    let op = 'and';
+    let op: 'and' | 'or' = 'and';
     let depth = 0;
     for (let j = out.length - 1; j >= 0; j--) {
       const p = out[j];
@@ -105,10 +114,10 @@ function resolveCommas(tokens) {
 
 // Precedence: AND binds loosest, then OR. "A or B and C" reads as
 // "(A or B) and C", which matches how SFU usually phrases things.
-function parse(tokens) {
+function parse(tokens: Token[]): RawTree {
   let pos = 0;
 
-  function parseAnd() {
+  function parseAnd(): RawTree {
     const args = [parseOr()];
     while (tokens[pos]?.t === 'and') {
       pos++;
@@ -116,7 +125,7 @@ function parse(tokens) {
     }
     return { op: 'and', args };
   }
-  function parseOr() {
+  function parseOr(): RawTree {
     const args = [parseAtom()];
     while (tokens[pos]?.t === 'or') {
       pos++;
@@ -124,8 +133,8 @@ function parse(tokens) {
     }
     return { op: 'or', args };
   }
-  function parseAtom() {
-    const items = [];
+  function parseAtom(): RawTree {
+    const items: RawTree[] = [];
     while (pos < tokens.length) {
       const tok = tokens[pos];
       if (tok.t === 'course') {
@@ -144,7 +153,7 @@ function parse(tokens) {
 
   const tree = parseAnd();
   // Keep going past anything unparseable, joining later pieces with AND.
-  const rest = [];
+  const rest: RawTree[] = [];
   while (pos < tokens.length) {
     pos++;
     rest.push(parseAnd());
@@ -153,15 +162,15 @@ function parse(tokens) {
 }
 
 // Drop empty branches, merge nested same-op groups, unwrap single children.
-function simplify(node) {
+function simplify(node: RawTree | null): Prereq | null {
   if (node == null || typeof node === 'string') return node;
-  const args = [];
+  const args: Prereq[] = [];
   for (const a of node.args.map(simplify)) {
     if (a == null) continue;
     if (typeof a === 'object' && a.op === node.op) args.push(...a.args);
     else args.push(a);
   }
-  const seen = new Set();
+  const seen = new Set<string>();
   const unique = args.filter((a) => {
     const key = JSON.stringify(a);
     return seen.has(key) ? false : seen.add(key);
@@ -171,7 +180,7 @@ function simplify(node) {
   return { op: node.op, args: unique };
 }
 
-export function parsePrereqs(text) {
+export function parsePrereqs(text: string): Prereq | null {
   if (!text) return null;
   return simplify(parse(resolveCommas(tokenize(text))));
 }

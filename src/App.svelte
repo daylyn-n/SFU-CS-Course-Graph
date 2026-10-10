@@ -1,5 +1,5 @@
-<script>
-  import { setContext, untrack } from 'svelte';
+<script lang="ts">
+  import { untrack } from 'svelte';
   import { SvelteSet } from 'svelte/reactivity';
   import { SvelteFlow, Background, Controls } from '@xyflow/svelte';
   import '@xyflow/svelte/dist/style.css';
@@ -13,31 +13,34 @@
   import PrereqList from './lib/PrereqList.svelte';
   import TermPills from './lib/TermPills.svelte';
   import Header from './lib/Header.svelte';
+  import { setActions } from './lib/context';
+  import type { Courses, Offerings, Status, Term } from './lib/types';
 
-  const courses = data.courses;
+  // JSON imports infer loose types (e.g. op: string), so assert the real shapes.
+  const courses = data.courses as unknown as Courses;
   const nodeTypes = { course: CourseNode, junction: JunctionNode };
   const STORAGE_KEY = 'sfu-prereqs:taken';
   const RMP_SCHOOL_ID = 1482; // Simon Fraser University on ratemyprofessors.com
 
-  const { terms, offerings } = offeringData;
-  const offeredIn = (code) => terms.filter((t) => offerings[code]?.[t.id]);
-  const rmpUrl = (name) =>
+  const { terms, offerings } = offeringData as unknown as { terms: Term[]; offerings: Offerings };
+  const offeredIn = (code: string): Term[] => terms.filter((t) => offerings[code]?.[t.id]);
+  const rmpUrl = (name: string) =>
     `https://www.ratemyprofessors.com/search/professors/${RMP_SCHOOL_ID}?q=${encodeURIComponent(name)}`;
 
   // Reverse lookup: which courses list this one as a prerequisite?
-  const unlocks = {};
+  const unlocks: Record<string, string[]> = {};
   for (const [code, c] of Object.entries(courses)) {
     for (const ref of new Set(JSON.stringify(c.prereq ?? '').match(/[A-Z]{2,5} \d{3}[A-Z]?/g))) {
       (unlocks[ref] ??= []).push(code);
     }
   }
 
-  function codeFromHash() {
+  function codeFromHash(): string | null {
     const code = decodeURIComponent(location.hash.slice(1)).replace('-', ' ');
     return code in courses ? code : null;
   }
 
-  function loadTaken() {
+  function loadTaken(): string[] {
     try {
       return JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '[]');
     } catch {
@@ -50,9 +53,9 @@
   let selected = $state(initial);
   let maxDepth = $state(2);
   let hideTaken = $state(true);
-  let view = $state(matchMedia('(max-width: 700px)').matches ? 'list' : 'graph');
-  const done = new SvelteSet(loadTaken());
-  const expanded = new SvelteSet();
+  let view = $state<'graph' | 'list'>(matchMedia('(max-width: 700px)').matches ? 'list' : 'graph');
+  const done = new SvelteSet<string>(loadTaken());
+  const expanded = new SvelteSet<string>();
 
   const graph = $derived(buildGraph(target, courses, done, { maxDepth, hideTaken, expanded, offeredIn }));
   // Svelte Flow needs writable arrays, so mirror the derived graph into state.
@@ -63,7 +66,7 @@
     edges = graph.edges;
   });
   const progress = $derived.by(() => {
-    const counts = { done: 0, ready: 0, locked: 0 };
+    const counts: Record<Status, number> = { done: 0, ready: 0, locked: 0 };
     for (const n of graph.nodes) {
       if (n.type === 'course' && n.id !== target) counts[n.data.status]++;
     }
@@ -82,18 +85,18 @@
     if (location.hash !== hash) history.replaceState(null, '', hash);
   });
 
-  function setTarget(code) {
+  function setTarget(code: string) {
     target = code;
     selected = code;
     expanded.clear();
   }
 
-  function toggleDone(code) {
+  function toggleDone(code: string) {
     if (done.has(code)) done.delete(code);
     else done.add(code);
   }
 
-  setContext('actions', {
+  setActions({
     toggleDone,
     expand: (code) => expanded.add(code),
   });
@@ -101,10 +104,10 @@
 
   const sel = $derived(courses[selected]);
   const selStatus = $derived(courseStatus(selected, courses, done));
-  const statusLabel = { done: 'Taken', ready: 'Can take now', locked: 'Prerequisites missing' };
+  const statusLabel: Record<Status, string> = { done: 'Taken', ready: 'Can take now', locked: 'Prerequisites missing' };
 </script>
 
-<svelte:window onhashchange={() => codeFromHash() && setTarget(codeFromHash())} />
+<svelte:window onhashchange={() => codeFromHash() && setTarget(codeFromHash()!)} />
 
 <Header
   {courses}

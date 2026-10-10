@@ -1,8 +1,13 @@
 <!-- Re-centres the chart whenever `key` changes (i.e. the set of nodes changed). -->
-<script>
+<script lang="ts">
   import { useSvelteFlow } from '@xyflow/svelte';
 
-  let { key } = $props();
+  interface Props {
+    /** refit whenever this changes */
+    key: unknown;
+  }
+
+  let { key }: Props = $props();
   const { fitView } = useSvelteFlow();
 
   $effect(() => {

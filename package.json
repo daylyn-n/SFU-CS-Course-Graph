@@ -7,15 +7,21 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "fetch-data": "node scripts/fetch-courses.mjs && node scripts/fetch-offerings.mjs",
-    "fetch-offerings": "node scripts/fetch-offerings.mjs"
+    "check": "svelte-check --tsconfig ./tsconfig.json",
+    "typecheck": "svelte-check --tsconfig ./tsconfig.json && tsc -p scripts/tsconfig.json",
+    "fetch-data": "node scripts/fetch-courses.ts && node scripts/fetch-offerings.ts",
+    "fetch-offerings": "node scripts/fetch-offerings.ts"
+  },
+  "engines": {
+    "node": ">=22.18"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^7.3.1",
     "@tsconfig/svelte": "^5.0.8",
+    "@types/node": "^24.19.2",
     "svelte": "^5.57.2",
     "svelte-check": "^4.7.6",
-    "typescript": "^7.0.2",
+    "typescript": "^6.0.3",
     "vite": "^8.3.4"
   },
   "dependencies": {
