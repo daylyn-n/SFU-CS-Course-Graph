@@ -9,6 +9,7 @@
 
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { join, relative } from 'node:path';
+import { termEnded } from './terms.ts';
 
 const before = process.argv[2];
 if (!before) throw new Error('usage: node scripts/check-data.ts <copy of public/data from before the fetch>');
@@ -69,18 +70,23 @@ const old = (f: string) => load(before, f);
 {
   const [n, o] = [now.get('offerings.json'), await old('offerings.json')];
   atLeast('offered courses (all terms)', count(n?.offerings), undefined, 0, 1000);
-  // Per term, only for terms in both: a newly published term starts small.
+  // Per term, against the old data's terms: a newly published term starts
+  // small, so it isn't compared. An old term that hasn't ended must still be
+  // there, so a truncated term list from SFU can't quietly drop one.
   const perTerm = (data: any, term: string) =>
     Object.values<Record<string, unknown[]>>(data?.offerings ?? {}).filter((byTerm) => byTerm[term]?.length).length;
-  for (const t of n?.terms ?? []) {
-    if (o?.terms?.some((x: { id: string }) => x.id === t.id)) atLeast(`  ${t.label} courses`, perTerm(n, t.id), perTerm(o, t.id), 0.8);
+  for (const t of (o?.terms ?? []) as { id: string; label: string }[]) {
+    if (n?.terms?.some((x: { id: string }) => x.id === t.id)) atLeast(`  ${t.label} courses`, perTerm(n, t.id), perTerm(o, t.id), 0.8);
+    else if (!termEnded(t.id)) problems.push(`${t.label}: in the old offerings but missing from the new ones, and it hasn't ended`);
+    else console.log(`  ok  ${t.label}: dropped (term is over)`);
   }
 }
 {
   const [n, o] = [now.get('seats.json'), await old('seats.json')];
-  for (const [term, s] of Object.entries<{ sections?: object }>(n?.terms ?? {})) {
-    const prev = o?.terms?.[term]?.sections;
-    if (prev) atLeast(`seats ${term} courses`, count(s.sections), count(prev), 0.5);
+  for (const [term, s] of Object.entries<{ sections?: object }>(o?.terms ?? {})) {
+    const next = n?.terms?.[term];
+    if (next) atLeast(`seats ${term} courses`, count(next.sections), count(s.sections), 0.5);
+    else if (!termEnded(term)) problems.push(`seats ${term}: in the old seats.json but missing from the new one, and it hasn't ended`);
   }
 }
 {
