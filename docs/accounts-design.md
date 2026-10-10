@@ -133,13 +133,21 @@ same project as ratings).
 
 ### Whose data is on this device
 - The local document records its `owner`.
-- **Never signed in (owner null), signing in:** if the account is empty,
-  upload; if the account has data, snapshot local, merge, and report it.
+- **Never signed in (owner null), signing in:**
+  - Nothing on this device: no question; take the account's data (or start
+    the account from this device's settings if the account is empty).
+  - Data on this device: on a shared computer it may be someone else's, so
+    nothing goes to the account silently. First ask "Copy this device's data
+    into your account?" (`confirmCopy`), even if the account is empty.
+    - **Yes:** if the account is empty, upload; otherwise snapshot ("Before
+      syncing with your account"), merge, push, and report the merge.
+    - **No:** snapshot the local document ("This device before signing in"),
+      then show the account's data (or an empty document owned by the user if
+      the account is empty). The old local data is never pushed.
 - **Same owner:** merge normally.
 - **Different owner** (a library computer, or switching accounts): never
-  merge. Snapshot the local document, load the account's, and offer "Copy
-  this device's data into your account" only when the local document has no
-  owner. History is filtered by owner.
+  merge and never offer a copy. Snapshot the local document and load the
+  account's. History is filtered by owner.
 
 ### Database (Postgres, row-level security)
 - `user_state(user_id uuid pk → auth.users on delete cascade, doc jsonb, rev

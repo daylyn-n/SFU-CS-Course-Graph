@@ -33,7 +33,7 @@ export const KEYS = {
 const OUR_KEYS = new Set<string>(Object.values(KEYS));
 
 /** What changed and why. 'local' covers ordinary edits. */
-export type ChangeSource = 'local' | 'undo' | 'restore' | 'import' | 'tab' | 'remote' | 'load';
+export type ChangeSource = 'local' | 'undo' | 'restore' | 'import' | 'tab' | 'remote' | 'load' | 'auto';
 /** Changes the user made here (stamped, synced); the rest came from elsewhere. */
 export const isOwnChange = (s: ChangeSource) => s === 'local' || s === 'undo' || s === 'restore' || s === 'import';
 
@@ -131,6 +131,8 @@ let savedActive = scheduleState.active;
 let incoming: { json: string; source: ChangeSource } | null = null;
 /** Values being set by an own action other than an ordinary edit (undo...). */
 let ownSource: ChangeSource | null = null;
+/** Values as left by automatic() housekeeping: saved but not stamped. */
+let autoJson: string | null = null;
 
 const listeners = new Set<(e: ChangeEvent) => void>();
 
@@ -201,6 +203,11 @@ $effect.root(() => {
     let source: ChangeSource;
     if (incoming && incoming.json === json) {
       source = incoming.source; // doc already set by applyDoc
+    } else if (autoJson === json) {
+      // Housekeeping, not an edit: keep the stamps so it never outranks a
+      // real change from another device.
+      source = 'auto';
+      doc = updateDoc(doc, values, null);
     } else {
       source = ownSource ?? 'local';
       doc = updateDoc(doc, values, clock);
@@ -208,6 +215,7 @@ $effect.root(() => {
     }
     incoming = null;
     ownSource = null;
+    autoJson = null;
     saved = json;
     savedActive = active;
     // Another tab's change is already in storage; writing it back could
@@ -262,6 +270,18 @@ export function setValues(values: Values, source: 'undo' | 'restore' | 'import')
   if (serialize(values) === saved) return;
   ownSource = source;
   assign(values);
+}
+
+/**
+ * Make changes that aren't the user's doing, like the schedule builder
+ * filling in sections for a newly added course or setting a slot's term when
+ * it opens. They're saved, but not stamped (they never win a merge over a
+ * real edit), not pushed as edits, and not undo steps.
+ */
+export function automatic(fn: () => void): void {
+  fn();
+  const json = serialize(currentValues());
+  if (json !== saved) autoJson = json;
 }
 
 /** Mark whose data this is (on sign-in) or clear it (shared-computer sign-out). */

@@ -4,6 +4,8 @@
 // compact form of each code so links stay short and paste cleanly into chats:
 //   #CMPT-410?taken=CMPT120,MACM101
 
+import { parseDoc, toValues, type AppDoc } from './persist/doc';
+
 const CODE = /^([A-Za-z]{2,5})[\s\-+_.]*(\d{3}[A-Za-z]?)$/;
 
 /** "CMPT 120" -> "CMPT120" */
@@ -73,7 +75,8 @@ export function compareTaken(local: Iterable<string>, incoming: Iterable<string>
 
 const APP_ID = 'sfu-prereqs';
 
-export interface Backup {
+/** The original backup: taken courses and the mapped course only. */
+export interface BackupV1 {
   app: typeof APP_ID;
   version: 1;
   exported: string;
@@ -81,15 +84,42 @@ export interface Backup {
   taken: string[];
 }
 
-export function makeBackup(target: string, taken: Iterable<string>, now = new Date()): Backup {
-  return { app: APP_ID, version: 1, exported: now.toISOString(), target, taken: uniqueCodes(taken) };
+/** The whole saved document (taken courses, schedules, settings, stamps). */
+export interface BackupV2 {
+  app: typeof APP_ID;
+  version: 2;
+  exported: string;
+  target: string;
+  doc: AppDoc;
+}
+
+export type Backup = BackupV1 | BackupV2;
+
+/** What a backup file holds. `doc` is set for a full (v2) backup. */
+export interface ParsedBackup {
+  target: string | null;
+  taken: string[];
+  doc?: AppDoc;
+}
+
+/** A full backup of `doc`; given a list of codes instead, the old taken-only (v1) form. */
+export function makeBackup(target: string, doc: AppDoc, now?: Date): BackupV2;
+export function makeBackup(target: string, taken: Iterable<string>, now?: Date): BackupV1;
+export function makeBackup(target: string, data: AppDoc | Iterable<string>, now = new Date()): Backup {
+  if (isDocLike(data)) return { app: APP_ID, version: 2, exported: now.toISOString(), target, doc: data };
+  return { app: APP_ID, version: 1, exported: now.toISOString(), target, taken: uniqueCodes(data) };
+}
+
+function isDocLike(x: unknown): x is AppDoc {
+  return !!x && typeof x === 'object' && !Array.isArray(x) && !(Symbol.iterator in x) && 'courses' in x;
 }
 
 /**
- * Parses a backup file. Also accepts a bare array of codes (what's stored in
- * localStorage), so a copy-pasted value works too. Throws a readable Error.
+ * Parses a backup file: a full v2 backup, a v1 backup (taken courses and
+ * target), or a bare array of codes (what's stored in localStorage), so a
+ * copy-pasted value works too. Throws only an Error with a readable message.
  */
-export function parseBackup(text: string): { target: string | null; taken: string[] } {
+export function parseBackup(text: string): ParsedBackup {
   let data: unknown;
   try {
     data = JSON.parse(text);
@@ -97,11 +127,21 @@ export function parseBackup(text: string): { target: string | null; taken: strin
     throw new Error("That file isn't valid JSON.");
   }
   if (Array.isArray(data)) return { target: null, taken: uniqueCodes(data) };
-  if (data && typeof data === 'object' && Array.isArray((data as Backup).taken)) {
-    const b = data as Partial<Backup>;
-    if (b.app !== undefined && b.app !== APP_ID) throw new Error("That file isn't an SFU Prerequisite Map backup.");
-    return { target: typeof b.target === 'string' ? parseCode(b.target) : null, taken: uniqueCodes(b.taken!) };
+  if (!data || typeof data !== 'object') throw new Error("That file doesn't contain a list of taken courses.");
+  const b = data as Record<string, unknown>;
+  if (b.app !== undefined && b.app !== APP_ID) throw new Error("That file isn't an SFU Prerequisite Map backup.");
+  const target = typeof b.target === 'string' ? parseCode(b.target) : null;
+  if (b.version === 2 || (b.doc && typeof b.doc === 'object' && !Array.isArray(b.doc))) {
+    if (!b.doc || typeof b.doc !== 'object' || Array.isArray(b.doc)) throw new Error('That backup is incomplete: it has no saved data.');
+    let doc: AppDoc;
+    try {
+      doc = parseDoc(b.doc);
+    } catch {
+      throw new Error("That backup couldn't be read.");
+    }
+    return { target, taken: toValues(doc).taken, doc };
   }
+  if (Array.isArray(b.taken)) return { target, taken: uniqueCodes(b.taken) };
   throw new Error("That file doesn't contain a list of taken courses.");
 }
 
@@ -133,8 +173,9 @@ export function download(filename: string, data: Blob | string): void {
   if (typeof data !== 'string') setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
-export function downloadBackup(target: string, taken: Iterable<string>): void {
-  const json = JSON.stringify(makeBackup(target, taken), null, 2);
+/** Downloads a full (v2) backup of `doc`. */
+export function downloadBackup(target: string, doc: AppDoc): void {
+  const json = JSON.stringify(makeBackup(target, doc), null, 2);
   download(`sfu-prereqs-${new Date().toISOString().slice(0, 10)}.json`, new Blob([json], { type: 'application/json' }));
 }
 
