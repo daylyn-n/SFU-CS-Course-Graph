@@ -75,8 +75,8 @@ npm run fetch-offerings   # just refresh sections and instructors, ~7 minutes
 npm run fetch-seats       # just refresh seat counts (skips if SFU hasn't posted a new file)
 ```
 
-A GitHub Action (`.github/workflows/refresh-data.yml`) does this automatically
-and commits to `main`: seats every day, sections and instructors on Mondays,
+A GitHub Action (`.github/workflows/refresh-data.yml`) does this automatically,
+opening and merging its own pull request into `main`: seats every day, sections and instructors on Mondays,
 and everything on the 1st of the month. Before committing it runs
 `scripts/check-data.ts`, which stops the update if a file is broken or lost a
 big share of its courses or programs (SFU's APIs sometimes fail under load), and

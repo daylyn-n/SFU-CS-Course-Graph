@@ -1,11 +1,15 @@
-# Keeps public/data fresh from SFU's public APIs and commits it to main, which
-# redeploys the site. Each run:
+# Keeps public/data fresh from SFU's public APIs. main only takes changes
+# through pull requests, so each update goes in as its own PR that this
+# workflow merges once the checks below pass; that redeploys the site. Each run:
 #   - every day: seat counts (SFU posts a new snapshot daily in registration)
 #   - Mondays:   sections, times and instructors too
 #   - the 1st:   everything (courses, descriptions, programs; ~15 minutes)
 # Run it by hand from the Actions tab (pick a mode) after a big calendar change.
-# If the new data looks broken (scripts/check-data.ts), nothing is committed
-# and GitHub emails you that the run failed.
+# If the new data looks broken (scripts/check-data.ts), no PR is opened and
+# GitHub emails you that the run failed.
+#
+# Needs Settings → Actions → General → "Allow GitHub Actions to create and
+# approve pull requests".
 
 name: Refresh course data
 
@@ -22,6 +26,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 concurrency:
   group: refresh-data
@@ -74,15 +79,24 @@ jobs:
       # The degree and prerequisite tests run against the real data files.
       - run: npm test
 
-      - name: Commit if anything changed
+      - name: Open and merge a PR if anything changed
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           if git diff --quiet && [ -z "$(git ls-files --others --exclude-standard public/data)" ]; then
             echo "No data changes."
             exit 0
           fi
+          mode='${{ steps.mode.outputs.mode }}'
+          day=$(date -u +%Y-%m-%d)
+          branch="data/refresh-$day-$mode-${{ github.run_id }}"
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git switch -c "$branch"
           git add public/data
-          git commit -m "Refresh course data (${{ steps.mode.outputs.mode }}, $(date -u +%Y-%m-%d))"
-          git pull --rebase
-          git push
+          git commit -m "Refresh course data ($mode, $day)"
+          git push -u origin "$branch"
+          gh pr create --base main --head "$branch" \
+            --title "Refresh course data ($mode, $day)" \
+            --body "Automatic data refresh (run [${{ github.run_id }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})). The data check and tests passed before this PR was opened."
+          gh pr merge "$branch" --squash --delete-branch
