@@ -2,3 +2,5 @@ node_modules
 dist
 .claude/worktrees/
 .playwright-mcp/
+.env.local
+.env.*.local
