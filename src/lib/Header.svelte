@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Courses, Term } from './types';
+  import type { Courses, Term, View } from './types';
 
   interface Props {
     courses: Courses;
@@ -7,7 +7,7 @@
     progress: { done: number; ready: number; locked: number };
     terms: Term[];
     onpick: (code: string) => void;
-    view: 'graph' | 'list';
+    view: View;
     maxDepth: number;
     hideTaken: boolean;
   }
@@ -135,6 +135,7 @@
       <div class="seg" role="group" aria-label="View">
         <button class:on={view === 'graph'} onclick={() => (view = 'graph')}>Chart</button>
         <button class:on={view === 'list'} onclick={() => (view = 'list')}>List</button>
+        <button class:on={view === 'explore'} onclick={() => (view = 'explore')}>Explore</button>
       </div>
       <label>
         Levels

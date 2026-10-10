@@ -32,3 +32,6 @@ export type Status = 'done' | 'ready' | 'locked';
 
 /** Read-only view of the taken set; SvelteSet and Set both fit. */
 export type Taken = ReadonlySet<string>;
+
+/** Which main view the canvas shows. */
+export type View = 'graph' | 'list' | 'explore' | 'plan' | 'timetable' | 'degree';

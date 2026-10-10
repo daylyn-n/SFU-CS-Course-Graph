@@ -14,7 +14,8 @@
   import TermPills from './lib/TermPills.svelte';
   import Header from './lib/Header.svelte';
   import { setActions } from './lib/context';
-  import type { Courses, Offerings, Status, Term } from './lib/types';
+  import type { Courses, Offerings, Status, Term, View } from './lib/types';
+  import ExploreView from './lib/ExploreView.svelte';
 
   // JSON imports infer loose types (e.g. op: string), so assert the real shapes.
   const courses = data.courses as unknown as Courses;
@@ -53,7 +54,7 @@
   let selected = $state(initial);
   let maxDepth = $state(2);
   let hideTaken = $state(true);
-  let view = $state<'graph' | 'list'>(matchMedia('(max-width: 700px)').matches ? 'list' : 'graph');
+  let view = $state<View>(matchMedia('(max-width: 700px)').matches ? 'list' : 'graph');
   const done = new SvelteSet<string>(loadTaken());
   const expanded = new SvelteSet<string>();
 
@@ -121,7 +122,7 @@
 />
 
 <main>
-  <section class="canvas" class:list={view === 'list'}>
+  <section class="canvas" class:list={view !== 'graph'}>
     {#if view === 'graph'}
       <SvelteFlow
         bind:nodes
@@ -147,6 +148,20 @@
         <span><TermPills terms={terms} /> offered (filled = this term)</span>
         <span class="hint">Tick a box to mark it taken · <b>+</b> shows more</span>
       </div>
+    {:else if view === 'explore'}
+      <ExploreView
+        {courses}
+        {done}
+        {terms}
+        {offeredIn}
+        {selected}
+        onselect={(c) => (selected = c)}
+        ontoggle={toggleDone}
+        ontarget={(c) => {
+          setTarget(c);
+          view = matchMedia('(max-width: 700px)').matches ? 'list' : 'graph';
+        }}
+      />
     {:else}
       <ul class="tree">
         <PrereqList
