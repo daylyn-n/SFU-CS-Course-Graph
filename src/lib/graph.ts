@@ -2,7 +2,7 @@ import dagre from '@dagrejs/dagre';
 import type { Courses, OtherReq, Prereq, Status, Taken, Term } from './types';
 
 // Rendered sizes of the node components. dagre needs these up front.
-export const COURSE_SIZE = { width: 200, height: 60 };
+export const COURSE_SIZE = { width: 224, height: 60 };
 export const JUNCTION_SIZE = { width: 64, height: 26 };
 export const OTHER_SIZE = { width: 170, height: 26 };
 

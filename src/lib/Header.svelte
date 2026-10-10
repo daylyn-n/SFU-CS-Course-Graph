@@ -25,7 +25,7 @@
     view = $bindable(),
   }: Props = $props();
 
-  // Quick picks, skipping any that aren't in the data or not running soon.
+  // Quick picks for the empty search box, skipping any that aren't in the data or not running soon.
   // svelte-ignore state_referenced_locally
   const PICKS = ['CMPT 225', 'CMPT 276', 'CMPT 300', 'CMPT 310', 'CMPT 354', 'CMPT 410', 'MACM 316']
     .filter((c) => c in courses && (!isOffered || isOffered(c)))
@@ -116,6 +116,7 @@
         bind:input
         placeholder="Search by code or name, e.g. CMPT 410 or machine learning"
         label="Course to look up"
+        suggestions={PICKS}
         onpick={(code) => {
           message = '';
           onpick(code);
@@ -131,13 +132,6 @@
   </div>
 
   <div class="row bottom">
-    <div class="picks">
-      <span class="label">Try</span>
-      {#each PICKS as code}
-        <button class="pick" class:on={code === target} onclick={() => onpick(code)}>{code}</button>
-      {/each}
-    </div>
-
     <div class="progress" title="Courses shown on the map for {target}">
       <div class="progress-text">
         <b>{target}</b>
@@ -343,63 +337,32 @@
     transform: scale(0.96);
   }
 
-  .picks {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 6px;
-  }
-  .label {
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    opacity: 0.75;
-    margin-right: 2px;
-  }
-  .pick {
-    padding: 3px 11px;
-    border-radius: 999px;
-    border: 1px solid rgb(255 255 255 / 0.4);
-    background: rgb(255 255 255 / 0.1);
-    color: #fff;
-    font-size: 12.5px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.15s, transform 0.15s;
-  }
-  .pick:hover {
-    background: rgb(255 255 255 / 0.22);
-    transform: translateY(-1px);
-  }
-  .pick.on {
-    background: #fff;
-    color: var(--sfu-red);
-    border-color: #fff;
-  }
-
   .progress {
     flex: 1 1 220px;
-    max-width: 340px;
+    max-width: 300px;
     min-width: 0;
+    opacity: 0.8;
   }
   .progress-text {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 2px 12px;
-    font-size: 12px;
-    margin-bottom: 5px;
+    gap: 2px 10px;
+    font-size: 11.5px;
+    margin-bottom: 4px;
+  }
+  .progress-text b {
+    font-weight: 600;
   }
   .progress-text span {
     display: flex;
     align-items: center;
-    gap: 5px;
-    opacity: 0.9;
+    gap: 4px;
+    opacity: 0.85;
   }
   .dot {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
     background: rgb(255 255 255 / 0.35);
   }
@@ -411,10 +374,10 @@
   }
   .bar {
     display: flex;
-    height: 7px;
+    height: 4px;
     border-radius: 999px;
     overflow: hidden;
-    background: rgb(255 255 255 / 0.2);
+    background: rgb(255 255 255 / 0.15);
   }
   .bar div {
     transition: width 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
