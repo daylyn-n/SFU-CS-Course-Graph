@@ -19,6 +19,7 @@
   import PlanView from './lib/PlanView.svelte';
   import TimetableView from './lib/TimetableView.svelte';
   import AddToTimetable from './lib/AddToTimetable.svelte';
+  import DegreeView from './lib/DegreeView.svelte';
 
   // JSON imports infer loose types (e.g. op: string), so assert the real shapes.
   const courses = data.courses as unknown as Courses;
@@ -178,6 +179,17 @@
         {selected}
         onselect={(c) => (selected = c)}
         ontoggle={toggleDone}
+        ontarget={(c) => {
+          setTarget(c);
+          view = matchMedia('(max-width: 700px)').matches ? 'list' : 'graph';
+        }}
+      />
+    {:else if view === 'degree'}
+      <DegreeView
+        {courses}
+        {done}
+        {offeredIn}
+        onselect={(c) => (selected = c)}
         ontarget={(c) => {
           setTarget(c);
           view = matchMedia('(max-width: 700px)').matches ? 'list' : 'graph';
