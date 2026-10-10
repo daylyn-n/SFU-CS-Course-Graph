@@ -7,3 +7,6 @@ dist
 
 # Local Supabase working files (accounts/ratings are archived: see README)
 /supabase/
+
+# Wrangler local state
+.wrangler/

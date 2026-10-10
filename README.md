@@ -121,8 +121,10 @@ ID 1482), not direct profile links, because RMP has no public API.
 
 ## Deploy
 
-`npm run build` produces a static site in `dist/` that works on GitHub Pages,
-Netlify, Vercel, etc.
+`npm run build` produces a static site in `dist/` that works on any static
+host. It's deployed on Cloudflare (Workers static assets, `wrangler.jsonc`) with
+build command `npm run build` and deploy command `npx wrangler deploy`; every
+merge to `main`, including the automatic data refreshes, redeploys it.
 
 ## Archived features
 
