@@ -4,7 +4,21 @@
   import { OPEN_EVENT } from './CommandPalette.svelte';
   import { copyShareLink, exportPng, exportProgress, importProgress } from './shareActions.svelte';
 
-  let { target, done, onshowchart }: { target: string; done: Taken; onshowchart: () => void } = $props();
+  let {
+    target,
+    done,
+    onshowchart,
+    onhistory,
+    onpick,
+  }: {
+    target: string;
+    done: Taken;
+    onshowchart: () => void;
+    /** open the version history panel; the entry is hidden without it */
+    onhistory?: () => void;
+    /** map a course (the one saved in an imported backup) */
+    onpick?: (code: string) => void;
+  } = $props();
 
   const mod = /Mac|iPhone|iPad/.test(navigator.platform) ? '⌘' : 'Ctrl+';
 </script>
@@ -18,8 +32,11 @@
     Copy share link
   </button>
   <button onclick={() => exportPng(target, onshowchart)}>Save chart as PNG</button>
-  <button onclick={() => exportProgress(target, done)}>Export progress</button>
-  <button onclick={() => importProgress(done)}>Import…</button>
+  <button onclick={() => exportProgress(target)} title="Taken courses, schedules and settings, as a JSON file">Download backup</button>
+  <button onclick={() => importProgress(done, onpick)}>Import…</button>
+  {#if onhistory}
+    <button onclick={onhistory}>Version history…</button>
+  {/if}
 </div>
 <p class="hint">
   The link includes your taken courses. Press

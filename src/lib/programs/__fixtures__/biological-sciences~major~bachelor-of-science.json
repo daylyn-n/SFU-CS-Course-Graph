@@ -1,0 +1,559 @@
+{
+ "title": "Biological Sciences",
+ "value": "bachelor-of-science",
+ "awardType": "Major",
+ "credential": "Bachelor of Science",
+ "degreeLevel": "Undergraduate",
+ "description": "The biological sciences major combines a broad foundation in the lower division with specialization in upper division. After completing their lower division courses, students select one of three&nbsp;streams: cells, molecules, physiology (CMP); ecology, evolution, conservation (EEC); or open stream.",
+ "fullTitle": "Biological Sciences Major",
+ "admissionRequirements": "Students meeting the \n<a href=\"https://www.sfu.ca/students/admission/admission-requirements.html\">admission requirements</a> to the Faculty of Science may receive direct entry to the BISC major upon acceptance to SFU either from high school or as a transfer student. Students already at SFU may apply to the BISC major once they have completed all lower division requirements (details below). Students must have a GPA of 2.0 or higher on the lower division requirements to be accepted into the program.",
+ "departments": [
+  {
+   "title": "Department of Biological Sciences",
+   "profilePage": "https://www.sfu.ca/biology/people/faculty.html",
+   "homePage": "https://www.sfu.ca/biology.html"
+  }
+ ],
+ "faculties": [
+  {
+   "title": "Faculty of Science",
+   "profilePpage": "",
+   "homePage": "https://www.sfu.ca/science.html"
+  }
+ ],
+ "requirements": [
+  {
+   "title": "Grade Requirements",
+   "requirements": [
+    {
+     "description": "Prerequisites. Students are normally required to obtain at least a C- on all course prerequisites, but in some cases the minimum grade requirements may be higher. Students are encouraged to plan ahead and consult the course calendar. In some cases, prerequisites may be waived for BISC courses with the approval of the department."
+    },
+    {
+     "description": "Continuation. To remain in the program, students must be in good academic standing, must maintain a CGPA of 2.0 in the major program requirements (i.e., excluding electives), and must not exceed SFU’s limits on course repeats. Students who do not meet these requirements will be dropped from the major program. Students may apply for readmission to the major program if they complete all lower division requirements (details below) with a GPA of 2.0 or higher, without exceeding the course repeat limit. Students may also apply for admission to the general science double minor program within the Faculty of Science or other programs across the university."
+    }
+   ]
+  },
+  {
+   "title": "Program Requirements",
+   "requirements": [
+    {
+     "description": "Students must complete a minimum of 120 units, including 44 units at the upper division level."
+    }
+   ]
+  },
+  {
+   "title": "Lower Division Requirements",
+   "requirements": [
+    {
+     "description": "Students complete all of"
+    },
+    {
+     "courseTitle": "General Biology",
+     "value": "bisc/101"
+    },
+    {
+     "courseTitle": "General Biology",
+     "value": "bisc/102"
+    },
+    {
+     "courseTitle": "Genetics",
+     "value": "bisc/202"
+    },
+    {
+     "courseTitle": "Ecology",
+     "value": "bisc/204"
+    },
+    {
+     "courseTitle": "Principles of Physiology",
+     "value": "bisc/205"
+    },
+    {
+     "courseTitle": "General Chemistry and Laboratory I",
+     "value": "chem/121"
+    },
+    {
+     "courseTitle": "Organic Chemistry and Laboratory I",
+     "value": "chem/281"
+    },
+    {
+     "courseTitle": "Molecular Biology and Biochemistry",
+     "value": "mbb/222"
+    },
+    {
+     "courseTitle": "Cellular Biology and Biochemistry",
+     "value": "mbb/231"
+    },
+    {
+     "courseTitle": "Statistics for the Life Sciences",
+     "value": "stat/201"
+    },
+    {
+     "description": "and one of"
+    },
+    {
+     "courseTitle": "General Chemistry II",
+     "value": "chem/122"
+    },
+    {
+     "courseTitle": "General Chemistry II with Applications to Life Sciences",
+     "value": "chem/180"
+    },
+    {
+     "description": "and one of"
+    },
+    {
+     "courseTitle": "Organic Chemistry II",
+     "value": "chem/282"
+    },
+    {
+     "courseTitle": "Organic Chemistry IIb",
+     "value": "chem/283"
+    },
+    {
+     "description": "and one of"
+    },
+    {
+     "courseTitle": "Calculus I with Review",
+     "value": "math/150"
+    },
+    {
+     "courseTitle": "Calculus I",
+     "value": "math/151"
+    },
+    {
+     "courseTitle": "Mathematics for the Life Sciences I",
+     "value": "math/154"
+    },
+    {
+     "description": "and one of"
+    },
+    {
+     "courseTitle": "Physics for the Life Sciences I",
+     "value": "phys/101"
+    },
+    {
+     "courseTitle": "Mechanics and Modern Physics",
+     "value": "phys/120"
+    },
+    {
+     "courseTitle": "Mechanics and Special Relativity",
+     "value": "phys/125"
+    },
+    {
+     "courseTitle": "Studio Physics - Mechanics and Modern Physics",
+     "value": "phys/140"
+    },
+    {
+     "description": "Students are encouraged to complete all lower division requirements before registering for upper division courses. Students who intend to apply for medical, dental, veterinary, or other professional program may need additional courses and are encouraged to consult with the Biological Sciences Undergraduate Advisor."
+    }
+   ]
+  },
+  {
+   "title": "Upper Division Requirements",
+   "requirements": [
+    {
+     "description": "Students complete a minimum of 12 upper division courses (a minimum of 36 units), consisting of three&nbsp;core courses plus nine&nbsp;stream specific courses, as specified below. Once students have completed their lower division requirements, they should meet with the undergraduate advisor to declare their stream. Students must obtain a C- or better on all upper division requirements."
+    },
+    {
+     "description": "All students complete three core courses, as follows."
+    },
+    {
+     "courseTitle": "Evolution",
+     "value": "bisc/300"
+    },
+    {
+     "courseTitle": "Developmental Biology",
+     "value": "bisc/333"
+    },
+    {
+     "description": "and at least one of"
+    },
+    {
+     "courseTitle": "Microbiology",
+     "value": "bisc/303"
+    },
+    {
+     "courseTitle": "Invertebrate Biology",
+     "value": "bisc/306"
+    },
+    {
+     "courseTitle": "Vertebrate Biology",
+     "value": "bisc/316"
+    },
+    {
+     "courseTitle": "Insect Biology",
+     "value": "bisc/317"
+    },
+    {
+     "courseTitle": "Parasitology",
+     "value": "bisc/318"
+    },
+    {
+     "courseTitle": "Algal Biology",
+     "value": "bisc/327"
+    },
+    {
+     "courseTitle": "Fungal Biology and Ecology",
+     "value": "bisc/328"
+    },
+    {
+     "courseTitle": "Plant Biology",
+     "value": "bisc/337"
+    }
+   ]
+  },
+  {
+   "title": "Cells, Molecules, and Physiology (CMP) Stream",
+   "requirements": [
+    {
+     "description": "This stream&nbsp;is for students who wish to specialize in cell biology, molecular biology, and physiology. The program provides flexibility for students to pursue their interests across these disciplines."
+    },
+    {
+     "description": "Students who choose this stream&nbsp;will complete two of the following techniques courses"
+    },
+    {
+     "courseTitle": "Genetic Analysis",
+     "value": "bisc/302w"
+    },
+    {
+     "courseTitle": "Microbiology",
+     "value": "bisc/303"
+    },
+    {
+     "courseTitle": "Genetic Engineering",
+     "value": "bisc/357"
+    },
+    {
+     "courseTitle": "Cellular Physiology Laboratory",
+     "value": "bpk/408w"
+    },
+    {
+     "description": "and at least five additional stream electives from"
+    },
+    {
+     "courseTitle": "Genetic Analysis",
+     "value": "bisc/302w"
+    },
+    {
+     "courseTitle": "Microbiology",
+     "value": "bisc/303"
+    },
+    {
+     "courseTitle": "Animal Physiology",
+     "value": "bisc/305"
+    },
+    {
+     "courseTitle": "Environmental Toxicology: A Mechanistic Perspective",
+     "value": "bisc/313"
+    },
+    {
+     "courseTitle": "Genetic Engineering",
+     "value": "bisc/357"
+    },
+    {
+     "courseTitle": "Plant Physiology",
+     "value": "bisc/366"
+    },
+    {
+     "courseTitle": "Current Topics in Cell Biology",
+     "value": "bisc/403"
+    },
+    {
+     "courseTitle": "Neurobiology",
+     "value": "bisc/405"
+    },
+    {
+     "courseTitle": "Models in Biology: From Molecules to Migration",
+     "value": "bisc/421"
+    },
+    {
+     "courseTitle": "Developmental Neurobiology",
+     "value": "bisc/423"
+    },
+    {
+     "courseTitle": "Applied Genomics",
+     "value": "bisc/424"
+    },
+    {
+     "courseTitle": "Sensory Biology",
+     "value": "bisc/425"
+    },
+    {
+     "courseTitle": "Cell Anatomy",
+     "value": "bisc/428"
+    },
+    {
+     "courseTitle": "Microbe-Plant Interactions",
+     "value": "bisc/430"
+    },
+    {
+     "courseTitle": "Environmental Microbiology",
+     "value": "bisc/433"
+    },
+    {
+     "courseTitle": "Environmental Physiology of Animals",
+     "value": "bisc/445"
+    },
+    {
+     "courseTitle": "Stem Cells - Current Trends",
+     "value": "bisc/447"
+    },
+    {
+     "courseTitle": "Marine Mammal Ecotoxicology",
+     "value": "bisc/450"
+    },
+    {
+     "courseTitle": "Endocrinology",
+     "value": "bisc/455"
+    },
+    {
+     "courseTitle": "Plant Molecular Biology and Biotechnology",
+     "value": "bisc/457"
+    },
+    {
+     "courseTitle": "Special Topics in Cells, Molecules and Physiology",
+     "value": "bisc/471"
+    },
+    {
+     "courseTitle": "Special Topics in Cells, Molecules and Physiology",
+     "value": "bisc/472"
+    },
+    {
+     "courseTitle": "Special Topics in Biology",
+     "value": "bisc/475"
+    },
+    {
+     "courseTitle": "Undergraduate Research: Writing Intensive",
+     "value": "bisc/497w"
+    },
+    {
+     "courseTitle": "Undergraduate Research I",
+     "value": "bisc/498"
+    },
+    {
+     "courseTitle": "Undergraduate Research II",
+     "value": "bisc/499"
+    },
+    {
+     "courseTitle": "Cellular Physiology Laboratory",
+     "value": "bpk/408w"
+    },
+    {
+     "description": "and two upper division electives (minimum of six units) from BISC, BPK, HSCI, MBB, PHYS, or STAT, subject to approval by the department. Students are encouraged to see the departmental website for a list of pre-approved non-BISC CMP electives. Normally, no more than two research intensive courses (such as BISC 497W, 498, or 499) may be used to satisfy stream requirements. Students complete a total of five lab courses (which may include one of BISC 497W, 498, 499) among their upper division courses. A minimum of three CMP stream electives must be at the 400-level."
+    }
+   ]
+  },
+  {
+   "title": "Ecology, Evolution, and Conservation (EEC) Stream",
+   "requirements": [
+    {
+     "description": "This stream integrates theoretical and applied approaches to ecology, evolution, and conservation. Students interested in obtaining additional field biology experience may also take courses at Bamfield Marine Sciences Centre, listed under marine sciences (MASC) in the course calendar. The EEC stream&nbsp;is accredited by the College of Applied Biology (see the biological sciences website for details)."
+    },
+    {
+     "description": "Students who choose this stream will complete both"
+    },
+    {
+     "courseTitle": "Analysis of Experimental and Observational Data",
+     "value": "stat/302"
+    },
+    {
+     "courseTitle": "Techniques in Ecology and Evolution",
+     "value": "bisc/360w"
+    },
+    {
+     "description": "and at least one additional organismal course from"
+    },
+    {
+     "courseTitle": "Invertebrate Biology",
+     "value": "bisc/306"
+    },
+    {
+     "courseTitle": "Vertebrate Biology",
+     "value": "bisc/316"
+    },
+    {
+     "courseTitle": "Insect Biology",
+     "value": "bisc/317"
+    },
+    {
+     "courseTitle": "Algal Biology",
+     "value": "bisc/327"
+    },
+    {
+     "courseTitle": "Fungal Biology and Ecology",
+     "value": "bisc/328"
+    },
+    {
+     "courseTitle": "Plant Biology",
+     "value": "bisc/337"
+    },
+    {
+     "description": "and at least one applied course from"
+    },
+    {
+     "courseTitle": "Environmental Toxicology: An Ecological Perspective",
+     "value": "bisc/308"
+    },
+    {
+     "courseTitle": "Conservation Biology",
+     "value": "bisc/309"
+    },
+    {
+     "courseTitle": "Fisheries Ecology",
+     "value": "bisc/413"
+    },
+    {
+     "description": "and at least five&nbsp;additional stream electives from"
+    },
+    {
+     "courseTitle": "Animal Physiology",
+     "value": "bisc/305"
+    },
+    {
+     "courseTitle": "Environmental Toxicology: An Ecological Perspective",
+     "value": "bisc/308"
+    },
+    {
+     "courseTitle": "Conservation Biology",
+     "value": "bisc/309"
+    },
+    {
+     "courseTitle": "Plant Physiology",
+     "value": "bisc/366"
+    },
+    {
+     "courseTitle": "Population Dynamics",
+     "value": "bisc/407"
+    },
+    {
+     "courseTitle": "Behavioural Ecology",
+     "value": "bisc/410"
+    },
+    {
+     "courseTitle": "Aquatic Ecology",
+     "value": "bisc/412"
+    },
+    {
+     "courseTitle": "Fisheries Ecology",
+     "value": "bisc/413"
+    },
+    {
+     "courseTitle": "Limnology",
+     "value": "bisc/414"
+    },
+    {
+     "courseTitle": "Community Ecology",
+     "value": "bisc/420"
+    },
+    {
+     "courseTitle": "Models in Biology: From Molecules to Migration",
+     "value": "bisc/421"
+    },
+    {
+     "courseTitle": "Population Genetics",
+     "value": "bisc/422"
+    },
+    {
+     "courseTitle": "Environmental Microbiology",
+     "value": "bisc/433"
+    },
+    {
+     "courseTitle": "Biodiversity",
+     "value": "bisc/440w"
+    },
+    {
+     "courseTitle": "Evolution of Health and Disease",
+     "value": "bisc/441"
+    },
+    {
+     "courseTitle": "Environmental Physiology of Animals",
+     "value": "bisc/445"
+    },
+    {
+     "courseTitle": "Marine Mammal Ecotoxicology",
+     "value": "bisc/450"
+    },
+    {
+     "courseTitle": "Special Topics in Ecology, Evolution and Conservation",
+     "value": "bisc/473"
+    },
+    {
+     "courseTitle": "Special Topics in Ecology, Evolution and Conservation",
+     "value": "bisc/474"
+    },
+    {
+     "courseTitle": "Special Topics in Biology",
+     "value": "bisc/475"
+    },
+    {
+     "courseTitle": "Undergraduate Research: Writing Intensive",
+     "value": "bisc/497w"
+    },
+    {
+     "courseTitle": "Undergraduate Research I",
+     "value": "bisc/498"
+    },
+    {
+     "courseTitle": "Undergraduate Research II",
+     "value": "bisc/499"
+    },
+    {
+     "description": "Students may substitute up to two upper division stream electives from the Faculty of Environment, Bamfield (MASC courses), or other relevant unit, subject to approval by the department. Students are encouraged to see the departmental website for a list of pre-approved EEC substitute stream electives. Students complete a total of five lab courses (which may include one of BISC 497W, 498, 499) among their upper division courses. A minimum of three EEC stream electives must be at the 400-level."
+    }
+   ]
+  },
+  {
+   "title": "Open Stream",
+   "requirements": [
+    {
+     "description": "This stream&nbsp;allows students to build their own program and combine interests spanning the full diversity of courses offered in the department."
+    },
+    {
+     "description": "Students who choose this stream will complete one of the following techniques courses"
+    },
+    {
+     "courseTitle": "Genetic Analysis",
+     "value": "bisc/302w"
+    },
+    {
+     "courseTitle": "Microbiology",
+     "value": "bisc/303"
+    },
+    {
+     "courseTitle": "Genetic Engineering",
+     "value": "bisc/357"
+    },
+    {
+     "courseTitle": "Techniques in Ecology and Evolution",
+     "value": "bisc/360w"
+    },
+    {
+     "courseTitle": "Cellular Physiology Laboratory",
+     "value": "bpk/408w"
+    },
+    {
+     "description": "and an additional eight upper division BISC courses (totaling a minimum of 24 units). Students may substitute up to two upper division courses from other units (e.g., BPK, FENV, HSCI, MASC, MBB, PHYS, or STAT), subject to approval by the department. Students are encouraged to see the departmental website for a list of pre-approved open stream electives. Normally, no more than two research intensive courses (such as BISC 497W, 498, or 499) may be used to satisfy stream requirements. Students complete a total of five lab courses (which may include one of BISC 497W, 498, 499) among their upper division courses. A minimum of three BISC courses must be at the 400-level."
+    }
+   ]
+  },
+  {
+   "title": "University Degree Requirements",
+   "description": "Students must also satisfy \n<a href=\"https://www.sfu.ca/students/calendar/2026/fall/fees-and-regulations/credentials-offered/definitions.html#degree_req\">University degree requirements</a> for degree completion."
+  },
+  {
+   "title": "Writing, Quantitative, and Breadth Requirements",
+   "description": "Students admitted to Simon Fraser University beginning in the fall 2006 term must meet writing, quantitative and breadth requirements as part of any degree program they may undertake. See \n<a href=\"https://www.sfu.ca/students/calendar/2026/fall/fees-and-regulations/enrolment/WQB.html\">Writing, Quantitative, and Breadth Requirements</a> for university-wide information. WQB Graduation Requirements A grade of C- or better is required to earn W, Q or B credit  \n<table> \n <tbody> \n  <tr> \n   <td>Requirement</td> \n   <td> Units </td> \n   <td colspan=\"2\">Notes</td> \n  </tr> \n  <tr> \n   <td>W - Writing</td> \n   <td> 6 </td> \n   <td colspan=\"2\"> Must include at least one upper division course, taken at Simon Fraser University within the student's major subject; two courses (minimum three units each) </td> \n  </tr> \n  <tr> \n   <td>Q - Quantitative</td> \n   <td> 6 </td> \n   <td colspan=\"2\">Q courses may be lower or upper division;&nbsp;two courses (total six units or more)</td> \n  </tr> \n  <tr> \n   <td>B - Breadth</td> \n   <td> 18 </td> \n   <td>Designated Breadth</td> \n   <td> Must be outside the student's major subject, and may be lower or upper division: Two courses (total six units or more) Social Sciences: B-Soc Two courses (total six units or more) Humanities: B-Hum Two courses (total six units or more) Sciences: B-Sci </td> \n  </tr> \n  <tr> \n   <td> 6 </td> \n   <td>Additional Breadth</td> \n   <td> Two courses (total six units or more) outside the student's major subject (may or may not be B-designated courses, and will likely help fulfil individual degree program requirements). Students choosing to complete a joint major, joint honours, double major, two extended minors, an extended minor and a minor, or two minors may satisfy the breadth requirements (designated or not designated) with courses completed in either one or both program areas. </td> \n  </tr> \n </tbody> \n</table>"
+  },
+  {
+   "title": "Residency Requirements and Transfer Credit",
+   "description": "<ul> \n <li>At least half of the program's total units must be earned through Simon Fraser University study.</li> \n <li>At least two thirds of the program's total upper division units must be earned through Simon Fraser University study.</li> \n</ul>"
+  },
+  {
+   "requirements": [
+    {
+     "description": "Students who transfer into the Biological Sciences Major from other institutions may count a maximum of 2 transfer courses toward their upper division program requirements. Transfer students are encouraged to meet with the Undergraduate Advisor for further details."
+    }
+   ]
+  }
+ ]
+}

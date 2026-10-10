@@ -1,0 +1,1329 @@
+{
+ "title": "Business",
+ "value": "bachelor-of-business-administration",
+ "awardType": "Major",
+ "credential": "Bachelor of Business Administration",
+ "degreeLevel": "Undergraduate",
+ "description": "Students admitted to the Beedie School of Business for the Fall 2017 term onwards must complete the Business Foundation Pathways within their first year. During the first 60 units of the program, students will complete mainly&nbsp;non-business courses, which fall under three categories&nbsp;of courses. The first category consists of lower division requirements&nbsp;that are mainly&nbsp;foundation courses and prepares students for more advanced upper division business courses. The second category consists of courses completed to meet university requirements in writing, quantitative and breadth areas, the Beedie School of Business non-business elective requirement, as well as a minimum of 36 units, outside of the Beedie School of Business*. These first two categories should be completed during the first 60 units. In the third category, students choose courses that are based on intellectual interest or to achieve academic goals. The last 60 units of the degree program consist of the core upper division business courses, at least one area of concentration, and lower and upper division electives. In total, students will complete a minimum of 120 units, which must include at least 45 units of upper division coursework. *Courses not labelled as BUS or BUEC that are completed as part of the lower division requirements may be used toward the 36 units outside business.",
+ "fullTitle": "Business Major",
+ "admissionRequirements": "Please refer to the \n<a href=\"https://www.sfu.ca/students/calendar/2026/fall/faculties-research/faculty-business/admission-requirements.html\">admission requirements section</a>.",
+ "departments": [
+  {
+   "title": "Business",
+   "profilePage": "https://www.sfu.ca/beedie/faculty-and-research/faculty-staff-directory.html",
+   "homePage": "https://www.sfu.ca/beedie.html"
+  }
+ ],
+ "faculties": [
+  {
+   "title": "Beedie School of Business",
+   "profilePpage": "",
+   "homePage": "https://www.sfu.ca/beedie.html"
+  }
+ ],
+ "requirements": [
+  {
+   "title": "Grade Requirements",
+   "requirements": [
+    {
+     "description": "In addition to normal university grade point average requirements, the Beedie School of Business requires a minimum 2.30 overall SFU Business course grade point average for entry into all 300 and 400 division business courses."
+    },
+    {
+     "description": "A minimum 2.30 overall SFU Business course grade point average is required for graduation from a business major, joint major, or double degree program."
+    },
+    {
+     "description": "For a course to be accepted as fulfilling a prerequisite, or for a lower division requirement, or for a core course to be accepted in a student’s program in business, a student must have obtained a minimum grade of C- (C minus)."
+    }
+   ]
+  },
+  {
+   "title": "Letters of Permission",
+   "requirements": [
+    {
+     "description": "The Beedie School of Business does not normally approve letters of permission for students already enrolled at Simon Fraser University."
+    }
+   ]
+  },
+  {
+   "title": "Program Requirements",
+   "requirements": [
+    {
+     "description": "Students admitted to the Beedie School of Business for the Fall 2017 term onwards must complete the Business Foundation Pathways within their first year. Students admitted from high school must complete the Business Foundation Pathways -&nbsp;High School Stream. Students admitted through internal or external transfer must complete the Business Foundation Pathways - Transfer Stream. The courses required for each stream can be found under the \n<a href=\"https://www.sfu.ca/students/calendar/2026/fall/programs/business-foundation-pathways.html\">Business Foundation Pathways</a>."
+    }
+   ]
+  },
+  {
+   "title": "Lower Division Requirements",
+   "requirements": [
+    {
+     "description": "Students must complete all lower division required courses with a minimum C- grade."
+    },
+    {
+     "description": "Students complete one of"
+    },
+    {
+     "courseTitle": "Introduction to Business",
+     "value": "bus/201"
+    },
+    {
+     "courseTitle": "Foundations of Business",
+     "value": "bus/202"
+    },
+    {
+     "description": "and all of"
+    },
+    {
+     "courseTitle": "Professional Development - Launch",
+     "value": "bus/203"
+    },
+    {
+     "courseTitle": "Critical Thinking in Business",
+     "value": "bus/217w"
+    },
+    {
+     "courseTitle": "Introduction to Business Technology Management",
+     "value": "bus/237"
+    },
+    {
+     "courseTitle": "Introduction to Innovation",
+     "value": "bus/240"
+    },
+    {
+     "courseTitle": "Financial Accounting I",
+     "value": "bus/251"
+    },
+    {
+     "courseTitle": "Managerial Accounting I",
+     "value": "bus/254"
+    },
+    {
+     "courseTitle": "Behaviour in Organizations",
+     "value": "bus/272"
+    },
+    {
+     "courseTitle": "Business in a Sustainable Society",
+     "value": "bus/275"
+    },
+    {
+     "description": "and one of"
+    },
+    {
+     "courseTitle": "Business Statistics",
+     "value": "bus/232"
+    },
+    {
+     "courseTitle": "Introduction to Economic Data and Statistics",
+     "value": "econ/233"
+    },
+    {
+     "courseTitle": "Introduction to Probability and Statistics",
+     "value": "stat/270"
+    },
+    {
+     "description": "and one of"
+    },
+    {
+     "courseTitle": "Managerial Economics",
+     "value": "bus/207"
+    },
+    {
+     "courseTitle": "Microeconomic Theory I: Competitive Behavior",
+     "value": "econ/201"
+    },
+    {
+     "description": "and one of"
+    },
+    {
+     "courseTitle": "Principles of Microeconomics",
+     "value": "econ/103"
+    },
+    {
+     "courseTitle": "Introduction to Microeconomics",
+     "value": "econ/113"
+    },
+    {
+     "description": "and one of"
+    },
+    {
+     "courseTitle": "Principles of Macroeconomics",
+     "value": "econ/105"
+    },
+    {
+     "courseTitle": "Introduction to Macroeconomics",
+     "value": "econ/115"
+    },
+    {
+     "description": "and one of"
+    },
+    {
+     "courseTitle": "Calculus I with Review",
+     "value": "math/150"
+    },
+    {
+     "courseTitle": "Calculus I",
+     "value": "math/151"
+    },
+    {
+     "courseTitle": "Mathematics for the Life Sciences I",
+     "value": "math/154"
+    },
+    {
+     "courseTitle": "Calculus I for the Social Sciences",
+     "value": "math/157"
+    },
+    {
+     "description": "and one of*"
+    },
+    {
+     "courseTitle": "Literary Classics in English",
+     "value": "engl/111w"
+    },
+    {
+     "courseTitle": "Literature Now",
+     "value": "engl/112w"
+    },
+    {
+     "courseTitle": "Literature and Performance",
+     "value": "engl/113w"
+    },
+    {
+     "courseTitle": "Language and Purpose",
+     "value": "engl/114w"
+    },
+    {
+     "courseTitle": "Literature and Culture",
+     "value": "engl/115w"
+    },
+    {
+     "courseTitle": "Writing to Persuade",
+     "value": "engl/199w"
+    },
+    {
+     "courseTitle": "Knowledge and Reality",
+     "value": "phil/100w"
+    },
+    {
+     "courseTitle": "Critical Thinking",
+     "value": "phil/105"
+    },
+    {
+     "courseTitle": "Introduction to Logic and Reasoning",
+     "value": "phil/110"
+    },
+    {
+     "courseTitle": "Moral and Legal Problems",
+     "value": "phil/120w"
+    },
+    {
+     "courseTitle": "Great Works in the History of Philosophy",
+     "value": "phil/150"
+    },
+    {
+     "courseTitle": "Writing in World Literature",
+     "value": "wl/101w"
+    },
+    {
+     "courseTitle": "Early World Literatures",
+     "value": "wl/103w"
+    },
+    {
+     "courseTitle": "Modern World Literatures",
+     "value": "wl/104w"
+    },
+    {
+     "courseTitle": "World Literature Lab",
+     "value": "wl/105w"
+    }
+   ]
+  },
+  {
+   "title": "Upper Division Requirements",
+   "requirements": [
+    {
+     "description": "In the last 60 units, students must complete a minimum of 36 upper division units in business courses, which must include the following:"
+    },
+    {
+     "description": "<ul> \n <li>all core courses (see Core Courses below)</li> \n <li>an area of concentration (see Areas of Concentration below)</li> \n <li>at least three 400 division BUS courses (excluding practicum courses and BUS 478). Any 400 division BUS course completed at SFU must be worth a minimum of three units to be used to fulfil this requirement. 400 division BUS courses worth zero units cannot be used to fulfil&nbsp;this requirement. These courses may be used toward the requirements for the area(s) of concentration. At least one of these 400 division BUS courses&nbsp;must be completed at Simon Fraser University.</li> \n</ul>"
+    },
+    {
+     "description": "Core Courses"
+    },
+    {
+     "description": "Students must complete all core courses with a minimum C- grade."
+    },
+    {
+     "description": "Students complete all of"
+    },
+    {
+     "courseTitle": "Professional Development - Planning",
+     "value": "bus/300"
+    },
+    {
+     "courseTitle": "Business, Society and Ethics",
+     "value": "bus/303"
+    },
+    {
+     "courseTitle": "Introduction to Finance",
+     "value": "bus/312"
+    },
+    {
+     "courseTitle": "Introduction to Marketing",
+     "value": "bus/343"
+    },
+    {
+     "courseTitle": "Business Communication",
+     "value": "bus/360w"
+    },
+    {
+     "courseTitle": "Operations and Supply Chain Management",
+     "value": "bus/373"
+    },
+    {
+     "courseTitle": "Commercial Law",
+     "value": "bus/393"
+    },
+    {
+     "courseTitle": "Strategy",
+     "value": "bus/478"
+    },
+    {
+     "courseTitle": "Professional Development - Summit",
+     "value": "bus/496"
+    },
+    {
+     "description": "and one of"
+    },
+    {
+     "courseTitle": "Organization Theory",
+     "value": "bus/374"
+    },
+    {
+     "courseTitle": "Introduction to Human Resource Management",
+     "value": "bus/381"
+    },
+    {
+     "description": "and one of*"
+    },
+    {
+     "courseTitle": "Global Business Environment",
+     "value": "bus/346"
+    },
+    {
+     "courseTitle": "Financial Institutions",
+     "value": "bus/410"
+    },
+    {
+     "courseTitle": "Fixed Income Security Analysis and Valuation",
+     "value": "bus/411"
+    },
+    {
+     "courseTitle": "Equity Security Analysis",
+     "value": "bus/417"
+    },
+    {
+     "courseTitle": "International Financial Management",
+     "value": "bus/418"
+    },
+    {
+     "courseTitle": "Cross-Cultural Management",
+     "value": "bus/430"
+    },
+    {
+     "courseTitle": "Business with East Asian Countries",
+     "value": "bus/431"
+    },
+    {
+     "courseTitle": "International Human Resource Management",
+     "value": "bus/432"
+    },
+    {
+     "courseTitle": "Foreign Market Entry",
+     "value": "bus/434"
+    },
+    {
+     "courseTitle": "Management of International Firms",
+     "value": "bus/435"
+    },
+    {
+     "courseTitle": "Global Marketing Management",
+     "value": "bus/447"
+    }
+   ]
+  },
+  {
+   "title": "Area of Concentration",
+   "requirements": [
+    {
+     "description": "Students must declare one or two of the following areas of concentration at 45 units and complete all the requirements as specified below. Students interested in declaring an additional concentration must meet with a faculty academic advisor for academic advising and concentration approval."
+    }
+   ]
+  },
+  {
+   "title": "Accounting",
+   "requirements": [
+    {
+     "description": "Students must complete all* of"
+    },
+    {
+     "courseTitle": "Financial Accounting:  Assets",
+     "value": "bus/320"
+    },
+    {
+     "courseTitle": "Financial Accounting: Equities",
+     "value": "bus/321"
+    },
+    {
+     "courseTitle": "Intermediate Managerial Accounting",
+     "value": "bus/322"
+    },
+    {
+     "courseTitle": "Accounting Theory",
+     "value": "bus/421"
+    },
+    {
+     "description": "and at least one* of"
+    },
+    {
+     "courseTitle": "Advanced Accounting",
+     "value": "bus/420"
+    },
+    {
+     "courseTitle": "Advanced Managerial Accounting",
+     "value": "bus/424"
+    },
+    {
+     "courseTitle": "Auditing and Assurance: Concepts and Methods",
+     "value": "bus/426"
+    },
+    {
+     "courseTitle": "Forensic Accounting and Data Analytics",
+     "value": "bus/428"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/490"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/491"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/492"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/493"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/494"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/495"
+    }
+   ]
+  },
+  {
+   "title": "Innovation and Entrepreneurship",
+   "requirements": [
+    {
+     "description": "For this concentration, students complete all of"
+    },
+    {
+     "courseTitle": "Financial Foundations for Entrepreneurs",
+     "value": "bus/314"
+    },
+    {
+     "courseTitle": "Real World Innovation",
+     "value": "bus/338"
+    },
+    {
+     "courseTitle": "Startup Studio",
+     "value": "bus/477"
+    },
+    {
+     "description": "and one of"
+    },
+    {
+     "courseTitle": "Consumer Behaviour",
+     "value": "bus/347"
+    },
+    {
+     "courseTitle": "Project Management",
+     "value": "bus/361"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/394"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/395"
+    },
+    {
+     "courseTitle": "New Product Development and Design",
+     "value": "bus/443"
+    },
+    {
+     "courseTitle": "Innovation Consulting",
+     "value": "bus/450"
+    },
+    {
+     "courseTitle": "Sustainable Innovation",
+     "value": "bus/453"
+    },
+    {
+     "courseTitle": "Group Dynamics and Teamwork",
+     "value": "bus/488"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/490"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/491"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/492"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/493"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/494"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/495"
+    }
+   ]
+  },
+  {
+   "title": "Finance",
+   "requirements": [
+    {
+     "description": "For this concentration, students complete both of"
+    },
+    {
+     "courseTitle": "Corporate Finance",
+     "value": "bus/313"
+    },
+    {
+     "courseTitle": "Investments",
+     "value": "bus/315"
+    },
+    {
+     "description": "and three&nbsp;of"
+    },
+    {
+     "courseTitle": "Financial Institutions",
+     "value": "bus/410"
+    },
+    {
+     "courseTitle": "Fixed Income Security Analysis and Valuation",
+     "value": "bus/411"
+    },
+    {
+     "courseTitle": "Advanced Corporate Finance",
+     "value": "bus/412"
+    },
+    {
+     "courseTitle": "Real Estate Investments",
+     "value": "bus/414"
+    },
+    {
+     "courseTitle": "Equity Security Analysis",
+     "value": "bus/417"
+    },
+    {
+     "courseTitle": "International Financial Management",
+     "value": "bus/418"
+    },
+    {
+     "courseTitle": "Derivative Securities",
+     "value": "bus/419"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/490"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/491"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/492"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/493"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/494"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/495"
+    }
+   ]
+  },
+  {
+   "title": "Human Resource Management",
+   "requirements": [
+    {
+     "description": "For this concentration, students complete both of"
+    },
+    {
+     "courseTitle": "Organization Theory",
+     "value": "bus/374"
+    },
+    {
+     "courseTitle": "Introduction to Human Resource Management",
+     "value": "bus/381"
+    },
+    {
+     "description": "and three of"
+    },
+    {
+     "courseTitle": "Recruitment and Selection",
+     "value": "bus/481"
+    },
+    {
+     "courseTitle": "Performance Management",
+     "value": "bus/482"
+    },
+    {
+     "courseTitle": "Introduction to Employment Law For Business",
+     "value": "bus/483"
+    },
+    {
+     "courseTitle": "Employment Systems",
+     "value": "bus/484"
+    },
+    {
+     "courseTitle": "Negotiations and Conflict Management",
+     "value": "bus/485"
+    },
+    {
+     "courseTitle": "Leadership",
+     "value": "bus/486"
+    },
+    {
+     "courseTitle": "Organizational Development and Change Management",
+     "value": "bus/487"
+    },
+    {
+     "courseTitle": "Group Dynamics and Teamwork",
+     "value": "bus/488"
+    },
+    {
+     "courseTitle": "Management Practices for Sustainability",
+     "value": "bus/489"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/490"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/491"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/492"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/493"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/494"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/495"
+    }
+   ]
+  },
+  {
+   "title": "International Business",
+   "requirements": [
+    {
+     "description": "For this concentration, students complete"
+    },
+    {
+     "courseTitle": "Global Business Environment",
+     "value": "bus/346"
+    },
+    {
+     "description": "and three of"
+    },
+    {
+     "courseTitle": "International Financial Management",
+     "value": "bus/418"
+    },
+    {
+     "courseTitle": "Cross-Cultural Management",
+     "value": "bus/430"
+    },
+    {
+     "courseTitle": "Business with East Asian Countries",
+     "value": "bus/431"
+    },
+    {
+     "courseTitle": "International Human Resource Management",
+     "value": "bus/432"
+    },
+    {
+     "courseTitle": "Foreign Market Entry",
+     "value": "bus/434"
+    },
+    {
+     "courseTitle": "Management of International Firms",
+     "value": "bus/435"
+    },
+    {
+     "courseTitle": "Global Marketing Management",
+     "value": "bus/447"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/490"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/491"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/492"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/493"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/494"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/495"
+    },
+    {
+     "description": "Other 400 division courses deemed to have significant international business relevance may, with prior faculty permission, be substituted for the above courses. These may be offered in another faculty. A course substitution for international business cannot be used for any other concentration."
+    },
+    {
+     "description": "Students concentrating in international business are strongly advised to consider combining it with another business concentration."
+    }
+   ]
+  },
+  {
+   "title": "Management Information Systems",
+   "requirements": [
+    {
+     "description": "For this concentration, students complete all of"
+    },
+    {
+     "courseTitle": "Project Management",
+     "value": "bus/361"
+    },
+    {
+     "courseTitle": "Business Process Analysis",
+     "value": "bus/362"
+    },
+    {
+     "courseTitle": "Managing Information Technology for Business Value",
+     "value": "bus/468"
+    },
+    {
+     "description": "and two of"
+    },
+    {
+     "courseTitle": "Business Analytics",
+     "value": "bus/462"
+    },
+    {
+     "courseTitle": "Business Data Management",
+     "value": "bus/464"
+    },
+    {
+     "courseTitle": "Business Systems Development",
+     "value": "bus/465"
+    },
+    {
+     "courseTitle": "Web-Enabled Business and Emerging Technologies",
+     "value": "bus/466"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/490"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/491"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/492"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/493"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/494"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/495"
+    }
+   ]
+  },
+  {
+   "title": "Operations Management",
+   "requirements": [
+    {
+     "description": "For this concentration, students complete both of"
+    },
+    {
+     "courseTitle": "Data Analytics and Visualization",
+     "value": "bus/336"
+    },
+    {
+     "courseTitle": "Advanced Operations Management",
+     "value": "bus/473"
+    },
+    {
+     "description": "and two of"
+    },
+    {
+     "courseTitle": "Decision Analysis in Business",
+     "value": "bus/437"
+    },
+    {
+     "courseTitle": "Simulation in Management Decision-making",
+     "value": "bus/440"
+    },
+    {
+     "courseTitle": "Customer Analytics",
+     "value": "bus/445"
+    },
+    {
+     "courseTitle": "Supply Chain Management",
+     "value": "bus/474"
+    },
+    {
+     "courseTitle": "Sustainable Operations",
+     "value": "bus/475"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/490"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/491"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/492"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/493"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/494"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/495"
+    }
+   ]
+  },
+  {
+   "title": "Marketing",
+   "requirements": [
+    {
+     "description": "For this concentration, students complete at least four upper division marketing courses from the lists indicated below."
+    },
+    {
+     "description": "At least one course must be selected from the marketing analytics course list and at least one course must be selected from the consumer behaviours and strategies course list."
+    },
+    {
+     "description": "Marketing Analytics (choose at least one)"
+    },
+    {
+     "courseTitle": "Marketing Research",
+     "value": "bus/345"
+    },
+    {
+     "courseTitle": "Web Analytics",
+     "value": "bus/441"
+    },
+    {
+     "courseTitle": "Customer Analytics",
+     "value": "bus/445"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/490"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/491"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/492"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/493"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/494"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/495"
+    },
+    {
+     "description": "**When offered as a quantitative selected topics course in marketing."
+    },
+    {
+     "description": "Consumer Behaviours and Strategies (choose at least one)"
+    },
+    {
+     "courseTitle": "Consumer Behaviour",
+     "value": "bus/347"
+    },
+    {
+     "courseTitle": "New Product Development and Design",
+     "value": "bus/443"
+    },
+    {
+     "courseTitle": "Business to Business Marketing",
+     "value": "bus/444"
+    },
+    {
+     "courseTitle": "Marketing Strategy in Sports, Entertainment and Other Creative Industries",
+     "value": "bus/446"
+    },
+    {
+     "courseTitle": "Global Marketing Management",
+     "value": "bus/447"
+    },
+    {
+     "courseTitle": "Integrated Marketing Communications",
+     "value": "bus/448"
+    },
+    {
+     "courseTitle": "Ethical Issues in Marketing",
+     "value": "bus/449"
+    },
+    {
+     "courseTitle": "Strategic Brand Management",
+     "value": "bus/455"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/490"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/491"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/492"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/493"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/494"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/495"
+    },
+    {
+     "description": "***When offered as a behavioural selected topics course in marketing."
+    }
+   ]
+  },
+  {
+   "title": "Strategic Analysis",
+   "requirements": [
+    {
+     "description": "For this concentration, students complete three of"
+    },
+    {
+     "courseTitle": "Business Applications of Game Theory",
+     "value": "bus/307"
+    },
+    {
+     "courseTitle": "Critical Thinking Through Business Case Analysis",
+     "value": "bus/371"
+    },
+    {
+     "courseTitle": "Strategic Decision Making",
+     "value": "bus/471"
+    },
+    {
+     "courseTitle": "Strategy Analysis Practicum",
+     "value": "bus/479"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/490"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/491"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/492"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/493"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/494"
+    },
+    {
+     "courseTitle": "Selected Topics in Business Administration",
+     "value": "bus/495"
+    },
+    {
+     "description": "Students concentrating in strategic analysis are strongly advised to consider combining it with another business concentration."
+    }
+   ]
+  },
+  {
+   "requirements": [
+    {
+     "description": "NOTE: SFU students accepted in the accelerated master’s within the Beedie School of Business may apply a maximum of 10 graduate course units, taken during the final term of the bachelor’s degree, towards the upper division electives of the bachelor’s program and the requirements of the master’s degree. For more information go to: \n<a href=\"https://www.sfu.ca/gradstudies/apply/programs/accelerated-masters.html\">https://www.sfu.ca/gradstudies/apply/programs/accelerated-masters.html</a>."
+    }
+   ]
+  },
+  {
+   "title": "Writing, Quantitative, and Breadth Requirements",
+   "description": "Students admitted to Simon Fraser University beginning in the fall 2006 term must meet writing, quantitative and breadth requirements as part of any degree program they may undertake. See \n<a href=\"https://www.sfu.ca/students/calendar/2026/fall/fees-and-regulations/enrolment/WQB.html\">Writing, Quantitative, and Breadth Requirements</a> for university-wide information. WQB Graduation Requirements A grade of C- or better is required to earn W, Q or B credit  \n<table> \n <tbody> \n  <tr> \n   <td>Requirement</td> \n   <td> Units </td> \n   <td colspan=\"2\">Notes</td> \n  </tr> \n  <tr> \n   <td>W - Writing</td> \n   <td> 6 </td> \n   <td colspan=\"2\"> Must include at least one upper division course, taken at Simon Fraser University within the student's major subject; two courses (minimum three units each) </td> \n  </tr> \n  <tr> \n   <td>Q - Quantitative</td> \n   <td> 6 </td> \n   <td colspan=\"2\">Q courses may be lower or upper division;&nbsp;two courses (total six units or more)</td> \n  </tr> \n  <tr> \n   <td>B - Breadth</td> \n   <td> 18 </td> \n   <td>Designated Breadth</td> \n   <td> Must be outside the student's major subject, and may be lower or upper division: Two courses (total six units or more) Social Sciences: B-Soc Two courses (total six units or more) Humanities: B-Hum Two courses (total six units or more) Sciences: B-Sci </td> \n  </tr> \n  <tr> \n   <td> 6 </td> \n   <td>Additional Breadth</td> \n   <td> Two courses (total six units or more) outside the student's major subject (may or may not be B-designated courses, and will likely help fulfil individual degree program requirements). Students choosing to complete a joint major, joint honours, double major, two extended minors, an extended minor and a minor, or two minors may satisfy the breadth requirements (designated or not designated) with courses completed in either one or both program areas. </td> \n  </tr> \n </tbody> \n</table>"
+  },
+  {
+   "title": "Beedie School of Business Non-Business Elective Requirements",
+   "requirements": [
+    {
+     "description": "Students&nbsp;are required to complete a minimum of nine units, outside of the Beedie School of Business, that is centered around the School’s Calling and offers an Indigenous perspective."
+    },
+    {
+     "description": "Students must complete a minimum of six units from Group A and a minimum of three units from Group B."
+    }
+   ]
+  },
+  {
+   "title": "Group A",
+   "requirements": [
+    {
+     "description": "Students must complete a minimum of six units from the following list of courses:"
+    },
+    {
+     "description": "Global Perspective"
+    },
+    {
+     "courseTitle": "International Trade",
+     "value": "econ/342"
+    },
+    {
+     "courseTitle": "Introduction to Global Asia",
+     "value": "ga/101"
+    },
+    {
+     "courseTitle": "Our World: Introducing Human Geography",
+     "value": "geog/100"
+    },
+    {
+     "courseTitle": "History of Africa to the 19th Century: From Ancient Times to the Slave Trade",
+     "value": "hist/231"
+    },
+    {
+     "courseTitle": "Introduction to Global Humanities",
+     "value": "hum/101w"
+    },
+    {
+     "courseTitle": "Global Challenges of the 21st Century: An Introduction to International Studies",
+     "value": "is/101"
+    },
+    {
+     "courseTitle": "Security and Global Governance: Interdisciplinary Perspectives",
+     "value": "is/200"
+    },
+    {
+     "courseTitle": "States, People, and Power Around the World",
+     "value": "is/210"
+    },
+    {
+     "courseTitle": "Wealth and Poverty of Nations",
+     "value": "is/220"
+    },
+    {
+     "courseTitle": "Introduction to Middle East Politics",
+     "value": "is/315"
+    },
+    {
+     "courseTitle": "Globalization, Poverty and Inequality",
+     "value": "is/427"
+    },
+    {
+     "courseTitle": "Migration, Migrants, and Work: A Global Perspective",
+     "value": "lbst/312"
+    },
+    {
+     "courseTitle": "International Relations",
+     "value": "pol/141"
+    },
+    {
+     "courseTitle": "Global Problems and the Culture of Capitalism (S)",
+     "value": "sa/302w"
+    },
+    {
+     "courseTitle": "What is World Literature?",
+     "value": "wl/100"
+    },
+    {
+     "description": "Innovation"
+    },
+    {
+     "courseTitle": "Thriving as a Cultural Entrepreneur",
+     "value": "ca/381"
+    },
+    {
+     "courseTitle": "Introduction to Communication Studies",
+     "value": "cmns/110"
+    },
+    {
+     "courseTitle": "Capitalism and the Making of the Modern World",
+     "value": "hist/135"
+    },
+    {
+     "courseTitle": "Visual Communication Design",
+     "value": "iat/110"
+    },
+    {
+     "courseTitle": "Introduction to Game Studies: Theory and Design",
+     "value": "iat/210"
+    },
+    {
+     "courseTitle": "Science, Policy, and Innovation",
+     "value": "pol/150"
+    },
+    {
+     "courseTitle": "Introduction to Public Policy",
+     "value": "pol/253"
+    },
+    {
+     "courseTitle": "Psychological Issues in Contemporary Society",
+     "value": "psyc/106"
+    },
+    {
+     "courseTitle": "Introduction to Sociology (S)",
+     "value": "sa/150"
+    },
+    {
+     "courseTitle": "Energy, Environment and Society",
+     "value": "see/110"
+    },
+    {
+     "courseTitle": "Introduction to 3D Printing and Laser Scanning Technologies",
+     "value": "tekx/101"
+    },
+    {
+     "description": "Social Responsibility"
+    },
+    {
+     "courseTitle": "Labor Economics",
+     "value": "econ/381"
+    },
+    {
+     "courseTitle": "Public Economics: Taxation",
+     "value": "econ/393"
+    },
+    {
+     "courseTitle": "Sex Talk: Introduction to Contemporary Issues in Sexuality Studies",
+     "value": "gsws/100"
+    },
+    {
+     "courseTitle": "Treaties in Canada",
+     "value": "indg/305"
+    },
+    {
+     "courseTitle": "Equality and Inequality at Work",
+     "value": "lbst/100"
+    },
+    {
+     "courseTitle": "Work and Worker's Rights: Introducing Labour Studies",
+     "value": "lbst/101"
+    },
+    {
+     "courseTitle": "Global Justice",
+     "value": "phil/121"
+    },
+    {
+     "courseTitle": "Global Change",
+     "value": "rem/100"
+    },
+    {
+     "courseTitle": "Energy Management for a Sustainable Climate and Society",
+     "value": "rem/350"
+    },
+    {
+     "courseTitle": "Power, Conflict and Change in Canadian Society (S)",
+     "value": "sa/200w"
+    },
+    {
+     "courseTitle": "Culture, Mental Health, and Therapeutic Governance (A)",
+     "value": "sa/219"
+    },
+    {
+     "courseTitle": "Introduction to Sustainability",
+     "value": "sd/281"
+    },
+    {
+     "courseTitle": "What is a city?",
+     "value": "urb/101"
+    },
+    {
+     "description": "Multiple Themes (Global Perspective, Innovation, Social Responsibility)"
+    },
+    {
+     "courseTitle": "Reconstructing the Human Past",
+     "value": "arch/101"
+    },
+    {
+     "courseTitle": "Contemporary Health Issues",
+     "value": "bpk/140"
+    },
+    {
+     "courseTitle": "Geohazards - Earth in Turmoil",
+     "value": "easc/104"
+    },
+    {
+     "courseTitle": "Geological Resources, Environment and Society",
+     "value": "easc/107"
+    },
+    {
+     "courseTitle": "The World Economy",
+     "value": "econ/102"
+    },
+    {
+     "courseTitle": "Economic Development",
+     "value": "econ/355w"
+    },
+    {
+     "courseTitle": "Selected Questions and Issues in Education",
+     "value": "educ/100w"
+    },
+    {
+     "courseTitle": "Climate Change, Water, and Society",
+     "value": "geog/104"
+    },
+    {
+     "courseTitle": "Climate Crisis: Understanding a World on Fire",
+     "value": "geog/333"
+    },
+    {
+     "courseTitle": "Introduction to Planning",
+     "value": "plan/100"
+    },
+    {
+     "courseTitle": "Ethics and the Environment",
+     "value": "rem/320w"
+    },
+    {
+     "courseTitle": "Ecological Economics",
+     "value": "rem/321"
+    },
+    {
+     "courseTitle": "Sustainable Transportation for a Zero-Emissions World",
+     "value": "rem/355"
+    },
+    {
+     "courseTitle": "Planning for Sustainable Food Systems",
+     "value": "rem/357"
+    }
+   ]
+  },
+  {
+   "title": "Group B",
+   "requirements": [
+    {
+     "description": "Students must complete a minimum of three units from the following list of courses*:"
+    },
+    {
+     "courseTitle": "Popular Writing by Indigenous Authors",
+     "value": "engl/360"
+    },
+    {
+     "courseTitle": "Introduction to Indigenous Studies",
+     "value": "indg/101"
+    },
+    {
+     "courseTitle": "International Indigenous Lifewriting",
+     "value": "indg/110w"
+    },
+    {
+     "courseTitle": "Introduction to Indigenous Research Methods",
+     "value": "indg/111"
+    },
+    {
+     "courseTitle": "Indigenous Peoples' Perspectives on History ",
+     "value": "indg/201w"
+    },
+    {
+     "courseTitle": "Popular Writing by Indigenous Authors",
+     "value": "indg/360"
+    },
+    {
+     "courseTitle": "Indigenous Peoples and Resource Management",
+     "value": "rem/207"
+    },
+    {
+     "courseTitle": "Sociology of Indigenous-Settler Relations (S)",
+     "value": "sa/216"
+    }
+   ]
+  },
+  {
+   "title": "Business Courses with Exchange Credit Restrictions",
+   "requirements": [
+    {
+     "description": "For more information, click \n<a href=\"https://www.sfu.ca/students/studyabroad/exchanges/academic-considerations/exchange-credit.html\">here</a>."
+    }
+   ]
+  },
+  {
+   "title": "Residency Requirements and Transfer Credit",
+   "description": "<ul> \n <li>At least half of the program's total units must be earned through Simon Fraser University study.</li> \n <li>At least two thirds of the program's total upper division units must be earned through Simon Fraser University study.</li> \n</ul>"
+  }
+ ]
+}

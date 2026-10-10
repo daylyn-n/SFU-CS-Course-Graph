@@ -1,0 +1,315 @@
+{
+ "title": "Engineering Science, Computer Engineering Option",
+ "value": "bachelor-of-applied-science",
+ "awardType": "Major",
+ "credential": "Bachelor of Applied Science",
+ "degreeLevel": "Undergraduate",
+ "description": "This program leads to a bachelor of applied science degree with a computer engineering option. Engineering science students develop skills in systems design with a high level of scientific knowledge. This demanding program is aimed&nbsp;at the superior student. The program produces well educated, innovative engineer/scientists with entrepreneurial skills and attitudes who are oriented to new technologies. Program entry is competitive. Students undertake a basic core of pure, applied and engineering sciences followed by studies in a specialized option. The general BASc&nbsp;program may be completed in eight academic terms plus a minimum of three co-op terms. ENSC&nbsp;courses emphasize learning, conceptualization, design and analysis. Built into the program are courses on social impacts of technology, finance, management, design methods and entrepreneurship intended to complement scientific studies. A special, integrated communications course completed throughout the program ensures that all graduates have the communication&nbsp;skills necessary to be effective engineers. The dynamic, on-going development and application of computer and digital systems requires computer systems engineers to have a balanced capability in software and hardware, and a solid engineering base.",
+ "fullTitle": "Engineering Science, Computer Engineering Option Major",
+ "admissionRequirements": "The program begins each fall term. However, admitted students may enter in any term. For detailed university admission requirements, visit \n<a href=\"http://www.sfu.ca/students/admission/admission-requirements.html\">www.sfu.ca/students/admission/admission-requirements.html</a>. For more detailed School of Engineering Science admission information, visit&nbsp;\n<a href=\"http://www.sfu.ca/engineering.html\">www.sfu.ca/engineering.html</a>, or send an email to \n<a href=\"mailto:asadvise@sfu.ca\">asadvise@sfu.ca</a>. Minimum Admission Requirements Applicants must be eligible for university admission, must submit a university application, and must have successfully completed the following high school courses: Physics 12, Mathematics 12, Chemistry 12, and English 12. External Transfer from Another Post-Secondary Institution Admission is competitive. A minimum of 24 units of transferable coursework is required, including: \n<ul> \n <li>at least one mathematics course chosen from: MATH 152, MATH 232 (or 240);</li> \n <li>at least one computing course chosen from: CMPT 128 (or 135; or (125 and 127)), 225 and ENSC 151;</li> \n <li>at least one physics course chosen from: PHYS 121 (or 141), PHYS 221, and PHYS 321&nbsp;</li> \n</ul> Please see \n<a href=\"http://www.sfu.ca/students/admission/admission-requirements.html\">www.sfu.ca/students/admission/admission-requirements.html</a> for further information. Internal Transfer from Another Simon Fraser University Program Simon Fraser University students who wish to transfer to engineering science from another program should formally apply for an internal transfer.&nbsp;The qualification for internal transfer will be calculated based on the following four criteria: CGPA, engineering related grade point average (ERGPA) at Simon Fraser University, no more than five repeated courses, and the course load during the term prior to the application deadline. In regards to the course load, we require the term prior to requesting the transfer to the School of Engineering Science, that the student must have been enrolled in at least 12 Simon Fraser University course load units and earned an overall CGPA of 2.5 or higher. Further,&nbsp;Simon Fraser University students applying for admission to the School of Engineering Science are competitively selected for admission on the basis of an engineering-related grade point average (ERGPA). Typically, we expect the ERGPA to be as high as 2.8, and the ERGPA is determined based on the number of seats available. Therefore, meeting the minimum requirements does not guarantee admission.&nbsp;The ERGPA is calculated over all courses the student has taken from this list, where a minimum of three courses from this list is required, such that: \n<ul> \n <li>at least one mathematics course chosen from MATH 151 (or 150), MATH 152, MATH 232 (or 240), MACM 101, MACM 201</li> \n <li>at least one computing course chosen from CMPT 128 or 135 or (125 and 127), 225, 275 and ENSC 151;</li> \n <li>at least one physics course chosen from PHYS 120 (or 140), PHYS 121 (or 141), PHYS 221, PHYS 321, PHYS 365</li> \n <li>additional courses may include: CHEM 121</li> \n</ul> All three courses must be completed prior to application. For complete information, contact an applied sciences advisor. If a course is a duplicate of any previous course completed at Simon Fraser University or elsewhere, only the last attempt will be included in the average. Admission is competitive and the admission average is established on a per term basis, depending on the number of spaces available. Second Degree Please see \n<a href=\"https://www.sfu.ca/students/calendar/2026/fall/programs/engineering-science-second-degree/bachelor-of-applied-science.html\">www.sfu.ca/students/calendar/programs/engineering-science-second-degree/bachelor-of-applied-science.html</a> for information on the requirements for admission to the second degree program. Program requirements for the computer engineering option are listed below.",
+ "departments": [
+  {
+   "title": "School of Engineering Science",
+   "profilePage": "https://www.sfu.ca/fas/schools/engineering-science/faculty.html",
+   "homePage": "https://www.sfu.ca/fas/schools/engineering-science.html"
+  }
+ ],
+ "faculties": [
+  {
+   "title": "Faculty of Applied Sciences",
+   "profilePpage": "",
+   "homePage": "https://www.sfu.ca/fas.html"
+  }
+ ],
+ "requirements": [
+  {
+   "title": "Minimum Grading Requirements",
+   "requirements": [
+    {
+     "description": "A C- grade or better in prerequisite courses is required to enroll in engineering science courses."
+    }
+   ]
+  },
+  {
+   "title": "Co-operative Education Work Experience",
+   "requirements": [
+    {
+     "description": "Every engineering science student completes three (3) work terms of practical experience in an appropriate industrial or research setting leading to a project under the technical direction of a practising engineer or scientist. The goal is a complementary combination of work in an industrial or research setting and study in one of the engineering options. The internship may be within the university but in most cases the work site is off campus."
+    },
+    {
+     "description": "After the first year, students typically alternate between academic and work terms."
+    },
+    {
+     "description": "At least two of the three mandatory work terms must be completed in industry (ENSC 195, 295, 395). Students may participate in additional work terms but are encouraged to seek diversity in their experience. The three mandatory work terms may include one special co-op term (ENSC 196, 296, 396). Special co-op may include, but is not restricted to, self-directed, entrepreneurial, service or research co-op work terms. Permission of the engineering science co-op office is required."
+    },
+    {
+     "description": "An optional non-technical work term (ENSC 194) is also available through the engineering science co-operative education office and is often completed after the first two study terms. ENSC 194 does not count toward the mandatory three course requirement."
+    }
+   ]
+  },
+  {
+   "title": "Upper Division Enrollment Requirements",
+   "requirements": [
+    {
+     "description": "To be eligible to enroll in upper division engineering courses, excluding ENSC 320, students must have declared their option."
+    },
+    {
+     "description": "There is an absolute minimum of 80 units completed to enroll in 400-level courses. Please note that specific courses may have higher requirements."
+    }
+   ]
+  },
+  {
+   "title": "Program Requirements",
+   "requirements": [
+    {
+     "description": "Students complete the engineering science core course requirements as shown below, which includes additional course requirements for this computer engineering option. These courses provide basic science, general studies, engineering science, specialized engineering and science, and project and laboratory work."
+    },
+    {
+     "description": "This program’s core course requirements also consist of non-technical courses which broaden education and develop awareness of social, economic and managerial factors affecting engineering and scientific work."
+    },
+    {
+     "description": "Although there is no strict requirement to complete the curriculum in the sequence that is strongly suggested by the school, deviating from the course completion schedule may lead to scheduling and prerequisite problems in subsequent terms. To view the suggested course schedule, visit&nbsp;\n<a href=\"https://www.sfu.ca/fas/study/current-students/school-of-engineering-science/undergraduates/program-requirements.html#ENSCoption\">https://www.sfu.ca/fas/study/current-students/school-of-engineering-science/undergraduates/program-requirements.html#ENSCoption</a>."
+    }
+   ]
+  },
+  {
+   "title": "Core Course Requirements",
+   "requirements": [
+    {
+     "description": "The following core courses are required for the engineering science major in computer engineering and cannot be substituted for &quot;equivalent&quot; courses in other areas without prior approval by the school. &quot;Equivalent&quot; courses taken without prior approval will not be applied to graduation requirements. Students should consult an academic advisor within their program for details on obtaining permission."
+    },
+    {
+     "courseTitle": "General Chemistry and Laboratory I",
+     "value": "chem/121"
+    },
+    {
+     "courseTitle": "Data Structures and Programming",
+     "value": "cmpt/225"
+    },
+    {
+     "courseTitle": "Introduction to Software Engineering",
+     "value": "cmpt/276"
+    },
+    {
+     "courseTitle": "Operating Systems",
+     "value": "cmpt/303"
+    },
+    {
+     "courseTitle": "Principles of Microeconomics",
+     "value": "econ/103"
+    },
+    {
+     "courseTitle": "Engineering, Science and Society",
+     "value": "ensc/100"
+    },
+    {
+     "courseTitle": "Process, Form, and Convention in Professional Genres",
+     "value": "ensc/105w"
+    },
+    {
+     "courseTitle": "Introduction to Electronics Laboratory Instruments Operation and Measurement Techniques",
+     "value": "ensc/120"
+    },
+    {
+     "courseTitle": "Introduction to Software Development for Engineers",
+     "value": "ensc/151"
+    },
+    {
+     "courseTitle": "Introduction to Engineering Analysis ",
+     "value": "ensc/180"
+    },
+    {
+     "courseTitle": "Graphical Communication for Engineering",
+     "value": "ensc/204"
+    },
+    {
+     "courseTitle": "Electric Circuits I",
+     "value": "ensc/220"
+    },
+    {
+     "courseTitle": "Microelectronics I",
+     "value": "ensc/225"
+    },
+    {
+     "courseTitle": "Software Design and Analysis for Engineers",
+     "value": "ensc/251"
+    },
+    {
+     "courseTitle": "Fundamentals of Digital Logic & Design",
+     "value": "ensc/252"
+    },
+    {
+     "courseTitle": "Introduction to Computer Organization",
+     "value": "ensc/254"
+    },
+    {
+     "courseTitle": "Engineering Measurement and Data Analysis",
+     "value": "ensc/280"
+    },
+    {
+     "courseTitle": "Electric Circuits II",
+     "value": "ensc/320"
+    },
+    {
+     "courseTitle": "Electronic Devices ",
+     "value": "ensc/324"
+    },
+    {
+     "courseTitle": "Communication Systems",
+     "value": "ensc/327"
+    },
+    {
+     "courseTitle": "Digital Systems Design",
+     "value": "ensc/350"
+    },
+    {
+     "courseTitle": "Embedded and Real Time System Software",
+     "value": "ensc/351"
+    },
+    {
+     "courseTitle": "Linear Systems",
+     "value": "ensc/380"
+    },
+    {
+     "courseTitle": "Capstone A: Project Design, Management, and Documentation",
+     "value": "ensc/405w"
+    },
+    {
+     "courseTitle": "Engineering Ethics, Law, and Professional Practice",
+     "value": "ensc/406"
+    },
+    {
+     "title": "or",
+     "courseTitle": "The Business of Engineering",
+     "value": "ensc/410"
+    },
+    {
+     "courseTitle": "The Business of Entrepreneurial Engineering",
+     "value": "ensc/411"
+    },
+    {
+     "courseTitle": "Digital Signal Processing",
+     "value": "ensc/429"
+    },
+    {
+     "courseTitle": "Capstone B: Engineering Design Project",
+     "value": "ensc/440"
+    },
+    {
+     "courseTitle": "Discrete Mathematics II",
+     "value": "macm/201"
+    },
+    {
+     "courseTitle": "Numerical Analysis I",
+     "value": "macm/316"
+    },
+    {
+     "courseTitle": "Calculus I",
+     "value": "math/151"
+    },
+    {
+     "courseTitle": "Calculus II",
+     "value": "math/152"
+    },
+    {
+     "courseTitle": "Applied Linear Algebra",
+     "value": "math/232"
+    },
+    {
+     "courseTitle": "Calculus III",
+     "value": "math/251"
+    },
+    {
+     "courseTitle": "Introduction to Ordinary Differential Equations",
+     "value": "math/260"
+    },
+    {
+     "courseTitle": "Mechanics and Modern Physics",
+     "value": "phys/120"
+    },
+    {
+     "courseTitle": "Optics, Electricity and Magnetism",
+     "value": "phys/121"
+    },
+    {
+     "description": "and any two of"
+    },
+    {
+     "courseTitle": "VLSI Systems Design",
+     "value": "ensc/450"
+    },
+    {
+     "courseTitle": "Advanced Digital System Design",
+     "value": "ensc/452"
+    },
+    {
+     "courseTitle": "Programming for Heterogeneous Computing Systems",
+     "value": "ensc/453"
+    }
+   ]
+  },
+  {
+   "title": "Complementary Studies Elective Courses",
+   "requirements": [
+    {
+     "description": "Students in the computer engineering option are required to take three breadth courses, with at least one course in each category (B-Hum/B-Soc). ECON 103 is a B-Soc course and counts towards these breadth requirements. Therefore, in this option, students have to take two more breadth courses, one of which must be a B-Hum category course (at least three units) to fulfil the requirement."
+    }
+   ]
+  },
+  {
+   "title": "Engineering Science and&nbsp;Design Elective Courses",
+   "requirements": [
+    {
+     "description": "Engineering science and design (ESD) electives may be offered by departments other than the School of Engineering Science, but they must satisfy the Canadian Engineering Accreditation Board (CEAB) engineering science and engineering design requirements. Generally, engineering science has roots in mathematics and basic sciences, but carries knowledge further toward creative applications that could include simulation, experimental procedures, modelling and the development of mathematical or numerical techniques. Application to the identification and solution of practical engineering problems is stressed."
+    },
+    {
+     "description": "Engineering design requires students to demonstrate an ability to design solutions for complex, open-ended engineering problems and to design systems, components or processes that meet specified needs with appropriate attention to health and safety risks, applicable standards, and economic, environmental, cultural and societal considerations."
+    },
+    {
+     "description": "Each option has a pre-approved list of electives that may include one or more pre-approved ESD electives. Note that these courses may have prerequisites not required for your option; these prerequisites would still need to be taken in order to enroll in the elective. Students interested in taking an ESD elective course that does not appear on this list should contact the chair of their option/undergraduate curriculum committee and obtain his/her approval in writing before proceeding with the course."
+    },
+    {
+     "description": "Students in the computer engineering option must complete a minimum of 12 units from the engineering science and&nbsp;design elective course list at \n<a href=\"https://www.sfu.ca/fas/study/current-students/school-of-engineering-science/undergraduates/program-requirements.html#ENSCoption\">https://www.sfu.ca/fas/study/current-students/school-of-engineering-science/undergraduates/program-requirements.html#ENSCoption</a>.&nbsp;Students may take a maximum of two 300-level ESD electives. &nbsp;"
+    },
+    {
+     "description": "NOTE: SFU students accepted in the accelerated master’s within the School of Engineering Science may apply a maximum of 10 graduate course units, taken while completing the bachelor's degree, towards the upper division electives of the bachelor's program and the requirements of the master's degree. For more information go to: \n<a href=\"https://www.sfu.ca/gradstudies/apply/programs/accelerated-masters.html\">https://www.sfu.ca/gradstudies/apply/programs/accelerated-masters.html</a> or please contact the engineering science graduate program committee chair."
+    }
+   ]
+  },
+  {
+   "title": "Science Elective Courses",
+   "requirements": [
+    {
+     "description": "Students must also complete&nbsp;one science elective course selected from a pre-approved science electives list that is available at&nbsp;\n<a href=\"https://www.sfu.ca/fas/study/current-students/school-of-engineering-science/undergraduates/program-requirements/preapproved-electives.html#science\">https://www.sfu.ca/fas/study/current-students/school-of-engineering-science/undergraduates/program-requirements/preapproved-electives.html#science</a>."
+    }
+   ]
+  },
+  {
+   "title": "Writing, Quantitative, and Breadth Requirements",
+   "description": "Students admitted to Simon Fraser University beginning in the fall 2006 term must meet writing, quantitative and breadth requirements as part of any degree program they may undertake. See \n<a href=\"https://www.sfu.ca/students/calendar/2026/fall/fees-and-regulations/enrolment/WQB.html\">Writing, Quantitative, and Breadth Requirements</a> for university-wide information. WQB Graduation Requirements A grade of C- or better is required to earn W, Q or B credit  \n<table> \n <tbody> \n  <tr> \n   <td>Requirement</td> \n   <td> Units </td> \n   <td colspan=\"2\">Notes</td> \n  </tr> \n  <tr> \n   <td>W - Writing</td> \n   <td> 6 </td> \n   <td colspan=\"2\"> Must include at least one upper division course, taken at Simon Fraser University within the student's major subject; two courses (minimum three units each) </td> \n  </tr> \n  <tr> \n   <td>Q - Quantitative</td> \n   <td> 6 </td> \n   <td colspan=\"2\">Q courses may be lower or upper division;&nbsp;two courses (total six units or more)</td> \n  </tr> \n  <tr> \n   <td>B - Breadth</td> \n   <td> 18 </td> \n   <td>Designated Breadth</td> \n   <td> Must be outside the student's major subject, and may be lower or upper division: Two courses (total six units or more) Social Sciences: B-Soc Two courses (total six units or more) Humanities: B-Hum Two courses (total six units or more) Sciences: B-Sci </td> \n  </tr> \n  <tr> \n   <td> 6 </td> \n   <td>Additional Breadth</td> \n   <td> Two courses (total six units or more) outside the student's major subject (may or may not be B-designated courses, and will likely help fulfil individual degree program requirements). Students choosing to complete a joint major, joint honours, double major, two extended minors, an extended minor and a minor, or two minors may satisfy the breadth requirements (designated or not designated) with courses completed in either one or both program areas. </td> \n  </tr> \n </tbody> \n</table>"
+  },
+  {
+   "title": "WQB Requirement Modifications for Engineering Science Students",
+   "requirements": [
+    {
+     "description": "For engineering science students, these university requirements are modified as follows. \n<ul> \n <li>for students in the computer engineering option, the total number of Breadth-Social Sciences (B-Soc) and Breadth-Humanities (B-Hum) courses is reduced to three courses, with at least one course in each category.&nbsp;ECON 103 is a B-Soc course and counts towards these breadth requirements. Therefore, in this option, students have to take two more breadth courses, one of which must be a B-Hum category course (at least three units) to fulfil the requirement.</li> \n</ul>"
+    }
+   ]
+  },
+  {
+   "title": "Residency Requirements and Transfer Credit",
+   "description": "<ul> \n <li>At least half of the program's total units must be earned through Simon Fraser University study.</li> \n <li>At least two thirds of the program's total upper division units must be earned through Simon Fraser University study.</li> \n</ul>"
+  },
+  {
+   "requirements": [
+    {
+     "description": "Please see \n<a href=\"https://www.sfu.ca/students/calendar/2026/fall/faculties-research/faculty-applied-sciences.html\">Faculty of Applied Sciences Residency Requirements</a> for further information."
+    }
+   ]
+  },
+  {
+   "title": "Elective Courses",
+   "description": "In addition to the courses listed above, students should consult an academic advisor to plan the remaining required elective courses."
+  }
+ ]
+}

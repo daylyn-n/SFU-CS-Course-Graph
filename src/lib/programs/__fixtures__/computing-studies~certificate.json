@@ -1,0 +1,303 @@
+{
+ "title": "Computing Studies",
+ "value": "certificate",
+ "awardType": "",
+ "credential": "Certificate",
+ "degreeLevel": "Undergraduate",
+ "description": "This program provides both part-time and full-time students with an opportunity to understand the fundamentals of computers and programming without necessarily specializing in computing science. Current SFU Computing Science students in Major or Honours programs (or related joint programs) may not apply to this program.",
+ "fullTitle": "Computing Studies ",
+ "admissionRequirements": "",
+ "departments": [
+  {
+   "title": "School of Computing Science",
+   "profilePage": "https://www.sfu.ca/fas/computing/people/faculty.html",
+   "homePage": "https://www.sfu.ca/fas/computing.html"
+  }
+ ],
+ "faculties": [
+  {
+   "title": "Faculty of Applied Sciences",
+   "profilePpage": "",
+   "homePage": "https://www.sfu.ca/fas.html"
+  }
+ ],
+ "requirements": [
+  {
+   "title": "Prerequisite Grade Requirement",
+   "requirements": [
+    {
+     "description": "Computing science course entry requires a grade of C- or better in each prerequisite course. A minimum 2.40 cumulative grade point average (CGPA) is required for 200, 300 and 400 division computing courses."
+    }
+   ]
+  },
+  {
+   "title": "Program Requirements",
+   "requirements": [
+    {
+     "description": "A 2.00 grade point average is required on the CMPT courses that are used for graduation. Only courses completed at Simon Fraser University are used in this calculation."
+    }
+   ]
+  },
+  {
+   "title": "Required Courses",
+   "requirements": [
+    {
+     "description": "Students complete at least 18 units of CMPT or MACM courses including:"
+    },
+    {
+     "courseTitle": "Data Structures and Programming",
+     "value": "cmpt/225"
+    },
+    {
+     "description": "3 units&nbsp;of upper division CMPT courses chosen from the following list.&nbsp;"
+    },
+    {
+     "description": "Artificial Intelligence"
+    },
+    {
+     "courseTitle": "Introduction to Artificial Intelligence",
+     "value": "cmpt/310"
+    },
+    {
+     "courseTitle": "Biomedical Computing",
+     "value": "cmpt/340"
+    },
+    {
+     "courseTitle": "Machine Learning",
+     "value": "cmpt/410"
+    },
+    {
+     "courseTitle": "Knowledge Representation",
+     "value": "cmpt/411"
+    },
+    {
+     "courseTitle": "Computational Linguistics",
+     "value": "cmpt/413"
+    },
+    {
+     "courseTitle": "Intelligent Systems",
+     "value": "cmpt/417"
+    },
+    {
+     "courseTitle": "Special Topics in Artificial Intelligence",
+     "value": "cmpt/419"
+    },
+    {
+     "courseTitle": "Deep Learning",
+     "value": "cmpt/420"
+    },
+    {
+     "description": "Visual and Interactive Computing"
+    },
+    {
+     "courseTitle": "Introduction to Visual Computing",
+     "value": "cmpt/361"
+    },
+    {
+     "courseTitle": "User Interface Design",
+     "value": "cmpt/363"
+    },
+    {
+     "courseTitle": "Multimedia Systems",
+     "value": "cmpt/365"
+    },
+    {
+     "courseTitle": "Computer Vision",
+     "value": "cmpt/412"
+    },
+    {
+     "courseTitle": "Computational Photography and Image Manipulation",
+     "value": "cmpt/461"
+    },
+    {
+     "courseTitle": "Geometric Modelling in Computer Graphics",
+     "value": "cmpt/464"
+    },
+    {
+     "courseTitle": "Animation",
+     "value": "cmpt/466"
+    },
+    {
+     "courseTitle": "Visualization",
+     "value": "cmpt/467"
+    },
+    {
+     "courseTitle": "Special Topics in Computer Graphics",
+     "value": "cmpt/469"
+    },
+    {
+     "description": "Computing Systems"
+    },
+    {
+     "courseTitle": "Operating Systems I",
+     "value": "cmpt/300"
+    },
+    {
+     "courseTitle": "Computer Simulation and Modelling",
+     "value": "cmpt/305"
+    },
+    {
+     "courseTitle": "Data Communications and Networking",
+     "value": "cmpt/371"
+    },
+    {
+     "courseTitle": "Principles of Compiler Design",
+     "value": "cmpt/379"
+    },
+    {
+     "courseTitle": "System Security and Privacy",
+     "value": "cmpt/403"
+    },
+    {
+     "courseTitle": "Distributed Systems",
+     "value": "cmpt/431"
+    },
+    {
+     "courseTitle": "Embedded Systems",
+     "value": "cmpt/433"
+    },
+    {
+     "courseTitle": "Computer Architecture",
+     "value": "cmpt/450"
+    },
+    {
+     "courseTitle": "Networking II",
+     "value": "cmpt/471"
+    },
+    {
+     "courseTitle": "Special Topics in Computing Systems",
+     "value": "cmpt/479"
+    },
+    {
+     "courseTitle": "Special Topics in Computer Hardware",
+     "value": "cmpt/499"
+    },
+    {
+     "description": "Information Systems"
+    },
+    {
+     "courseTitle": "Computational Data Science",
+     "value": "cmpt/353"
+    },
+    {
+     "courseTitle": "Database Systems I",
+     "value": "cmpt/354"
+    },
+    {
+     "courseTitle": "Mobile Applications Programming and Design",
+     "value": "cmpt/362"
+    },
+    {
+     "courseTitle": "Web II - Server-side Development",
+     "value": "cmpt/372"
+    },
+    {
+     "courseTitle": "Computational Biology",
+     "value": "cmpt/441"
+    },
+    {
+     "courseTitle": "Database Systems II",
+     "value": "cmpt/454"
+    },
+    {
+     "courseTitle": "Information Retrieval and Web Search",
+     "value": "cmpt/456"
+    },
+    {
+     "courseTitle": "Special Topics in Database Systems",
+     "value": "cmpt/459"
+    },
+    {
+     "courseTitle": "Web Systems Architecture",
+     "value": "cmpt/474"
+    },
+    {
+     "description": "Programming Languages and Software"
+    },
+    {
+     "courseTitle": "Software Development Methods",
+     "value": "cmpt/373"
+    },
+    {
+     "courseTitle": "Comparative Programming Languages",
+     "value": "cmpt/383"
+    },
+    {
+     "courseTitle": "Symbolic Computing",
+     "value": "cmpt/384"
+    },
+    {
+     "courseTitle": "Software Testing, Reliability and Security",
+     "value": "cmpt/473"
+    },
+    {
+     "courseTitle": "Requirements Engineering ",
+     "value": "cmpt/475"
+    },
+    {
+     "courseTitle": "Introduction to Formal Verification",
+     "value": "cmpt/477"
+    },
+    {
+     "courseTitle": "Special Topics in Programming Languages",
+     "value": "cmpt/489"
+    },
+    {
+     "description": "Theoretical Computing Science"
+    },
+    {
+     "courseTitle": "Data Structures and Algorithms",
+     "value": "cmpt/307"
+    },
+    {
+     "courseTitle": "Computability and Complexity",
+     "value": "cmpt/308"
+    },
+    {
+     "courseTitle": "Cryptography and Cryptographic Protocols",
+     "value": "cmpt/404"
+    },
+    {
+     "courseTitle": "Design and Analysis of Computing Algorithms",
+     "value": "cmpt/405"
+    },
+    {
+     "courseTitle": "Computational Complexity",
+     "value": "cmpt/407"
+    },
+    {
+     "courseTitle": "Special Topics in Theoretical Computing Science",
+     "value": "cmpt/409"
+    },
+    {
+     "title": "or",
+     "courseTitle": "Introduction to Quantum Algorithms",
+     "value": "cmpt/476"
+    },
+    {
+     "courseTitle": "Introduction to Quantum Algorithms",
+     "value": "macm/476"
+    }
+   ]
+  },
+  {
+   "title": "Co-operative Education and Work Experience",
+   "requirements": [
+    {
+     "description": "All computing science students are strongly encouraged to explore the opportunities that co-operative education can offer. Please contact an \n<a href=\"https://www.sfu.ca/computing/prospective-students/undergraduate-students/cooperative-education.html\">applied sciences co-op</a> advisor during your first year of studies to ensure that you have all of the necessary courses and information to help plan for a successful co-op experience."
+    }
+   ]
+  },
+  {
+   "title": "Residency Requirements and Transfer Credit",
+   "description": "<ul> \n <li>At least half of the program's total units must be earned through Simon Fraser University study.</li> \n <li>At least two thirds of the program's total upper division units must be earned through Simon Fraser University study.</li> \n</ul>"
+  },
+  {
+   "requirements": [
+    {
+     "description": "Please see \n<a href=\"https://www.sfu.ca/students/calendar/2026/fall/faculties-research/faculty-applied-sciences.html\">Faculty of Applied Sciences Residency Requirements</a> for further information."
+    }
+   ]
+  }
+ ]
+}

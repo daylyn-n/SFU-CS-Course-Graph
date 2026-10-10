@@ -1,5 +1,6 @@
 <!-- Term-by-term plan for reaching the target course from what's taken. -->
 <script lang="ts">
+  import { settings } from './persist/store.svelte';
   import { courseStatus } from './graph';
   import { planCourses } from './planner';
   import type { Courses, Offerings, Taken, Term } from './types';
@@ -22,24 +23,9 @@
     onselect: (code: string) => void;
   } = $props();
 
-  const STORAGE_KEY = 'sfu-prereqs:per-term';
   const LOADS = [2, 3, 4, 5, 6];
-
-  function loadPerTerm(): number {
-    try {
-      const n = Number(localStorage.getItem(STORAGE_KEY));
-      return LOADS.includes(n) ? n : 4;
-    } catch {
-      return 4;
-    }
-  }
-
-  let perTerm = $state(loadPerTerm());
-  $effect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, String(perTerm));
-    } catch {}
-  });
+  // Saved (and synced) by persist/store.
+  const perTerm = $derived(LOADS.includes(settings.planPerTerm) ? settings.planPerTerm : 4);
 
   const plan = $derived(planCourses(target, courses, done, { terms, offerings, maxPerTerm: perTerm }));
   const unconfirmed = $derived(plan.terms.some((t) => t.courses.some((c) => !c.confirmed)));
@@ -66,7 +52,7 @@
       <span class="label">Per term</span>
       <div class="seg">
         {#each LOADS as n}
-          <button class:on={perTerm === n} aria-pressed={perTerm === n} onclick={() => (perTerm = n)}>{n}</button>
+          <button class:on={perTerm === n} aria-pressed={perTerm === n} onclick={() => (settings.planPerTerm = n)}>{n}</button>
         {/each}
       </div>
     </div>

@@ -4,6 +4,7 @@
      week on the left and a compact course list on the right, each scrolling
      on its own. Narrower than 640px, docked falls back to the stacked layout. -->
 <script lang="ts">
+  import { automatic } from '../persist/store.svelte';
   import { untrack } from 'svelte';
   import { courseStatus } from '../graph';
   import CourseSearch from './CourseSearch.svelte';
@@ -43,6 +44,8 @@
     duplicateSlot,
     notify,
   } from './store.svelte';
+  import { beforeBulk } from '../persist/autosnap';
+  import { canRedo, canUndo, redo, undo } from '../persist/undo.svelte';
 
   interface Props {
     courses: Courses;
@@ -133,16 +136,19 @@
   $effect(() => {
     const s = slot;
     const t = term;
-    untrack(() => {
-      if (s.term !== t) s.term = t ?? null;
-      const current = rows; // snapshot: `rows` recomputes after each write
-      if (!current.some((r) => r.offered && !r.complete)) return;
-      const result = arrange(
-        current.map((r) => ({ code: r.code, sections: r.sections, picks: r.picks, fixed: r.complete })),
-        { maxNodes: 20000 },
-      );
-      current.forEach((r, i) => r.offered && !r.complete && setPicks(r.code, result.picks[i]));
-    });
+    // Housekeeping, not the user's edit: see automatic() in persist/store.
+    untrack(() =>
+      automatic(() => {
+        if (s.term !== t) s.term = t ?? null;
+        const current = rows; // snapshot: `rows` recomputes after each write
+        if (!current.some((r) => r.offered && !r.complete)) return;
+        const result = arrange(
+          current.map((r) => ({ code: r.code, sections: r.sections, picks: r.picks, fixed: r.complete })),
+          { maxNodes: 20000 },
+        );
+        current.forEach((r, i) => r.offered && !r.complete && setPicks(r.code, result.picks[i]));
+      }),
+    );
   });
 
   // Notices fade after a few seconds.
@@ -224,6 +230,7 @@
   });
 
   function autoArrange() {
+    void beforeBulk(`Before auto-arrange · ${slot.name}`);
     const result = arrange(
       rows.map((r) => ({ code: r.code, sections: r.sections, picks: keepPicks ? r.picks : {} })),
       { maxNodes: 150000 },
@@ -260,13 +267,19 @@
 
   function duplicateTo(to: number) {
     const target = scheduleState.slots[to];
-    if (target.courses.length && !confirm(`Replace “${target.name}” with a copy of “${slot.name}”?`)) return;
+    if (target.courses.length) {
+      if (!confirm(`Replace “${target.name}” with a copy of “${slot.name}”?`)) return;
+      void beforeBulk(`Before duplicating onto · ${target.name}`);
+    }
     duplicateSlot(scheduleState.active, to);
     notify(`Copied into ${scheduleState.slots[to].name}`);
   }
 
   function clearActive() {
-    if (slot.courses.length && !confirm(`Remove all courses from “${slot.name}”?`)) return;
+    if (slot.courses.length) {
+      if (!confirm(`Remove all courses from “${slot.name}”?`)) return;
+      void beforeBulk(`Before clearing · ${slot.name}`);
+    }
     clearSlot(scheduleState.active);
   }
 
@@ -275,6 +288,7 @@
     el.select();
   };
 
+  const mod = /Mac|iPhone|iPad/.test(navigator.platform) ? '⌘' : 'Ctrl+';
   const plural = (n: number, w: string) => `${n} ${w}${n === 1 ? '' : 's'}`;
   const conflictText = (c: (typeof conflicts)[number]) =>
     `${c.a.code} ${c.a.section.section} × ${c.b.code} ${c.b.section.section} (${c.day} ${fmtMin(c.start)})`;
@@ -338,6 +352,17 @@
   />
 {/snippet}
 
+{#snippet undoRedo()}
+  <div class="undo-redo" role="group" aria-label="Undo and redo">
+    <button class="icon-btn ur" onclick={undo} disabled={!canUndo()} title="Undo ({mod}Z)" aria-label="Undo">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 14L4 9l5-5M4 9h10a6 6 0 0 1 0 12h-3" /></svg>
+    </button>
+    <button class="icon-btn ur" onclick={redo} disabled={!canRedo()} title="Redo ({mod === '⌘' ? '⇧⌘Z' : 'Ctrl+Shift+Z'})" aria-label="Redo">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 14l5-5-5-5M20 9H10a6 6 0 0 0 0 12h3" /></svg>
+    </button>
+  </div>
+{/snippet}
+
 {#snippet arrangeIcon()}
   <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h11M4 12h7M4 17h13M18 4l2 3-2 3M14 9l2 3-2 3" /></svg>
 {/snippet}
@@ -398,6 +423,7 @@
       {@render slotTabs()}
       {@render termSwitch()}
       <div class="dsearch">{@render search()}</div>
+      {@render undoRedo()}
       <button class="primary darrange" onclick={autoArrange} disabled={!anyOffered} title="Pick sections with no clashes, keeping your picks where possible">
         {@render arrangeIcon()} Auto-arrange
       </button>
@@ -488,6 +514,7 @@
       {@render termSwitch()}
 
       <div class="slot-actions">
+        {@render undoRedo()}
         <select
           aria-label="Duplicate this schedule"
           value=""
@@ -923,6 +950,22 @@
   .icon-btn:hover {
     border-color: var(--border);
     color: var(--accent-text);
+  }
+  .undo-redo {
+    display: flex;
+    gap: 2px;
+    flex-shrink: 0;
+  }
+  .undo-redo .ur {
+    width: 30px;
+    height: 30px;
+    padding: 0;
+  }
+  .undo-redo .ur svg {
+    width: 16px;
+    height: 16px;
+    stroke-width: 2.2;
+    stroke-linejoin: round;
   }
   .icon-btn svg {
     width: 14px;

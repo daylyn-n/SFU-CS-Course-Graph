@@ -31,14 +31,17 @@ app asks before importing them. Press Cmd/Ctrl+K for the command palette.
   non-course options like Pre-Calculus 12. Only a few levels show by default
   (`+` expands a course), and once you've taken a course, everything behind it
   and the alternatives it replaces are hidden. Hover a course to highlight its
-  path; drag blocks to rearrange them.
+  path.
 - **Side panel**: the course's description and WQB/breadth designation, the
   calendar's own prerequisite text, "Next steps" (the cheapest path to the
   target given what you've taken), sections with seat snapshots and Rate My
   Professors links, ratings, and what the course leads to.
 - **Explore**: everything you can take next, by department and term.
 - **Plan**: a term-by-term plan toward the target course.
-- **Degree**: progress against SFU CS program requirements.
+- **Degree**: progress against your program's requirements, for all 368 SFU
+  undergraduate programs (majors, honours, joint majors, minors, certificates).
+  Requirements that can't be checked automatically are listed to confirm with
+  an advisor. Only the chosen program's data is downloaded.
 - **Schedule**: three saved schedules, section pickers for lectures plus their
   labs/tutorials, a weekly grid with time-conflict and exam-clash detection,
   and an auto-arrange button that searches section combinations for a
@@ -48,8 +51,18 @@ app asks before importing them. Press Cmd/Ctrl+K for the command palette.
 - **Sharing**: share links, progress backup/restore and a PNG of the chart
   (side panel or command palette).
 
-Taken courses, schedules and ratings (unless Supabase is set up, below) are
-saved in your browser's localStorage.
+- **Ticking courses** fills in their prerequisites: required ones for certain,
+  a best-guess route for "one of" groups (shown dashed as assumed; untick one
+  to try another route). Unticking a course also unticks what only had its
+  prerequisites through it, with Undo.
+- **Never lose progress**: undo/redo (Ctrl/Cmd+Z), version history with
+  automatic snapshots before anything destructive, full backups, open tabs
+  kept in sync, and a warning if saving fails. With an account (below),
+  everything syncs across devices.
+
+Without an account, everything is saved in this browser (localStorage, plus
+version history in IndexedDB). See `docs/accounts-design.md` for how saving,
+history and sync work.
 
 ## Course data
 
@@ -58,7 +71,7 @@ Everything comes from SFU's public sources and is saved as static JSON in
 descriptions file loads afterwards):
 
 ```sh
-npm run fetch-data        # all four files below, ~12 minutes
+npm run fetch-data        # all the files below, ~12 minutes
 npm run fetch-offerings   # just refresh sections and instructors, ~7 minutes
 npm run fetch-seats       # just refresh seat counts (skips if SFU hasn't posted a new file)
 ```
@@ -74,6 +87,8 @@ npm run fetch-seats       # just refresh seat counts (skips if SFU hasn't posted
   course in the current term and the following terms SFU has published
   (usually one term ahead), with meeting times, campus and instructors. Re-run
   it every so often, since instructors get assigned closer to the term.
+- `programs/` (`scripts/fetch-programs.ts`): every undergraduate program's
+  requirements, one small file each, plus an index for the picker.
 - `seats.json` (`scripts/fetch-seats.ts`): seat counts from SFU's Course
   Section Availability Report, a daily snapshot that Institutional Research
   posts during registration. It's not live, and has no waitlists; live seats
@@ -111,6 +126,35 @@ per browser and nobody can edit anyone else's. Clearing site data loses the
 ability to edit old ratings (they stay up). The Supabase library is only
 downloaded when those variables are set.
 
+## Accounts and sync
+
+Optional, through the same Supabase project as ratings. With
+`VITE_SUPABASE_URL`/`VITE_SUPABASE_ANON_KEY` set, a **Sign in** button
+appears: students sign in with a 6-digit code sent by email (no passwords),
+and their taken courses, schedules and program sync across devices. Signing
+in on a device that already has progress asks before copying it into the
+account; a "shared computer" option wipes the device on sign-out.
+
+**Before going live:**
+1. Run `supabase/schema.sql` in the SQL editor (or `npx supabase db push`).
+2. **Set up custom SMTP** (Authentication → Emails, e.g. Resend's free tier).
+   Supabase's built-in sender only allows a few emails an hour.
+3. Set the **Magic Link** and **Confirm signup** email templates to show the
+   code, as in `supabase/templates/otp.html` (`{{ .Token }}`).
+4. Add the site's URL to **Site URL** and **Redirect URLs**.
+5. Optional Google sign-in: enable the Google provider, then build with
+   `VITE_AUTH_GOOGLE=1`.
+
+**Local development** with a full Supabase (needs Docker):
+
+```sh
+npx supabase start     # API :54321, Studio :54323, email inbox :54324
+cp .env.example .env.local   # has the local URL and anon key
+npm run dev
+npx vitest run --config scripts/e2e/vitest.config.ts   # sync tests against the real DB
+npx supabase stop
+```
+
 ## Code map
 
 - `src/App.svelte`: page layout, chart, side panel
@@ -119,6 +163,11 @@ downloaded when those variables are set.
 - `src/lib/fuzzy.ts` / `search.ts`: course search used everywhere
 - `src/lib/schedule/`: schedule builder (`schedule.ts` is the pure logic)
 - `src/lib/explore.ts`, `planner.ts`, `degree.ts`: Explore, Plan and Degree views
+- `src/lib/programs/`: converting and lazy-loading SFU program requirements
+- `src/lib/implied.ts`: filling in and unticking prerequisites
+- `src/lib/persist/`: the saved document, history, undo, autosnapshots
+- `src/lib/sync/`, `src/lib/account/`: sync engine, sign-in and account UI
+- `supabase/`: database migrations and local config
 - `src/lib/ratings/`, `share.ts`: ratings and sharing
 - `scripts/`: data fetching and the prerequisite parser
 

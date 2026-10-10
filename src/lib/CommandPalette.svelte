@@ -13,6 +13,7 @@
   import type { Courses, View } from './types';
   import { fuzzyScore, rankCourses } from './fuzzy';
   import { clearTaken, copyShareLink, exportPng, exportProgress, importProgress } from './shareActions.svelte';
+  import { canRedo, canUndo, redo, undo } from './persist/undo.svelte';
 
   const VIEWS: { id: View; label: string }[] = [
     { id: 'graph', label: 'Chart' },
@@ -28,12 +29,15 @@
     target,
     done,
     onpick,
+    onhistory,
     view = $bindable(),
   }: {
     courses: Courses;
     target: string;
     done: SvelteSet<string>;
     onpick: (code: string) => void;
+    /** open the version history panel; the command is hidden without it */
+    onhistory?: () => void;
     view: View;
   } = $props();
 
@@ -55,7 +59,14 @@
   let active = $state(0);
   let returnFocus: HTMLElement | null = null;
 
+  const mod = /Mac|iPhone|iPad/.test(navigator.platform) ? '⌘' : 'Ctrl+';
+
   const commands: Command[] = $derived([
+    ...(canUndo() ? [{ id: 'undo', label: `Undo (${mod === '⌘' ? '⌘Z' : 'Ctrl+Z'})`, keywords: 'undo revert back', run: undo }] : []),
+    ...(canRedo() ? [{ id: 'redo', label: `Redo (${mod === '⌘' ? '⇧⌘Z' : 'Ctrl+Shift+Z'})`, keywords: 'redo again forward', run: redo }] : []),
+    ...(onhistory
+      ? [{ id: 'history', label: 'Version history…', keywords: 'history versions restore snapshot undo backup earlier', run: onhistory }]
+      : []),
     ...VIEWS.filter((v) => v.id !== view).map((v) => ({
       id: `view-${v.id}`,
       label: `Switch to ${v.label} view`,
@@ -63,8 +74,8 @@
       run: () => (view = v.id),
     })),
     { id: 'share', label: 'Copy share link', keywords: 'share url link clipboard', run: () => copyShareLink(target, done) },
-    { id: 'export', label: 'Export progress (JSON)', keywords: 'backup download save file', run: () => exportProgress(target, done) },
-    { id: 'import', label: 'Import progress from file…', keywords: 'restore backup upload load json', run: () => importProgress(done) },
+    { id: 'export', label: 'Download backup (JSON)', keywords: 'backup download save file export progress', run: () => exportProgress(target) },
+    { id: 'import', label: 'Import backup from file…', keywords: 'restore backup upload load json progress', run: () => importProgress(done, onpick) },
     { id: 'png', label: 'Save chart as PNG', keywords: 'image picture export download screenshot', run: () => exportPng(target, () => (view = 'graph')) },
     { id: 'clear', label: 'Clear all taken courses', keywords: 'reset remove untick unmark', run: () => clearTaken(done) },
   ]);

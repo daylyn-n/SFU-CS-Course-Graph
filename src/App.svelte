@@ -1,7 +1,7 @@
 <script lang="ts">
   import { untrack } from 'svelte';
-  import { SvelteMap, SvelteSet } from 'svelte/reactivity';
-  import { SvelteFlow, Background, Controls, ControlButton } from '@xyflow/svelte';
+  import { SvelteSet } from 'svelte/reactivity';
+  import { SvelteFlow, Background, Controls } from '@xyflow/svelte';
   import '@xyflow/svelte/dist/style.css';
 
   import { buildGraph, courseStatus, pathThrough, nextSteps as findNextSteps } from './lib/graph';
@@ -33,6 +33,24 @@
   import CourseRatings from './lib/ratings/CourseRatings.svelte';
   import ProfRating from './lib/ratings/ProfRating.svelte';
   import { setRatingsData } from './lib/ratings/context';
+  import { inferTaken, untick } from './lib/implied';
+  import { flash } from './lib/shareActions.svelte';
+  import { done, notTaken, settings, getDoc } from './lib/persist/store.svelte';
+  import { startAutosnap } from './lib/persist/autosnap';
+  import { installUndoShortcuts } from './lib/persist/undo.svelte';
+  import HistoryPanel from './lib/persist/HistoryPanel.svelte';
+  import SaveError from './lib/persist/SaveError.svelte';
+  import { authState, isAuthConfigured } from './lib/account/client';
+  import AccountButton from './lib/account/AccountButton.svelte';
+  import SignInDialog from './lib/account/SignInDialog.svelte';
+  import CopyPrompt from './lib/account/CopyPrompt.svelte';
+  import ProgramPrompt from './lib/account/ProgramPrompt.svelte';
+  import SaveHint from './lib/account/SaveHint.svelte';
+  import { sync, answerCopy, retrySync, signOutHere, deleteCloudData } from './lib/sync/controller.svelte';
+  import { exportProgress } from './lib/shareActions.svelte';
+  import { loadProgramIndex, pickerOptions } from './lib/programs/load';
+  import Welcome from './lib/Welcome.svelte';
+  import { scheduleState } from './lib/schedule/store.svelte';
 
   interface Props {
     data: CourseData;
@@ -42,11 +60,54 @@
   let { data, offeringData }: Props = $props();
   const courses = untrack(() => data.courses);
   const nodeTypes = { course: CourseNode, junction: JunctionNode, other: OtherNode };
-  const STORAGE_KEY = 'sfu-prereqs:taken';
 
   const { terms, offerings } = untrack(() => offeringData);
   setScheduleData({ terms, offerings });
   setRatingsData({ terms, offerings });
+
+  // Version history: snapshots when edits settle and before bulk changes.
+  startAutosnap();
+  let historyOpen = $state(false);
+  const accounts = isAuthConfigured();
+
+  // First visit: a welcome screen before the app. Skipped for anyone who
+  // already has progress or an account, and for share links (the sender
+  // wants them to see the chart). A per-device preference, not synced.
+  const WELCOMED_KEY = 'sfu-prereqs:welcomed';
+  const codes = Object.keys(courses);
+  function alreadyWelcomed(): boolean {
+    try {
+      if (localStorage.getItem(WELCOMED_KEY)) return true;
+    } catch {}
+    return (
+      done.size > 0 ||
+      scheduleState.slots.some((s) => s.courses.length) ||
+      !!authState.user ||
+      /[?&]taken=/.test(location.hash)
+    );
+  }
+  let welcomed = $state(alreadyWelcomed());
+  function finishWelcome() {
+    welcomed = true;
+    try {
+      localStorage.setItem(WELCOMED_KEY, '1');
+    } catch {}
+  }
+  let programCount = $state(368);
+  $effect(() => {
+    if (!welcomed) loadProgramIndex().then((i) => i.length && (programCount = i.length));
+  });
+  let signInOpen = $state(false);
+  // Program list for the sign-up question, fetched only when it's asked.
+  let programChoices = $state<{ id: string; name: string; faculty?: string }[]>([]);
+  $effect(() => {
+    if (sync.programPrompt && !programChoices.length) {
+      loadProgramIndex().then((index) => (programChoices = pickerOptions(index)));
+    }
+  });
+  // Ctrl/Cmd+Z everywhere except text fields and while a dialog (the command
+  // palette, history, course details) is open.
+  $effect(() => installUndoShortcuts(() => !!document.querySelector('dialog[open]')));
 
   // Show "Added X to Schedule 1" briefly after each add.
   let showNotice = $state(false);
@@ -73,14 +134,6 @@
     return code && code in courses ? code : null;
   }
 
-  function loadTaken(): string[] {
-    try {
-      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '[]');
-      return Array.isArray(saved) ? saved.filter((c): c is string => typeof c === 'string') : [];
-    } catch {
-      return [];
-    }
-  }
 
   const narrow = () => matchMedia('(max-width: 700px)').matches;
   const initial = codeFromHash() ?? 'CMPT 410';
@@ -91,7 +144,13 @@
   let dockOpen = $state(false);
   let hideTaken = $state(true);
   let view = $state<View>(narrow() ? 'list' : 'graph');
-  const done = new SvelteSet<string>(loadTaken());
+  // `done` is what you've ticked (saved by persist/store). Their
+  // prerequisites are filled in on top (`implied`): required ones for
+  // certain, a best guess for "one of" groups. `notTaken` holds guesses
+  // you've rejected. Everything that asks "has this been taken?" uses
+  // `known`, the two together.
+  const implied = $derived(settings.assumePrereqs ? inferTaken(courses, done, notTaken) : new Map());
+  const known = $derived(new Set([...done, ...implied.keys()]));
   // Svelte Flow unmounts without a pointerleave when switching views.
   $effect(() => {
     view;
@@ -99,18 +158,12 @@
   });
   const expanded = new SvelteSet<string>();
 
-  const graph = $derived(buildGraph(target, courses, done, { maxDepth, hideTaken, expanded, offeredIn }));
-  // Where the user has dragged blocks to. Kept across re-layouts (ticking a
-  // box, expanding) and cleared when the target changes.
-  const moved = new SvelteMap<string, { x: number; y: number }>();
-  const placed = $derived(
-    graph.nodes.map((n) => (moved.has(n.id) ? { ...n, position: moved.get(n.id)! } : n)),
-  );
+  const graph = $derived(buildGraph(target, courses, known, { maxDepth, hideTaken, expanded, offeredIn, implied }));
   // Svelte Flow needs writable arrays, so mirror the derived graph into state.
-  let nodes = $state.raw(untrack(() => placed));
+  let nodes = $state.raw(untrack(() => graph.nodes));
   let edges = $state.raw(untrack(() => graph.edges));
   $effect.pre(() => {
-    nodes = placed;
+    nodes = graph.nodes;
     edges = graph.edges;
   });
   // While hovering a course, fade everything not on a path through it. This is
@@ -134,7 +187,7 @@
 
   // What to take next (whole tree, not just what's drawn), soonest-offered first.
   const nextGroups = $derived(
-    findNextSteps(target, courses, done)
+    findNextSteps(target, courses, known)
       .map((group) => [...group].sort((a, b) => soonest(a) - soonest(b)))
       .sort((a, b) => soonest(a[0]) - soonest(b[0]) || a[0].localeCompare(b[0], 'en', { numeric: true })),
   );
@@ -153,12 +206,6 @@
   });
   const layoutKey = $derived(graph.nodes.map((n) => n.id).join() + target);
 
-  $effect(() => {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify([...done]));
-    } catch {}
-  });
-
   // Each new target gets a history entry so the Back button returns to the
   // previous course. The first one replaces, so Back can still leave the app.
   // Only the hash's course is compared, so an incoming share link's
@@ -176,12 +223,43 @@
     target = code;
     selected = code;
     expanded.clear();
-    moved.clear();
   }
 
+  // Ticking a box. Unticking also unticks what only had its prerequisites
+  // through that course; unticking a filled-in guess means "I didn't take
+  // this", which moves the guess to another route (see implied.ts).
   function toggleDone(code: string) {
-    if (done.has(code)) done.delete(code);
-    else done.add(code);
+    if (done.has(code) || implied.has(code)) unmark(code);
+    else markTaken(code);
+  }
+
+  function unmark(code: string) {
+    const was = { taken: [...done], notTaken: [...notTaken] };
+    const r = untick(courses, done, notTaken, code, settings.assumePrereqs);
+    replaceSet(done, r.taken);
+    replaceSet(notTaken, r.notTaken);
+    if (r.cascaded.length) {
+      const list = r.cascaded.length === 1 ? r.cascaded[0] : `${r.cascaded.slice(0, -1).join(', ')} and ${r.cascaded.at(-1)}`;
+      flash(`Also unticked ${list}, which needed ${code}.`, {
+        action: {
+          label: 'Undo',
+          run: () => {
+            replaceSet(done, was.taken);
+            replaceSet(notTaken, was.notTaken);
+          },
+        },
+      });
+    }
+  }
+
+  function replaceSet(set: Set<string>, values: string[]) {
+    set.clear();
+    for (const v of values) set.add(v);
+  }
+
+  function markTaken(code: string) {
+    done.add(code);
+    notTaken.delete(code);
   }
 
   setActions({
@@ -206,7 +284,11 @@
     selected;
     descOpen = false;
   });
-  const selStatus = $derived(courseStatus(selected, courses, done));
+  const selStatus = $derived(courseStatus(selected, courses, known));
+  const selImplied = $derived(implied.get(selected));
+  const impliedList = $derived(
+    [...implied].sort(([a], [b]) => a.localeCompare(b, 'en', { numeric: true })),
+  );
   const statusLabel: Record<Status, string> = {
     done: 'Taken',
     ready: 'Can take now',
@@ -220,7 +302,7 @@
   function addTaken() {
     const code = matchCourse(takenInput, courses);
     if (code) {
-      done.add(code);
+      markTaken(code);
       takenInput = '';
       takenError = '';
     } else takenError = takenInput.trim() ? `No course matches "${takenInput.trim()}"` : '';
@@ -256,6 +338,20 @@
   }}
 />
 
+{#if !welcomed}
+  <Welcome
+    courseCount={codes.length}
+    {programCount}
+    {terms}
+    {accounts}
+    onstart={finishWelcome}
+    onsignin={() => {
+      finishWelcome();
+      signInOpen = true;
+    }}
+  />
+{:else}
+<SaveError {target} />
 <Header
   {courses}
   {target}
@@ -263,64 +359,93 @@
   {terms}
   onpick={setTarget}
   isOffered={(code) => offeredIn(code).length > 0}
-  ondock={() => {
-    view = 'graph';
-    dockOpen = true;
-  }}
   bind:view
-  bind:maxDepth
-  bind:hideTaken
-/>
+>
+  {#snippet account()}
+    {#if accounts}
+      <AccountButton
+        status={authState.user ? sync.status : 'idle'}
+        lastSyncedAt={sync.lastSyncedAt}
+        onsignin={() => (signInOpen = true)}
+        onhistory={() => (historyOpen = true)}
+        onbackup={() => exportProgress(target)}
+        onsignout={signOutHere}
+        ondeletedata={deleteCloudData}
+        onretry={retrySync}
+        onreload={() => location.reload()}
+      />
+    {/if}
+  {/snippet}
+</Header>
 
 {#if view === 'schedule'}
-  <ScheduleBuilder {courses} {terms} {offerings} {done} onopen={showOnMap} />
+  <ScheduleBuilder {courses} {terms} {offerings} done={known} onopen={showOnMap} />
+  <button
+    class="dock-fab"
+    onclick={() => {
+      view = 'graph';
+      dockOpen = true;
+    }}
+    title="Show the schedule under the prerequisite map">Dock under map ↙</button
+  >
 {:else}
 <main>
-  <section class="canvas" class:list={view !== 'graph'}>
+  <section class="canvas" class:list={view !== 'graph'} class:graph={view === 'graph'}>
+    {#snippet viewOptions()}
+      <!-- Chart/List options live with the chart, not in the header, so the
+           header (and its tabs) look the same on every view. -->
+      <div class="view-bar">
+        <label>
+          Levels
+          <select bind:value={maxDepth}>
+            {#each [1, 2, 3, 4] as d}<option value={d}>{d}</option>{/each}
+            <option value={Infinity}>All</option>
+          </select>
+        </label>
+        <label class="switch-label">
+          <input type="checkbox" bind:checked={hideTaken} />
+          <span class="switch" aria-hidden="true"></span>
+          Hide prereqs of taken courses
+        </label>
+      </div>
+    {/snippet}
     {#if view === 'graph'}
+      {@render viewOptions()}
+      <div class="flow">
       <SvelteFlow
         bind:nodes
         bind:edges
         {nodeTypes}
-        nodesDraggable
+        nodesDraggable={false}
         nodesConnectable={false}
         elementsSelectable={false}
         minZoom={0.2}
         onnodeclick={({ node }) => node.type === 'course' && (selected = node.id)}
-        onnodedragstop={({ nodes: dragged }) => {
-          for (const n of dragged) moved.set(n.id, { ...n.position });
-        }}
         edgesFocusable={false}
         onnodepointerenter={({ node }) => node.type === 'course' && (hovered = node.id)}
         onnodepointerleave={() => (hovered = null)}
         proOptions={{ hideAttribution: true }}
       >
         <Background gap={24} />
-        <Controls showLock={false}>
-          {#if moved.size}
-            <ControlButton onclick={() => moved.clear()} title="Reset layout" aria-label="Reset layout">
-              <svg viewBox="0 0 24 24" aria-hidden="true"
-                ><path d="M4 12a8 8 0 1 0 2.3-5.6M4 4v4h4" fill="none" stroke="currentColor" stroke-width="2.2" /></svg
-              >
-            </ControlButton>
-          {/if}
-        </Controls>
+        <Controls showLock={false} />
         <FitOnChange key={layoutKey} anchor={target} />
         <ChartSnapshot />
       </SvelteFlow>
       <div class="legend">
         <span><i class="done"></i>Taken</span>
+        <span><i class="assumed"></i>Assumed taken</span>
         <span><i class="ready"></i>Can take now</span>
         <span><i class="locked"></i>Prereqs missing</span>
         <span><i class="unknown"></i>Check requirements</span>
         <span><i class="missing"></i>Not in catalog</span>
         <span><TermPills terms={terms} /> offered (filled = this term)</span>
-        <span class="hint">Tick a box to mark it taken · <b>+</b> shows more · drag to rearrange</span>
+        <span class="hint">Tick a box to mark it taken · <b>+</b> shows more</span>
+      </div>
       </div>
     {:else if view === 'explore'}
       <ExploreView
         {courses}
-        {done}
+        done={known}
         {terms}
         {offeredIn}
         {selected}
@@ -329,15 +454,17 @@
         ontarget={showOnMap}
       />
     {:else if view === 'degree'}
-      <DegreeView {courses} {done} {offeredIn} onselect={select} ontarget={showOnMap} />
+      <DegreeView {courses} done={known} {implied} {offeredIn} onselect={select} ontarget={showOnMap} ontoggle={toggleDone} />
     {:else if view === 'plan'}
-      <PlanView {target} {courses} {done} {terms} {offerings} {selected} onselect={select} />
+      <PlanView {target} {courses} done={known} {terms} {offerings} {selected} onselect={select} />
     {:else}
+      {@render viewOptions()}
       <ul class="tree">
         <PrereqList
           tree={target}
           {courses}
-          {done}
+          done={known}
+          {implied}
           {hideTaken}
           {maxDepth}
           {expanded}
@@ -355,7 +482,15 @@
     <h2>{selected}</h2>
     <p class="course-title">{sel?.title ?? "This course isn't in SFU's current calendar."}</p>
     {#if sel}
-      <p class="status {selStatus}">{statusLabel[selStatus]} · {sel.units} units</p>
+      <p class="status {selStatus}">
+        {#if selImplied}
+          {selImplied.certain ? 'Taken' : 'Assumed taken'} · prerequisite of
+          <button class="link-btn inline" onclick={() => select(selImplied.via)}>{selImplied.via}</button>
+        {:else}
+          {statusLabel[selStatus]}{notTaken.has(selected) ? ' · you said you didn’t take it' : ''}
+        {/if}
+        · {sel.units} units
+      </p>
     {/if}
     {#if selBadges.length}
       <div class="badges" aria-label="WQB and breadth designation">
@@ -369,9 +504,15 @@
       {/if}
     {/if}
     <div class="actions">
-      <button class="primary" onclick={() => toggleDone(selected)}>
-        {done.has(selected) ? 'Unmark as taken' : 'Mark as taken'}
-      </button>
+      {#if selImplied}
+        <!-- Filled in from another course: confirm it, or say it's wrong. -->
+        <button class="primary" onclick={() => markTaken(selected)}>I took this</button>
+        <button onclick={() => unmark(selected)}>I didn't take this</button>
+      {:else}
+        <button class="primary" onclick={() => toggleDone(selected)}>
+          {done.has(selected) ? 'Unmark as taken' : 'Mark as taken'}
+        </button>
+      {/if}
       {#if selected !== target && sel}
         <button onclick={() => setTarget(selected)}>Show its prerequisites</button>
       {/if}
@@ -393,17 +534,17 @@
     {#if sel}<CourseRatings code={selected} />{/if}
 
     <h3>Next steps toward {target}</h3>
-    {#if done.has(target)}
+    {#if known.has(target)}
       <p class="muted">You've taken {target}. Nice!</p>
-    {:else if courseStatus(target, courses, done) === 'ready'}
+    {:else if courseStatus(target, courses, known) === 'ready'}
       <p class="muted">You can take {target} now.</p>
-    {:else if courseStatus(target, courses, done) === 'unknown' && !nextGroups.length}
+    {:else if courseStatus(target, courses, known) === 'unknown' && !nextGroups.length}
       <p class="muted">
         You may be able to take {target} now. It has requirements that aren't SFU courses (like
         Pre-Calculus 12, a units count or permission), so check the calendar text below.
       </p>
     {:else if nextGroups.length}
-      {#if courseStatus(target, courses, done) === 'unknown'}
+      {#if courseStatus(target, courses, known) === 'unknown'}
         <p class="muted small">
           You may already qualify through a non-course requirement (see the calendar text). Otherwise:
         </p>
@@ -489,8 +630,42 @@
         {/each}
       </div>
     {:else}
-      <p class="muted">Tick courses you've finished and the chart shows what you can take next.</p>
+      <p class="muted">
+        Tick courses you've finished and the chart shows what you can take next. Their prerequisites are filled in
+        for you.
+      </p>
     {/if}
+    {#if implied.size}
+      <h4 class="sub">Filled in from those ({implied.size})</h4>
+      <p class="muted small">
+        Solid: required, so you must have taken it. Dashed: our guess for a "one of" requirement. Click one to confirm
+        or correct it.
+      </p>
+      <div class="chips">
+        {#each impliedList as [code, info] (code)}
+          <button
+            class="chip done implied"
+            class:assumed={!info.certain}
+            onclick={() => select(code)}
+            title="{info.certain ? 'Required' : 'Assumed'}: prerequisite of {info.via}">{code}</button
+          >
+        {/each}
+      </div>
+    {/if}
+    {#if notTaken.size}
+      <h4 class="sub">Marked not taken ({notTaken.size})</h4>
+      <div class="chips">
+        {#each [...notTaken].sort() as code (code)}
+          <button class="chip" onclick={() => notTaken.delete(code)} title="Undo: allow it to be filled in again"
+            >{code} ×</button
+          >
+        {/each}
+      </div>
+    {/if}
+    <label class="assume-toggle">
+      <input type="checkbox" bind:checked={settings.assumePrereqs} />
+      Fill in prerequisites of courses I've taken
+    </label>
     <form
       class="add-taken"
       onsubmit={(e) => {
@@ -514,9 +689,16 @@
     </form>
     {#if takenError}<p class="error">{takenError}</p>{/if}
 
-    <ShareMenu {target} {done} onshowchart={() => (view = 'graph')} />
+    <ShareMenu
+      {target}
+      {done}
+      onshowchart={() => (view = 'graph')}
+      onhistory={() => (historyOpen = true)}
+      onpick={setTarget}
+    />
 
-    <p class="source">
+    <button class="link-btn about" onclick={() => (welcomed = false)}>About this site</button>
+    <p class="data-source">
       Data: SFU Academic Calendar ({data.term.replace('/', ' ')}) and course outlines, fetched
       {new Date(offeringData.fetched).toLocaleDateString()}. Prerequisites are parsed from the
       calendar text automatically, so always check the original. RMP links search by name and may
@@ -524,8 +706,28 @@
     </p>
   </aside>
 </main>
-<ScheduleDock {courses} {terms} {offerings} {done} bind:open={dockOpen} onexpand={() => (view = 'schedule')} onopen={setTarget} />
+<ScheduleDock {courses} {terms} {offerings} done={known} bind:open={dockOpen} onexpand={() => (view = 'schedule')} onopen={setTarget} />
 {/if}
 
-<CommandPalette {courses} {target} {done} onpick={setTarget} bind:view />
-<ShareBanner {done} onpick={setTarget} />
+<CommandPalette {courses} {target} {done} onpick={setTarget} bind:view onhistory={() => (historyOpen = true)} />
+<HistoryPanel bind:open={historyOpen} owner={authState.user?.id ?? null} syncing={!!authState.user} />
+{/if}
+
+{#if accounts}
+  <SignInDialog bind:open={signInOpen} askProgram={false} />
+  <CopyPrompt open={sync.copyPrompt} onanswer={answerCopy} />
+  {#if programChoices.length}
+    <ProgramPrompt
+      bind:open={sync.programPrompt}
+      programs={programChoices}
+      value={settings.program}
+      onpick={(id) => {
+        settings.program = id;
+        sync.programPrompt = false;
+      }}
+      onskip={() => (sync.programPrompt = false)}
+    />
+  {/if}
+  {#if !authState.user}<SaveHint onsignin={() => (signInOpen = true)} />{/if}
+{/if}
+{#if welcomed}<ShareBanner {done} onpick={setTarget} />{/if}

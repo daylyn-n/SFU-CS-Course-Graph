@@ -15,6 +15,8 @@ export interface GraphOptions {
   expanded?: ReadonlySet<string>;
   /** terms a course runs in */
   offeredIn?: (code: string) => Term[];
+  /** courses filled in from the ones you've ticked (see implied.ts) */
+  implied?: ReadonlyMap<string, { via: string; certain: boolean }>;
 }
 
 export interface CourseNodeData {
@@ -25,6 +27,10 @@ export interface CourseNodeData {
   isTarget: boolean;
   collapsed: boolean;
   offered: Term[];
+  /** filled in from a ticked course: required ('certain') or our guess ('assumed') */
+  inferred: 'certain' | 'assumed' | null;
+  /** the course it was filled in from */
+  via: string | null;
   [key: string]: unknown;
 }
 
@@ -186,7 +192,13 @@ export function buildGraph(
   target: string,
   courses: Courses,
   done: Taken,
-  { maxDepth = Infinity, hideTaken = true, expanded = new Set(), offeredIn = () => [] }: GraphOptions = {},
+  {
+    maxDepth = Infinity,
+    hideTaken = true,
+    expanded = new Set(),
+    offeredIn = () => [],
+    implied = new Map(),
+  }: GraphOptions = {},
 ): { nodes: GraphNode[]; edges: GraphEdge[] } {
   const nodes = new Map<string, UnplacedNode>();
   const edges: GraphEdge[] = [];
@@ -241,6 +253,8 @@ export function buildGraph(
         isTarget: code === target,
         collapsed: !!prereqOf(code) && !expand,
         offered: offeredIn(code),
+        inferred: implied.has(code) ? (implied.get(code)!.certain ? 'certain' : 'assumed') : null,
+        via: implied.get(code)?.via ?? null,
       },
     });
     const tree = prereqOf(code);

@@ -7,11 +7,16 @@ import {
   copyText,
   downloadBackup,
   downloadChartPng,
+  encodeShareHash,
   parseBackup,
   pickTextFile,
   shareUrl,
 } from './share';
 import type { Taken } from './types';
+import { getDoc, setValues } from './persist/store.svelte';
+import { toValues } from './persist/doc';
+import { beforeBulk } from './persist/autosnap';
+import { undo } from './persist/undo.svelte';
 
 export interface PendingImport {
   taken: string[];
@@ -53,6 +58,7 @@ export function applyImport(done: Set<string>, merge: boolean): void {
   const p = shareUi.pending;
   if (!p) return;
   const before = [...done];
+  void beforeBulk(p.source === 'link' ? 'Before importing a share link' : 'Before importing a backup');
   if (!merge) done.clear();
   for (const c of p.taken) done.add(c);
   shareUi.pending = null;
@@ -70,6 +76,7 @@ function restore(done: Set<string>, codes: string[]) {
 export function clearTaken(done: Set<string>): void {
   if (!done.size) return flash('No courses are marked as taken.');
   const before = [...done];
+  void beforeBulk('Before clearing taken courses');
   done.clear();
   flash(`Cleared ${before.length} taken course${before.length === 1 ? '' : 's'}`, {
     action: { label: 'Undo', run: () => restore(done, before) },
@@ -85,19 +92,49 @@ export async function copyShareLink(target: string, taken: Taken): Promise<void>
   }
 }
 
-export function exportProgress(target: string, taken: Taken): void {
-  downloadBackup(target, taken);
-  flash('Progress saved as a JSON file');
+/** Downloads everything (taken courses, schedules, settings) as a JSON backup. */
+export function exportProgress(target: string): void {
+  try {
+    downloadBackup(target, getDoc());
+    flash('Backup saved as a JSON file');
+  } catch {
+    flash("Couldn't create the backup file.", { error: true });
+  }
 }
 
-export async function importProgress(local: Taken): Promise<void> {
+/**
+ * Asks for a backup file and loads it. A full backup replaces everything
+ * (after a history snapshot, and it can be undone); an older taken-only
+ * backup goes through the merge/replace banner. `onpick` maps the backup's
+ * course; without it the URL hash is changed, which App follows.
+ */
+export async function importProgress(local: Taken, onpick?: (code: string) => void): Promise<void> {
   const text = await pickTextFile();
   if (text === null) return;
   try {
-    const { taken, target } = parseBackup(text);
+    const { taken, target, doc } = parseBackup(text);
+    if (doc) return applyFullBackup(text, onpick);
     if (!offerImport(local, taken, target, 'file')) flash('That backup matches what you already have.');
   } catch (e) {
-    flash((e as Error).message, { error: true });
+    flash((e as Error).message || "Couldn't read that file.", { error: true });
+  }
+}
+
+/** Loads a full (v2) backup's text, replacing everything. */
+export function applyFullBackup(text: string, onpick?: (code: string) => void): void {
+  const { target, doc } = parseBackup(text);
+  if (!doc) throw new Error("That file isn't a full backup.");
+  const values = toValues(doc);
+  if (JSON.stringify(values) === JSON.stringify(toValues(getDoc()))) {
+    flash('That backup matches what you already have.');
+  } else {
+    void beforeBulk('Before importing a backup');
+    setValues(values, 'import');
+    flash('Loaded the backup', { action: { label: 'Undo', run: undo } });
+  }
+  if (target) {
+    if (onpick) onpick(target);
+    else location.hash = encodeShareHash(target, []);
   }
 }
 

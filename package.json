@@ -10,7 +10,8 @@
     "test": "vitest run",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "typecheck": "svelte-check --tsconfig ./tsconfig.json && tsc -p scripts/tsconfig.json",
-    "fetch-data": "node scripts/fetch-courses.ts && node scripts/fetch-details.ts && node scripts/fetch-offerings.ts && node scripts/fetch-seats.ts",
+    "fetch-data": "node scripts/fetch-courses.ts && node scripts/fetch-details.ts && node scripts/fetch-offerings.ts && node scripts/fetch-seats.ts && node scripts/fetch-programs.ts",
+    "fetch-programs": "node scripts/fetch-programs.ts",
     "fetch-offerings": "node scripts/fetch-offerings.ts",
     "fetch-details": "node scripts/fetch-details.ts",
     "fetch-seats": "node scripts/fetch-seats.ts"
@@ -22,6 +23,7 @@
     "@sveltejs/vite-plugin-svelte": "^7.3.1",
     "@tsconfig/svelte": "^5.0.8",
     "@types/node": "^24.19.2",
+    "fake-indexeddb": "^6.2.5",
     "svelte": "^5.57.2",
     "svelte-check": "^4.7.6",
     "typescript": "^6.0.3",

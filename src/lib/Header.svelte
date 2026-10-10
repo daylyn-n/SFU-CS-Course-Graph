@@ -1,6 +1,7 @@
 <script lang="ts">
   import { matchCourse, searchCourses } from './search';
   import CourseInput from './CourseInput.svelte';
+  import type { Snippet } from 'svelte';
   import type { Courses, Term, View } from './types';
 
   interface Props {
@@ -12,11 +13,9 @@
     onpick: (code: string) => void;
     /** is the course running in an upcoming term? (filters the quick picks) */
     isOffered?: ((code: string) => boolean) | null;
-    /** dock the schedule under the map (shown on the Schedule tab) */
-    ondock?: (() => void) | null;
     view: View;
-    maxDepth: number;
-    hideTaken: boolean;
+    /** the account button (sign in / avatar), when accounts are set up */
+    account?: Snippet;
   }
 
   let {
@@ -26,10 +25,8 @@
     terms,
     onpick,
     isOffered = null,
-    ondock = null,
     view = $bindable(),
-    maxDepth = $bindable(),
-    hideTaken = $bindable(),
+    account,
   }: Props = $props();
 
   // Quick picks, skipping any that aren't in the data or not running soon.
@@ -135,6 +132,7 @@
       <button type="submit">Map it</button>
       {#if message}<div class="message" role="status">{message}</div>{/if}
     </form>
+    {#if account}<div class="account">{@render account()}</div>{/if}
   </div>
 
   <div class="row bottom">
@@ -167,25 +165,6 @@
         <button class:on={view === 'schedule'} onclick={() => (view = 'schedule')}>Schedule</button>
         <button class:on={view === 'degree'} onclick={() => (view = 'degree')}>Degree</button>
       </div>
-      {#if view === 'schedule' && ondock}
-        <button class="dock-btn" onclick={ondock} title="Show the schedule under the prerequisite map">
-          Dock under map ↙
-        </button>
-      {/if}
-      {#if view === 'graph' || view === 'list'}
-        <label>
-          Levels
-          <select bind:value={maxDepth}>
-            {#each [1, 2, 3, 4] as d}<option value={d}>{d}</option>{/each}
-            <option value={Infinity}>All</option>
-          </select>
-        </label>
-        <label class="toggle">
-          <input type="checkbox" bind:checked={hideTaken} />
-          <span class="switch" aria-hidden="true"></span>
-          Hide prereqs of taken courses
-        </label>
-      {/if}
     </div>
   </div>
 </header>
@@ -244,6 +223,9 @@
     flex-wrap: wrap;
     align-items: center;
     gap: 10px 22px;
+  }
+  .account {
+    flex-shrink: 0;
   }
   .row.top {
     z-index: 2; /* search dropdown sits above the row below */
@@ -460,12 +442,7 @@
     margin-left: auto;
     font-size: 13px;
   }
-  .controls label {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    cursor: pointer;
-  }
+
   .seg {
     display: flex;
     padding: 3px;
@@ -485,66 +462,18 @@
     background: #fff;
     color: var(--sfu-red);
   }
-  .dock-btn {
-    border: 1px solid rgb(255 255 255 / 0.55);
-    border-radius: 999px;
-    padding: 4px 12px;
-    background: rgb(255 255 255 / 0.1);
-    color: #fff;
-    font-weight: 600;
-    cursor: pointer;
-  }
-  .dock-btn:hover {
-    background: rgb(255 255 255 / 0.22);
-  }
-  select {
-    border: 1px solid rgb(255 255 255 / 0.45);
-    border-radius: 999px;
-    padding: 3px 8px;
-    background: rgb(255 255 255 / 0.1);
-    color: #fff;
-    cursor: pointer;
-  }
-  select option {
-    color: #1c1c1e;
-    background: #fff;
-  }
+
+
+
+
 
   /* Checkbox drawn as a switch */
-  .toggle input {
-    position: absolute;
-    opacity: 0;
-    pointer-events: none;
-  }
-  .switch {
-    position: relative;
-    width: 30px;
-    height: 17px;
-    border-radius: 999px;
-    background: rgb(0 0 0 / 0.25);
-    transition: background 0.2s;
-  }
-  .switch::after {
-    content: '';
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    width: 13px;
-    height: 13px;
-    border-radius: 50%;
-    background: #fff;
-    transition: transform 0.2s;
-  }
-  .toggle input:checked + .switch {
-    background: #7be09a;
-  }
-  .toggle input:checked + .switch::after {
-    transform: translateX(13px);
-  }
-  .toggle input:focus-visible + .switch {
-    outline: 2px solid #fff;
-    outline-offset: 2px;
-  }
+
+
+
+
+
+
 
   @media (max-width: 700px) {
     /* Six tabs don't fit a phone: let the row scroll sideways. */

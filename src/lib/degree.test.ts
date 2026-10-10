@@ -169,6 +169,51 @@ describe('evaluateProgram', () => {
   });
 });
 
+describe('manual items and alternative sections', () => {
+  const courses = cat(['A 100', 'A 200', 'B 100', 'B 200', 'C 100']);
+
+  it('notes never count, but show which listed courses are taken', () => {
+    const p = program([
+      {
+        title: 'S',
+        requirements: [
+          { id: 'a', title: 'a', kind: 'course', code: 'A 100' },
+          { id: 'n', title: 'Check', kind: 'note', text: 'Ask an advisor', codes: ['B 100', 'B 200'] },
+        ],
+      },
+    ]);
+    const r = evaluateProgram(p, new Set(['A 100', 'B 100']), courses);
+    expect(byId(r, 'n')).toMatchObject({ status: 'manual', counted: ['B 100'], candidates: ['B 200'], need: 0 });
+    expect(r).toMatchObject({ met: 1, total: 1, manual: 1, fraction: 1 });
+    // Taken courses only mentioned by a note aren't "counted" units.
+    expect(r.unitsCounted).toBe(3);
+  });
+
+  it('counts only the best alternative in a choice group', () => {
+    const streamA = { title: 'Stream A', choice: { group: 'g' }, requirements: [{ id: 'sa', title: 'sa', kind: 'course' as const, code: 'A 200' }, { id: 'sa2', title: 'sa2', kind: 'course' as const, code: 'C 100' }] };
+    const streamB = { title: 'Stream B', choice: { group: 'g' }, requirements: [{ id: 'sb', title: 'sb', kind: 'course' as const, code: 'B 200' }] };
+    const p = program([{ title: 'Core', requirements: [{ id: 'core', title: 'core', kind: 'course', code: 'A 100' }] }, streamA, streamB]);
+    const r = evaluateProgram(p, new Set(['A 100', 'B 200']), courses);
+    expect(r.sections.map((s) => s.chosen)).toEqual([undefined, false, true]);
+    expect(r).toMatchObject({ met: 2, total: 2, fraction: 1 });
+    // Unchosen alternatives still get their own progress, for display.
+    expect(r.sections[1].results.map((x) => x.status)).toEqual(['unmet', 'unmet']);
+
+    const r2 = evaluateProgram(p, new Set(['A 100', 'A 200']), courses);
+    expect(r2.sections.map((s) => s.chosen)).toEqual([undefined, true, false]);
+    expect(r2).toMatchObject({ met: 2, total: 3 });
+  });
+
+  it('optional groups never count toward the totals', () => {
+    const p = program([
+      { title: 'Core', requirements: [{ id: 'core', title: 'core', kind: 'course', code: 'A 100' }] },
+      { title: 'X', choice: { group: 'g', optional: true }, requirements: [{ id: 'x', title: 'x', kind: 'course', code: 'B 100' }] },
+      { title: 'Y', choice: { group: 'g', optional: true }, requirements: [{ id: 'y', title: 'y', kind: 'course', code: 'C 100' }] },
+    ]);
+    expect(evaluateProgram(p, new Set(['A 100']), courses)).toMatchObject({ met: 1, total: 1, fraction: 1 });
+  });
+});
+
 describe('real programs', () => {
   const major = PROGRAMS.find((p) => p.id === 'cmpt-major-bsc')!;
   const sosy = PROGRAMS.find((p) => p.id === 'sosy-major-bsc')!;

@@ -1,0 +1,198 @@
+{
+ "title": "English and History",
+ "value": "bachelor-of-arts",
+ "awardType": "Joint Major",
+ "credential": "Bachelor of Arts",
+ "degreeLevel": "Undergraduate",
+ "description": "",
+ "fullTitle": "English and History Joint Major",
+ "admissionRequirements": "",
+ "departments": [
+  {
+   "title": "Department of History",
+   "profilePage": "http://www.sfu.ca/history/faculty-and-staff/faculty-by-name.html",
+   "homePage": "http://www.sfu.ca/history.html"
+  },
+  {
+   "title": "Department of English",
+   "profilePage": "http://www.sfu.ca/english/test-page/faculty-by-name.html",
+   "homePage": "http://www.sfu.ca/english.html"
+  }
+ ],
+ "faculties": [
+  {
+   "title": "Faculty of Arts and Social Sciences",
+   "profilePpage": "",
+   "homePage": "https://www.sfu.ca/fass.html"
+  }
+ ],
+ "requirements": [
+  {
+   "title": "Program Requirements"
+  },
+  {
+   "title": "English Lower Division Requirements",
+   "requirements": [
+    {
+     "description": "Students complete any two 100-division English courses. Such courses may include:"
+    },
+    {
+     "courseTitle": "Literary Classics in English",
+     "value": "engl/111w"
+    },
+    {
+     "courseTitle": "Literature Now",
+     "value": "engl/112w"
+    },
+    {
+     "courseTitle": "Literature and Performance",
+     "value": "engl/113w"
+    },
+    {
+     "courseTitle": "Language and Purpose",
+     "value": "engl/114w"
+    },
+    {
+     "courseTitle": "Literature and Culture",
+     "value": "engl/115w"
+    },
+    {
+     "courseTitle": "Writing to Persuade",
+     "value": "engl/199w"
+    },
+    {
+     "description": "Students also complete any four 200-division English courses. Such courses may include:"
+    },
+    {
+     "courseTitle": "The Environmental Imagination",
+     "value": "engl/202"
+    },
+    {
+     "courseTitle": "Reading Sexuality and Gender",
+     "value": "engl/204"
+    },
+    {
+     "courseTitle": "Race, Borders, Empire",
+     "value": "engl/209"
+    },
+    {
+     "courseTitle": "Reading and Writing Identities",
+     "value": "engl/210"
+    },
+    {
+     "courseTitle": "The Place of the Past",
+     "value": "engl/211"
+    },
+    {
+     "courseTitle": "Reading Across Media",
+     "value": "engl/213"
+    },
+    {
+     "courseTitle": "History and Principles of Rhetoric",
+     "value": "engl/214"
+    },
+    {
+     "courseTitle": "History and Principles of Literary Criticism",
+     "value": "engl/216"
+    },
+    {
+     "courseTitle": "Metrics and Prosody",
+     "value": "engl/234"
+    },
+    {
+     "courseTitle": "Creative Reading",
+     "value": "engl/272"
+    },
+    {
+     "description": "Students wishing to major in English are strongly advised to submit a formal declaration to this effect to the undergraduate advisor upon completing all lower division requirements."
+    }
+   ]
+  },
+  {
+   "title": "History Lower Division Requirements",
+   "requirements": [
+    {
+     "description": "Students complete 18 units of 100 and 200 division history courses."
+    },
+    {
+     "description": "Students must complete at least six lower division history units before enrolling in 300 division work and nine lower division history units before enrolling in 400 division work."
+    }
+   ]
+  },
+  {
+   "title": "English Upper Division Requirements",
+   "requirements": [
+    {
+     "description": "Students complete 20 units of upper division English courses. A minimum of four of these units must be at the 400-level, excluding directed studies courses (ENGL 490, 491); a minimum of four units must be from the following group of courses, focused on Canadian and/or Indigenous Literatures:"
+    },
+    {
+     "courseTitle": "Canadian Literatures",
+     "value": "engl/355"
+    },
+    {
+     "courseTitle": "Popular Writing by Indigenous Authors",
+     "value": "engl/360"
+    },
+    {
+     "courseTitle": "Seminar in Indigenous Literatures",
+     "value": "engl/431w"
+    },
+    {
+     "courseTitle": "Seminar in Canadian Literature",
+     "value": "engl/432w"
+    },
+    {
+     "description": "With permission of the department, other English courses of equivalent content may be substituted for those required in this group."
+    }
+   ]
+  },
+  {
+   "title": "History Upper Division Requirements",
+   "requirements": [
+    {
+     "description": "Students complete 24 units of 300 and 400 level history courses, of which 12 must be in 400 level. Students must complete at least one course from each group shown below. Global/Comparative courses that are also included in another group may only be counted towards fulfilling the upper division course requirements for one group."
+    },
+    {
+     "description": "<a href=\"https://www.sfu.ca/students/calendar/2026/fall/programs/history/major/bachelor-of-arts.html#group1\">Group 1&nbsp;- Africa, Asia, Middle East</a>"
+    },
+    {
+     "description": "<a href=\"https://www.sfu.ca/students/calendar/2026/fall/programs/history/major/bachelor-of-arts.html#group2\">Group 2 - The Americas</a>"
+    },
+    {
+     "description": "<a href=\"https://www.sfu.ca/students/calendar/2026/fall/programs/history/major/bachelor-of-arts.html#group3\">Group 3 - Europe</a>"
+    },
+    {
+     "description": "<a href=\"https://www.sfu.ca/students/calendar/2026/fall/programs/history/major/bachelor-of-arts.html#group4\">Group 4 - Global/Comparative</a>"
+    },
+    {
+     "description": "Students in history joint major programs have the option of taking concentrations to enhance their programs."
+    },
+    {
+     "description": "<a href=\"https://www.sfu.ca/students/calendar/2026/fall/programs/history/major/bachelor-of-arts.html#british_history_and_irish_history\">Concentration in British History and Irish History</a>"
+    },
+    {
+     "description": "<a href=\"https://www.sfu.ca/students/calendar/2026/fall/programs/history/major/bachelor-of-arts.html#early_modern_world_history\">Concentration in Early Modern World History</a>"
+    },
+    {
+     "description": "<a href=\"https://www.sfu.ca/students/calendar/2026/fall/programs/history/major/bachelor-of-arts.html#middle_eastern_and_islamic_history\">Concentration in Middle Eastern and Islamic History</a>"
+    }
+   ]
+  },
+  {
+   "title": "Faculty of Arts and Social Sciences Degree Requirements",
+   "description": "For all bachelor of arts (BA) programs, students complete 120 units, which includes \n<ul> \n <li>at least 60 units that must be completed at Simon Fraser University</li> \n <li>at least 45 upper division units, of which at least 30 upper division units must be completed at Simon Fraser University</li> \n <li>at least 60&nbsp;units (including 21 upper division units) in Faculty of Arts and Social Sciences courses</li> \n <li>satisfaction of the writing, quantitative, and breadth requirements</li> \n <li>an overall cumulative grade point average (CGPA) and upper division overall CGPA of at least 2.0, and program CGPA and upper division program CGPA of at least 2.0 on the course work used to satisfy the minimum program requirements. FASS departments may define additional GPA requirements for their respective programs.</li> \n</ul>"
+  },
+  {
+   "title": "Writing, Quantitative, and Breadth Requirements",
+   "description": "Students admitted to Simon Fraser University beginning in the fall 2006 term must meet writing, quantitative and breadth requirements as part of any degree program they may undertake. See \n<a href=\"https://www.sfu.ca/students/calendar/2026/fall/fees-and-regulations/enrolment/WQB.html\">Writing, Quantitative, and Breadth Requirements</a> for university-wide information. WQB Graduation Requirements A grade of C- or better is required to earn W, Q or B credit  \n<table> \n <tbody> \n  <tr> \n   <td>Requirement</td> \n   <td> Units </td> \n   <td colspan=\"2\">Notes</td> \n  </tr> \n  <tr> \n   <td>W - Writing</td> \n   <td> 6 </td> \n   <td colspan=\"2\"> Must include at least one upper division course, taken at Simon Fraser University within the student's major subject; two courses (minimum three units each) </td> \n  </tr> \n  <tr> \n   <td>Q - Quantitative</td> \n   <td> 6 </td> \n   <td colspan=\"2\">Q courses may be lower or upper division;&nbsp;two courses (total six units or more)</td> \n  </tr> \n  <tr> \n   <td>B - Breadth</td> \n   <td> 18 </td> \n   <td>Designated Breadth</td> \n   <td> Must be outside the student's major subject, and may be lower or upper division: Two courses (total six units or more) Social Sciences: B-Soc Two courses (total six units or more) Humanities: B-Hum Two courses (total six units or more) Sciences: B-Sci </td> \n  </tr> \n  <tr> \n   <td> 6 </td> \n   <td>Additional Breadth</td> \n   <td> Two courses (total six units or more) outside the student's major subject (may or may not be B-designated courses, and will likely help fulfil individual degree program requirements). Students choosing to complete a joint major, joint honours, double major, two extended minors, an extended minor and a minor, or two minors may satisfy the breadth requirements (designated or not designated) with courses completed in either one or both program areas. </td> \n  </tr> \n </tbody> \n</table>"
+  },
+  {
+   "title": "Residency Requirements and Transfer Credit",
+   "description": "<ul> \n <li>At least half of the program's total units must be earned through Simon Fraser University study.</li> \n <li>At least two thirds of the program's total upper division units must be earned through Simon Fraser University study.</li> \n</ul>"
+  },
+  {
+   "title": "Elective Courses",
+   "description": "In addition to the courses listed above, students should consult an academic advisor to plan the remaining required elective courses."
+  }
+ ]
+}
