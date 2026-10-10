@@ -1,33 +1,43 @@
 :root {
-  --bg: #f6f6f4;
+  /* SFU red, with a darker shade for hover/pressed states */
+  --sfu-red: #a6192e;
+  --sfu-red-dark: #7f1323;
+  --header-bg: var(--sfu-red);
+  --header-text: #ffffff;
+  --bg: #f7f5f4;
   --surface: #ffffff;
   --text: #1c1c1e;
   --muted: #6b6b70;
-  --border: #dedede;
-  --accent: #b5172f;
+  --border: #e2dedc;
+  --accent: var(--sfu-red);
+  --accent-text: var(--sfu-red);
   --done: #2f8a4f;
   --done-bg: #e8f5ec;
   --ready: #2563c9;
   --ready-bg: #e9f0fc;
   --locked-border: #c4c4c8;
   --locked-bg: #ffffff;
+  --term: var(--sfu-red);
   color-scheme: light;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #161618;
-    --surface: #202024;
-    --text: #ececef;
-    --muted: #9a9aa2;
-    --border: #34343a;
-    --accent: #ef5a6f;
+    --header-bg: #8c1526;
+    --bg: #161415;
+    --surface: #211e1f;
+    --text: #efeced;
+    --muted: #a19b9d;
+    --border: #3a3436;
+    --accent: #e0455c;
+    --accent-text: #f2788a;
     --done: #5cc27f;
     --done-bg: #1c3325;
     --ready: #6e9ff0;
     --ready-bg: #1d2a42;
     --locked-border: #4a4a52;
     --locked-bg: #26262b;
+    --term: #f2788a;
     color-scheme: dark;
   }
 }
@@ -72,75 +82,6 @@ select {
 
 button:hover {
   border-color: var(--muted);
-}
-
-header {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 10px 20px;
-  padding: 12px 16px;
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-}
-
-h1 {
-  font-size: 17px;
-  margin: 0;
-  white-space: nowrap;
-}
-
-.search {
-  display: flex;
-  gap: 6px;
-  flex: 1 1 280px;
-  max-width: 420px;
-}
-
-.search input {
-  flex: 1;
-  min-width: 0;
-  padding: 7px 10px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: var(--bg);
-}
-
-.controls {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px 16px;
-  color: var(--muted);
-}
-
-.controls label {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.seg {
-  display: flex;
-}
-
-.seg button {
-  border-radius: 0;
-}
-
-.seg button:first-child {
-  border-radius: 8px 0 0 8px;
-}
-
-.seg button:last-child {
-  border-radius: 0 8px 8px 0;
-  border-left: none;
-}
-
-.seg button.on {
-  background: var(--text);
-  color: var(--surface);
-  border-color: var(--text);
 }
 
 main {
@@ -234,7 +175,7 @@ aside h3 {
 
 .eyebrow {
   font-size: 12px;
-  color: var(--accent);
+  color: var(--accent-text);
   font-weight: 600;
 }
 
@@ -262,6 +203,27 @@ aside h3 {
   flex-wrap: wrap;
   gap: 8px;
   margin-top: 12px;
+}
+
+button.primary {
+  background: var(--sfu-red);
+  border-color: var(--sfu-red);
+  color: #fff;
+  font-weight: 600;
+}
+
+button.primary:hover {
+  background: var(--sfu-red-dark);
+  border-color: var(--sfu-red-dark);
+}
+
+.chip:hover {
+  border-color: var(--accent);
+  color: var(--accent-text);
+}
+
+aside h2 {
+  color: var(--accent-text);
 }
 
 .raw {
@@ -298,6 +260,49 @@ aside h3 {
   margin-top: 24px;
   font-size: 11px;
   color: var(--muted);
+}
+
+.term {
+  margin-bottom: 12px;
+}
+
+.term-name {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.section {
+  padding: 8px 10px;
+  margin-bottom: 6px;
+  border-radius: 8px;
+  background: var(--bg);
+  font-size: 13px;
+}
+
+.section-head b {
+  margin-right: 4px;
+}
+
+.profs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 12px;
+  margin-top: 3px;
+}
+
+.profs a {
+  color: var(--accent-text);
+  text-decoration: none;
+}
+
+.profs a:hover {
+  text-decoration: underline;
+}
+
+.rmp {
+  font-size: 10px;
+  font-weight: 600;
+  opacity: 0.75;
 }
 
 /* Svelte Flow theming */

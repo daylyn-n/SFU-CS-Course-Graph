@@ -7,41 +7,12 @@
 
 import { writeFile, mkdir } from 'node:fs/promises';
 import { parsePrereqs } from './parse-prereqs.mjs';
+import { CALENDAR_API, getJson as getJsonFrom, missingPaths, pool } from './sfu-api.mjs';
 
-const API = 'https://www.sfu.ca/bin/wcm/academic-calendar';
 const [term = '2026/fall', ...deptArgs] = process.argv.slice(2);
 const depts = deptArgs.length ? deptArgs : ['cmpt', 'macm', 'math', 'stat'];
 const OUT = new URL('../src/data/courses.json', import.meta.url);
-
-const notFound = new Set();
-
-async function getJson(path) {
-  for (let attempt = 1; ; attempt++) {
-    try {
-      const res = await fetch(`${API}?${term}/courses/${path}`);
-      // The API sometimes 404s under load, so 404s get retried too.
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      return await res.json();
-    } catch (err) {
-      if (attempt >= 3) {
-        if (err.message === 'HTTP 404') notFound.add(path);
-        else console.warn(`  ! ${path}: ${err.message}`);
-        return null;
-      }
-      await new Promise((r) => setTimeout(r, 500 * attempt));
-    }
-  }
-}
-
-// Run fn over items with at most `limit` requests in flight.
-async function pool(items, limit, fn) {
-  const queue = [...items];
-  await Promise.all(
-    Array.from({ length: limit }, async () => {
-      while (queue.length) await fn(queue.shift());
-    }),
-  );
-}
+const getJson = (path) => getJsonFrom(CALENDAR_API, `${term}/courses/${path}`);
 
 const courses = {};
 
@@ -107,7 +78,8 @@ const sorted = Object.fromEntries(
 );
 await mkdir(new URL('.', OUT), { recursive: true });
 await writeFile(OUT, JSON.stringify({ term, fetched: new Date().toISOString(), courses: sorted }, null, 1));
-if (notFound.size) {
-  console.log(`  (${notFound.size} listed/referenced courses have no calendar entry: ${[...notFound].join(', ')})`);
+const notFound = missingPaths();
+if (notFound.length) {
+  console.log(`  (${notFound.length} listed/referenced courses have no calendar entry: ${notFound.join(', ')})`);
 }
 console.log(`Wrote ${Object.keys(sorted).length} courses to src/data/courses.json`);

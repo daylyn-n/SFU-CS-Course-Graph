@@ -2,6 +2,7 @@
 <script>
   import Self from './PrereqList.svelte';
   import { courseStatus, satisfied } from './graph.js';
+  import TermPills from './TermPills.svelte';
 
   // tree: a course code string or { op, args }. `flat` is set for a course's
   // own prerequisites, where an AND just means "list them all" with no header.
@@ -15,10 +16,21 @@
     maxDepth,
     expanded,
     onexpand,
+    offeredIn,
     ancestors = [],
     flat = false,
   } = $props();
-  const shared = $derived({ courses, done, hideTaken, ontoggle, onselect, maxDepth, expanded, onexpand });
+  const shared = $derived({
+    courses,
+    done,
+    hideTaken,
+    ontoggle,
+    onselect,
+    maxDepth,
+    expanded,
+    onexpand,
+    offeredIn,
+  });
 </script>
 
 {#if typeof tree === 'string'}
@@ -35,6 +47,7 @@
         aria-label="Mark {tree} as taken"
       />
       <button class="link" onclick={() => onselect(tree)}>{tree}</button>
+      <span class="terms"><TermPills terms={offeredIn(tree)} /></span>
       {#if showable && !open}
         <button class="more" onclick={() => onexpand(tree)} title="Show prerequisites">+</button>
       {/if}
@@ -98,6 +111,14 @@
   }
   .row.done .link {
     color: var(--done);
+  }
+  .terms {
+    display: inline-flex;
+    gap: 3px;
+    align-self: center;
+  }
+  .terms:empty {
+    display: none;
   }
   .title {
     color: var(--muted);

@@ -1,6 +1,7 @@
 <script>
   import { getContext } from 'svelte';
   import { Handle, Position } from '@xyflow/svelte';
+  import TermPills from './TermPills.svelte';
 
   let { data } = $props();
   const actions = getContext('actions');
@@ -22,7 +23,7 @@
     aria-label="Mark {data.code} as taken"
   />
   <div class="text">
-    <div class="code">{data.code}</div>
+    <div class="code">{data.code} <TermPills terms={data.offered} /></div>
     <div class="title">{data.title}</div>
   </div>
   {#if data.collapsed}
@@ -41,7 +42,7 @@
 <style>
   .course {
     position: relative;
-    width: 172px;
+    width: 200px;
     height: 60px;
     box-sizing: border-box;
     display: flex;
@@ -76,6 +77,7 @@
   .code {
     font-weight: 700;
     font-size: 14px;
+    white-space: nowrap;
   }
   .title {
     font-size: 11px;

@@ -1,7 +1,7 @@
 import dagre from '@dagrejs/dagre';
 
 // Rendered sizes of the node components. dagre needs these up front.
-export const COURSE_SIZE = { width: 172, height: 60 };
+export const COURSE_SIZE = { width: 200, height: 60 };
 export const JUNCTION_SIZE = { width: 64, height: 26 };
 
 /** Is a prerequisite tree satisfied by the set of taken courses? */
@@ -30,12 +30,13 @@ export function courseStatus(code, courses, done) {
  * @param {number} opts.maxDepth  stop expanding past this many levels (Infinity = all)
  * @param {boolean} opts.hideTaken  don't expand courses already taken
  * @param {Set<string>} opts.expanded  courses to expand even past maxDepth
+ * @param {(code: string) => object[]} opts.offeredIn  terms a course runs in
  */
 export function buildGraph(
   target,
   courses,
   done,
-  { maxDepth = Infinity, hideTaken = true, expanded = new Set() } = {},
+  { maxDepth = Infinity, hideTaken = true, expanded = new Set(), offeredIn = () => [] } = {},
 ) {
   const nodes = new Map();
   const edges = [];
@@ -87,6 +88,7 @@ export function buildGraph(
         missing: !course,
         isTarget: code === target,
         collapsed: !!course?.prereq && !expand,
+        offered: offeredIn(code),
       },
     });
     if (expand) connect(course.prereq, code, true);

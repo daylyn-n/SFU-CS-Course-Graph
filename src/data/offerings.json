@@ -1,0 +1,7138 @@
+{
+ "fetched": "2026-10-10T08:13:09.799Z",
+ "terms": [
+  {
+   "id": "2026/fall",
+   "label": "Fall 2026",
+   "short": "Fa26",
+   "current": true
+  },
+  {
+   "id": "2027/spring",
+   "label": "Spring 2027",
+   "short": "Sp27",
+   "current": false
+  }
+ ],
+ "offerings": {
+  "BUS 232": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Negar Ganjouhaghighi"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 14:30–17:20"
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Devadrita Nair"
+     ],
+     "campus": "Surrey",
+     "delivery": "In Person",
+     "schedule": "We 14:30–17:20"
+    },
+    {
+     "section": "E100",
+     "instructors": [
+      "Cleusa Yamamoto"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Th 17:30–20:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Negar Ganjouhaghighi"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 14:30–17:20"
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Devadrita Nair"
+     ],
+     "campus": "Surrey",
+     "delivery": "In Person",
+     "schedule": "We 14:30–17:20"
+    },
+    {
+     "section": "E100",
+     "instructors": [
+      "Hamideh Shokoohian"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Th 17:30–20:20"
+    }
+   ]
+  },
+  "CMPT 105W": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Eva  Mackamul"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 11:30–12:20"
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Diana Cukierman"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 13:30–14:20, Th 12:30–14:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 13:30–14:20, Th 12:30–14:20"
+    }
+   ]
+  },
+  "CMPT 120": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Amir Aghasharif"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 9:30–10:20"
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Toby Donaldson"
+     ],
+     "campus": "Surrey",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 10:30–11:20"
+    },
+    {
+     "section": "D300",
+     "instructors": [
+      "Diana Cukierman"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 8:30–10:20, Th 8:30–9:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Toby Donaldson"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 10:30–12:20, We 10:30–11:20"
+    }
+   ]
+  },
+  "CMPT 125": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Bobby Chan"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 8:30–10:20, Th 8:30–9:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Bobby Chan"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 16:30–17:20, Th 15:30–17:20"
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Toby Donaldson"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 13:30–14:20"
+    }
+   ]
+  },
+  "CMPT 130": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Brian Fraser"
+     ],
+     "campus": "Surrey",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 10:30–11:20"
+    }
+   ]
+  },
+  "CMPT 135": {
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Victor Cheung"
+     ],
+     "campus": "Surrey",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 12:30–13:20"
+    }
+   ]
+  },
+  "CMPT 201": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Brian Fraser"
+     ],
+     "campus": "Surrey",
+     "delivery": "In Person",
+     "schedule": "Mo, We 14:30–16:20"
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Ahmadreza Nezami"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "We, Fr 12:30–14:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu, Th 8:30–10:20"
+    }
+   ]
+  },
+  "CMPT 210": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Sharan Vaswani"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 10:30–11:20, Th 9:30–11:20"
+    },
+    {
+     "section": "E100",
+     "instructors": [
+      "Wuyang Chen"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 16:30–18:20, We 16:30–17:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "SiQi Zhou"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 14:30–16:20, Fr 14:30–15:20"
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Brad Bart"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 12:30–14:20, We 12:30–13:20"
+    }
+   ]
+  },
+  "CMPT 213": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Victor Cheung"
+     ],
+     "campus": "Surrey",
+     "delivery": "In Person",
+     "schedule": "Tu 13:30–14:20, Th 12:30–14:20"
+    }
+   ]
+  },
+  "CMPT 218": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Marzena Karpinska"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 8:30–10:20, We 8:30–9:20"
+    }
+   ]
+  },
+  "CMPT 225": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Mirza Zaeem Baig"
+     ],
+     "campus": "Surrey",
+     "delivery": "In Person",
+     "schedule": "Tu 11:30–13:20, Th 11:30–12:20"
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Igor Shinkar"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 11:30–13:20, Th 11:30–12:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 10:30–12:20, Fr 10:30–11:20"
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Victor Cheung"
+     ],
+     "campus": "Surrey",
+     "delivery": "In Person",
+     "schedule": "We 9:30–10:20, Fr 8:30–10:20"
+    }
+   ]
+  },
+  "CMPT 263": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Xingdong Yang"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "We 9:30–10:20, Fr 8:30–10:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Nicholas Vincent"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 14:30–15:20, Th 14:30–16:20"
+    }
+   ]
+  },
+  "CMPT 276": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Bobby Chan"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 13:30–14:20, Th 12:30–14:20"
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Saba Alimadadi Jani"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "We 11:30–12:20, Fr 10:30–12:20"
+    },
+    {
+     "section": "D300",
+     "instructors": [
+      "Herbert Tsang"
+     ],
+     "campus": "Surrey",
+     "delivery": "In Person",
+     "schedule": "Tu 10:30–11:20, Th 9:30–11:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Saba Alimadadi Jani"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 10:30–12:20, Fr 10:30–11:20"
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Bobby Chan"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 10:30–12:20, We 10:30–11:20"
+    },
+    {
+     "section": "D300",
+     "instructors": [
+      "Brian Fraser"
+     ],
+     "campus": "Surrey",
+     "delivery": "In Person",
+     "schedule": "Tu 10:30–12:20, Fr 10:30–11:20"
+    }
+   ]
+  },
+  "CMPT 295": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Gregory Baker"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "We 15:30–16:20, Fr 14:30–16:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Alaa Alameldeen"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "We 9:30–10:20, Fr 8:30–10:20"
+    }
+   ]
+  },
+  "CMPT 303": {
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Steven Ko"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "We 13:30–14:20, Fr 12:30–14:20"
+    }
+   ]
+  },
+  "CMPT 305": {
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Alaa Alameldeen"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "We 11:30–12:20, Fr 10:30–12:20"
+    }
+   ]
+  },
+  "CMPT 307": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Kay C Wiese"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 10:30–12:20, We 10:30–11:20"
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Heng Liu"
+     ],
+     "campus": "Surrey",
+     "delivery": "In Person",
+     "schedule": "Tu 14:30–16:20, Fr 14:30–15:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Valentine Kabanets"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 10:30–11:20, Th 10:30–12:20"
+    },
+    {
+     "section": "E100",
+     "instructors": [
+      "Valentine Kabanets"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 16:30–17:20, Th 16:30–18:20"
+    }
+   ]
+  },
+  "CMPT 308": {
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Evgenia Ternovska"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 12:30–14:20, We 12:30–13:20"
+    }
+   ]
+  },
+  "CMPT 310": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Hang Ma"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 11:30–14:20"
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Mohammad Soltanshah"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 14:30–17:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Maxwell Libbrecht"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "We 9:30–10:20, Fr 8:30–10:20"
+    }
+   ]
+  },
+  "CMPT 318": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Uwe Glaesser"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 10:30–11:20, Th 9:30–11:20"
+    }
+   ]
+  },
+  "CMPT 353": {
+   "2027/spring": [
+    {
+     "section": "E100",
+     "instructors": [
+      "Hedayat Zarkoob"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 17:30–19:20, We 18:30–19:20"
+    }
+   ]
+  },
+  "CMPT 354": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Zhengjie Miao"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 8:30–10:20, We 8:30–9:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Martin Ester"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 14:30–16:20, Th 14:30–15:20"
+    },
+    {
+     "section": "D200",
+     "instructors": [],
+     "campus": "Surrey",
+     "delivery": "In Person",
+     "schedule": "Mo 8:30–9:20, Th 8:30–10:20"
+    }
+   ]
+  },
+  "CMPT 361": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Xue Bin Jason Peng",
+      "Yasutaka Furukawa"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "We 15:30–16:20, Fr 14:30–16:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Yasutaka Furukawa"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "We 15:30–16:20, Fr 14:30–16:20"
+    }
+   ]
+  },
+  "CMPT 363": {
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Parmit Kaur Chilana"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 12:30–13:20, Th 12:30–14:20"
+    }
+   ]
+  },
+  "CMPT 365": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Jiangchuan Liu"
+     ],
+     "campus": "Burnaby",
+     "delivery": "Blended",
+     "schedule": "Mo 12:30–14:20, We 12:30–13:20"
+    }
+   ]
+  },
+  "CMPT 371": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Mohamed Hefeeda",
+      "Mirza Zaeem Baig"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "We 17:30–18:20, Fr 16:30–18:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "E100",
+     "instructors": [],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 17:30–18:20, Th 17:30–19:20"
+    }
+   ]
+  },
+  "CMPT 373": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "William Sumner"
+     ],
+     "campus": "Surrey",
+     "delivery": "In Person",
+     "schedule": "We 9:30–10:20, Fr 8:30–10:20"
+    }
+   ]
+  },
+  "CMPT 376W": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Chris Kerslake"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 16:30–17:20, Th 15:30–17:20"
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Mirza Zaeem Baig"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "We 13:30–14:20, Fr 12:30–14:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D200",
+     "instructors": [],
+     "campus": "Surrey",
+     "delivery": "In Person",
+     "schedule": "Mo 14:30–15:20, Th 14:30–16:20"
+    },
+    {
+     "section": "E100",
+     "instructors": [],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 16:30–17:20, We 16:30–18:20"
+    }
+   ]
+  },
+  "CMPT 379": {
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Anders Miltner"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 8:30–10:20, Th 8:30–9:20"
+    }
+   ]
+  },
+  "CMPT 383": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Toby Donaldson"
+     ],
+     "campus": "Surrey",
+     "delivery": "In Person",
+     "schedule": "Mo 12:30–14:20, We 12:30–13:20"
+    }
+   ]
+  },
+  "CMPT 403": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Jianliang Wu"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "We 9:30–10:20, Fr 8:30–10:20"
+    }
+   ]
+  },
+  "CMPT 405": {
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "We 15:30–16:20, Fr 14:30–16:20"
+    }
+   ]
+  },
+  "CMPT 409": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Sharan Vaswani"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 14:30–16:20, Th 14:30–15:20"
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Robert Andrews"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "We 15:30–16:20, Fr 14:30–16:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Igor Shinkar"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 12:30–14:20, Fr 12:30–13:20"
+    }
+   ]
+  },
+  "CMPT 410": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Mo Chen"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "We 15:30–16:20, Fr 14:30–16:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Ke Li"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 12:30–14:20, Fr 12:30–13:20"
+    }
+   ]
+  },
+  "CMPT 411": {
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Th 10:30–12:20"
+    }
+   ]
+  },
+  "CMPT 412": {
+   "2027/spring": [
+    {
+     "section": "E100",
+     "instructors": [
+      "Richard Zhang"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 17:30–20:20"
+    }
+   ]
+  },
+  "CMPT 413": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Zhiyun Peng"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "We 13:30–14:20, Fr 12:30–14:20"
+    }
+   ]
+  },
+  "CMPT 415": {
+   "2026/fall": [
+    {
+     "section": "D010",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D100",
+     "instructors": [
+      "Angelica Lim"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Marzena Karpinska"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D300",
+     "instructors": [
+      "Keval Vora"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D400",
+     "instructors": [
+      "Sze Yiu Chau"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D500",
+     "instructors": [
+      "Mohammad Tayebi"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D600",
+     "instructors": [
+      "Tianzheng Wang"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D700",
+     "instructors": [
+      "Lawrence Kim"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D800",
+     "instructors": [
+      "Nicholas Vincent"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D900",
+     "instructors": [
+      "Arrvindh Shriraman"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D010",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D011",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D012",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D013",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D014",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D015",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D016",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D100",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D200",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D300",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D400",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D500",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D600",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D700",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D800",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D900",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  },
+  "CMPT 416": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Marzena Karpinska"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Lawrence Kim"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D300",
+     "instructors": [
+      "Sze Yiu Chau"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D400",
+     "instructors": [
+      "Nicholas Vincent"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D500",
+     "instructors": [
+      "SiQi Zhou"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Xingdong Yang"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Lawrence Kim"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D300",
+     "instructors": [
+      "Nicholas Vincent"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D400",
+     "instructors": [
+      "Angelica Lim"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D500",
+     "instructors": [
+      "Brian Fraser"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D600",
+     "instructors": [
+      "Bobby Chan"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D700",
+     "instructors": [
+      "Ghassan Hamarneh"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D800",
+     "instructors": [
+      "Ouldooz Baghban Karimi"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  },
+  "CMPT 417": {
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Hang Ma"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Th 11:30–14:20"
+    }
+   ]
+  },
+  "CMPT 419": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "SiQi Zhou"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 12:30–14:20, Fr 12:30–13:20"
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Wuyang Chen"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 10:30–12:20, We 10:30–11:20"
+    },
+    {
+     "section": "D300",
+     "instructors": [
+      "Oliver Schulte"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 12:30–14:20, We 12:30–13:20"
+    },
+    {
+     "section": "D400",
+     "instructors": [
+      "Frederick Popowich"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 11:30–13:20, Th 11:30–12:20"
+    },
+    {
+     "section": "D500",
+     "instructors": [
+      "Ke Wang"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 14:30–17:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Angelica Lim"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 14:30–16:20, We 14:30–15:20"
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Nicholas Vincent"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 10:30–12:20, We 10:30–11:20"
+    },
+    {
+     "section": "E100",
+     "instructors": [
+      "Marzena Karpinska"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 16:30–17:20, We 16:30–18:20"
+    }
+   ]
+  },
+  "CMPT 420": {
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Wuyang Chen"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 9:30–12:20"
+    }
+   ]
+  },
+  "CMPT 426": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "D300",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "D400",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "I100",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Cristina Eftenaru",
+      "Stephanie Greaves"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Cristina Eftenaru",
+      "Stephanie Greaves"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "D300",
+     "instructors": [
+      "Cristina Eftenaru",
+      "Stephanie Greaves"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "D400",
+     "instructors": [
+      "Cristina Eftenaru",
+      "Stephanie Greaves"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "I100",
+     "instructors": [
+      "Cristina Eftenaru",
+      "Stephanie Greaves"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    }
+   ]
+  },
+  "CMPT 427": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "D300",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "D400",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "I100",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Cristina Eftenaru",
+      "Stephanie Greaves"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Cristina Eftenaru",
+      "Stephanie Greaves"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "D300",
+     "instructors": [
+      "Cristina Eftenaru",
+      "Stephanie Greaves"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "D400",
+     "instructors": [
+      "Cristina Eftenaru",
+      "Stephanie Greaves"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "I100",
+     "instructors": [
+      "Cristina Eftenaru",
+      "Stephanie Greaves"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    }
+   ]
+  },
+  "CMPT 428": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "D300",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "D400",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "I100",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Cristina Eftenaru",
+      "Stephanie Greaves"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Cristina Eftenaru",
+      "Stephanie Greaves"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "D300",
+     "instructors": [
+      "Cristina Eftenaru",
+      "Stephanie Greaves"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "D400",
+     "instructors": [
+      "Cristina Eftenaru",
+      "Stephanie Greaves"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "I100",
+     "instructors": [
+      "Cristina Eftenaru",
+      "Stephanie Greaves"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    }
+   ]
+  },
+  "CMPT 429": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "D300",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "D400",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "I100",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Cristina Eftenaru",
+      "Stephanie Greaves"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Cristina Eftenaru",
+      "Stephanie Greaves"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "D300",
+     "instructors": [
+      "Cristina Eftenaru",
+      "Stephanie Greaves"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "D400",
+     "instructors": [
+      "Cristina Eftenaru",
+      "Stephanie Greaves"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "I100",
+     "instructors": [
+      "Cristina Eftenaru",
+      "Stephanie Greaves"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    }
+   ]
+  },
+  "CMPT 430": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "D300",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "D400",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "I100",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Cristina Eftenaru",
+      "Stephanie Greaves"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Cristina Eftenaru",
+      "Stephanie Greaves"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "D300",
+     "instructors": [
+      "Cristina Eftenaru",
+      "Stephanie Greaves"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "D400",
+     "instructors": [
+      "Cristina Eftenaru",
+      "Stephanie Greaves"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "I100",
+     "instructors": [
+      "Cristina Eftenaru",
+      "Stephanie Greaves"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    }
+   ]
+  },
+  "CMPT 431": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Keval Vora"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Th 8:30–11:20"
+    }
+   ]
+  },
+  "CMPT 433": {
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Brian Fraser"
+     ],
+     "campus": "Surrey",
+     "delivery": "In Person",
+     "schedule": "Tu 14:30–16:20, Fr 14:30–15:20"
+    }
+   ]
+  },
+  "CMPT 441": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Kay C Wiese"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 14:30–16:20, We 14:30–15:20"
+    }
+   ]
+  },
+  "CMPT 454": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Tianzheng Wang"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 14:30–16:20, Th 14:30–15:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "E100",
+     "instructors": [
+      "Ke Wang"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 17:30–20:20"
+    }
+   ]
+  },
+  "CMPT 455": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Martin Ester"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 12:30–14:20, Fr 12:30–13:20"
+    }
+   ]
+  },
+  "CMPT 464": {
+   "2026/fall": [
+    {
+     "section": "E200",
+     "instructors": [
+      "Richard Zhang"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 16:30–19:20"
+    }
+   ]
+  },
+  "CMPT 466": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "KangKang Yin"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 10:30–12:20, Fr 10:30–11:20"
+    }
+   ]
+  },
+  "CMPT 467": {
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "We 11:30–12:20, Fr 10:30–12:20"
+    }
+   ]
+  },
+  "CMPT 469": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Xingdong Yang"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "We 14:30–17:20"
+    }
+   ]
+  },
+  "CMPT 471": {
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Mohamed Hefeeda"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 16:30–17:20, Th 15:30–17:20"
+    }
+   ]
+  },
+  "CMPT 473": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "William Sumner"
+     ],
+     "campus": "Surrey",
+     "delivery": "In Person",
+     "schedule": "We 13:30–14:20, Fr 12:30–14:20"
+    }
+   ]
+  },
+  "CMPT 478": {
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Matthew Amy"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 12:30–13:20, Th 12:30–14:20"
+    }
+   ]
+  },
+  "CMPT 479": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Saba Alimadadi Jani"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Fr 14:30–17:20"
+    },
+    {
+     "section": "D300",
+     "instructors": [
+      "Alaa Alameldeen"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "We 9:30–12:20"
+    },
+    {
+     "section": "E100",
+     "instructors": [
+      "Keval Vora"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 16:30–19:20"
+    }
+   ]
+  },
+  "CMPT 489": {
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Anders Miltner"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 14:30–16:20, Th 14:30–15:20"
+    }
+   ]
+  },
+  "CMPT 494": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Mohammad Tayebi"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Angelica Lim"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D500",
+     "instructors": [
+      "Ke Li"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Ghassan Hamarneh"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Mohammad Tayebi"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D300",
+     "instructors": [
+      "Ke Li"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  },
+  "CMPT 495": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Mohammad Tayebi"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Ke Li"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Mohammad Tayebi"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "KangKang Yin"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D300",
+     "instructors": [
+      "Ke Li"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  },
+  "CMPT 496": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Bobby Chan"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Lawrence Kim"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D500",
+     "instructors": [
+      "Brian Fraser"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Lawrence Kim"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Steven Ko"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D300",
+     "instructors": [
+      "Mohammad Tayebi"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D400",
+     "instructors": [
+      "Ouldooz Baghban Karimi"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  },
+  "CMPT 497": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  },
+  "CMPT 498": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Evgenia Ternovska"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Ke Li"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Mo Chen"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D200",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D300",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  },
+  "CMPT 626": {
+   "2026/fall": [
+    {
+     "section": "G300",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "G400",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "G500",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "G600",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "G700",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "G800",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "I100",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "I200",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "I400",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    }
+   ]
+  },
+  "CMPT 627": {
+   "2026/fall": [
+    {
+     "section": "G300",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "G400",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "G500",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "G600",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "G700",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "G800",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "I100",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "I200",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "I400",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "G300",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "G400",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "G500",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "G600",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "G700",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "G800",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "I100",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "I200",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    },
+    {
+     "section": "I400",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": "Mo, Tu, We, Th, Fr 8:00–20:00"
+    }
+   ]
+  },
+  "CMPT 628": {
+   "2026/fall": [
+    {
+     "section": "G400",
+     "instructors": [
+      "Cristina Eftenaru"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  },
+  "CMPT 629": {
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  },
+  "CMPT 631": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  },
+  "CMPT 700": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Nicholas Vincent"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 12:30–13:20, Th 12:30–14:20"
+    }
+   ]
+  },
+  "CMPT 705": {
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "We 15:30–16:20, Fr 14:30–16:20"
+    }
+   ]
+  },
+  "CMPT 711": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Kay C Wiese"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 14:30–16:20, We 14:30–15:20"
+    }
+   ]
+  },
+  "CMPT 713": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Zhiyun Peng"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "We 13:30–14:20, Fr 12:30–14:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 13:30–14:20, Th 12:30–14:20"
+    }
+   ]
+  },
+  "CMPT 724": {
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Angelica Lim"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 14:30–16:20, We 14:30–15:20"
+    }
+   ]
+  },
+  "CMPT 726": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Mo Chen"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "We 15:30–16:20, Fr 14:30–16:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Ke Li"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 12:30–14:20, Fr 12:30–13:20"
+    }
+   ]
+  },
+  "CMPT 728": {
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Wuyang Chen"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 9:30–12:20"
+    }
+   ]
+  },
+  "CMPT 732": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Gregory Baker",
+      "Hedayat Zarkoob"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 10:30–12:20"
+    }
+   ]
+  },
+  "CMPT 733": {
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Hedayat Zarkoob",
+      "Zhengjie Miao"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 16:30–18:20"
+    }
+   ]
+  },
+  "CMPT 741": {
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Ke Wang"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Th 16:30–19:20"
+    }
+   ]
+  },
+  "CMPT 742": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Ali Mahdavi Amiri"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 10:30–13:20"
+    }
+   ]
+  },
+  "CMPT 743": {
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Ali Mahdavi Amiri"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Fr 9:30–12:20"
+    }
+   ]
+  },
+  "CMPT 756": {
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 10:30–11:20, Th 9:30–11:20"
+    }
+   ]
+  },
+  "CMPT 762": {
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Richard Zhang"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 17:30–20:20"
+    }
+   ]
+  },
+  "CMPT 764": {
+   "2026/fall": [
+    {
+     "section": "G300",
+     "instructors": [
+      "Richard Zhang"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 16:30–19:20"
+    }
+   ]
+  },
+  "CMPT 766": {
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [
+      "KangKang Yin"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 10:30–11:20, Th 10:30–12:20"
+    }
+   ]
+  },
+  "CMPT 771": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Mohamed Hefeeda",
+      "David Chou"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 16:30–17:20, Th 15:30–17:20"
+    }
+   ]
+  },
+  "CMPT 782": {
+   "2026/fall": [
+    {
+     "section": "G200",
+     "instructors": [
+      "Mohammad Tayebi"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "We 10:30–12:20"
+    }
+   ]
+  },
+  "CMPT 783": {
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Tao Wang"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 14:30–16:20"
+    }
+   ]
+  },
+  "CMPT 785": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Mohammad Tayebi"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 14:30–16:20, We 14:30–15:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Mohammad Tayebi"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "We 16:30–18:20, Fr 16:30–17:20"
+    }
+   ]
+  },
+  "CMPT 789": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Sze Yiu Chau"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "We 13:30–14:20, Fr 12:30–14:20"
+    }
+   ]
+  },
+  "CMPT 820": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Jiangchuan Liu"
+     ],
+     "campus": "Burnaby",
+     "delivery": "Blended",
+     "schedule": "Tu 10:30–11:20, Th 9:30–11:20"
+    }
+   ]
+  },
+  "CMPT 827": {
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Hang Ma"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Th 11:30–14:20"
+    }
+   ]
+  },
+  "CMPT 863": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Lawrence Kim"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Th 14:30–17:20"
+    }
+   ]
+  },
+  "CMPT 891": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Angelica Lim"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Fr 13:30–16:30"
+    }
+   ]
+  },
+  "CMPT 894": {
+   "2026/fall": [
+    {
+     "section": "G010",
+     "instructors": [
+      "Oliver Schulte"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G011",
+     "instructors": [
+      "Ouldooz Baghban Karimi"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G012",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G013",
+     "instructors": [
+      "Yasutaka Furukawa"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G014",
+     "instructors": [
+      "Jiangchuan Liu"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G015",
+     "instructors": [
+      "Richard Zhang"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G100",
+     "instructors": [
+      "Marzena Karpinska"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G200",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G300",
+     "instructors": [
+      "Ali Mahdavi Amiri"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G400",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G500",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G600",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G700",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G800",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G900",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "G010",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G100",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G200",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G300",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G400",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G500",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G600",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G700",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G800",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G900",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  },
+  "CMPT 895": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  },
+  "CMPT 896": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G200",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G200",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  },
+  "CMPT 897": {
+   "2026/fall": [],
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G200",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  },
+  "CMPT 898": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G200",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G200",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  },
+  "CMPT 899": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G200",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G200",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  },
+  "CMPT 981": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Sharan Vaswani"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 14:30–16:20, Th 14:30–15:20"
+    },
+    {
+     "section": "G200",
+     "instructors": [
+      "Robert Andrews"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "We 15:30–16:20, Fr 14:30–16:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Matthew Amy"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 12:30–13:20, Th 12:30–14:20"
+    },
+    {
+     "section": "G200",
+     "instructors": [
+      "Igor Shinkar"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 12:30–14:20, Fr 12:30–13:20"
+    }
+   ]
+  },
+  "CMPT 982": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Saba Alimadadi Jani"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Fr 14:30–17:20"
+    },
+    {
+     "section": "G200",
+     "instructors": [
+      "Keval Vora"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 16:30–19:20"
+    },
+    {
+     "section": "G400",
+     "instructors": [
+      "Alaa Alameldeen"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "We 9:30–12:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Anders Miltner"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 14:30–16:20, Th 14:30–15:20"
+    },
+    {
+     "section": "G200",
+     "instructors": [
+      "Uwe Glaesser"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 10:30–12:20, We 10:30–11:20"
+    }
+   ]
+  },
+  "CMPT 983": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [
+      "SiQi Zhou"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 12:30–14:20, Fr 12:30–13:20"
+    },
+    {
+     "section": "G200",
+     "instructors": [
+      "Wuyang Chen"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 10:30–12:20, We 10:30–11:20"
+    },
+    {
+     "section": "G300",
+     "instructors": [
+      "Ke Li"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 10:30–12:20, Fr 10:30–11:20"
+    },
+    {
+     "section": "G400",
+     "instructors": [
+      "Ke Wang"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 14:30–17:20"
+    },
+    {
+     "section": "G500",
+     "instructors": [
+      "Oliver Schulte"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 12:30–14:20, We 12:30–13:20"
+    },
+    {
+     "section": "G600",
+     "instructors": [
+      "Frederick Popowich"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 11:30–13:20, Th 11:30–12:20"
+    },
+    {
+     "section": "G700",
+     "instructors": [
+      "Marzena Karpinska"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 8:30–10:20, We 8:30–9:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Hang Ma"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 11:30–14:20"
+    },
+    {
+     "section": "G200",
+     "instructors": [
+      "Martin Ester"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 17:30–18:20, Fr 16:30–18:20"
+    },
+    {
+     "section": "G300",
+     "instructors": [
+      "Marzena Karpinska"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 16:30–17:20, We 16:30–18:20"
+    }
+   ]
+  },
+  "CMPT 984": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Tianzheng Wang"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 14:30–16:20, Th 14:30–15:20"
+    }
+   ]
+  },
+  "CMPT 985": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Xingdong Yang"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "We 14:30–17:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Nicholas Vincent"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 10:30–12:20, We 10:30–11:20"
+    }
+   ]
+  },
+  "ECON 103": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Douglas Allen"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 10:30–12:20, We 10:30–11:20"
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Martin Santamaria"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 14:30–17:20"
+    },
+    {
+     "section": "D900",
+     "instructors": [
+      "Gulriz Barkin"
+     ],
+     "campus": "Surrey",
+     "delivery": "In Person",
+     "schedule": "Tu, Th 10:30–12:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Douglas Allen"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 8:30–10:20, We 8:30–9:20"
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Marie Rekkas"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 13:30–14:20, Th 12:30–14:20"
+    }
+   ]
+  },
+  "ECON 113": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Pierre Mouganie"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 14:30–16:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Pierre Mouganie"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Fr 14:30–16:20"
+    }
+   ]
+  },
+  "ECON 233": {
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Dongwoo Kim"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Fr 14:30–16:20"
+    }
+   ]
+  },
+  "ECON 333": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Marie Rekkas"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 12:30–14:20, Fr 12:30–13:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Xiaoting Sun"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Fr 9:30–12:20"
+    }
+   ]
+  },
+  "ENSC 120": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Atousa Hajshirmohammadi"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Th 8:30–10:20"
+    }
+   ]
+  },
+  "ENSC 151": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Cheng Li"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu, Th 14:30–16:20"
+    }
+   ]
+  },
+  "ENSC 251": {
+   "2026/fall": [
+    {
+     "section": "E100",
+     "instructors": [
+      "Matthew Stewart"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu, Th 16:30–18:20"
+    }
+   ]
+  },
+  "ENSC 252": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Majid Shokoufi"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "We, Fr 14:30–16:20"
+    }
+   ]
+  },
+  "ENSC 351": {
+   "2026/fall": [
+    {
+     "section": "E100",
+     "instructors": [
+      "Matthew Stewart"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "We, Fr 14:30–16:20"
+    }
+   ]
+  },
+  "MACM 101": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Evgenia Ternovska"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 10:30–11:20"
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Victor Cheung"
+     ],
+     "campus": "Surrey",
+     "delivery": "In Person",
+     "schedule": "Tu 8:30–10:20, Th 8:30–9:20"
+    },
+    {
+     "section": "D300",
+     "instructors": [
+      "Steve Pearce"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 16:30–17:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Brad Bart"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "We 15:30–16:20, Fr 14:30–16:20"
+    }
+   ]
+  },
+  "MACM 201": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Tamon Stephen"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 12:30–13:20, We, Fr 12:30–13:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Ladislav Stacho"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 12:30–13:20"
+    },
+    {
+     "section": "D400",
+     "instructors": [
+      "Abraham Punnen"
+     ],
+     "campus": "Surrey",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 8:30–9:20"
+    }
+   ]
+  },
+  "MACM 203": {
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Steven Ruuth"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 14:30–15:20"
+    }
+   ]
+  },
+  "MACM 204": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Michael Monagan"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Th 10:30–11:20"
+    }
+   ]
+  },
+  "MACM 316": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "David Muraki"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 12:30–13:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "John Stockie"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 12:30–13:20"
+    }
+   ]
+  },
+  "MACM 401": {
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Michael Monagan"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 14:30–16:20, Th 14:30–15:20"
+    }
+   ]
+  },
+  "MACM 416": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Conor McCoid"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 10:30–11:20"
+    }
+   ]
+  },
+  "MACM 476": {
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Nadish de Silva"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "We 11:30–12:20, Fr 10:30–12:20"
+    }
+   ]
+  },
+  "MATH 100": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Alexander Rutherford"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 8:30–9:20"
+    }
+   ]
+  },
+  "MATH 110": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Justin Gray"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 8:30–9:20"
+    },
+    {
+     "section": "D400",
+     "instructors": [
+      "Vijaykumar Singh"
+     ],
+     "campus": "Surrey",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 8:30–9:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Justin Gray"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 8:30–9:20"
+    },
+    {
+     "section": "D400",
+     "instructors": [
+      "Alexander Rutherford"
+     ],
+     "campus": "Surrey",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 9:30–10:20"
+    }
+   ]
+  },
+  "MATH 130": {
+   "2027/spring": [
+    {
+     "section": "D400",
+     "instructors": [
+      "Alexander Rutherford"
+     ],
+     "campus": "Surrey",
+     "delivery": "In Person",
+     "schedule": "We 13:30–14:20, Fr 12:30–14:20"
+    }
+   ]
+  },
+  "MATH 141W": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Jamie Mulholland"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 9:30–10:20"
+    }
+   ]
+  },
+  "MATH 150": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Sheena Miao Ying Tan"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 8:30–9:20"
+    },
+    {
+     "section": "D400",
+     "instructors": [
+      "Vijay Singh",
+      "Vijaykumar Singh"
+     ],
+     "campus": "Surrey",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 9:30–10:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Amarpreet Rattan"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 8:30–9:20"
+    },
+    {
+     "section": "D400",
+     "instructors": [
+      "Justin Chan"
+     ],
+     "campus": "Surrey",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 11:30–12:20"
+    }
+   ]
+  },
+  "MATH 151": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Nils Bruin"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 8:30–9:20"
+    },
+    {
+     "section": "D400",
+     "instructors": [
+      "Vijay Singh",
+      "Vijaykumar Singh"
+     ],
+     "campus": "Surrey",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 9:30–10:20"
+    }
+   ]
+  },
+  "MATH 152": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Michael Monagan"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 8:30–9:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Brenda Davison"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 8:30–9:20"
+    },
+    {
+     "section": "D200",
+     "instructors": [],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 8:30–9:20"
+    },
+    {
+     "section": "D300",
+     "instructors": [
+      "David Muraki"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 8:30–9:20"
+    },
+    {
+     "section": "D400",
+     "instructors": [
+      "TBA Sessional"
+     ],
+     "campus": "Surrey",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 11:30–12:20"
+    }
+   ]
+  },
+  "MATH 154": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Alexander Beams"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 8:30–9:20"
+    },
+    {
+     "section": "D400",
+     "instructors": [
+      "Ladislav Stacho"
+     ],
+     "campus": "Surrey",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 9:30–10:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Vijaykumar Singh"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 8:30–9:20"
+    }
+   ]
+  },
+  "MATH 155": {
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Stephen Choi"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 8:30–9:20"
+    },
+    {
+     "section": "D400",
+     "instructors": [
+      "TBA Sessional"
+     ],
+     "campus": "Surrey",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 9:30–10:20"
+    }
+   ]
+  },
+  "MATH 157": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Razvan Fetecau"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 11:30–12:20"
+    },
+    {
+     "section": "D400",
+     "instructors": [
+      "Justin Chan"
+     ],
+     "campus": "Surrey",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 12:30–13:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Imin Chen"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 11:30–12:20"
+    },
+    {
+     "section": "D400",
+     "instructors": [
+      "Abraham Punnen"
+     ],
+     "campus": "Surrey",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 12:30–13:20"
+    }
+   ]
+  },
+  "MATH 158": {
+   "2027/spring": [
+    {
+     "section": "E200",
+     "instructors": [
+      "TBA Sessional"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 16:30–17:20, We 16:30–18:20"
+    }
+   ]
+  },
+  "MATH 190": {
+   "2026/fall": [
+    {
+     "section": "B100",
+     "instructors": [
+      "Sheena Miao Ying Tan"
+     ],
+     "campus": "Burnaby",
+     "delivery": "Blended",
+     "schedule": "Tu, Th 10:30–12:20"
+    },
+    {
+     "section": "OL01",
+     "instructors": [
+      "Jessica Stockdale",
+      "Danielle Wills"
+     ],
+     "campus": "Burnaby",
+     "delivery": "Online",
+     "schedule": ""
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "B100",
+     "instructors": [
+      "Sophie Burrill"
+     ],
+     "campus": "Burnaby",
+     "delivery": "Blended",
+     "schedule": "Tu, Th 10:30–12:20"
+    },
+    {
+     "section": "OL01",
+     "instructors": [
+      "Sheena Miao Ying Tan"
+     ],
+     "campus": "",
+     "delivery": "Online",
+     "schedule": ""
+    }
+   ]
+  },
+  "MATH 208": {
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Vijaykumar Singh"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 14:30–16:20, We 14:30–15:20"
+    }
+   ]
+  },
+  "MATH 232": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Jamie Mulholland"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 11:30–12:20"
+    },
+    {
+     "section": "D400",
+     "instructors": [
+      "Tareq Uz Zaman"
+     ],
+     "campus": "Surrey",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 13:30–14:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Jamie Mulholland"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 11:30–12:20"
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Brenda Davison"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 11:30–12:20"
+    },
+    {
+     "section": "D400",
+     "instructors": [
+      "Justin Chan"
+     ],
+     "campus": "Surrey",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 14:30–15:20"
+    }
+   ]
+  },
+  "MATH 240": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Nilima Nigam"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 11:30–12:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Katrina Honigs"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 11:30–12:20"
+    }
+   ]
+  },
+  "MATH 242": {
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Nathan Ilten"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 13:30–14:20"
+    }
+   ]
+  },
+  "MATH 251": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Peter McDonald"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 8:30–9:20"
+    },
+    {
+     "section": "D400",
+     "instructors": [
+      "Justin Chan"
+     ],
+     "campus": "Surrey",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 8:30–9:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Matthew DeVos"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 8:30–9:20"
+    }
+   ]
+  },
+  "MATH 252": {
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Nilima Nigam"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 8:30–9:20"
+    }
+   ]
+  },
+  "MATH 260": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Ralf Wittenberg"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 10:30–11:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Ralf Wittenberg"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 13:30–14:20"
+    }
+   ]
+  },
+  "MATH 303": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Nick Harrison"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 14:30–15:20, Th 14:30–16:20"
+    }
+   ]
+  },
+  "MATH 304": {
+   "2027/spring": [
+    {
+     "section": "E100",
+     "instructors": [
+      "Jamie Mulholland"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 16:30–18:20, We 16:30–17:20"
+    }
+   ]
+  },
+  "MATH 308": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Petr Lisonek"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 14:30–15:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "TBA Sessional"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 14:30–15:20"
+    }
+   ]
+  },
+  "MATH 309": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Cedric Chauve"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 10:30–12:20, Fr 10:30–11:20"
+    }
+   ]
+  },
+  "MATH 314": {
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "David Muraki"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 10:30–11:20"
+    }
+   ]
+  },
+  "MATH 320": {
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Imin Chen"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 13:30–14:20"
+    }
+   ]
+  },
+  "MATH 322": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Katrina Honigs"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 13:30–14:20"
+    }
+   ]
+  },
+  "MATH 336": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Hadar Hamid",
+      "Natalia Bussard"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Hadar Hamid",
+      "Natalia Bussard"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "I100",
+     "instructors": [
+      "Hadar Hamid",
+      "Natalia Bussard"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Hadar Hamid",
+      "Natalia Bussard"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Hadar Hamid",
+      "Natalia Bussard"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "I100",
+     "instructors": [
+      "Hadar Hamid",
+      "Natalia Bussard"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  },
+  "MATH 337": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Hadar Hamid",
+      "Natalia Bussard"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Hadar Hamid",
+      "Natalia Bussard"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "I100",
+     "instructors": [
+      "Hadar Hamid",
+      "Natalia Bussard"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Hadar Hamid",
+      "Natalia Bussard"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Hadar Hamid",
+      "Natalia Bussard"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "I100",
+     "instructors": [
+      "Hadar Hamid",
+      "Natalia Bussard"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  },
+  "MATH 340": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Amarpreet Rattan"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 11:30–12:20"
+    }
+   ]
+  },
+  "MATH 341": {
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Katrina Honigs"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 15:30–16:20"
+    }
+   ]
+  },
+  "MATH 345": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Matthew DeVos"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 15:30–16:20"
+    }
+   ]
+  },
+  "MATH 348": {
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "TBA Sessional"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 15:30–16:20"
+    }
+   ]
+  },
+  "MATH 360": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Ben Ashby"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 14:30–15:20"
+    }
+   ]
+  },
+  "MATH 402": {
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu, Th 10:30–12:20"
+    }
+   ]
+  },
+  "MATH 408": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Tamon Stephen"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 14:30–16:20, We 14:30–15:20"
+    }
+   ]
+  },
+  "MATH 418": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Ralf Wittenberg"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 12:30–13:20"
+    }
+   ]
+  },
+  "MATH 436": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Hadar Hamid",
+      "Natalia Bussard"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Hadar Hamid",
+      "Natalia Bussard"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "I100",
+     "instructors": [
+      "Hadar Hamid",
+      "Natalia Bussard"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Hadar Hamid",
+      "Natalia Bussard"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Hadar Hamid",
+      "Natalia Bussard"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "I100",
+     "instructors": [
+      "Hadar Hamid",
+      "Natalia Bussard"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  },
+  "MATH 437": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Hadar Hamid",
+      "Natalia Bussard"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Hadar Hamid",
+      "Natalia Bussard"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "I100",
+     "instructors": [
+      "Hadar Hamid",
+      "Natalia Bussard"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Hadar Hamid",
+      "Natalia Bussard"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Hadar Hamid",
+      "Natalia Bussard"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "I100",
+     "instructors": [
+      "Hadar Hamid",
+      "Natalia Bussard"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  },
+  "MATH 440": {
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Nils Bruin"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 10:30–11:20"
+    }
+   ]
+  },
+  "MATH 445": {
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Ladislav Stacho"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 14:30–15:20"
+    }
+   ]
+  },
+  "MATH 447": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Petr Lisonek"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 11:30–12:20"
+    }
+   ]
+  },
+  "MATH 450": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Imin Chen"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 13:30–14:20"
+    }
+   ]
+  },
+  "MATH 467": {
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Razvan Fetecau"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 12:30–13:20"
+    }
+   ]
+  },
+  "MATH 469": {
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Caroline Colijn"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 11:30–12:20"
+    }
+   ]
+  },
+  "MATH 486": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Hadar Hamid",
+      "Natalia Bussard"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Hadar Hamid",
+      "Natalia Bussard"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "I100",
+     "instructors": [
+      "Hadar Hamid",
+      "Natalia Bussard"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Hadar Hamid",
+      "Natalia Bussard"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Hadar Hamid",
+      "Natalia Bussard"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "I100",
+     "instructors": [
+      "Hadar Hamid",
+      "Natalia Bussard"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  },
+  "MATH 498": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Ben Ashby"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Th 12:30–14:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Ben Ashby"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Th 12:30–14:20"
+    }
+   ]
+  },
+  "MATH 499W": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Ben Ashby"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  },
+  "MATH 701": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Michael Monagan"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 14:30–16:20, Th 14:30–15:20"
+    }
+   ]
+  },
+  "MATH 708": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Tamon Stephen"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 14:30–16:20, We 14:30–15:20"
+    }
+   ]
+  },
+  "MATH 716": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Conor McCoid"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 10:30–11:20"
+    }
+   ]
+  },
+  "MATH 718": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Ralf Wittenberg"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 12:30–13:20"
+    }
+   ]
+  },
+  "MATH 740": {
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Nils Bruin"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 10:30–11:20"
+    }
+   ]
+  },
+  "MATH 745": {
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Ladislav Stacho"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 14:30–15:20"
+    }
+   ]
+  },
+  "MATH 747": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Petr Lisonek"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 11:30–12:20"
+    }
+   ]
+  },
+  "MATH 750": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Imin Chen"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 13:30–14:20"
+    }
+   ]
+  },
+  "MATH 767": {
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Razvan Fetecau"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 12:30–13:20"
+    }
+   ]
+  },
+  "MATH 769": {
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Caroline Colijn"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 11:30–12:20"
+    }
+   ]
+  },
+  "MATH 776": {
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Nadish de Silva"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "We 11:30–12:20, Fr 10:30–12:20"
+    }
+   ]
+  },
+  "MATH 801": {
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Michael Monagan"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 14:30–16:20, Th 14:30–15:20"
+    }
+   ]
+  },
+  "MATH 818": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Nathan Ilten"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "We, Fr 14:30–16:20"
+    }
+   ]
+  },
+  "MATH 821": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Amarpreet Rattan"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu, Th 10:30–12:20"
+    }
+   ]
+  },
+  "MATH 831": {
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Weiran Sun"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu, Th 10:30–12:20"
+    }
+   ]
+  },
+  "MATH 845": {
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "We, Fr 14:30–16:20"
+    }
+   ]
+  },
+  "MATH 875": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  },
+  "MATH 876": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  },
+  "MATH 877": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  },
+  "MATH 879": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G200",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G200",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  },
+  "MATH 880": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G200",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G200",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  },
+  "MATH 890": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Hadar Hamid",
+      "Natalia Bussard"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G200",
+     "instructors": [
+      "Hadar Hamid",
+      "Natalia Bussard"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "I100",
+     "instructors": [
+      "Hadar Hamid",
+      "Natalia Bussard"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Hadar Hamid",
+      "Natalia Bussard"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G200",
+     "instructors": [
+      "Hadar Hamid",
+      "Natalia Bussard"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "I100",
+     "instructors": [
+      "Hadar Hamid",
+      "Natalia Bussard"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  },
+  "MATH 891": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Hadar Hamid",
+      "Natalia Bussard"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G200",
+     "instructors": [
+      "Hadar Hamid",
+      "Natalia Bussard"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "I100",
+     "instructors": [
+      "Hadar Hamid",
+      "Natalia Bussard"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Hadar Hamid",
+      "Natalia Bussard"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G200",
+     "instructors": [
+      "Hadar Hamid",
+      "Natalia Bussard"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "I100",
+     "instructors": [
+      "Hadar Hamid",
+      "Natalia Bussard"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  },
+  "MATH 894": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G200",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G200",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  },
+  "MATH 895": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Nilima Nigam"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G200",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G200",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  },
+  "MATH 898": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G200",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G300",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G200",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G300",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  },
+  "MATH 899": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G200",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G300",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G200",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G300",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  },
+  "MSE 210": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Krishna Vijayaraghavan"
+     ],
+     "campus": "Surrey",
+     "delivery": "",
+     "schedule": "Tu 13:30–14:20, Th 12:30–14:20"
+    }
+   ]
+  },
+  "PHIL 110": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Bruno Guindon"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 10:30–12:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Thomas Donaldson"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Th 10:30–12:20"
+    }
+   ]
+  },
+  "PHIL 314": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Jennifer Wang"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 10:30–11:20, Th 10:30–12:20"
+    }
+   ]
+  },
+  "PHYS 121": {
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Hoi-Kwan Lau"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 9:30–10:20"
+    }
+   ]
+  },
+  "PHYS 141": {
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Daria Ahrensmeier"
+     ],
+     "campus": "Surrey",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 12:30–13:20"
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Daria Ahrensmeier"
+     ],
+     "campus": "Surrey",
+     "delivery": "In Person",
+     "schedule": "Mo 15:30–16:20, We 15:30–16:20, Fr 15:30–16:20"
+    }
+   ]
+  },
+  "PHYS 211": {
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Jeffrey McGuirk"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 10:30–11:20"
+    }
+   ]
+  },
+  "PHYS 255": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Eundeok Mun"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 9:30–10:20"
+    }
+   ]
+  },
+  "PHYS 384": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Malcolm Kennett"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 12:30–13:20"
+    }
+   ]
+  },
+  "PHYS 385": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Daria Ahrensmeier"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 11:30–12:20"
+    }
+   ]
+  },
+  "POL 201": {
+   "2026/fall": [
+    {
+     "section": "B100",
+     "instructors": [
+      "Mark Pickup"
+     ],
+     "campus": "Burnaby",
+     "delivery": "Blended",
+     "schedule": "Th 12:30–13:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "B100",
+     "instructors": [
+      "Edana Beauvais"
+     ],
+     "campus": "",
+     "delivery": "Blended",
+     "schedule": ""
+    }
+   ]
+  },
+  "STAT 100": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Sonja Isberg"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 14:30–16:20"
+    },
+    {
+     "section": "D900",
+     "instructors": [
+      "Gamage Perera"
+     ],
+     "campus": "Surrey",
+     "delivery": "In Person",
+     "schedule": "Tu 11:30–13:20, Th 11:30–12:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Richard Lockhart"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 14:30–16:20"
+    }
+   ]
+  },
+  "STAT 180": {
+   "2026/fall": [
+    {
+     "section": "E100",
+     "instructors": [
+      "Jiguo Cao"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 18:30–20:20"
+    }
+   ]
+  },
+  "STAT 201": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Jinko Graham"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 13:30–14:20, Th 12:30–14:20"
+    },
+    {
+     "section": "OL01",
+     "instructors": [
+      "Tim Swartz"
+     ],
+     "campus": "",
+     "delivery": "Online",
+     "schedule": ""
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Rachel Altman"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 14:30–16:20, We 14:30–15:20"
+    },
+    {
+     "section": "D900",
+     "instructors": [
+      "Wei Lin"
+     ],
+     "campus": "Surrey",
+     "delivery": "In Person",
+     "schedule": "Tu 13:30–14:20, Th 12:30–14:20"
+    },
+    {
+     "section": "OL01",
+     "instructors": [
+      "Wei Lin"
+     ],
+     "campus": "",
+     "delivery": "Online",
+     "schedule": ""
+    }
+   ]
+  },
+  "STAT 203": {
+   "2026/fall": [
+    {
+     "section": "D900",
+     "instructors": [
+      "Gamage Perera"
+     ],
+     "campus": "Surrey",
+     "delivery": "In Person",
+     "schedule": "Tu 14:30–16:20, Th 14:30–15:20"
+    },
+    {
+     "section": "OL01",
+     "instructors": [
+      "Tim Swartz"
+     ],
+     "campus": "Burnaby",
+     "delivery": "Online",
+     "schedule": ""
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Sonja Isberg"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 14:30–16:20, We 14:30–15:20"
+    },
+    {
+     "section": "OL01",
+     "instructors": [
+      "Wei Lin"
+     ],
+     "campus": "",
+     "delivery": "Online",
+     "schedule": ""
+    }
+   ]
+  },
+  "STAT 240": {
+   "2027/spring": [
+    {
+     "section": "E100",
+     "instructors": [
+      "David Stenning"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 16:30–18:20"
+    }
+   ]
+  },
+  "STAT 270": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Lloyd Elliott"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 9:30–10:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Faezeh Yazdi"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo, We, Fr 9:30–10:20"
+    },
+    {
+     "section": "OL01",
+     "instructors": [
+      "Gamage Perera"
+     ],
+     "campus": "",
+     "delivery": "Online",
+     "schedule": ""
+    }
+   ]
+  },
+  "STAT 271": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Wei Lin"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "We 11:30–12:20, Fr 10:30–12:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Sonja Isberg"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "We 11:30–12:20, Fr 10:30–12:20"
+    }
+   ]
+  },
+  "STAT 285": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "X. Joan Hu"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 10:30–12:20, We 10:30–11:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Boxin Tang"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 12:30–13:20, Th 12:30–14:20"
+    }
+   ]
+  },
+  "STAT 300W": {
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "TBA Sessional"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 10:30–12:20, We 10:30–11:20"
+    }
+   ]
+  },
+  "STAT 302": {
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Joan Hu"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 14:30–15:20, Th 14:30–16:20"
+    },
+    {
+     "section": "OL01",
+     "instructors": [
+      "Gamage Perera"
+     ],
+     "campus": "",
+     "delivery": "Online",
+     "schedule": ""
+    }
+   ]
+  },
+  "STAT 305": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "X. Joan Hu"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 14:30–15:20, Th 14:30–16:20"
+    }
+   ]
+  },
+  "STAT 330": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Liangliang Wang"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 12:30–14:20, We 12:30–13:20"
+    }
+   ]
+  },
+  "STAT 336": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "I100",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "I100",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  },
+  "STAT 337": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "I100",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "I100",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  },
+  "STAT 342": {
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "TBA Sessional"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 12:30–14:20"
+    }
+   ]
+  },
+  "STAT 350": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Rachel Altman"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 10:30–12:20, Fr 10:30–11:20"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Rachel Altman",
+      "Lin Zhang"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 14:30–16:20, Th 14:30–15:20"
+    }
+   ]
+  },
+  "STAT 360": {
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Owen Ward"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Th 10:30–12:20"
+    }
+   ]
+  },
+  "STAT 403": {
+   "2026/fall": [
+    {
+     "section": "E100",
+     "instructors": [
+      "Brad McNeney"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 16:30–17:20, We 16:30–18:20"
+    }
+   ]
+  },
+  "STAT 410": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Abhishek Shukla"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 10:30–11:20, Th 9:30–11:20"
+    }
+   ]
+  },
+  "STAT 430": {
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Boxin Tang"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 10:30–12:20, Fr 10:30–11:20"
+    }
+   ]
+  },
+  "STAT 436": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "I100",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "I100",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  },
+  "STAT 437": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "I100",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "I100",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  },
+  "STAT 438": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "I100",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "I100",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  },
+  "STAT 440": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Lloyd Elliott"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 14:30–16:20, We 14:30–15:20"
+    }
+   ]
+  },
+  "STAT 445": {
+   "2027/spring": [
+    {
+     "section": "E100",
+     "instructors": [
+      "Donald Estep"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 16:30–18:20, Th 16:30–17:20"
+    }
+   ]
+  },
+  "STAT 450": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Jinko Graham"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 10:30–12:20, We 10:30–11:20"
+    }
+   ]
+  },
+  "STAT 452": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Owen Ward"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 13:30–14:20, Th 12:30–14:20"
+    }
+   ]
+  },
+  "STAT 460": {
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Liangliang Wang"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 12:30–13:20, Th 12:30–14:20"
+    }
+   ]
+  },
+  "STAT 475": {
+   "2027/spring": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Faezeh Yazdi"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 12:30–14:20, Fr 12:30–13:20"
+    }
+   ]
+  },
+  "STAT 485": {
+   "2026/fall": [
+    {
+     "section": "E100",
+     "instructors": [
+      "Richard Lockhart"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 16:30–17:50, Th 16:30–17:50"
+    }
+   ]
+  },
+  "STAT 495": {
+   "2026/fall": [
+    {
+     "section": "D100",
+     "instructors": [
+      "Dave Clarke"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "D200",
+     "instructors": [
+      "Dave Clarke"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  },
+  "STAT 603": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Brad McNeney"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 16:30–17:20, We 16:30–18:20"
+    }
+   ]
+  },
+  "STAT 604": {
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Joan Hu"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 14:30–15:20, Th 14:30–16:20"
+    }
+   ]
+  },
+  "STAT 605": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [
+      "X. Joan Hu Hu"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 14:30–15:20, Th 14:30–16:20"
+    }
+   ]
+  },
+  "STAT 642": {
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [
+      "TBA Sessional"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 12:30–14:20"
+    }
+   ]
+  },
+  "STAT 645": {
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Donald Estep"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 16:30–18:20, Th 16:30–17:20"
+    }
+   ]
+  },
+  "STAT 652": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Owen Ward"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 13:30–14:20, Th 12:30–14:20"
+    }
+   ]
+  },
+  "STAT 675": {
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Faezeh Yazdi"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 12:30–14:20, Fr 12:30–13:20"
+    }
+   ]
+  },
+  "STAT 685": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Richard Lockhart"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu 16:30–17:50, Th 16:30–17:50"
+    }
+   ]
+  },
+  "STAT 811": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Ian Bercovitz"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Fr 11:30–12:50"
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Ian Bercovitz"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Fr 11:30–12:50"
+    }
+   ]
+  },
+  "STAT 812": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Ian Bercovitz"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G200",
+     "instructors": [
+      "Ian Bercovitz"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Ian Bercovitz"
+     ],
+     "campus": "",
+     "delivery": "",
+     "schedule": ""
+    },
+    {
+     "section": "G200",
+     "instructors": [
+      "Ian Bercovitz"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  },
+  "STAT 830": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Richard Lockhart"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 12:30–14:20, We 10:30–12:20"
+    }
+   ]
+  },
+  "STAT 850": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Boxin Tang"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu, Th 14:30–16:20"
+    }
+   ]
+  },
+  "STAT 851": {
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Rachel Altman"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Tu, Th 9:30–11:20"
+    }
+   ]
+  },
+  "STAT 852": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Lin Zhang"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "We 14:30–16:20, Fr 8:30–10:20"
+    }
+   ]
+  },
+  "STAT 853": {
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Liangliang Wang"
+     ],
+     "campus": "Burnaby",
+     "delivery": "In Person",
+     "schedule": "Mo 9:30–11:20, Su 9:30–10:20"
+    }
+   ]
+  },
+  "STAT 880": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G200",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "I100",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G200",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "I100",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  },
+  "STAT 881": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G200",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "I100",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G200",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "I100",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  },
+  "STAT 882": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G200",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "I100",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G200",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "I100",
+     "instructors": [
+      "Natalie Erickson"
+     ],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  },
+  "STAT 894": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  },
+  "STAT 895": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  },
+  "STAT 898": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G200",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G200",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  },
+  "STAT 899": {
+   "2026/fall": [
+    {
+     "section": "G100",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G200",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ],
+   "2027/spring": [
+    {
+     "section": "G100",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    },
+    {
+     "section": "G200",
+     "instructors": [],
+     "campus": "",
+     "delivery": "In Person",
+     "schedule": ""
+    }
+   ]
+  }
+ }
+}

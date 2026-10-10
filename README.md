@@ -20,14 +20,26 @@ Link straight to a course with the URL hash, e.g. `http://localhost:5173/#CMPT-4
 `src/data/courses.json` is generated from SFU's public academic calendar API:
 
 ```sh
-npm run fetch-data                          # 2026/fall, CMPT MACM MATH STAT
+npm run fetch-data                          # courses + offerings
 node scripts/fetch-courses.mjs 2027/spring cmpt macm math stat ensc
+npm run fetch-offerings                     # just refresh who's teaching what
 ```
 
 Prerequisites from other departments that these courses mention (e.g. ENSC 251)
 are fetched too. The calendar writes prerequisites as English sentences, so
 `scripts/parse-prereqs.mjs` turns them into and/or trees as best it can. The
 original text is always shown in the side panel for checking.
+
+### Offerings and instructors
+
+`scripts/fetch-offerings.mjs` writes `src/data/offerings.json` from SFU's course
+outlines API: which courses run in the current term and the following terms SFU
+has already published (usually one term ahead), with each lecture section's
+campus, meeting times and instructors. Courses show `Fa26`/`Sp27`-style badges
+(filled = this term), and the side panel lists sections with a Rate My
+Professors link per instructor. The links are RMP searches for that name at SFU
+(school ID 1482), not direct profile links, because RMP has no public API.
+Re-run it every so often, since instructors get assigned closer to the term.
 
 ## How the chart is built
 
