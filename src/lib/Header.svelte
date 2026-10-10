@@ -121,6 +121,7 @@
       <div class="seg" role="group" aria-label="View">
         <button class:on={view === 'graph'} onclick={() => (view = 'graph')}>Chart</button>
         <button class:on={view === 'list'} onclick={() => (view = 'list')}>List</button>
+        <button class:on={view === 'explore'} onclick={() => (view = 'explore')}>Explore</button>
       </div>
       <label>
         Levels
