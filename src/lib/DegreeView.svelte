@@ -14,9 +14,12 @@
     onselect: (code: string) => void;
     /** map a course's prerequisites */
     ontarget: (code: string) => void;
+    /** courses filled in from ticked ones; assumed ones count but are flagged */
+    implied?: ReadonlyMap<string, { via: string; certain: boolean }>;
   }
 
-  let { courses, done, offeredIn = () => [], onselect, ontarget }: Props = $props();
+  let { courses, done, offeredIn = () => [], onselect, ontarget, implied = new Map() }: Props = $props();
+  const isAssumed = (code: string) => implied.get(code)?.certain === false;
 
   const STORAGE_KEY = 'sfu-prereqs:program';
   const SUGGESTIONS = 6;
@@ -39,6 +42,16 @@
   const program = $derived(PROGRAMS.find((p) => p.id === programId) ?? PROGRAMS[0]);
   const result = $derived(evaluateProgram(program, done, courses));
   const pct = $derived(Math.round(result.fraction * 100));
+  // Assumed courses (our guess at a "one of" route) that are counting here.
+  const assumedCounted = $derived(
+    [
+      ...new Set(
+        result.sections.flatMap(({ results }) =>
+          results.flatMap((r) => (r.req.kind === 'course' && r.status === 'met' ? [r.req.code] : r.counted)),
+        ),
+      ),
+    ].filter(isAssumed),
+  );
   // Courses with all prerequisites met come first, then ones running soon.
   const rank: Record<Status, number> = { ready: 0, unknown: 1, locked: 2, done: 3 };
   const STATE_LABEL: Record<Status, string> = {
@@ -88,6 +101,13 @@
     </div>
   </div>
 
+  {#if assumedCounted.length}
+    <p class="notice assumed-note">
+      Counting {assumedCounted.length} assumed course{assumedCounted.length === 1 ? '' : 's'} (dashed), filled in from
+      prerequisites of courses you've taken: {assumedCounted.join(', ')}. Select one to confirm or correct it.
+    </p>
+  {/if}
+
   {#if result.duplicates.length}
     <p class="notice">
       {result.duplicates.join(', ')} not counted: an equivalent (cross-listed) course already counts.
@@ -120,6 +140,7 @@
                     {@const code = r.req.code}
                     <button class="code-link" onclick={() => onselect(code)}>{code}</button>
                     <span class="muted-inline">{courses[code]?.title ?? ''}</span>
+                    {#if r.status === 'met' && isAssumed(code)}<span class="assumed-tag">assumed</span>{/if}
                   {:else}
                     {r.req.title}
                   {/if}
@@ -131,7 +152,12 @@
               {#if r.counted.length && r.req.kind !== 'course'}
                 <div class="chips">
                   {#each showAll[r.req.id] ? r.counted : r.counted.slice(0, 10) as code (code)}
-                    <button class="chip done" onclick={() => onselect(code)}>{code}</button>
+                    <button
+                      class="chip done"
+                      class:assumed={isAssumed(code)}
+                      title={isAssumed(code) ? `Assumed: prerequisite of ${implied.get(code)?.via}` : undefined}
+                      onclick={() => onselect(code)}>{code}</button
+                    >
                   {/each}
                   {#if r.counted.length > 10 && !showAll[r.req.id]}
                     <button class="chip more" onclick={() => (showAll[r.req.id] = true)}>
@@ -450,6 +476,19 @@
     border-color: var(--done);
     color: var(--done);
     background: var(--done-bg);
+  }
+  .chip.done.assumed {
+    border-style: dashed;
+    background: transparent;
+  }
+  .assumed-tag {
+    margin-left: 6px;
+    font-size: 10.5px;
+    font-weight: 600;
+    padding: 0 6px;
+    border: 1px dashed var(--done);
+    border-radius: 999px;
+    color: var(--done);
   }
   .chip.more {
     color: var(--muted);

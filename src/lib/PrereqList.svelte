@@ -16,6 +16,8 @@
     expanded: ReadonlySet<string>;
     onexpand: (code: string) => void;
     offeredIn: (code: string) => Term[];
+    /** courses filled in from ticked ones (see implied.ts) */
+    implied?: ReadonlyMap<string, { via: string; certain: boolean }>;
     ancestors?: string[];
     flat?: boolean;
   }
@@ -34,6 +36,7 @@
     expanded,
     onexpand,
     offeredIn,
+    implied = new Map(),
     ancestors = [],
     flat = false,
   }: Props = $props();
@@ -47,6 +50,7 @@
     expanded,
     onexpand,
     offeredIn,
+    implied,
   });
   // High school courses come with "(or equivalent)" in the calendar.
   const otherText = (label: string) => (/\b1[12]$|^(AP|IB) /.test(label) ? `${label} (or equivalent)` : label);
@@ -57,19 +61,22 @@
   {@const status = courseStatus(tree, courses, done)}
   {@const showable = course?.prereq && !(hideTaken && done.has(tree)) && !ancestors.includes(tree)}
   {@const open = showable && (ancestors.length < maxDepth || expanded.has(tree))}
+  {@const inferred = implied.get(tree)}
   <li>
-    <div class="row {status}">
+    <div class="row {status}" class:assumed={inferred && !inferred.certain}>
       <input
         type="checkbox"
         checked={status === 'done'}
         onchange={() => ontoggle(tree)}
-        aria-label="Mark {tree} as taken"
+        aria-label={inferred ? `${tree} is assumed taken; untick if you didn't take it` : `Mark ${tree} as taken`}
+        title={inferred ? `${inferred.certain ? 'Taken' : 'Assumed taken'}: prerequisite of ${inferred.via}` : undefined}
       />
       <button class="link" onclick={() => onselect(tree)}>{tree}</button>
       <span class="terms"><TermPills terms={offeredIn(tree)} /></span>
       {#if showable && !open}
         <button class="more" onclick={() => onexpand(tree)} title="Show prerequisites">+</button>
       {/if}
+      {#if inferred && !inferred.certain}<span class="tag" title="Prerequisite of {inferred.via}">assumed</span>{/if}
       <span class="title">{course?.title ?? 'Not in catalog'}</span>
     </div>
     {#if open}
@@ -136,6 +143,18 @@
     color: var(--unknown);
   }
   .row.done .link {
+    color: var(--done);
+  }
+  .row.assumed input {
+    opacity: 0.6;
+  }
+  .tag {
+    align-self: center;
+    font-size: 10.5px;
+    font-weight: 600;
+    padding: 0 6px;
+    border: 1px dashed var(--done);
+    border-radius: 999px;
     color: var(--done);
   }
   .terms {

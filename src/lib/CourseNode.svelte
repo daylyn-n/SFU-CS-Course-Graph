@@ -14,7 +14,10 @@
   class="course {data.status}"
   class:is-target={data.isTarget}
   class:missing={data.missing}
-  title={data.title}
+  class:assumed={data.inferred === 'assumed'}
+  title={data.inferred
+    ? `${data.title}\n${data.inferred === 'assumed' ? 'Assumed taken' : 'Taken'}: prerequisite of ${data.via}`
+    : data.title}
 >
   <Handle type="target" position={Position.Left} />
   <input
@@ -23,7 +26,7 @@
     checked={data.status === 'done'}
     onclick={(e) => e.stopPropagation()}
     onchange={() => actions.toggleDone(data.code)}
-    aria-label="Mark {data.code} as taken"
+    aria-label={data.inferred ? `${data.code} is assumed taken; untick if you didn't take it` : `Mark ${data.code} as taken`}
   />
   <div class="text">
     <div class="code">{data.code} <TermPills terms={data.offered} /></div>
@@ -66,6 +69,13 @@
     border-color: var(--unknown);
     border-style: dashed;
     background: var(--unknown-bg);
+  }
+  .course.done.assumed {
+    border-style: dashed;
+    background: color-mix(in srgb, var(--done-bg) 55%, var(--locked-bg));
+  }
+  .course.done.assumed .check {
+    opacity: 0.6;
   }
   .course.done {
     border-color: var(--done);

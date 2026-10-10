@@ -31,7 +31,7 @@ app asks before importing them. Press Cmd/Ctrl+K for the command palette.
   non-course options like Pre-Calculus 12. Only a few levels show by default
   (`+` expands a course), and once you've taken a course, everything behind it
   and the alternatives it replaces are hidden. Hover a course to highlight its
-  path; drag blocks to rearrange them.
+  path.
 - **Side panel**: the course's description and WQB/breadth designation, the
   calendar's own prerequisite text, "Next steps" (the cheapest path to the
   target given what you've taken), sections with seat snapshots and Rate My

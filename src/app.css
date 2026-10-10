@@ -161,6 +161,12 @@ main {
   border-style: dashed;
 }
 
+.legend i.assumed {
+  border-color: var(--done);
+  border-style: dashed;
+  background: transparent;
+}
+
 .legend i.unknown {
   border-color: var(--unknown);
   background: var(--unknown-bg);
@@ -402,6 +408,38 @@ aside h2 {
   border-radius: 999px;
 }
 
+.chip.done.implied {
+  background: transparent;
+}
+
+.chip.done.implied.assumed {
+  border-style: dashed;
+}
+
+h4.sub {
+  margin: 14px 0 4px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.assume-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.assume-toggle input {
+  accent-color: var(--done);
+}
+
+.link-btn.inline {
+  margin-left: 0;
+  font-weight: 600;
+}
+
 .chip.done {
   border-color: var(--done);
   color: var(--done);
@@ -412,7 +450,8 @@ aside h2 {
   margin: 0;
 }
 
-.source {
+/* Not ".source": Svelte Flow puts that class on every outgoing edge handle. */
+.data-source {
   margin-top: 24px;
   font-size: 11px;
   color: var(--muted);
