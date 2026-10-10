@@ -11,9 +11,16 @@ chart, and [dagre](https://github.com/dagrejs/dagre) for the layered layout.
 ```sh
 npm install
 npm run dev
+npm run check      # type-check the app (npm run typecheck also checks scripts/)
 ```
 
+The data scripts are TypeScript run directly by Node (>= 22.18, or 22.6+ with
+`--experimental-strip-types`), so there is no build step for them.
+
 Link straight to a course with the URL hash, e.g. `http://localhost:5173/#CMPT-410`.
+Share links can carry taken courses too (`#CMPT-410?taken=CMPT120,MACM101`); the
+app asks before importing them. Press Cmd/Ctrl+K for the command palette.
+`npm test` runs the unit tests.
 
 ## Course data
 
@@ -21,18 +28,18 @@ Link straight to a course with the URL hash, e.g. `http://localhost:5173/#CMPT-4
 
 ```sh
 npm run fetch-data                          # courses + offerings
-node scripts/fetch-courses.mjs 2027/spring cmpt macm math stat ensc
+node scripts/fetch-courses.ts 2027/spring cmpt macm math stat ensc
 npm run fetch-offerings                     # just refresh who's teaching what
 ```
 
 Prerequisites from other departments that these courses mention (e.g. ENSC 251)
 are fetched too. The calendar writes prerequisites as English sentences, so
-`scripts/parse-prereqs.mjs` turns them into and/or trees as best it can. The
+`scripts/parse-prereqs.ts` turns them into and/or trees as best it can. The
 original text is always shown in the side panel for checking.
 
 ### Offerings and instructors
 
-`scripts/fetch-offerings.mjs` writes `src/data/offerings.json` from SFU's course
+`scripts/fetch-offerings.ts` writes `src/data/offerings.json` from SFU's course
 outlines API: which courses run in the current term and the following terms SFU
 has already published (usually one term ahead), with each lecture section's
 campus, meeting times and instructors. Courses show `Fa26`/`Sp27`-style badges
@@ -41,9 +48,38 @@ Professors link per instructor. The links are RMP searches for that name at SFU
 (school ID 1482), not direct profile links, because RMP has no public API.
 Re-run it every so often, since instructors get assigned closer to the term.
 
+## Ratings
+
+Courses can be rated on **Easy** and **Useful**, and instructors on **Clear** and
+**Engaging**, each on a 1–5 scale and shown as a percentage (1 = 0%, 3 = 50%,
+5 = 100%), with an optional thumbs up/down, short written review, term and
+prof/course. A prof's ratings are pooled across every course they teach. The
+code lives in `src/lib/ratings/`; `aggregate.ts` does the maths and is unit
+tested (`npm test`).
+
+By default ratings are saved in the visitor's own browser (localStorage), so
+each person only sees their own. To share them between everyone, connect a
+free [Supabase](https://supabase.com) project:
+
+1. Create a project, open **SQL Editor**, paste in `supabase/schema.sql` and run it.
+   This makes the `ratings` table, its row-level security and three functions
+   (`upsert_rating`, `delete_rating`, `my_rating_ids`).
+2. In **Project Settings → API**, copy the project URL and the `anon` public key.
+3. `cp .env.example .env.local` and fill in `VITE_SUPABASE_URL` and
+   `VITE_SUPABASE_ANON_KEY` (set the same two variables in your host's build
+   settings when deploying).
+4. Restart `npm run dev` / rebuild. The side panel stops saying ratings are
+   saved in this browser only.
+
+There are no accounts. Each browser gets a random id stored in localStorage
+that only the write functions ever see, so it's one rating per course or prof
+per browser and nobody can edit anyone else's. Clearing site data loses the
+ability to edit old ratings (they stay up). The Supabase library is only
+downloaded when those variables are set.
+
 ## How the chart is built
 
-- `src/lib/graph.js` walks backwards from the chosen course, turning each
+- `src/lib/graph.ts` walks backwards from the chosen course, turning each
   prerequisite tree into nodes and edges, then runs dagre to position them.
 - Lines that go straight into a course are all required. A "one of" node means
   any one of its inputs is enough, and "all of" groups appear inside a "one of".

@@ -1,10 +1,13 @@
-<script>
-  import { getContext } from 'svelte';
-  import { Handle, Position } from '@xyflow/svelte';
+<script lang="ts">
+  import { Handle, Position, type Node, type NodeProps } from '@xyflow/svelte';
   import TermPills from './TermPills.svelte';
+  import { getActions } from './context';
+  import type { CourseNodeData } from './graph';
 
-  let { data } = $props();
-  const actions = getContext('actions');
+  type Props = NodeProps<Node<CourseNodeData, 'course'>>;
+
+  let { data }: Props = $props();
+  const actions = getActions();
 </script>
 
 <div
