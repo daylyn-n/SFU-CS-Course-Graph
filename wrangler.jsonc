@@ -1,0 +1,7 @@
+// Cloudflare deploy: serves the static build in dist/ (`npm run build` first).
+// "name" must match the Worker's name in the Cloudflare dashboard.
+{
+  "name": "sfu-cs-course-graph",
+  "compatibility_date": "2026-10-01",
+  "assets": { "directory": "./dist" }
+}
