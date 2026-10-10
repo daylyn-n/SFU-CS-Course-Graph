@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { groupPrograms, matchScore, OTHER_FACULTY, type ProgramOption } from './programs';
+import { groupPrograms, matchScore, OTHER_FACULTY, type ProgramOption } from './search';
 
 const P: ProgramOption[] = [
   { id: 'cmpt-major', name: 'Computing Science Major', faculty: 'Applied Sciences' },

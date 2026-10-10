@@ -3,8 +3,8 @@
   import { settings } from './persist/store.svelte';
   import { evaluateProgram, type Program, type RequirementResult, type SectionResult } from './degree';
   import { loadProgram, loadProgramIndex, pickerOptions, resolveProgramId, type ProgramIndexEntry } from './programs/load';
-  import ProgramPicker from './account/ProgramPicker.svelte';
-  import ProgramPrompt from './account/ProgramPrompt.svelte';
+  import ProgramPicker from './programs/ProgramPicker.svelte';
+  import ProgramPrompt from './programs/ProgramPrompt.svelte';
   import { courseStatus } from './graph';
   import TermPills from './TermPills.svelte';
   import type { Courses, Status, Taken, Term } from './types';

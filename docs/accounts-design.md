@@ -1,6 +1,9 @@
 # Never lose progress: saving, history and optional accounts
 
-Status: design (revised after review), on branch `feat/accounts-sync`.
+Status: layers 1 and 2 (the saved document, history, undo, backups, cross-tab
+sync) are live. Layer 3 (accounts, Supabase and cross-device sync) has been
+removed from main and is archived at the tag `archive-accounts-ratings`; see
+"Archived features" in the README.
 
 ## The problem
 
@@ -111,7 +114,10 @@ interface AppDoc {
 - **Backup v2:** export the whole document as JSON. Import accepts v2 and the
   intern's v1 (taken courses + target), snapshotting first.
 
-## Layer 3: optional account and sync (Supabase)
+## Layer 3: optional account and sync (Supabase), archived
+
+> Not on main. This section describes the version at the tag
+> `archive-accounts-ratings`.
 
 Only appears when `VITE_SUPABASE_URL` / `VITE_SUPABASE_ANON_KEY` are set (the
 same project as ratings).

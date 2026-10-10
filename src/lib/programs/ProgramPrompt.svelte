@@ -1,7 +1,7 @@
 <!-- ProgramPicker in its own modal, e.g. a first-visit prompt for signed-out users. -->
 <script lang="ts">
   import ProgramPicker from './ProgramPicker.svelte';
-  import type { ProgramOption } from './programs';
+  import type { ProgramOption } from './search';
 
   interface Props {
     open: boolean;

@@ -23,7 +23,11 @@ export interface Settings {
 
 export interface AppDoc {
   schema: number;
-  /** Supabase user id this data belongs to, or null if never signed in */
+  /**
+   * Account this data belongs to. Always null for now: accounts are archived
+   * (tag archive-accounts-ratings), but the field stays so restoring them
+   * needs no change to saved data.
+   */
   owner: string | null;
   /** per course; 'none' with a stamp is a tombstone (unticked) */
   courses: Record<string, { state: CourseState; at: number }>;
