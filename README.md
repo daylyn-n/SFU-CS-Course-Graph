@@ -75,6 +75,14 @@ npm run fetch-offerings   # just refresh sections and instructors, ~7 minutes
 npm run fetch-seats       # just refresh seat counts (skips if SFU hasn't posted a new file)
 ```
 
+A GitHub Action (`.github/workflows/refresh-data.yml`) does this automatically
+and commits to `main`: seats every day, sections and instructors on Mondays,
+and everything on the 1st of the month. Before committing it runs
+`scripts/check-data.ts`, which stops the update if a file is broken or lost a
+big share of its courses or programs (SFU's APIs sometimes fail under load), and
+skips files where only the timestamp changed. You can also start it by hand
+from the Actions tab.
+
 - `courses.json` (`scripts/fetch-courses.ts`): every course in the academic
   calendar, with its prerequisite text and a parsed and/or tree. The calendar
   writes prerequisites as English sentences, so `scripts/parse-prereqs.ts`

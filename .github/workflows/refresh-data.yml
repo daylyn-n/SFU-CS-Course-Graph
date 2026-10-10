@@ -1,0 +1,88 @@
+# Keeps public/data fresh from SFU's public APIs and commits it to main, which
+# redeploys the site. Each run:
+#   - every day: seat counts (SFU posts a new snapshot daily in registration)
+#   - Mondays:   sections, times and instructors too
+#   - the 1st:   everything (courses, descriptions, programs; ~15 minutes)
+# Run it by hand from the Actions tab (pick a mode) after a big calendar change.
+# If the new data looks broken (scripts/check-data.ts), nothing is committed
+# and GitHub emails you that the run failed.
+
+name: Refresh course data
+
+on:
+  schedule:
+    - cron: '0 13 * * *' # 13:00 UTC = 5–6 am in Vancouver
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: What to refresh
+        type: choice
+        options: [seats, offerings, full]
+        default: offerings
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-data
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Pick what to refresh
+        id: mode
+        run: |
+          mode='${{ inputs.mode }}'
+          if [ -z "$mode" ]; then
+            if [ "$(date -u +%d)" = 01 ]; then mode=full
+            elif [ "$(date -u +%u)" = 1 ]; then mode=offerings
+            else mode=seats; fi
+          fi
+          echo "mode=$mode" >> "$GITHUB_OUTPUT"
+          echo "Refreshing: $mode"
+
+      - name: Keep a copy of the current data
+        run: cp -r public/data "$RUNNER_TEMP/data-before"
+
+      - name: Fetch everything
+        if: steps.mode.outputs.mode == 'full'
+        run: npm run fetch-data
+
+      - name: Fetch sections and seats
+        if: steps.mode.outputs.mode == 'offerings'
+        run: npm run fetch-offerings && npm run fetch-seats
+
+      - name: Fetch seats
+        if: steps.mode.outputs.mode == 'seats'
+        run: npm run fetch-seats
+
+      - name: Check the new data
+        run: node scripts/check-data.ts "$RUNNER_TEMP/data-before"
+
+      # The degree and prerequisite tests run against the real data files.
+      - run: npm test
+
+      - name: Commit if anything changed
+        run: |
+          if git diff --quiet && [ -z "$(git ls-files --others --exclude-standard public/data)" ]; then
+            echo "No data changes."
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public/data
+          git commit -m "Refresh course data (${{ steps.mode.outputs.mode }}, $(date -u +%Y-%m-%d))"
+          git pull --rebase
+          git push
