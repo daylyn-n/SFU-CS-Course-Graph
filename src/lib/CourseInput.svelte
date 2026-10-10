@@ -1,7 +1,20 @@
 <!-- Text box with a dropdown of courses matching by code or name.
      Arrow keys move through results, Enter picks, Esc closes. -->
-<script>
-  import { matchCourse, searchCourses } from './search.js';
+<script lang="ts">
+  import { matchCourse, searchCourses, type SearchHit } from './search';
+  import type { Courses } from './types';
+
+  interface Props {
+    courses: Courses;
+    onpick: (code: string) => void;
+    placeholder?: string;
+    label?: string;
+    value?: string;
+    input?: HTMLInputElement;
+    onnomatch?: ((query: string, suggestions: SearchHit[]) => void) | null;
+    oninput?: (() => void) | null;
+    limit?: number;
+  }
 
   let {
     courses,
@@ -13,21 +26,21 @@
     onnomatch = null, // (query, suggestions) => void, when Enter finds nothing
     oninput = null,
     limit = 8,
-  } = $props();
+  }: Props = $props();
 
   const id = `ci-${Math.random().toString(36).slice(2, 8)}`;
   let open = $state(false);
   let active = $state(-1);
   const results = $derived(open ? searchCourses(value, courses, limit) : []);
 
-  function pick(code) {
+  function pick(code: string) {
     onpick(code);
     value = '';
     open = false;
     active = -1;
   }
 
-  function onkeydown(e) {
+  function onkeydown(e: KeyboardEvent) {
     if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
       e.preventDefault();
       open = true;

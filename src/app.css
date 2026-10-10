@@ -446,6 +446,13 @@ aside h2 {
   margin-top: 3px;
 }
 
+.prof {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px 8px;
+}
+
 .profs a {
   color: var(--accent-text);
   text-decoration: none;

@@ -1,10 +1,11 @@
-<script>
-  import { setContext, untrack } from 'svelte';
-  import { SvelteSet } from 'svelte/reactivity';
-  import { SvelteFlow, Background, Controls } from '@xyflow/svelte';
+<script lang="ts">
+  import { untrack } from 'svelte';
+  import { SvelteMap, SvelteSet } from 'svelte/reactivity';
+  import { SvelteFlow, Background, Controls, ControlButton } from '@xyflow/svelte';
   import '@xyflow/svelte/dist/style.css';
 
-  import { buildGraph, courseStatus, pathThrough, nextSteps as findNextSteps } from './lib/graph.js';
+  import { buildGraph, courseStatus, pathThrough, nextSteps as findNextSteps } from './lib/graph';
+  import type { CourseData, OfferingData, Status, Term, View } from './lib/types';
   import CourseNode from './lib/CourseNode.svelte';
   import JunctionNode from './lib/JunctionNode.svelte';
   import OtherNode from './lib/OtherNode.svelte';
@@ -12,22 +13,40 @@
   import PrereqList from './lib/PrereqList.svelte';
   import TermPills from './lib/TermPills.svelte';
   import Header from './lib/Header.svelte';
-  import { rmpUrl } from './lib/links.js';
-  import { loadDetails, designationBadges } from './lib/details.js';
-  import { loadSeats, seatInfo, describeSeats, formatAsOf, GOSFU_URL } from './lib/seats.js';
+  import { setActions } from './lib/context';
+  import { rmpUrl } from './lib/links';
+  import { loadDetails, designationBadges } from './lib/details';
+  import { loadSeats, seatInfo, describeSeats, formatAsOf, GOSFU_URL } from './lib/seats';
   import ScheduleDock from './lib/ScheduleDock.svelte';
   import CourseInput from './lib/CourseInput.svelte';
-  import { matchCourse } from './lib/search.js';
+  import { matchCourse } from './lib/search';
   import ScheduleBuilder from './lib/schedule/ScheduleBuilder.svelte';
-  import { addToSchedule, isInSchedule, scheduleNotice, setScheduleData } from './lib/schedule/store.svelte.js';
+  import { addToSchedule, isInSchedule, scheduleNotice, setScheduleData } from './lib/schedule/store.svelte';
+  import ExploreView from './lib/ExploreView.svelte';
+  import PlanView from './lib/PlanView.svelte';
+  import DegreeView from './lib/DegreeView.svelte';
+  import CommandPalette from './lib/CommandPalette.svelte';
+  import ShareBanner from './lib/ShareBanner.svelte';
+  import ShareMenu from './lib/ShareMenu.svelte';
+  import ChartSnapshot from './lib/ChartSnapshot.svelte';
+  import { decodeShareHash } from './lib/share';
+  import CourseRatings from './lib/ratings/CourseRatings.svelte';
+  import ProfRating from './lib/ratings/ProfRating.svelte';
+  import { setRatingsData } from './lib/ratings/context';
 
-  let { data, offeringData } = $props();
+  interface Props {
+    data: CourseData;
+    offeringData: OfferingData;
+  }
+
+  let { data, offeringData }: Props = $props();
   const courses = untrack(() => data.courses);
   const nodeTypes = { course: CourseNode, junction: JunctionNode, other: OtherNode };
   const STORAGE_KEY = 'sfu-prereqs:taken';
 
   const { terms, offerings } = untrack(() => offeringData);
   setScheduleData({ terms, offerings });
+  setRatingsData({ terms, offerings });
 
   // Show "Added X to Schedule 1" briefly after each add.
   let showNotice = $state(false);
@@ -37,56 +56,61 @@
     const t = setTimeout(() => (showNotice = false), 6000);
     return () => clearTimeout(t);
   });
-  const offeredIn = (code) => terms.filter((t) => offerings[code]?.[t.id]);
+  const offeredIn = (code: string): Term[] => terms.filter((t) => offerings[code]?.[t.id]);
 
   // Reverse lookup: which courses list this one as a prerequisite?
-  const unlocks = {};
+  const unlocks: Record<string, string[]> = {};
   for (const [code, c] of Object.entries(courses)) {
     for (const ref of new Set(JSON.stringify(c.prereq ?? '').match(/[A-Z]{2,5} \d{3}[A-Z]?/g))) {
       (unlocks[ref] ??= []).push(code);
     }
   }
 
-  function codeFromHash() {
-    try {
-      const code = decodeURIComponent(location.hash.slice(1)).replace('-', ' ').toUpperCase();
-      return code in courses ? code : null;
-    } catch {
-      return null; // malformed escape like "#%E0%A4%A"
-    }
+  // Share links look like "#CMPT-410?taken=…"; decodeShareHash also copes with
+  // lowercase codes and malformed escapes like "#%E0%A4%A".
+  function codeFromHash(): string | null {
+    const code = decodeShareHash(location.hash).target;
+    return code && code in courses ? code : null;
   }
 
-  function loadTaken() {
+  function loadTaken(): string[] {
     try {
       const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '[]');
-      return Array.isArray(saved) ? saved.filter((c) => typeof c === 'string') : [];
+      return Array.isArray(saved) ? saved.filter((c): c is string => typeof c === 'string') : [];
     } catch {
       return [];
     }
   }
 
+  const narrow = () => matchMedia('(max-width: 700px)').matches;
   const initial = codeFromHash() ?? 'CMPT 410';
   let target = $state(initial);
   let selected = $state(initial);
   let maxDepth = $state(2);
-  let hovered = $state(null);
+  let hovered = $state<string | null>(null);
   let dockOpen = $state(false);
   let hideTaken = $state(true);
-  let view = $state(matchMedia('(max-width: 700px)').matches ? 'list' : 'graph');
-  const done = new SvelteSet(loadTaken());
+  let view = $state<View>(narrow() ? 'list' : 'graph');
+  const done = new SvelteSet<string>(loadTaken());
   // Svelte Flow unmounts without a pointerleave when switching views.
   $effect(() => {
     view;
     hovered = null;
   });
-  const expanded = new SvelteSet();
+  const expanded = new SvelteSet<string>();
 
   const graph = $derived(buildGraph(target, courses, done, { maxDepth, hideTaken, expanded, offeredIn }));
+  // Where the user has dragged blocks to. Kept across re-layouts (ticking a
+  // box, expanding) and cleared when the target changes.
+  const moved = new SvelteMap<string, { x: number; y: number }>();
+  const placed = $derived(
+    graph.nodes.map((n) => (moved.has(n.id) ? { ...n, position: moved.get(n.id)! } : n)),
+  );
   // Svelte Flow needs writable arrays, so mirror the derived graph into state.
-  let nodes = $state.raw(untrack(() => graph.nodes));
+  let nodes = $state.raw(untrack(() => placed));
   let edges = $state.raw(untrack(() => graph.edges));
   $effect.pre(() => {
-    nodes = graph.nodes;
+    nodes = placed;
     edges = graph.edges;
   });
   // While hovering a course, fade everything not on a path through it. This is
@@ -114,7 +138,7 @@
       .map((group) => [...group].sort((a, b) => soonest(a) - soonest(b)))
       .sort((a, b) => soonest(a[0]) - soonest(b[0]) || a[0].localeCompare(b[0], 'en', { numeric: true })),
   );
-  function soonest(code) {
+  function soonest(code: string): number {
     const i = terms.findIndex((t) => offerings[code]?.[t.id]);
     return i === -1 ? terms.length : i;
   }
@@ -137,36 +161,40 @@
 
   // Each new target gets a history entry so the Back button returns to the
   // previous course. The first one replaces, so Back can still leave the app.
+  // Only the hash's course is compared, so an incoming share link's
+  // "?taken=…" stays until ShareBanner has dealt with it.
   let firstHash = true;
   $effect(() => {
     const hash = '#' + target.replace(' ', '-');
-    if (location.hash !== hash) history[firstHash ? 'replaceState' : 'pushState'](null, '', hash);
+    if (decodeShareHash(location.hash).target !== target) {
+      history[firstHash ? 'replaceState' : 'pushState'](null, '', hash);
+    }
     firstHash = false;
   });
 
-  function setTarget(code) {
+  function setTarget(code: string) {
     target = code;
     selected = code;
     expanded.clear();
+    moved.clear();
   }
 
-  function toggleDone(code) {
+  function toggleDone(code: string) {
     if (done.has(code)) done.delete(code);
     else done.add(code);
   }
 
-  setContext('actions', {
+  setActions({
     toggleDone,
     expand: (code) => expanded.add(code),
   });
-
 
   const sel = $derived(courses[selected]);
 
   // Descriptions and seat snapshots load after the page is up (they're big
   // and not needed for the first paint).
-  let details = $state({});
-  let seats = $state(null);
+  let details = $state<Awaited<ReturnType<typeof loadDetails>>>({});
+  let seats = $state<Awaited<ReturnType<typeof loadSeats>> | null>(null);
   let descOpen = $state(false);
   $effect(() => {
     loadDetails().then((d) => (details = d));
@@ -179,7 +207,7 @@
     descOpen = false;
   });
   const selStatus = $derived(courseStatus(selected, courses, done));
-  const statusLabel = {
+  const statusLabel: Record<Status, string> = {
     done: 'Taken',
     ready: 'Can take now',
     locked: 'Prereqs missing',
@@ -199,10 +227,16 @@
   }
 
   // Selecting a course in the list on a phone: bring the details into view.
-  let aside = $state();
-  function select(code) {
+  let aside = $state<HTMLElement>();
+  function select(code: string) {
     selected = code;
-    if (matchMedia('(max-width: 700px)').matches) aside?.scrollIntoView({ behavior: 'smooth' });
+    if (narrow()) aside?.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // Leaving Explore/Degree/Schedule for a course's prerequisites lands on the map.
+  function showOnMap(code: string) {
+    setTarget(code);
+    view = narrow() ? 'list' : 'graph';
   }
 </script>
 
@@ -213,8 +247,8 @@
 <svelte:window
   onkeydown={(e) => {
     // Enter on a focused chart node selects it, like a click.
-    const node = document.activeElement?.closest?.('.svelte-flow__node-course');
-    if (e.key === 'Enter' && node && e.target === document.activeElement) selected = node.dataset.id;
+    const node = (document.activeElement as HTMLElement | null)?.closest<HTMLElement>('.svelte-flow__node-course');
+    if (e.key === 'Enter' && node?.dataset.id && e.target === document.activeElement) selected = node.dataset.id;
   }}
   onhashchange={() => {
     const code = codeFromHash();
@@ -239,37 +273,40 @@
 />
 
 {#if view === 'schedule'}
-  <ScheduleBuilder
-    {courses}
-    {terms}
-    {offerings}
-    {done}
-    onopen={(code) => {
-      setTarget(code);
-      view = 'graph';
-    }}
-  />
+  <ScheduleBuilder {courses} {terms} {offerings} {done} onopen={showOnMap} />
 {:else}
 <main>
-  <section class="canvas" class:list={view === 'list'}>
+  <section class="canvas" class:list={view !== 'graph'}>
     {#if view === 'graph'}
       <SvelteFlow
         bind:nodes
         bind:edges
         {nodeTypes}
-        nodesDraggable={false}
+        nodesDraggable
         nodesConnectable={false}
         elementsSelectable={false}
         minZoom={0.2}
         onnodeclick={({ node }) => node.type === 'course' && (selected = node.id)}
+        onnodedragstop={({ nodes: dragged }) => {
+          for (const n of dragged) moved.set(n.id, { ...n.position });
+        }}
         edgesFocusable={false}
         onnodepointerenter={({ node }) => node.type === 'course' && (hovered = node.id)}
         onnodepointerleave={() => (hovered = null)}
         proOptions={{ hideAttribution: true }}
       >
         <Background gap={24} />
-        <Controls showLock={false} />
+        <Controls showLock={false}>
+          {#if moved.size}
+            <ControlButton onclick={() => moved.clear()} title="Reset layout" aria-label="Reset layout">
+              <svg viewBox="0 0 24 24" aria-hidden="true"
+                ><path d="M4 12a8 8 0 1 0 2.3-5.6M4 4v4h4" fill="none" stroke="currentColor" stroke-width="2.2" /></svg
+              >
+            </ControlButton>
+          {/if}
+        </Controls>
         <FitOnChange key={layoutKey} anchor={target} />
+        <ChartSnapshot />
       </SvelteFlow>
       <div class="legend">
         <span><i class="done"></i>Taken</span>
@@ -278,8 +315,23 @@
         <span><i class="unknown"></i>Check requirements</span>
         <span><i class="missing"></i>Not in catalog</span>
         <span><TermPills terms={terms} /> offered (filled = this term)</span>
-        <span class="hint">Tick a box to mark it taken · <b>+</b> shows more</span>
+        <span class="hint">Tick a box to mark it taken · <b>+</b> shows more · drag to rearrange</span>
       </div>
+    {:else if view === 'explore'}
+      <ExploreView
+        {courses}
+        {done}
+        {terms}
+        {offeredIn}
+        {selected}
+        onselect={select}
+        ontoggle={toggleDone}
+        ontarget={showOnMap}
+      />
+    {:else if view === 'degree'}
+      <DegreeView {courses} {done} {offeredIn} onselect={select} ontarget={showOnMap} />
+    {:else if view === 'plan'}
+      <PlanView {target} {courses} {done} {terms} {offerings} {selected} onselect={select} />
     {:else}
       <ul class="tree">
         <PrereqList
@@ -292,7 +344,7 @@
           {offeredIn}
           ontoggle={toggleDone}
           onselect={select}
-          onexpand={(c) => expanded.add(c)}
+          onexpand={(c: string) => expanded.add(c)}
         />
       </ul>
     {/if}
@@ -337,6 +389,8 @@
         </p>
       {/if}
     {/key}
+
+    {#if sel}<CourseRatings code={selected} />{/if}
 
     <h3>Next steps toward {target}</h3>
     {#if done.has(target)}
@@ -394,10 +448,13 @@
               <div class="seat seat-{d.level}">{d.text} <span class="muted">· as of {formatAsOf(seat.asOf)}</span></div>
             {/if}
             <div class="profs">
-              {#each s.instructors as name}
-                <a href={rmpUrl(name)} target="_blank" rel="noopener" title="Search Rate My Professors"
-                  >{name} <span class="rmp">RMP ↗</span></a
-                >
+              {#each s.instructors ?? [] as name}
+                <span class="prof">
+                  <a href={rmpUrl(name)} target="_blank" rel="noopener" title="Search Rate My Professors"
+                    >{name} <span class="rmp">RMP ↗</span></a
+                  >
+                  <ProfRating {name} course={selected} />
+                </span>
               {:else}
                 <span class="muted">Instructor TBA</span>
               {/each}
@@ -457,6 +514,8 @@
     </form>
     {#if takenError}<p class="error">{takenError}</p>{/if}
 
+    <ShareMenu {target} {done} onshowchart={() => (view = 'graph')} />
+
     <p class="source">
       Data: SFU Academic Calendar ({data.term.replace('/', ' ')}) and course outlines, fetched
       {new Date(offeringData.fetched).toLocaleDateString()}. Prerequisites are parsed from the
@@ -465,13 +524,8 @@
     </p>
   </aside>
 </main>
-<ScheduleDock
-  {courses}
-  {terms}
-  {offerings}
-  {done}
-  bind:open={dockOpen}
-  onexpand={() => (view = 'schedule')}
-  onopen={(code) => setTarget(code)}
-/>
+<ScheduleDock {courses} {terms} {offerings} {done} bind:open={dockOpen} onexpand={() => (view = 'schedule')} onopen={setTarget} />
 {/if}
+
+<CommandPalette {courses} {target} {done} onpick={setTarget} bind:view />
+<ShareBanner {done} onpick={setTarget} />

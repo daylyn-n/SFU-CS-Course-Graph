@@ -2,10 +2,17 @@
      If fitting everything would make text unreadably small, it zooms to a
      readable level with the `anchor` node (the target) near the right edge;
      the rest of the chart is a pan away. -->
-<script>
+<script lang="ts">
   import { useSvelteFlow } from '@xyflow/svelte';
 
-  let { key, anchor } = $props();
+  interface Props {
+    /** refit whenever this changes */
+    key: unknown;
+    /** node to keep in view when zooming in for readability */
+    anchor: string;
+  }
+
+  let { key, anchor }: Props = $props();
   const { fitView, getNode, getViewport, setViewport } = useSvelteFlow();
   const MIN_READABLE = 0.55;
 
@@ -16,8 +23,8 @@
     const t = setTimeout(async () => {
       await fitView({ padding: 0.12, maxZoom: 1.2 });
       const node = getNode(anchor);
-      if (cancelled || !node || getViewport().zoom >= MIN_READABLE) return;
       const pane = document.querySelector('.svelte-flow');
+      if (cancelled || !node || !pane || getViewport().zoom >= MIN_READABLE) return;
       const { width, height } = pane.getBoundingClientRect();
       const w = node.measured?.width ?? 200;
       const h = node.measured?.height ?? 60;

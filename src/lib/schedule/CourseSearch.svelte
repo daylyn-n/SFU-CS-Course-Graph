@@ -1,23 +1,37 @@
 <!-- Search box over every course, by code or by name; picking one adds it to
      the schedule, and the (i) button opens its details. -->
-<script>
+<script lang="ts">
   import TermPills from '../TermPills.svelte';
-  import { searchCourses } from '../search.js';
-  import { loadDetails, designationBadges } from '../details.js';
+  import { searchCourses } from '../search';
+  import { loadDetails, designationBadges, type Details } from '../details';
+  import type { Courses, Offerings, Term } from '../types';
 
-  let { courses, offerings, terms, term, inSchedule, onadd, ondetails, compact = false } = $props();
+  interface Props {
+    courses: Courses;
+    offerings: Offerings;
+    terms: Term[];
+    /** the term being planned, for "Not this term" */
+    term: string | undefined;
+    inSchedule: (code: string) => boolean;
+    onadd: (code: string) => void;
+    /** open a course's details; focus returns to `returnTo` afterwards */
+    ondetails?: (code: string, returnTo: HTMLElement) => void;
+    compact?: boolean;
+  }
+
+  let { courses, offerings, terms, term, inSchedule, onadd, ondetails, compact = false }: Props = $props();
 
   let query = $state('');
   let open = $state(false);
   let active = $state(0);
-  let input;
-  let root;
+  let input: HTMLInputElement;
+  let root: HTMLElement;
 
   // Same matching as the rest of the app (code prefix, then title words in any order).
   const results = $derived(searchCourses(query, courses, 8).map((h) => ({ code: h.code, title: courses[h.code]?.title ?? '' })));
 
   // Designations, for badges: fetched once, the first time the box is focused.
-  let details = $state(null);
+  let details = $state<Details | null>(null);
   let asked = false;
   function loadOnce() {
     if (asked) return;
@@ -25,9 +39,9 @@
     loadDetails().then((d) => (details = d));
   }
 
-  const offeredIn = (code) => terms.filter((t) => offerings[code]?.[t.id]?.length);
+  const offeredIn = (code: string) => terms.filter((t) => offerings[code]?.[t.id]?.length);
 
-  function pick(code) {
+  function pick(code: string) {
     if (!code) return;
     onadd(code);
     query = '';
@@ -35,7 +49,7 @@
     input.focus();
   }
 
-  function onkeydown(e) {
+  function onkeydown(e: KeyboardEvent) {
     if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
       e.preventDefault();
       open = true;
@@ -60,7 +74,7 @@
   class:open={open && query.trim()}
   bind:this={root}
   onfocusout={(e) => {
-    if (!root.contains(e.relatedTarget)) open = false;
+    if (!root.contains(e.relatedTarget as Node | null)) open = false;
   }}
   onkeydown={(e) => {
     if (e.key === 'Escape' && e.target !== input && open) {

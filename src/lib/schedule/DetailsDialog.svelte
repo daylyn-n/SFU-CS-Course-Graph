@@ -2,22 +2,35 @@
      a bottom sheet on phones. Native <dialog>, so focus moves in, the page
      behind is inert, and Esc closes it. A backdrop click closes it too, and
      focus goes back to where it was (or to `returnTo`). -->
-<script>
+<script lang="ts">
   import CourseDetails from '../CourseDetails.svelte';
+  import type { Courses, Offerings, Taken, Term } from '../types';
+
+  interface Props {
+    code: string | null;
+    courses: Courses;
+    done: Taken;
+    terms: Term[];
+    offerings: Offerings;
+    /** show a course's prerequisites (closes the dialog first) */
+    onopen?: (code: string) => void;
+    onclose: () => void;
+    returnTo?: HTMLElement | null;
+  }
 
   // code: the course to show, or null when closed.
-  let { code, courses, done, terms, offerings, onopen, onclose, returnTo = null } = $props();
+  let { code, courses, done, terms, offerings, onopen, onclose, returnTo = null }: Props = $props();
 
-  let dialog;
-  let opener = null;
+  let dialog: HTMLDialogElement;
+  let opener: HTMLElement | null = null;
   let downOnBackdrop = false;
   const headingId = 'course-details-heading';
 
   $effect(() => {
     if (code && !dialog.open) {
-      opener = document.activeElement;
+      opener = document.activeElement as HTMLElement | null;
       dialog.showModal();
-      dialog.querySelector('.close')?.focus();
+      dialog.querySelector<HTMLElement>('.close')?.focus();
     } else if (!code && dialog.open) {
       dialog.close();
     }
@@ -64,7 +77,7 @@
           {headingId}
           showAdd
           onopen={onopen &&
-            ((c) => {
+            ((c: string) => {
               dialog.close();
               onopen(c);
             })}

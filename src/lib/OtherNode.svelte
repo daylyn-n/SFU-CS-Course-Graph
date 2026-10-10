@@ -1,8 +1,11 @@
 <!-- A non-course alternative such as "Pre-Calculus 12": shown, not tracked. -->
-<script>
-  import { Handle, Position } from '@xyflow/svelte';
+<script lang="ts">
+  import { Handle, Position, type Node, type NodeProps } from '@xyflow/svelte';
+  import type { OtherNodeData } from './graph';
 
-  let { data } = $props();
+  type Props = NodeProps<Node<OtherNodeData, 'other'>>;
+
+  let { data }: Props = $props();
 </script>
 
 <div class="other" title="{data.label}: not tracked here, check it yourself">

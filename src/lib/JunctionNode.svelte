@@ -1,7 +1,10 @@
-<script>
-  import { Handle, Position } from '@xyflow/svelte';
+<script lang="ts">
+  import { Handle, Position, type Node, type NodeProps } from '@xyflow/svelte';
+  import type { JunctionNodeData } from './graph';
 
-  let { data } = $props();
+  type Props = NodeProps<Node<JunctionNodeData, 'junction'>>;
+
+  let { data }: Props = $props();
 </script>
 
 <div class="junction" class:met={data.met}>

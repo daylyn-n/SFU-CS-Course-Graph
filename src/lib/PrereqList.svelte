@@ -1,8 +1,24 @@
 <!-- Indented checklist version of the chart, for small screens. -->
-<script>
+<script lang="ts">
   import Self from './PrereqList.svelte';
-  import { courseStatus, satisfied } from './graph.js';
+  import { courseStatus, satisfied } from './graph';
   import TermPills from './TermPills.svelte';
+  import type { Courses, Prereq, Taken, Term } from './types';
+
+  interface Props {
+    tree: Prereq;
+    courses: Courses;
+    done: Taken;
+    hideTaken: boolean;
+    ontoggle: (code: string) => void;
+    onselect: (code: string) => void;
+    maxDepth: number;
+    expanded: ReadonlySet<string>;
+    onexpand: (code: string) => void;
+    offeredIn: (code: string) => Term[];
+    ancestors?: string[];
+    flat?: boolean;
+  }
 
   // tree: a course code string, { other: label } for a non-course alternative,
   // or { op, args }. `flat` is set for a course's own prerequisites, where an
@@ -20,7 +36,7 @@
     offeredIn,
     ancestors = [],
     flat = false,
-  } = $props();
+  }: Props = $props();
   const shared = $derived({
     courses,
     done,
@@ -33,7 +49,7 @@
     offeredIn,
   });
   // High school courses come with "(or equivalent)" in the calendar.
-  const otherText = (label) => (/\b1[12]$|^(AP|IB) /.test(label) ? `${label} (or equivalent)` : label);
+  const otherText = (label: string) => (/\b1[12]$|^(AP|IB) /.test(label) ? `${label} (or equivalent)` : label);
 </script>
 
 {#if typeof tree === 'string'}
@@ -58,11 +74,11 @@
     </div>
     {#if open}
       <ul>
-        <Self tree={course.prereq} {...shared} ancestors={[...ancestors, tree]} flat />
+        <Self tree={course.prereq!} {...shared} ancestors={[...ancestors, tree]} flat />
       </ul>
     {/if}
   </li>
-{:else if tree.other}
+{:else if 'other' in tree}
   <li>
     <div class="row other" title="Not tracked here: check it yourself">{otherText(tree.other)}</div>
   </li>

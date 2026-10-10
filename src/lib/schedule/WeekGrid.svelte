@@ -1,10 +1,17 @@
 <!-- Week calendar: one column per day, overlapping meetings side by side.
      With `fit`, it fills its container's height (hours compress to fit). -->
-<script>
-  import { layoutDay, fmtMin, DAY_NAMES } from './schedule.js';
+<script lang="ts">
+  import { layoutDay, fmtMin, DAY_NAMES, type GridEvent, type GridRange } from './schedule';
+
+  interface Props {
+    events: GridEvent[];
+    range: GridRange;
+    onpick?: (code: string) => void;
+    fit?: boolean;
+  }
 
   // events: [{ key, day, start, end, code, section, type, campus, hue }]
-  let { events, range, onpick, fit = false } = $props();
+  let { events, range, onpick, fit = false }: Props = $props();
 
   const hours = $derived(
     Array.from({ length: (range.to - range.from) / 60 }, (_, i) => range.from / 60 + i),
@@ -13,7 +20,7 @@
     Object.fromEntries(range.days.map((d) => [d, layoutDay(events.filter((e) => e.day === d))])),
   );
   // Position as a fraction of the day so the column height can be set in CSS.
-  const pct = (min) => ((min - range.from) / (range.to - range.from)) * 100;
+  const pct = (min: number) => ((min - range.from) / (range.to - range.from)) * 100;
 </script>
 
 <div class="wrap" class:fit>

@@ -1,6 +1,23 @@
-<script>
-  import { matchCourse, searchCourses } from './search.js';
+<script lang="ts">
+  import { matchCourse, searchCourses } from './search';
   import CourseInput from './CourseInput.svelte';
+  import type { Courses, Term, View } from './types';
+
+  interface Props {
+    courses: Courses;
+    target: string;
+    /** counts for the courses on the map */
+    progress: { done: number; ready: number; locked: number };
+    terms: Term[];
+    onpick: (code: string) => void;
+    /** is the course running in an upcoming term? (filters the quick picks) */
+    isOffered?: ((code: string) => boolean) | null;
+    /** dock the schedule under the map (shown on the Schedule tab) */
+    ondock?: (() => void) | null;
+    view: View;
+    maxDepth: number;
+    hideTaken: boolean;
+  }
 
   let {
     courses,
@@ -13,15 +30,16 @@
     view = $bindable(),
     maxDepth = $bindable(),
     hideTaken = $bindable(),
-  } = $props();
+  }: Props = $props();
 
   // Quick picks, skipping any that aren't in the data or not running soon.
+  // svelte-ignore state_referenced_locally
   const PICKS = ['CMPT 225', 'CMPT 276', 'CMPT 300', 'CMPT 310', 'CMPT 354', 'CMPT 410', 'MACM 316']
     .filter((c) => c in courses && (!isOffered || isOffered(c)))
     .slice(0, 5);
 
   let search = $state('');
-  let input;
+  let input = $state<HTMLInputElement>();
 
   let message = $state('');
 
@@ -31,13 +49,13 @@
       onpick(code);
       search = '';
       message = '';
-      input.blur();
+      input?.blur();
       return;
     }
     showNoMatch(search, searchCourses(search, courses, 3));
   }
 
-  function showNoMatch(query, hits) {
+  function showNoMatch(query: string, hits: { code: string }[]) {
     message = !query.trim()
       ? ''
       : hits.length
@@ -46,20 +64,20 @@
   }
 
   // "/" jumps to the search box, like on GitHub or YouTube.
-  function onkeydown(e) {
+  function onkeydown(e: KeyboardEvent) {
     const el = document.activeElement;
     const typing =
       el?.tagName === 'TEXTAREA' ||
       el?.tagName === 'SELECT' ||
-      (el?.tagName === 'INPUT' && !['checkbox', 'radio', 'button'].includes(el.type));
+      (el?.tagName === 'INPUT' && !['checkbox', 'radio', 'button'].includes((el as HTMLInputElement).type));
     if (e.key === '/' && !typing) {
       e.preventDefault();
-      input.focus();
+      input?.focus();
     }
   }
 
   const total = $derived(progress.done + progress.ready + progress.locked);
-  const pct = (n) => (total ? (n / total) * 100 : 0);
+  const pct = (n: number) => (total ? (n / total) * 100 : 0);
 </script>
 
 <svelte:window {onkeydown} />
@@ -108,7 +126,7 @@
         onpick={(code) => {
           message = '';
           onpick(code);
-          input.blur();
+          input?.blur();
         }}
         oninput={() => (message = '')}
         onnomatch={showNoMatch}
@@ -144,14 +162,17 @@
       <div class="seg" role="group" aria-label="View">
         <button class:on={view === 'graph'} onclick={() => (view = 'graph')}>Chart</button>
         <button class:on={view === 'list'} onclick={() => (view = 'list')}>List</button>
+        <button class:on={view === 'explore'} onclick={() => (view = 'explore')}>Explore</button>
+        <button class:on={view === 'plan'} onclick={() => (view = 'plan')}>Plan</button>
         <button class:on={view === 'schedule'} onclick={() => (view = 'schedule')}>Schedule</button>
+        <button class:on={view === 'degree'} onclick={() => (view = 'degree')}>Degree</button>
       </div>
       {#if view === 'schedule' && ondock}
         <button class="dock-btn" onclick={ondock} title="Show the schedule under the prerequisite map">
           Dock under map ↙
         </button>
       {/if}
-      {#if view !== 'schedule'}
+      {#if view === 'graph' || view === 'list'}
         <label>
           Levels
           <select bind:value={maxDepth}>
@@ -526,6 +547,18 @@
   }
 
   @media (max-width: 700px) {
+    /* Six tabs don't fit a phone: let the row scroll sideways. */
+    .controls {
+      max-width: 100%;
+    }
+    .seg {
+      max-width: 100%;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .seg button {
+      flex-shrink: 0;
+    }
     .hero {
       padding: 12px 16px 10px;
     }

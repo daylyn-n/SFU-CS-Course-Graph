@@ -3,14 +3,15 @@
      short, wide drawer (about 300–520px tall) under the map: one toolbar, the
      week on the left and a compact course list on the right, each scrolling
      on its own. Narrower than 640px, docked falls back to the stacked layout. -->
-<script>
+<script lang="ts">
   import { untrack } from 'svelte';
-  import { courseStatus } from '../graph.js';
+  import { courseStatus } from '../graph';
   import CourseSearch from './CourseSearch.svelte';
   import WeekGrid from './WeekGrid.svelte';
   import DetailsDialog from './DetailsDialog.svelte';
-  import { seatSummary, seatLabel } from './seatText.js';
-  import { loadSeats, GOSFU_URL } from '../seats.js';
+  import { seatSummary, seatLabel } from './seatText';
+  import { loadSeats, GOSFU_URL, type SeatData } from '../seats';
+  import type { Courses, Offerings, Section, Taken, Term } from '../types';
   import {
     arrange,
     componentGroups,
@@ -25,7 +26,9 @@
     resolvePicks,
     typeOf,
     DAY_NAMES,
-  } from './schedule.js';
+    type GridEvent,
+    type Meeting,
+  } from './schedule';
   import {
     scheduleState,
     scheduleNotice,
@@ -39,9 +42,19 @@
     clearSlot,
     duplicateSlot,
     notify,
-  } from './store.svelte.js';
+  } from './store.svelte';
 
-  let { courses, terms, offerings, done, onopen, docked = false } = $props();
+  interface Props {
+    courses: Courses;
+    terms: Term[];
+    offerings: Offerings;
+    done: Taken;
+    /** show a course's prerequisites */
+    onopen: (code: string) => void;
+    docked?: boolean;
+  }
+
+  let { courses, terms, offerings, done, onopen, docked = false }: Props = $props();
   untrack(() => setScheduleData({ terms, offerings }));
 
   // Docked layout only when there's room for the grid and list side by side.
@@ -49,7 +62,7 @@
   const compact = $derived(docked && (width ? width >= 640 : !matchMedia('(max-width: 700px)').matches));
 
   // Seat snapshots (seats.json may be missing; then only the goSFU link shows).
-  let seats = $state(null);
+  let seats = $state<SeatData | null>(null);
   $effect(() => {
     let live = true;
     loadSeats().then((s) => live && (seats = s));
@@ -57,9 +70,9 @@
   });
 
   // Course details modal.
-  let detailsCode = $state(null);
-  let detailsReturn = $state(null);
-  function openDetails(code, returnTo = null) {
+  let detailsCode = $state<string | null>(null);
+  let detailsReturn = $state<HTMLElement | null>(null);
+  function openDetails(code: string, returnTo: HTMLElement | null = null) {
     detailsReturn = returnTo;
     detailsCode = code;
   }
@@ -69,12 +82,13 @@
 
   const slot = $derived(scheduleState.slots[scheduleState.active]);
   const fallbackTerm = $derived((terms.find((t) => t.current) ?? terms[0])?.id);
-  const term = $derived(terms.some((t) => t.id === slot.term) ? slot.term : fallbackTerm);
-  const termLabel = (id) => terms.find((t) => t.id === id)?.label ?? id;
+  // slot.term is a string whenever it matches a term.
+  const term = $derived((terms.some((t) => t.id === slot.term) ? slot.term : fallbackTerm) as string | undefined);
+  const termLabel = (id: string | undefined) => terms.find((t) => t.id === id)?.label ?? id;
 
   const rows = $derived(
     slot.courses.map((c, i) => {
-      const sections = offerings[c.code]?.[term] ?? [];
+      const sections = (term && offerings[c.code]?.[term]) || [];
       return {
         code: c.code,
         picks: c.picks,
@@ -84,7 +98,7 @@
         offered: enrolOptions(sections).length > 0,
         elsewhere: terms.filter((t) => t.id !== term && offerings[c.code]?.[t.id]?.length),
         status: courseStatus(c.code, courses, done),
-        units: parseFloat(courses[c.code]?.units) || 0,
+        units: parseFloat(courses[c.code]?.units ?? '') || 0,
       };
     }),
   );
@@ -93,7 +107,7 @@
   );
   const conflicts = $derived(findConflicts(picked));
   const exams = $derived(examClashes(picked));
-  const events = $derived(
+  const events: GridEvent[] = $derived(
     picked.flatMap((p) =>
       meetings(p.section).map((m) => ({
         ...m,
@@ -120,7 +134,7 @@
     const s = slot;
     const t = term;
     untrack(() => {
-      if (s.term !== t) s.term = t;
+      if (s.term !== t) s.term = t ?? null;
       const current = rows; // snapshot: `rows` recomputes after each write
       if (!current.some((r) => r.offered && !r.complete)) return;
       const result = arrange(
@@ -143,15 +157,17 @@
   // ---- Section pickers ----
 
   // Meetings of everything picked except `code`'s sections other than `keep`.
-  function othersExcept(code, keep = []) {
+  type Row = (typeof rows)[number];
+
+  function othersExcept(code: string, keep: Section[] = []): Meeting[] {
     return picked.filter((p) => p.code !== code || keep.includes(p.section)).flatMap((p) => meetings(p.section));
   }
-  const clashes = (s, others) => meetings(s).some((m) => others.some((o) => overlaps(m, o)));
+  const clashes = (s: Section, others: Meeting[]) => meetings(s).some((m) => others.some((o) => overlaps(m, o)));
 
-  function timesOf(s) {
+  function timesOf(s: Section): string {
     const ms = meetings(s);
     if (!ms.length) return s.delivery === 'Online' ? 'Online' : 'No set times';
-    const parts = new Map();
+    const parts = new Map<string, string[]>();
     for (const m of ms) {
       const t = `${fmtMin(m.start)}–${fmtMin(m.end)}`;
       parts.set(t, [...(parts.get(t) ?? []), m.day]);
@@ -159,7 +175,7 @@
     return [...parts].map(([t, days]) => `${days.join(' ')} ${t}`).join(', ');
   }
 
-  function label(s, others, code) {
+  function label(s: Section, others: Meeting[] | null, code: string): string {
     const who = s.instructors?.length ? s.instructors.join(', ') : '';
     const where = s.delivery === 'Online' ? '' : s.campus;
     const seat = seatLabel(seats, term, code, s.section);
@@ -168,7 +184,7 @@
   }
 
   // Choosing a lecture re-picks its labs/tutorials to avoid clashes.
-  function pickEnrol(row, sectionName) {
+  function pickEnrol(row: Row, sectionName: string) {
     const sec = row.sections.find((s) => isEnrol(s) && s.section === sectionName);
     if (!sec) return;
     const items = rows.map((r) =>
@@ -184,7 +200,7 @@
     setPicks(row.code, arrange(items, { maxNodes: 20000 }).picks[i]);
   }
 
-  function pickComponent(row, key, sectionName) {
+  function pickComponent(row: Row, key: string, sectionName: string) {
     const picks = { ...row.picks };
     if (sectionName) picks[key] = sectionName;
     else delete picks[key];
@@ -194,7 +210,7 @@
   // ---- Auto-arrange ----
 
   let keepPicks = $state(true);
-  let arrangeMsg = $state(null);
+  let arrangeMsg = $state<{ ok: boolean; text: string } | null>(null);
   $effect(() => {
     scheduleState.active;
     term;
@@ -233,7 +249,7 @@
   let editing = $state(-1);
   let draftName = $state('');
 
-  function startRename(i) {
+  function startRename(i: number) {
     editing = i;
     draftName = scheduleState.slots[i].name;
   }
@@ -242,7 +258,7 @@
     editing = -1;
   }
 
-  function duplicateTo(to) {
+  function duplicateTo(to: number) {
     const target = scheduleState.slots[to];
     if (target.courses.length && !confirm(`Replace “${target.name}” with a copy of “${slot.name}”?`)) return;
     duplicateSlot(scheduleState.active, to);
@@ -254,13 +270,13 @@
     clearSlot(scheduleState.active);
   }
 
-  const focusName = (el) => {
+  const focusName = (el: HTMLInputElement) => {
     el.focus();
     el.select();
   };
 
-  const plural = (n, w) => `${n} ${w}${n === 1 ? '' : 's'}`;
-  const conflictText = (c) =>
+  const plural = (n: number, w: string) => `${n} ${w}${n === 1 ? '' : 's'}`;
+  const conflictText = (c: (typeof conflicts)[number]) =>
     `${c.a.code} ${c.a.section.section} × ${c.b.code} ${c.b.section.section} (${c.day} ${fmtMin(c.start)})`;
 </script>
 
@@ -327,7 +343,7 @@
 {/snippet}
 
 <!-- Picker label + select for a course's enrolment section and components. -->
-{#snippet pickers(row, others, small)}
+{#snippet pickers(row: Row, others: Meeting[], small: boolean)}
   <label>
     <span>{row.enrol ? typeOf(row.enrol) : 'Section'}</span>
     <select
@@ -363,7 +379,7 @@
   {/each}
 {/snippet}
 
-{#snippet seatLine(row)}
+{#snippet seatLine(row: Row)}
   {@const sum = seatSummary(seats, term, row.code, row.chosen)}
   {#if sum}
     <p class="seats">

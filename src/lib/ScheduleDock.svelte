@@ -1,11 +1,24 @@
 <!-- The schedule builder docked under the prerequisite map: a slim bar that
      opens into a resizable drawer, so you can build a timetable while looking
      at prerequisites. On phones the drawer is a full-height sheet. -->
-<script>
+<script lang="ts">
   import ScheduleBuilder from './schedule/ScheduleBuilder.svelte';
-  import { activeSlot } from './schedule/store.svelte.js';
+  import { activeSlot } from './schedule/store.svelte';
+  import type { Courses, Offerings, Taken, Term } from './types';
 
-  let { courses, terms, offerings, done, open = $bindable(false), onexpand, onopen } = $props();
+  interface Props {
+    courses: Courses;
+    terms: Term[];
+    offerings: Offerings;
+    done: Taken;
+    open?: boolean;
+    /** switch to the full schedule tab */
+    onexpand: () => void;
+    /** show a course's prerequisites */
+    onopen: (code: string) => void;
+  }
+
+  let { courses, terms, offerings, done, open = $bindable(false), onexpand, onopen }: Props = $props();
 
   const KEY = 'sfu-prereqs:dock-height';
   const MIN = 220;
@@ -24,10 +37,10 @@
   const maxHeight = () => Math.max(MIN, innerHeight - 260);
   const shown = $derived(Math.min(height, typeof innerHeight === 'number' ? maxHeight() : height));
 
-  function startDrag(e) {
+  function startDrag(e: PointerEvent) {
     e.preventDefault();
     dragging = true;
-    const move = (ev) => {
+    const move = (ev: PointerEvent) => {
       height = Math.round(Math.min(maxHeight(), Math.max(MIN, innerHeight - ev.clientY)));
     };
     const up = () => {
@@ -42,7 +55,7 @@
     addEventListener('pointerup', up);
   }
 
-  function onkeydown(e) {
+  function onkeydown(e: KeyboardEvent) {
     // Keyboard resizing for the handle.
     if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
       e.preventDefault();
@@ -63,6 +76,8 @@
 {/if}
 <section class="dock" class:open class:dragging style:--h="{shown}px" aria-label="Schedule">
   {#if open}
+    <!-- A focusable separator is the ARIA "window splitter" pattern. -->
+    <!-- svelte-ignore a11y_no_noninteractive_tabindex, a11y_no_noninteractive_element_interactions -->
     <div
       class="handle"
       role="separator"

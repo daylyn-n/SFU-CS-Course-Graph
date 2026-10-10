@@ -2,13 +2,28 @@
      description, prerequisites with the student's status, and (given terms
      and offerings) its sections with seat snapshots. Descriptions and seats
      are fetched lazily the first time any CourseDetails mounts. -->
-<script>
-  import { courseStatus } from './graph.js';
-  import { loadDetails, designationBadges } from './details.js';
-  import { loadSeats, seatInfo, describeSeats, formatAsOf, GOSFU_URL } from './seats.js';
+<script lang="ts">
+  import { courseStatus } from './graph';
+  import { loadDetails, designationBadges, type Details } from './details';
+  import { loadSeats, seatInfo, describeSeats, formatAsOf, GOSFU_URL, type SeatData } from './seats';
   import TermPills from './TermPills.svelte';
-  import { rmpUrl } from './links.js';
-  import { addToSchedule, isInSchedule } from './schedule/store.svelte.js';
+  import { rmpUrl } from './links';
+  import { addToSchedule, isInSchedule } from './schedule/store.svelte';
+  import type { Courses, Offerings, Status, Taken, Term } from './types';
+
+  interface Props {
+    code: string;
+    courses: Courses;
+    done: Taken;
+    terms?: Term[];
+    offerings?: Offerings;
+    /** show the course in the prerequisite map */
+    onopen?: ((code: string) => void) | null;
+    /** show an "Add to schedule" button */
+    showAdd?: boolean;
+    /** id for the heading, so a dialog can be labelled by it */
+    headingId?: string;
+  }
 
   let {
     code,
@@ -19,10 +34,10 @@
     onopen = null,
     showAdd = false,
     headingId = undefined,
-  } = $props();
+  }: Props = $props();
 
-  let details = $state(null); // null while loading
-  let seats = $state(null);
+  let details = $state<Details | null>(null); // null while loading
+  let seats = $state<SeatData | null>(null);
   $effect(() => {
     let live = true;
     loadDetails().then((d) => live && (details = d));
@@ -30,7 +45,7 @@
     return () => (live = false);
   });
 
-  const STATUS = {
+  const STATUS: Record<Status, string> = {
     done: 'Taken',
     ready: 'Can take now',
     locked: 'Prereqs missing',
@@ -136,7 +151,7 @@
                     title="Search Rate My Professors">{name} <small>RMP ↗</small></a
                   >{:else}Instructor TBA{/each}
               </div>
-              {#if d}
+              {#if seat && d}
                 <div class="seat seat-{d.level}">{d.text} · as of {formatAsOf(seat.asOf)}</div>
               {/if}
             </div>
