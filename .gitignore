@@ -1,3 +1,5 @@
 node_modules
 dist
 .claude/worktrees/
+.env.local
+.env.*.local

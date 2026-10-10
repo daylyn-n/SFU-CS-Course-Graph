@@ -13,6 +13,8 @@
   import PrereqList from './lib/PrereqList.svelte';
   import TermPills from './lib/TermPills.svelte';
   import Header from './lib/Header.svelte';
+  import CourseRatings from './lib/ratings/CourseRatings.svelte';
+  import ProfRating from './lib/ratings/ProfRating.svelte';
 
   const courses = data.courses;
   const nodeTypes = { course: CourseNode, junction: JunctionNode };
@@ -178,6 +180,8 @@
       {/if}
     </div>
 
+    {#if sel}<CourseRatings code={selected} />{/if}
+
     <h3>When it runs</h3>
     {#each terms as term (term.id)}
       {@const sections = offerings[selected]?.[term.id]}
@@ -195,9 +199,12 @@
             {#if s.schedule}<div class="muted">{s.schedule}</div>{/if}
             <div class="profs">
               {#each s.instructors as name}
-                <a href={rmpUrl(name)} target="_blank" rel="noopener" title="Search Rate My Professors"
-                  >{name} <span class="rmp">RMP ↗</span></a
-                >
+                <span class="prof">
+                  <a href={rmpUrl(name)} target="_blank" rel="noopener" title="Search Rate My Professors"
+                    >{name} <span class="rmp">RMP ↗</span></a
+                  >
+                  <ProfRating {name} course={selected} />
+                </span>
               {:else}
                 <span class="muted">Instructor TBA</span>
               {/each}
