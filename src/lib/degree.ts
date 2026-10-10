@@ -14,7 +14,7 @@
 // - Within a program, courses in an `equivalents` group (cross-listed
 //   courses) count once.
 
-import type { Courses, Taken } from './types';
+import type { Courses, Taken } from './types.ts';
 
 /** A set of courses: explicit codes and/or numeric ranges, minus exclusions. */
 export interface CourseSet {
@@ -43,12 +43,25 @@ export type Requirement =
   /** At least `courses` courses and/or `units` units from a set. */
   | (ReqBase & { kind: 'choose'; from: CourseSet; courses?: number; units?: number })
   /** One course in each of `count` distinct areas. */
-  | (ReqBase & { kind: 'areas'; count: number; areas: { name: string; codes: string[] }[] });
+  | (ReqBase & { kind: 'areas'; count: number; areas: { name: string; codes: string[] }[] })
+  /**
+   * Something that can't be checked automatically (calendar text we couldn't
+   * read). Shown as "check with an advisor"; never counts toward progress.
+   * `codes` are courses the text mentions, shown as taken/not taken.
+   */
+  | (ReqBase & { kind: 'note'; text: string; codes?: string[] });
 
 export interface RequirementSection {
   title: string;
+  /** Calendar prose for the section; lines separated by newlines. */
   note?: string;
   requirements: Requirement[];
+  /**
+   * Alternative sections (streams, concentrations): sections sharing a
+   * `group` are options, of which the student completes one. Only the best
+   * matching one counts; `optional` groups don't count at all.
+   */
+  choice?: { group: string; label?: string; optional?: boolean };
 }
 
 export interface Program {
@@ -63,9 +76,16 @@ export interface Program {
   equivalents?: string[][];
   /** Things the calendar leaves open, or that this model simplifies. */
   caveats?: string[];
+  /** Faculty offering the program. */
+  faculty?: string;
+  /** True when converted automatically from the calendar (not hand-written). */
+  converted?: boolean;
+  /** For hand-written programs: the calendar program id this replaces. */
+  calendarId?: string;
 }
 
-export type ReqStatus = 'met' | 'partial' | 'unmet';
+/** 'manual': a note requirement, which the student checks with an advisor. */
+export type ReqStatus = 'met' | 'partial' | 'unmet' | 'manual';
 
 export interface RequirementResult {
   req: Requirement;
@@ -85,13 +105,22 @@ export interface RequirementResult {
 export interface SectionResult {
   section: RequirementSection;
   results: RequirementResult[];
+  /**
+   * For alternative sections (streams): whether this is the one being
+   * counted (the best match). Unchosen alternatives are evaluated on their
+   * own for display but don't count toward the totals.
+   */
+  chosen?: boolean;
 }
 
 export interface ProgramResult {
   program: Program;
   sections: SectionResult[];
   met: number;
+  /** Requirements counted toward progress (excludes manual items and unchosen alternatives). */
   total: number;
+  /** Manual (advisor-check) items in the counted sections. */
+  manual: number;
   /** Fraction 0..1, giving partial credit by each requirement's own measure. */
   fraction: number;
   /** Units of taken courses counted by at least one requirement. */
@@ -129,6 +158,8 @@ function matches(req: Requirement, code: string): boolean {
       return inSet(code, req.from);
     case 'areas':
       return req.areas.some((a) => a.codes.includes(code));
+    case 'note':
+      return false;
   }
 }
 
@@ -143,6 +174,8 @@ function specificity(req: Requirement, catalog: string[]): number {
       return 10 + catalog.filter((c) => inSet(c, req.from)).length + (req.from.ranges ? 1000 : 0);
     case 'areas':
       return 10 + req.areas.reduce((n, a) => n + a.codes.length, 0);
+    case 'note':
+      return Infinity;
   }
 }
 
@@ -169,12 +202,14 @@ function matchAreas(areas: { codes: string[] }[], pool: string[]): Map<number, s
 
 const plural = (n: number, word: string) => `${n} ${word}${n === 1 ? '' : 's'}`;
 
-/**
- * Check `taken` against `program`. `courses` is the loaded catalog, used for
- * units and to list candidate courses for range requirements.
- */
-export function evaluateProgram(program: Program, taken: Taken, courses: Courses): ProgramResult {
-  const catalog = Object.keys(courses).sort();
+/** Evaluate a list of sections together (one allocation of courses). */
+function evaluateSections(
+  program: Program,
+  sectionList: RequirementSection[],
+  taken: Taken,
+  courses: Courses,
+  catalog: string[],
+): { results: Map<string, RequirementResult>; duplicates: string[] } {
   const units = (c: string) => unitsOf(c, courses);
 
   // Equivalent courses count once: keep the first taken one in each group.
@@ -191,9 +226,10 @@ export function evaluateProgram(program: Program, taken: Taken, courses: Courses
     program.equivalents?.find((g) => g.includes(code)) ?? [code];
   const takenAny = (code: string) => equivalentOf(code).some((c) => effective.has(c));
 
-  const all = program.sections.flatMap((s) => s.requirements);
-  const exclusive = all.filter((r) => !r.shared);
-  const shared = all.filter((r) => r.shared);
+  const all = sectionList.flatMap((s) => s.requirements);
+  const notes = all.filter((r) => r.kind === 'note');
+  const exclusive = all.filter((r) => !r.shared && r.kind !== 'note');
+  const shared = all.filter((r) => r.shared && r.kind !== 'note');
   const results = new Map<string, RequirementResult>();
   const used = new Map<string, string>(); // course -> exclusive requirement id
   const done = new Set<string>(); // exclusive requirement ids already filled
@@ -215,6 +251,7 @@ export function evaluateProgram(program: Program, taken: Taken, courses: Courses
     if (req.kind === 'course') list = [req.code];
     else if (req.kind === 'oneOf') list = [...new Set(req.options.flat())];
     else if (req.kind === 'areas') list = [...new Set(req.areas.flatMap((a) => a.codes))];
+    else if (req.kind === 'note') list = req.codes ?? [];
     else list = [...new Set([...(req.from.codes ?? []), ...catalog.filter((c) => inSet(c, req.from))])];
     return list.filter((c) => !takenAny(c));
   };
@@ -299,7 +336,7 @@ export function evaluateProgram(program: Program, taken: Taken, courses: Courses
       };
     } else if (req.kind === 'choose') {
       result = evalChoose(req, available(), true);
-    } else {
+    } else if (req.kind === 'areas') {
       const pool = available();
       const got = matchAreas(req.areas, pool);
       const counted = [...got.values()];
@@ -316,7 +353,7 @@ export function evaluateProgram(program: Program, taken: Taken, courses: Courses
           req.areas.some((a, i) => !got.has(i) && a.codes.includes(c)),
         ),
       };
-    }
+    } else continue; // notes never reach here
     for (const c of result.counted) used.set(c, req.id);
     if (result.status === 'met') done.add(req.id);
     results.set(req.id, result);
@@ -345,7 +382,7 @@ export function evaluateProgram(program: Program, taken: Taken, courses: Courses
           ? []
           : untakenCandidates(req).filter((c) => req.areas.some((a, i) => !got.has(i) && a.codes.includes(c))),
       };
-    } else {
+    } else if (req.kind === 'course' || req.kind === 'oneOf') {
       // A shared single course / one-of behaves like an exclusive one without claiming.
       const opts = req.kind === 'course' ? [[req.code]] : req.options;
       const best = opts.find((o) => o.every((c) => pool.includes(c)));
@@ -359,21 +396,86 @@ export function evaluateProgram(program: Program, taken: Taken, courses: Courses
         remaining: best ? '' : opts.map((o) => o.join(' + ')).join(' or '),
         candidates: best ? [] : untakenCandidates(req),
       };
-    }
+    } else continue;
     results.set(req.id, result);
   }
 
-  const sections = program.sections.map((section) => ({
-    section,
-    results: section.requirements.map((r) => results.get(r.id)!),
-  }));
-  const flat = sections.flatMap((s) => s.results);
-  const countedCourses = new Set(flat.flatMap((r) => r.counted));
+  // 3. Manual items: never met automatically; show which listed courses are taken.
+  for (const req of notes) {
+    if (req.kind !== 'note') continue;
+    results.set(req.id, {
+      req,
+      status: 'manual',
+      counted: (req.codes ?? []).filter((c) => takenAny(c)),
+      have: 0,
+      need: 0,
+      measure: 'courses',
+      remaining: '',
+      candidates: untakenCandidates(req),
+    });
+  }
+
+  return { results, duplicates };
+}
+
+const sectionFraction = (rs: RequirementResult[]) => {
+  const counted = rs.filter((r) => r.status !== 'manual');
+  return counted.length ? counted.reduce((n, r) => n + (r.need ? r.have / r.need : 1), 0) / counted.length : 0;
+};
+
+/**
+ * Check `taken` against `program`. `courses` is the loaded catalog, used for
+ * units and to list candidate courses for range requirements.
+ *
+ * Alternative sections (`choice` groups, e.g. streams) are tried one at a
+ * time alongside the rest of the program; the best match in each group is
+ * counted, and the others are shown with their own (uncounted) progress.
+ */
+export function evaluateProgram(program: Program, taken: Taken, courses: Courses): ProgramResult {
+  const catalog = Object.keys(courses).sort();
+  const units = (c: string) => unitsOf(c, courses);
+  const core = program.sections.filter((s) => !s.choice);
+  const groups = new Map<string, RequirementSection[]>();
+  for (const s of program.sections) if (s.choice) groups.set(s.choice.group, [...(groups.get(s.choice.group) ?? []), s]);
+
+  // Pick the best alternative in each group, trying each with the core sections.
+  const chosen = new Set<RequirementSection>();
+  const trial = new Map<RequirementSection, Map<string, RequirementResult>>();
+  for (const members of groups.values()) {
+    let best: RequirementSection | undefined;
+    let bestScore = -1;
+    for (const m of members) {
+      const { results } = evaluateSections(program, [...core, m], taken, courses, catalog);
+      trial.set(m, results);
+      const score = sectionFraction(m.requirements.map((r) => results.get(r.id)!));
+      if (score > bestScore) [best, bestScore] = [m, score];
+    }
+    if (best) chosen.add(best);
+  }
+
+  const active = program.sections.filter((s) => !s.choice || chosen.has(s));
+  const { results, duplicates } = evaluateSections(program, active, taken, courses, catalog);
+
+  const sections: SectionResult[] = program.sections.map((section) => {
+    const source = !section.choice || chosen.has(section) ? results : trial.get(section)!;
+    return {
+      section,
+      results: section.requirements.map((r) => source.get(r.id)!),
+      ...(section.choice ? { chosen: chosen.has(section) } : {}),
+    };
+  });
+  const countedSections = sections.filter((s) => !s.section.choice || (s.chosen && !s.section.choice.optional));
+  const all = countedSections.flatMap((s) => s.results);
+  const flat = all.filter((r) => r.status !== 'manual');
+  const countedCourses = new Set(
+    sections.filter((s) => !s.section.choice || s.chosen).flatMap((s) => s.results.filter((r) => r.status !== 'manual').flatMap((r) => r.counted)),
+  );
   return {
     program,
     sections,
     met: flat.filter((r) => r.status === 'met').length,
     total: flat.length,
+    manual: all.length - flat.length,
     fraction: flat.length ? flat.reduce((n, r) => n + (r.need ? r.have / r.need : 1), 0) / flat.length : 0,
     unitsCounted: [...countedCourses].reduce((n, c) => n + units(c), 0),
     duplicates,

@@ -5,6 +5,7 @@
 // The Table I concentration lists are shared by the major and the minor.
 
 import type { CourseSet, Program, Requirement } from '../lib/degree';
+import { CURATED_CALENDAR_IDS } from '../lib/programs/ids';
 
 const CAL = 'https://www.sfu.ca/students/calendar/2026/fall/programs';
 const CALENDAR = 'Fall 2026';
@@ -78,6 +79,7 @@ const req = (code: string): Requirement => ({ id: code, title: code, kind: 'cour
 export const PROGRAMS: Program[] = [
   {
     id: 'cmpt-major-bsc',
+    calendarId: CURATED_CALENDAR_IDS['cmpt-major-bsc'],
     name: 'Computing Science Major',
     credential: 'BSc',
     calendar: CALENDAR,
@@ -168,6 +170,7 @@ export const PROGRAMS: Program[] = [
   },
   {
     id: 'sosy-major-bsc',
+    calendarId: CURATED_CALENDAR_IDS['sosy-major-bsc'],
     name: 'Software Systems Major',
     credential: 'BSc',
     calendar: CALENDAR,
@@ -281,6 +284,7 @@ export const PROGRAMS: Program[] = [
   },
   {
     id: 'cmpt-minor',
+    calendarId: CURATED_CALENDAR_IDS['cmpt-minor'],
     name: 'Computing Science Minor',
     credential: 'Minor',
     calendar: CALENDAR,
@@ -322,4 +326,5 @@ export const PROGRAMS: Program[] = [
   },
 ];
 
+/** @deprecated The Degree tab now asks the student to pick; kept for old imports. */
 export const DEFAULT_PROGRAM = PROGRAMS[0].id;

@@ -48,6 +48,7 @@
   import SaveHint from './lib/account/SaveHint.svelte';
   import { sync, answerCopy, retrySync, signOutHere, deleteCloudData } from './lib/sync/controller.svelte';
   import { exportProgress } from './lib/shareActions.svelte';
+  import { loadProgramIndex, pickerOptions } from './lib/programs/load';
 
   interface Props {
     data: CourseData;
@@ -67,8 +68,13 @@
   let historyOpen = $state(false);
   const accounts = isAuthConfigured();
   let signInOpen = $state(false);
-  // Program list for the sign-up question (filled in by the Degree data).
+  // Program list for the sign-up question, fetched only when it's asked.
   let programChoices = $state<{ id: string; name: string; faculty?: string }[]>([]);
+  $effect(() => {
+    if (sync.programPrompt && !programChoices.length) {
+      loadProgramIndex().then((index) => (programChoices = pickerOptions(index)));
+    }
+  });
   // Ctrl/Cmd+Z everywhere except text fields and while a dialog (the command
   // palette, history, course details) is open.
   $effect(() => installUndoShortcuts(() => !!document.querySelector('dialog[open]')));
