@@ -13,6 +13,7 @@
   import PrereqList from './lib/PrereqList.svelte';
   import TermPills from './lib/TermPills.svelte';
   import Header from './lib/Header.svelte';
+  import PlanView from './lib/PlanView.svelte';
 
   const courses = data.courses;
   const nodeTypes = { course: CourseNode, junction: JunctionNode };
@@ -118,7 +119,7 @@
 />
 
 <main>
-  <section class="canvas" class:list={view === 'list'}>
+  <section class="canvas" class:list={view !== 'graph'}>
     {#if view === 'graph'}
       <SvelteFlow
         bind:nodes
@@ -144,6 +145,8 @@
         <span><TermPills terms={terms} /> offered (filled = this term)</span>
         <span class="hint">Tick a box to mark it taken · <b>+</b> shows more</span>
       </div>
+    {:else if view === 'plan'}
+      <PlanView {target} {courses} {done} {terms} {offerings} {selected} onselect={(c) => (selected = c)} />
     {:else}
       <ul class="tree">
         <PrereqList
