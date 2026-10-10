@@ -49,6 +49,8 @@
   import { sync, answerCopy, retrySync, signOutHere, deleteCloudData } from './lib/sync/controller.svelte';
   import { exportProgress } from './lib/shareActions.svelte';
   import { loadProgramIndex, pickerOptions } from './lib/programs/load';
+  import Welcome from './lib/Welcome.svelte';
+  import { scheduleState } from './lib/schedule/store.svelte';
 
   interface Props {
     data: CourseData;
@@ -67,6 +69,34 @@
   startAutosnap();
   let historyOpen = $state(false);
   const accounts = isAuthConfigured();
+
+  // First visit: a welcome screen before the app. Skipped for anyone who
+  // already has progress or an account, and for share links (the sender
+  // wants them to see the chart). A per-device preference, not synced.
+  const WELCOMED_KEY = 'sfu-prereqs:welcomed';
+  const codes = Object.keys(courses);
+  function alreadyWelcomed(): boolean {
+    try {
+      if (localStorage.getItem(WELCOMED_KEY)) return true;
+    } catch {}
+    return (
+      done.size > 0 ||
+      scheduleState.slots.some((s) => s.courses.length) ||
+      !!authState.user ||
+      /[?&]taken=/.test(location.hash)
+    );
+  }
+  let welcomed = $state(alreadyWelcomed());
+  function finishWelcome() {
+    welcomed = true;
+    try {
+      localStorage.setItem(WELCOMED_KEY, '1');
+    } catch {}
+  }
+  let programCount = $state(368);
+  $effect(() => {
+    if (!welcomed) loadProgramIndex().then((i) => i.length && (programCount = i.length));
+  });
   let signInOpen = $state(false);
   // Program list for the sign-up question, fetched only when it's asked.
   let programChoices = $state<{ id: string; name: string; faculty?: string }[]>([]);
@@ -308,6 +338,19 @@
   }}
 />
 
+{#if !welcomed}
+  <Welcome
+    courseCount={codes.length}
+    {programCount}
+    {terms}
+    {accounts}
+    onstart={finishWelcome}
+    onsignin={() => {
+      finishWelcome();
+      signInOpen = true;
+    }}
+  />
+{:else}
 <SaveError {target} />
 <Header
   {courses}
@@ -654,6 +697,7 @@
       onpick={setTarget}
     />
 
+    <button class="link-btn about" onclick={() => (welcomed = false)}>About this site</button>
     <p class="data-source">
       Data: SFU Academic Calendar ({data.term.replace('/', ' ')}) and course outlines, fetched
       {new Date(offeringData.fetched).toLocaleDateString()}. Prerequisites are parsed from the
@@ -667,6 +711,7 @@
 
 <CommandPalette {courses} {target} {done} onpick={setTarget} bind:view onhistory={() => (historyOpen = true)} />
 <HistoryPanel bind:open={historyOpen} owner={authState.user?.id ?? null} syncing={!!authState.user} />
+{/if}
 
 {#if accounts}
   <SignInDialog bind:open={signInOpen} askProgram={false} />
@@ -685,4 +730,4 @@
   {/if}
   {#if !authState.user}<SaveHint onsignin={() => (signInOpen = true)} />{/if}
 {/if}
-<ShareBanner {done} onpick={setTarget} />
+{#if welcomed}<ShareBanner {done} onpick={setTarget} />{/if}

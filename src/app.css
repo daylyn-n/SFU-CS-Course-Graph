@@ -711,3 +711,9 @@ h4.sub {
     display: none;
   }
 }
+
+.link-btn.about {
+  display: block;
+  margin: 22px 0 0;
+  font-size: 12.5px;
+}
