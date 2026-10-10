@@ -17,6 +17,8 @@
   import type { Courses, Offerings, Status, Term, View } from './lib/types';
   import ExploreView from './lib/ExploreView.svelte';
   import PlanView from './lib/PlanView.svelte';
+  import TimetableView from './lib/TimetableView.svelte';
+  import AddToTimetable from './lib/AddToTimetable.svelte';
 
   // JSON imports infer loose types (e.g. op: string), so assert the real shapes.
   const courses = data.courses as unknown as Courses;
@@ -183,6 +185,8 @@
       />
     {:else if view === 'plan'}
       <PlanView {target} {courses} {done} {terms} {offerings} {selected} onselect={(c) => (selected = c)} />
+    {:else if view === 'timetable'}
+      <TimetableView {courses} {terms} {offerings} onselect={(c) => (selected = c)} />
     {:else}
       <ul class="tree">
         <PrereqList
@@ -228,6 +232,7 @@
         {#each sections ?? [] as s (s.section)}
           <div class="section">
             <div class="section-head">
+              <AddToTimetable code={selected} termId={term.id} section={s.section} />
               <b>{s.section}</b>
               {[s.campus, s.delivery].filter(Boolean).join(' · ')}
             </div>
