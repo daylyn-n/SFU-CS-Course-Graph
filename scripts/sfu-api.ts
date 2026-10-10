@@ -3,10 +3,10 @@
 export const CALENDAR_API = 'https://www.sfu.ca/bin/wcm/academic-calendar';
 export const OUTLINES_API = 'https://www.sfu.ca/bin/wcm/course-outlines';
 
-const notFound = new Set();
+const notFound = new Set<string>();
 
-/** GET `${base}?${path}` as JSON, retrying; null if it never succeeds. */
-export async function getJson(base, path) {
+/** GET `${base}?${path}` as JSON, retrying; null if it never succeeds. Untyped: callers know the shape. */
+export async function getJson(base: string, path: string): Promise<any> {
   for (let attempt = 1; ; attempt++) {
     try {
       const res = await fetch(`${base}?${path}`);
@@ -15,8 +15,9 @@ export async function getJson(base, path) {
       return await res.json();
     } catch (err) {
       if (attempt >= 3) {
-        if (err.message === 'HTTP 404') notFound.add(path);
-        else console.warn(`  ! ${path}: ${err.message}`);
+        const message = (err as Error).message;
+        if (message === 'HTTP 404') notFound.add(path);
+        else console.warn(`  ! ${path}: ${message}`);
         return null;
       }
       await new Promise((r) => setTimeout(r, 500 * attempt));
@@ -25,16 +26,16 @@ export async function getJson(base, path) {
 }
 
 /** Paths that 404'd on every attempt, for a summary at the end. */
-export function missingPaths() {
+export function missingPaths(): string[] {
   return [...notFound];
 }
 
 /** Run fn over items with at most `limit` requests in flight. */
-export async function pool(items, limit, fn) {
+export async function pool<T>(items: Iterable<T>, limit: number, fn: (item: T) => Promise<unknown>): Promise<void> {
   const queue = [...items];
   await Promise.all(
     Array.from({ length: limit }, async () => {
-      while (queue.length) await fn(queue.shift());
+      while (queue.length) await fn(queue.shift()!);
     }),
   );
 }

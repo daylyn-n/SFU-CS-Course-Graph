@@ -1,6 +1,12 @@
 <!-- Small badges for the terms a course is offered in, e.g. "Fa26 Sp27". -->
-<script>
-  let { terms } = $props();
+<script lang="ts">
+  import type { Term } from './types';
+
+  interface Props {
+    terms: Term[];
+  }
+
+  let { terms }: Props = $props();
 </script>
 
 {#each terms as t (t.id)}
