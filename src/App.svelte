@@ -40,6 +40,14 @@
   import { installUndoShortcuts } from './lib/persist/undo.svelte';
   import HistoryPanel from './lib/persist/HistoryPanel.svelte';
   import SaveError from './lib/persist/SaveError.svelte';
+  import { authState, isAuthConfigured } from './lib/account/client';
+  import AccountButton from './lib/account/AccountButton.svelte';
+  import SignInDialog from './lib/account/SignInDialog.svelte';
+  import CopyPrompt from './lib/account/CopyPrompt.svelte';
+  import ProgramPrompt from './lib/account/ProgramPrompt.svelte';
+  import SaveHint from './lib/account/SaveHint.svelte';
+  import { sync, answerCopy, retrySync, signOutHere, deleteCloudData } from './lib/sync/controller.svelte';
+  import { exportProgress } from './lib/shareActions.svelte';
 
   interface Props {
     data: CourseData;
@@ -57,6 +65,10 @@
   // Version history: snapshots when edits settle and before bulk changes.
   startAutosnap();
   let historyOpen = $state(false);
+  const accounts = isAuthConfigured();
+  let signInOpen = $state(false);
+  // Program list for the sign-up question (filled in by the Degree data).
+  let programChoices = $state<{ id: string; name: string; faculty?: string }[]>([]);
   // Ctrl/Cmd+Z everywhere except text fields and while a dialog (the command
   // palette, history, course details) is open.
   $effect(() => installUndoShortcuts(() => !!document.querySelector('dialog[open]')));
@@ -299,7 +311,23 @@
   onpick={setTarget}
   isOffered={(code) => offeredIn(code).length > 0}
   bind:view
-/>
+>
+  {#snippet account()}
+    {#if accounts}
+      <AccountButton
+        status={authState.user ? sync.status : 'idle'}
+        lastSyncedAt={sync.lastSyncedAt}
+        onsignin={() => (signInOpen = true)}
+        onhistory={() => (historyOpen = true)}
+        onbackup={() => exportProgress(target)}
+        onsignout={signOutHere}
+        ondeletedata={deleteCloudData}
+        onretry={retrySync}
+        onreload={() => location.reload()}
+      />
+    {/if}
+  {/snippet}
+</Header>
 
 {#if view === 'schedule'}
   <ScheduleBuilder {courses} {terms} {offerings} done={known} onopen={showOnMap} />
@@ -632,5 +660,23 @@
 {/if}
 
 <CommandPalette {courses} {target} {done} onpick={setTarget} bind:view onhistory={() => (historyOpen = true)} />
-<HistoryPanel bind:open={historyOpen} owner={getDoc().owner} syncing={false} />
+<HistoryPanel bind:open={historyOpen} owner={authState.user?.id ?? null} syncing={!!authState.user} />
+
+{#if accounts}
+  <SignInDialog bind:open={signInOpen} askProgram={false} />
+  <CopyPrompt open={sync.copyPrompt} onanswer={answerCopy} />
+  {#if programChoices.length}
+    <ProgramPrompt
+      bind:open={sync.programPrompt}
+      programs={programChoices}
+      value={settings.program}
+      onpick={(id) => {
+        settings.program = id;
+        sync.programPrompt = false;
+      }}
+      onskip={() => (sync.programPrompt = false)}
+    />
+  {/if}
+  {#if !authState.user}<SaveHint onsignin={() => (signInOpen = true)} />{/if}
+{/if}
 <ShareBanner {done} onpick={setTarget} />

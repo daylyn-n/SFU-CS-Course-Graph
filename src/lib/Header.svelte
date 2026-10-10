@@ -1,6 +1,7 @@
 <script lang="ts">
   import { matchCourse, searchCourses } from './search';
   import CourseInput from './CourseInput.svelte';
+  import type { Snippet } from 'svelte';
   import type { Courses, Term, View } from './types';
 
   interface Props {
@@ -13,6 +14,8 @@
     /** is the course running in an upcoming term? (filters the quick picks) */
     isOffered?: ((code: string) => boolean) | null;
     view: View;
+    /** the account button (sign in / avatar), when accounts are set up */
+    account?: Snippet;
   }
 
   let {
@@ -23,6 +26,7 @@
     onpick,
     isOffered = null,
     view = $bindable(),
+    account,
   }: Props = $props();
 
   // Quick picks, skipping any that aren't in the data or not running soon.
@@ -128,6 +132,7 @@
       <button type="submit">Map it</button>
       {#if message}<div class="message" role="status">{message}</div>{/if}
     </form>
+    {#if account}<div class="account">{@render account()}</div>{/if}
   </div>
 
   <div class="row bottom">
@@ -218,6 +223,9 @@
     flex-wrap: wrap;
     align-items: center;
     gap: 10px 22px;
+  }
+  .account {
+    flex-shrink: 0;
   }
   .row.top {
     z-index: 2; /* search dropdown sits above the row below */
