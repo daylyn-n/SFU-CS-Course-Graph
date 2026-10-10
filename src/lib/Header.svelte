@@ -136,6 +136,7 @@
         <button class:on={view === 'graph'} onclick={() => (view = 'graph')}>Chart</button>
         <button class:on={view === 'list'} onclick={() => (view = 'list')}>List</button>
         <button class:on={view === 'explore'} onclick={() => (view = 'explore')}>Explore</button>
+        <button class:on={view === 'plan'} onclick={() => (view = 'plan')}>Plan</button>
       </div>
       <label>
         Levels

@@ -16,6 +16,7 @@
   import { setActions } from './lib/context';
   import type { Courses, Offerings, Status, Term, View } from './lib/types';
   import ExploreView from './lib/ExploreView.svelte';
+  import PlanView from './lib/PlanView.svelte';
 
   // JSON imports infer loose types (e.g. op: string), so assert the real shapes.
   const courses = data.courses as unknown as Courses;
@@ -162,6 +163,8 @@
           view = matchMedia('(max-width: 700px)').matches ? 'list' : 'graph';
         }}
       />
+    {:else if view === 'plan'}
+      <PlanView {target} {courses} {done} {terms} {offerings} {selected} onselect={(c) => (selected = c)} />
     {:else}
       <ul class="tree">
         <PrereqList
