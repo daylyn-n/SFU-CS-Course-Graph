@@ -76,6 +76,19 @@ export interface Program {
   equivalents?: string[][];
   /** Things the calendar leaves open, or that this model simplifies. */
   caveats?: string[];
+  /** GPA and grade rules, quoted from the calendar ("2.40 CGPA to continue") */
+  grades?: { label: string; text: string }[];
+  /**
+   * Optional areas of concentration (CS Table I): finishing one means `count`
+   * courses from an area, `minUpper` of them at `upperLevel` or above.
+   */
+  concentrations?: {
+    rule: string;
+    count: number;
+    minUpper?: number;
+    upperLevel?: number;
+    areas: { name: string; codes: string[] }[];
+  };
   /** Faculty offering the program. */
   faculty?: string;
   /** True when converted automatically from the calendar (not hand-written). */

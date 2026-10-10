@@ -411,7 +411,7 @@
         ontarget={showOnMap}
       />
     {:else if view === 'degree'}
-      <DegreeView {courses} done={known} {implied} {offeredIn} onselect={select} ontarget={showOnMap} />
+      <DegreeView {courses} done={known} {implied} {offeredIn} onselect={select} ontarget={showOnMap} ontoggle={toggleDone} />
     {:else if view === 'plan'}
       <PlanView {target} {courses} done={known} {terms} {offerings} {selected} onselect={select} />
     {:else}

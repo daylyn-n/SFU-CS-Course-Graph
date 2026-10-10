@@ -19,9 +19,11 @@
     ontarget: (code: string) => void;
     /** courses filled in from ticked ones; assumed ones count but are flagged */
     implied?: ReadonlyMap<string, { via: string; certain: boolean }>;
+    /** tick or untick a course as taken (the same as everywhere else in the app) */
+    ontoggle: (code: string) => void;
   }
 
-  let { courses, done, offeredIn = () => [], onselect, ontarget, implied = new Map() }: Props = $props();
+  let { courses, done, offeredIn = () => [], onselect, ontarget, implied = new Map(), ontoggle }: Props = $props();
   const isAssumed = (code: string) => implied.get(code)?.certain === false;
 
   const SUGGESTIONS = 6;
@@ -81,6 +83,23 @@
 
   const result = $derived(program ? evaluateProgram(program, done, courses) : null);
   const pct = $derived(result ? Math.round(result.fraction * 100) : 0);
+  // Optional concentrations (CS Table I): progress in each area.
+  const level = (code: string) => parseInt(code.split(' ')[1] ?? '', 10) || 0;
+  const concentrationResults = $derived.by(() => {
+    const c = program?.concentrations;
+    if (!c) return [];
+    return c.areas.map((a) => {
+      const have = a.codes.filter((code) => done.has(code));
+      const upper = have.filter((code) => level(code) >= (c.upperLevel ?? 400));
+      return {
+        name: a.name,
+        codes: a.codes,
+        have: have.length,
+        upper: upper.length,
+        complete: have.length >= c.count && upper.length >= (c.minUpper ?? 0),
+      };
+    });
+  });
   const counted = (s: SectionResult) => !s.section.choice || s.chosen;
   // Assumed courses (our guess at a "one of" route) that are counting here.
   const assumedCounted = $derived(
@@ -153,6 +172,39 @@
   </div>
 {/snippet}
 
+<!-- One click marks a course taken (or not), the same as the checkboxes on
+     the chart; the code opens its details. Unticking cascades as usual. -->
+{#snippet tick(code: string, size: 'big' | 'small')}
+  {@const taken = done.has(code)}
+  <button
+    type="button"
+    class="tick {size}"
+    class:on={taken}
+    class:assumed={taken && isAssumed(code)}
+    role="checkbox"
+    aria-checked={taken}
+    aria-label="{taken ? 'Untick' : 'Tick'} {code} as taken"
+    title={taken && isAssumed(code)
+      ? `Assumed taken (prerequisite of ${implied.get(code)?.via}). Click if you didn't take it.`
+      : taken
+        ? 'Taken. Click to untick'
+        : 'Click to mark as taken'}
+    onclick={() => ontoggle(code)}
+  >
+    {#if taken}<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7" /></svg>{/if}
+  </button>
+{/snippet}
+
+{#snippet chip(code: string)}
+  {@const taken = done.has(code)}
+  {@const st = taken ? 'done' : courseStatus(code, courses, done)}
+  <span class="cchip {st}" class:assumed={taken && isAssumed(code)}>
+    {@render tick(code, 'small')}
+    <button type="button" class="ccode" title="{courses[code]?.title ?? code}: details" onclick={() => onselect(code)}>{code}</button>
+    {#if !taken}<TermPills terms={offeredIn(code)} />{/if}
+  </span>
+{/snippet}
+
 <div class="degree">
   {#if loading}
     <p class="notice loading" role="status">Loading your program…</p>
@@ -193,6 +245,24 @@
         <div class="bar" aria-hidden="true"><div style:width="{pct}%"></div></div>
       </div>
     </div>
+
+    <p class="howto">
+      <span class="tick small demo" aria-hidden="true"></span> Tick a course to mark it taken · click a code for
+      details · <span class="key ready">can take now</span>
+      <span class="key unknown">check requirements</span>
+      <span class="key locked">prerequisites missing</span>
+    </p>
+
+    {#if program.grades?.length}
+      <section class="grades" aria-label="Grade requirements">
+        <h3>Grade requirements</h3>
+        <ul>
+          {#each program.grades as g (g.text)}
+            <li><b>{g.label}:</b> {g.text}</li>
+          {/each}
+        </ul>
+      </section>
+    {/if}
 
     {#if assumedCounted.length}
       <p class="notice assumed-note">
@@ -241,16 +311,15 @@
           <ul>
             {#each results as r (r.req.id)}
               {@const sugg = r.status === 'manual' ? [] : suggestions(r)}
-              <li class="req {r.status}">
-                <span class="icon" role="img" aria-label={r.status === 'manual' ? 'check with an advisor' : r.status}>
-                  {#if r.status === 'met'}
-                    <svg viewBox="0 0 16 16"><path d="M3.5 8.5l3 3 6-7" /></svg>
-                  {:else if r.status === 'partial'}
-                    <svg viewBox="0 0 16 16"><path d="M8 2.5a5.5 5.5 0 0 1 0 11z" class="half" /></svg>
-                  {:else if r.status === 'manual'}
-                    <svg viewBox="0 0 16 16"><path d="M8 4.5v4.2M8 11.3v.2" /></svg>
-                  {/if}
-                </span>
+              <li class="req {r.status}" class:group-req={r.req.kind !== 'course'}>
+                {#if r.req.kind === 'course'}
+                  {@const code = r.req.code}
+                  {@render tick(code, 'big')}
+                {:else}
+                  <!-- Groups ("one of", units, areas) are met by ticking their courses,
+                       so their status is a coloured edge, not something to click. -->
+                  <span class="sr-only">{r.status === 'manual' ? 'Check with an advisor' : r.status === 'met' ? 'Met' : r.status === 'partial' ? 'Partly met' : 'Not met'}</span>
+                {/if}
                 <div class="body">
                   <div class="head">
                     <span class="title">
@@ -275,12 +344,7 @@
                   {#if r.counted.length && r.req.kind !== 'course'}
                     <div class="chips">
                       {#each showAll[r.req.id] ? r.counted : r.counted.slice(0, 10) as code (code)}
-                        <button
-                          class="chip done"
-                          class:assumed={isAssumed(code)}
-                          title={isAssumed(code) ? `Assumed: prerequisite of ${implied.get(code)?.via}` : undefined}
-                          onclick={() => onselect(code)}>{code}</button
-                        >
+                        {@render chip(code)}
                       {/each}
                       {#if r.counted.length > 10 && !showAll[r.req.id]}
                         <button class="chip more" onclick={() => (showAll[r.req.id] = true)}>
@@ -294,7 +358,7 @@
                     {#if r.candidates.length}
                       <div class="chips">
                         {#each r.candidates.slice(0, 12) as code (code)}
-                          <button class="chip" title={courses[code]?.title ?? code} onclick={() => onselect(code)}>{code}</button>
+                          {@render chip(code)}
                         {/each}
                         {#if r.candidates.length > 12}<span class="chip more">+{r.candidates.length - 12}</span>{/if}
                       </div>
@@ -314,20 +378,7 @@
                     {:else if sugg.length}
                       <div class="chips suggest">
                         {#each sugg as s (s.code)}
-                          <span class="sugg {s.status}">
-                            <button class="chip" title={courses[s.code]?.title ?? s.code} onclick={() => onselect(s.code)}>
-                              {s.code}
-                              <TermPills terms={offeredIn(s.code)} />
-                            </button>
-                            <button
-                              class="map"
-                              title="Map prerequisites for {s.code}"
-                              aria-label="Map prerequisites for {s.code}"
-                              onclick={() => ontarget(s.code)}
-                            >
-                              <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5L12 8l-3.5 3.5" /></svg>
-                            </button>
-                          </span>
+                          {@render chip(s.code)}
                         {/each}
                       </div>
                     {/if}
@@ -339,6 +390,37 @@
         {/if}
       </section>
     {/each}
+
+    {#if program.concentrations && concentrationResults.length}
+      {@const done4 = concentrationResults.filter((c) => c.complete).length}
+      <section class="group concentrations">
+        <h3>
+          Concentrations
+          <span class="count" class:all={done4 > 0}>{done4} complete</span>
+        </h3>
+        <p class="note">{program.concentrations.rule}</p>
+        <div class="conc-grid">
+          {#each concentrationResults as c (c.name)}
+            {@const need = program.concentrations.count}
+            {@const needUpper = program.concentrations.minUpper ?? 0}
+            <div class="conc" class:complete={c.complete}>
+              <div class="conc-head">
+                <b>{c.name}</b>
+                {#if c.complete}<span class="conc-done">Complete</span>{/if}
+              </div>
+              <p class="conc-progress">
+                {Math.min(c.have, need)} of {need} courses · {Math.min(c.upper, needUpper)} of {needUpper} at the
+                {program.concentrations.upperLevel ?? 400} level
+              </p>
+              <div class="conc-bar" aria-hidden="true"><div style:width="{(Math.min(c.have, need) / need) * 100}%"></div></div>
+              <div class="chips">
+                {#each c.codes as code (code)}{@render chip(code)}{/each}
+              </div>
+            </div>
+          {/each}
+        </div>
+      </section>
+    {/if}
 
     {#if program.caveats?.length}
       <section class="group">
@@ -607,43 +689,232 @@
   .req + .req {
     border-top: 1px solid var(--border);
   }
-  .icon {
+  /* Groups are met by ticking their courses: status shows as the left edge. */
+  .req.group-req {
+    border-left: 3px solid var(--locked-border);
+  }
+  .req.group-req.met {
+    border-left-color: var(--done);
+  }
+  .req.group-req.partial {
+    border-left-color: var(--ready);
+  }
+  .req.group-req.manual {
+    border-left: 3px dashed var(--unknown);
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  /* The tick box: the same everywhere on this page. */
+  .tick {
+    all: unset;
+    box-sizing: border-box;
     flex-shrink: 0;
-    width: 18px;
-    height: 18px;
-    margin-top: 1px;
-    border-radius: 50%;
-    border: 1.5px solid var(--locked-border);
+    display: grid;
+    place-items: center;
+    border: 2px solid var(--locked-border);
+    border-radius: 5px;
+    background: var(--surface);
+    cursor: pointer;
+    transition:
+      border-color 0.12s,
+      background 0.12s;
   }
-  .icon svg {
-    display: block;
-    width: 100%;
-    height: 100%;
-    fill: none;
-    stroke: #fff;
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+  .tick.big {
+    width: 22px;
+    height: 22px;
   }
-  .req.met .icon {
+  .tick.small {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    border-width: 1.5px;
+  }
+  .tick:hover {
+    border-color: var(--done);
+  }
+  .tick:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  .tick.on {
     background: var(--done);
     border-color: var(--done);
   }
-  .req.partial .icon {
-    border-color: var(--ready);
-  }
-  .icon .half {
-    fill: var(--ready);
-    stroke: none;
-  }
-  .req.manual .icon {
-    border-color: var(--unknown);
+  .tick.on.assumed {
+    background: var(--done-bg);
     border-style: dashed;
   }
-  .req.manual .icon svg {
-    stroke: var(--unknown);
-    stroke-width: 2.2;
+  .tick svg {
+    width: 80%;
+    height: 80%;
+    fill: none;
+    stroke: #fff;
+    stroke-width: 2.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
   }
+  .tick.on.assumed svg {
+    stroke: var(--done);
+  }
+
+  /* Course chips: tick box, code (details), term badges. Colour = can I take it? */
+  .cchip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 9px 3px 5px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface);
+    font-size: 12px;
+  }
+  .cchip.ready {
+    border-color: var(--ready);
+    background: var(--ready-bg);
+  }
+  .cchip.unknown {
+    border-color: var(--unknown);
+    background: var(--unknown-bg);
+  }
+  .cchip.done {
+    border-color: var(--done);
+    background: var(--done-bg);
+  }
+  .cchip.done.assumed {
+    border-style: dashed;
+    background: transparent;
+  }
+  .ccode {
+    all: unset;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .ccode:hover {
+    text-decoration: underline;
+    color: var(--accent-text);
+  }
+  .cchip.ready .ccode {
+    color: var(--ready);
+  }
+  .cchip.unknown .ccode {
+    color: var(--unknown);
+  }
+  .cchip.done .ccode {
+    color: var(--done);
+  }
+
+  .howto {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 8px;
+    margin: 4px 2px 12px;
+    font-size: 12.5px;
+    color: var(--muted);
+  }
+  .tick.demo {
+    display: inline-block;
+    pointer-events: none;
+  }
+  .key {
+    padding: 0 8px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+  }
+  .key.ready {
+    border-color: var(--ready);
+    color: var(--ready);
+    background: var(--ready-bg);
+  }
+  .key.unknown {
+    border-color: var(--unknown);
+    color: var(--unknown);
+    background: var(--unknown-bg);
+  }
+
+  .grades {
+    margin: 0 0 16px;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 10px;
+    background: var(--surface);
+  }
+  .grades h3 {
+    margin: 0 0 4px;
+    font-size: 13px;
+  }
+  .grades ul {
+    margin: 0;
+    padding: 0 0 0 18px;
+    border: none;
+    border-radius: 0;
+    background: none;
+    overflow: visible;
+    list-style: disc;
+    font-size: 13px;
+  }
+  .grades li + li {
+    margin-top: 2px;
+  }
+
+  .conc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 10px;
+    margin-top: 8px;
+  }
+  .conc {
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+  }
+  .conc.complete {
+    border-color: var(--done);
+    background: var(--done-bg);
+  }
+  .conc-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .conc-done {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--done);
+  }
+  .conc-progress {
+    margin: 2px 0 6px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .conc-bar {
+    height: 5px;
+    border-radius: 999px;
+    background: var(--border);
+    overflow: hidden;
+  }
+  .conc-bar div {
+    height: 100%;
+    background: var(--done);
+    transition: width 0.3s;
+  }
+
+
+
+
+
+
+
   .manual-label {
     font-size: 12px;
     font-weight: 600;
@@ -747,15 +1018,8 @@
     font-size: 12px;
     border-radius: 999px;
   }
-  .chip.done {
-    border-color: var(--done);
-    color: var(--done);
-    background: var(--done-bg);
-  }
-  .chip.done.assumed {
-    border-style: dashed;
-    background: transparent;
-  }
+
+
   .assumed-tag {
     margin-left: 6px;
     font-size: 10.5px;
@@ -768,47 +1032,13 @@
   .chip.more {
     color: var(--muted);
   }
-  .sugg {
-    display: inline-flex;
-    align-items: stretch;
-  }
-  .sugg .chip {
-    border-radius: 999px 0 0 999px;
-    border-right: none;
-  }
-  .sugg.ready .chip,
-  .sugg.ready .map {
-    border-color: var(--ready);
-    color: var(--ready);
-    background: var(--ready-bg);
-  }
-  .sugg.unknown .chip,
-  .sugg.unknown .map {
-    border-color: var(--unknown);
-    color: var(--unknown);
-    background: var(--unknown-bg);
-  }
-  .map {
-    display: inline-flex;
-    align-items: center;
-    padding: 0 7px 0 5px;
-    border-radius: 0 999px 999px 0;
-    color: var(--muted);
-  }
-  .map svg {
-    width: 12px;
-    height: 12px;
-    fill: none;
-    stroke: currentColor;
-    stroke-width: 1.8;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-  }
-  .chip:hover,
-  .map:hover {
-    border-color: var(--accent);
-    color: var(--accent-text);
-  }
+
+
+
+
+
+
+
 
   .caveats {
     padding: 10px 14px 10px 30px;

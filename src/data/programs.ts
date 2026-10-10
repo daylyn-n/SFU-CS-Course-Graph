@@ -46,6 +46,26 @@ export const TABLE_I: { name: string; codes: string[] }[] = [
   },
 ];
 
+/**
+ * Areas of concentration (major and honours): "four courses in the
+ * corresponding Area as listed in Table I, two of which must be at the 400
+ * division". Optional, and courses may also count for other requirements.
+ */
+export const CS_CONCENTRATIONS = {
+  rule: 'Optional. A concentration is four courses from one area, at least two of them at the 400 level. They can also count toward your other requirements.',
+  count: 4,
+  minUpper: 2,
+  upperLevel: 400,
+  areas: TABLE_I,
+};
+
+/** Grade rules shared by the School of Computing Science's majors (calendar wording). */
+const CS_GRADES = [
+  { label: 'To stay in good standing', text: 'Students who do not maintain at least a 2.40 CGPA will be placed on probation within the school.' },
+  { label: 'For 200-, 300- and 400-level CMPT courses', text: 'A minimum 2.40 CGPA is required for 200, 300 and 400 division CMPT courses.' },
+  { label: 'To graduate', text: 'A GPA of 2.00 must be obtained for upper division courses used to fulfil the program requirements.' },
+];
+
 /** Table III – Computing Mathematics Courses. (Table II currently lists no courses.) */
 export const TABLE_III = ['MACM 316', 'MACM 401', 'MACM 442', 'MATH 308', 'MATH 340', 'MATH 343'];
 
@@ -161,6 +181,8 @@ export const PROGRAMS: Program[] = [
         ],
       },
     ],
+    grades: CS_GRADES,
+    concentrations: CS_CONCENTRATIONS,
     caveats: [
       'The BSc credential lists "two courses chosen from Table I, Table II or Table III" next to MACM 316. This reads it as MACM 316 plus two more courses, both beyond the 30 upper division CMPT units; check with an advisor.',
       'Breadth and depth are treated as overlapping the other requirements (a course can count for both), as the calendar says concentration courses may also meet other requirements.',
@@ -275,6 +297,7 @@ export const PROGRAMS: Program[] = [
         ],
       },
     ],
+    grades: CS_GRADES,
     caveats: [
       'The calendar doesn’t say whether CMPT 379/431/433 used for the capstone may also count toward the systems or software engineering lists. Here each course counts for only one of those three.',
       'CMPT 120/125 are not listed as substitutes for CMPT 130/135; ask an advisor if you took those.',
@@ -318,6 +341,10 @@ export const PROGRAMS: Program[] = [
           },
         ],
       },
+    ],
+    grades: [
+      { label: 'For 200-, 300- and 400-level CMPT courses', text: 'A minimum 2.40 cumulative grade point average (CGPA) is required for 200, 300 and 400 division computing courses.' },
+      { label: 'In the minor', text: 'A grade point average of 2.00 in these upper division courses is required.' },
     ],
     caveats: [
       'The list includes MATH 308, 340 and 343 (Table III) even though the 15-unit total names only CMPT or MACM courses, so a MATH course counts toward the 12 but not the 15.',

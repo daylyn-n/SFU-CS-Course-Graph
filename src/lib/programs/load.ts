@@ -4,7 +4,7 @@
 // versions and need no download. Nothing here touches localStorage: only the
 // chosen id is persisted, by persist/store (settings.program).
 
-import { PROGRAMS } from '../../data/programs';
+import { PROGRAMS, CS_CONCENTRATIONS } from '../../data/programs';
 import type { Program } from '../degree';
 import { CURATED_CALENDAR_IDS, type ProgramIndexEntry } from './ids';
 
@@ -46,6 +46,11 @@ export function loadProgramIndex(fetcher: typeof fetch = fetch): Promise<Program
   return indexPending;
 }
 
+// Concentrations the converter can't read from the calendar's tables.
+const CONCENTRATIONS: Record<string, NonNullable<Program['concentrations']>> = {
+  'computing-science~honours~bachelor-of-science-or-bachelor-of-arts': CS_CONCENTRATIONS,
+};
+
 const programs = new Map<string, Promise<Program | null>>();
 
 /**
@@ -62,6 +67,7 @@ export function loadProgram(id: string, fetcher: typeof fetch = fetch): Promise<
   if (!p) {
     p = fetcher(`${BASE}${cal}.json`)
       .then((r) => (r.ok ? (r.json() as Promise<Program>) : r.status === 404 ? null : Promise.reject(new Error(`HTTP ${r.status}`))))
+      .then((prog) => (prog && cal in CONCENTRATIONS ? { ...prog, concentrations: CONCENTRATIONS[cal] } : prog))
       .catch(() => {
         programs.delete(cal);
         return null;

@@ -67,6 +67,25 @@ await pool(areas, 6, async (area) => {
 });
 console.log(`  ${programArea.size} programs listed (${fromPages} only on the calendar pages)`);
 
+// The listings sometimes miss programs under load, which would silently drop
+// them from the app. So everything in the previous index is fetched too; a
+// program SFU really removed still drops out (fetchProgram finds nothing).
+let carried = 0;
+let previous: ProgramIndexEntry[] = [];
+try {
+  previous = JSON.parse(await readFile(new URL('index.json', OUT), 'utf8'));
+  for (const e of previous) {
+    const value = e.id.replaceAll('~', '/');
+    if (!programArea.has(value)) {
+      programArea.set(value, e.area ?? '');
+      carried++;
+    }
+  }
+} catch {
+  // No previous index (first run).
+}
+if (carried) console.log(`  + ${carried} programs from the previous index that the listings missed`);
+
 // 2. Each program; keep undergraduate degree programs, minors, certificates
 // and diplomas (not co-op programs or graduate programs).
 const raws = new Map<string, RawProgram>();
@@ -99,6 +118,23 @@ await pool(programArea.keys(), 6, async (value) => {
   if (raw.degreeLevel !== 'Undergraduate' || /co-operative|practicum/i.test(raw.awardType ?? '')) return;
   raws.set(value, raw);
 });
+// Programs we had last time but couldn't fetch now: the API fails under
+// load, so try again one at a time before letting any of them drop out.
+const retry = previous.map((e) => e.id.replaceAll('~', '/')).filter((v) => !raws.has(v));
+let recovered = 0;
+for (const value of retry) {
+  for (let attempt = 1; attempt <= 3 && !raws.has(value); attempt++) {
+    await new Promise((r) => setTimeout(r, 800 * attempt));
+    const raw = await fetchProgram(value);
+    if (raw && raw.degreeLevel === 'Undergraduate' && !/co-operative|practicum/i.test(raw.awardType ?? '')) {
+      raws.set(value, raw);
+      recovered++;
+      skipped--;
+    }
+  }
+  if (!raws.has(value)) console.warn(`  ! ${value}: in the previous index but not available now, dropped`);
+}
+if (recovered) console.log(`  recovered ${recovered} program(s) on retry`);
 if (skipped) console.log(`  (${skipped} listed programs had no usable calendar entry)`);
 
 // 3. Convert and write.

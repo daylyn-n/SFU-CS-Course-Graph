@@ -393,6 +393,8 @@ export function convertProgram(raw: RawProgram, opts: ConvertOptions): { program
   let group: NonNullable<RequirementSection['choice']> | undefined;
   let announced: string | undefined; // label of an announced choice ("concentration")
   let optional = false;
+  // GPA rules ("at least a 2.40 CGPA"), quoted from wherever they appear.
+  const grades: { label: string; text: string }[] = [];
 
   for (const [si, rs] of (raw.requirements ?? []).entries()) {
     if (!rs) continue;
@@ -401,6 +403,11 @@ export function convertProgram(raw: RawProgram, opts: ConvertOptions): { program
     if (!items.length) continue;
     const hasCourses = items.some((it) => it.description === undefined);
     const text = items.map((it) => (it.description ? cleanHtml(it.description) : '')).join(' ');
+    for (const sentence of text.split(/(?<=\.)\s+/)) {
+      if (/\b(c?gpa|grade point average)\b/i.test(sentence) && grades.length < 6 && !grades.some((g) => g.text === sentence)) {
+        grades.push({ label: title || 'Grades', text: sentence.trim() });
+      }
+    }
     // Admin sections (GPA, residency, admission...) are skipped, unless they
     // also state what to complete ("Upper Division Course Access and Requirements").
     if (!hasCourses && ADMIN_TITLE.test(title) && (DEGREE_LEVEL_TITLE.test(title) || !STATES_REQUIREMENT.test(text))) continue;
@@ -449,6 +456,7 @@ export function convertProgram(raw: RawProgram, opts: ConvertOptions): { program
     faculty: cleanHtml(raw.faculties?.[0]?.title ?? '') || undefined,
     converted: true,
     sections,
+    ...(grades.length ? { grades } : {}),
     caveats: [CONVERTED_CAVEAT],
   };
   return { program, stats: { understood: all.length - manual, manual } };
