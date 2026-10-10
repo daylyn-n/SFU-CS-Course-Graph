@@ -166,14 +166,24 @@
         <text x="40" y="45" text-anchor="middle">{pct}%</text>
       </svg>
       <div class="summary-text">
-        <div class="program-line">
-          <span class="eyebrow">Program</span>
-          <button class="link change" onclick={openChange}>Change</button>
-        </div>
-        <h2 class="program-name">
-          {program.name}{#if program.credential && !program.name.includes(program.credential)}
-            <span class="cred">{program.credential}</span>{/if}
-        </h2>
+        <span class="eyebrow">Your program</span>
+        <!-- The whole box opens the program picker, so it's obvious where to
+             click to change it. -->
+        <button
+          class="program-switch"
+          onclick={openChange}
+          aria-label="Change program (currently {program.name})"
+          title="Change program"
+        >
+          <h2 class="program-name">
+            {program.name}{#if program.credential && !program.name.includes(program.credential)}
+              <span class="cred">{program.credential}</span>{/if}
+          </h2>
+          <span class="change-cta" aria-hidden="true">
+            <svg viewBox="0 0 16 16"><path d="M2.5 5h9m0 0L9 2.5M11.5 5 9 7.5M13.5 11h-9m0 0L7 8.5M4.5 11 7 13.5" /></svg>
+            Change program
+          </span>
+        </button>
         <p class="stats">
           <b>{result.met}</b> of {result.total} requirements met · <b>{result.unitsCounted}</b> units counted
           {#if result.manual}
@@ -427,8 +437,62 @@
     outline-offset: 2px;
     border-radius: 3px;
   }
+  .program-switch {
+    all: unset;
+    box-sizing: border-box;
+    display: flex;
+    /* On narrow screens the button drops below the name instead of squeezing it. */
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    margin-top: 4px;
+    padding: 8px 8px 8px 12px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+    cursor: pointer;
+    transition:
+      border-color 0.15s,
+      box-shadow 0.15s;
+  }
+  .program-switch:hover {
+    border-color: var(--accent);
+    box-shadow: 0 2px 10px rgb(0 0 0 / 0.06);
+  }
+  .program-switch:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  .change-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: var(--sfu-red);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 650;
+    white-space: nowrap;
+  }
+  .program-switch:hover .change-cta {
+    background: var(--sfu-red-dark);
+  }
+  .change-cta svg {
+    width: 14px;
+    height: 14px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
   .program-name {
-    margin: 2px 0 0;
+    flex: 1 1 160px;
+    margin: 0;
     font-size: 16px;
     font-weight: 750;
     line-height: 1.3;
