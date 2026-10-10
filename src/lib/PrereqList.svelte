@@ -1,7 +1,7 @@
 <!-- Indented checklist version of the chart, for small screens. -->
 <script>
   import Self from './PrereqList.svelte';
-  import { courseStatus, satisfied } from './graph.js';
+  import { courseStatus, satisfied } from './graph';
   import TermPills from './TermPills.svelte';
 
   // tree: a course code string or { op, args }. `flat` is set for a course's

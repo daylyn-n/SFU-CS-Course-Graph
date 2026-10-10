@@ -1,11 +1,51 @@
 import dagre from '@dagrejs/dagre';
+import type { Courses, Prereq, Status, Taken, Term } from './types';
 
 // Rendered sizes of the node components. dagre needs these up front.
 export const COURSE_SIZE = { width: 200, height: 60 };
 export const JUNCTION_SIZE = { width: 64, height: 26 };
 
+export interface GraphOptions {
+  /** stop expanding past this many levels (Infinity = all) */
+  maxDepth?: number;
+  /** don't expand courses already taken */
+  hideTaken?: boolean;
+  /** courses to expand even past maxDepth */
+  expanded?: ReadonlySet<string>;
+  /** terms a course runs in */
+  offeredIn?: (code: string) => Term[];
+}
+
+export interface CourseNodeData {
+  code: string;
+  title: string;
+  status: Status;
+  missing: boolean;
+  isTarget: boolean;
+  collapsed: boolean;
+  offered: Term[];
+  [key: string]: unknown;
+}
+
+export interface JunctionNodeData {
+  label: 'one of' | 'all of';
+  met: boolean;
+  [key: string]: unknown;
+}
+
+export type GraphNode =
+  | { id: string; type: 'course'; data: CourseNodeData; position: { x: number; y: number } }
+  | { id: string; type: 'junction'; data: JunctionNodeData; position: { x: number; y: number } };
+
+export interface GraphEdge {
+  id: string;
+  source: string;
+  target: string;
+  class: string;
+}
+
 /** Is a prerequisite tree satisfied by the set of taken courses? */
-export function satisfied(tree, done) {
+export function satisfied(tree: Prereq | null | undefined, done: Taken): boolean {
   if (tree == null) return true;
   if (typeof tree === 'string') return done.has(tree);
   return tree.op === 'and'
@@ -14,7 +54,7 @@ export function satisfied(tree, done) {
 }
 
 /** 'done' | 'ready' (can take it now) | 'locked' */
-export function courseStatus(code, courses, done) {
+export function courseStatus(code: string, courses: Courses, done: Taken): Status {
   if (done.has(code)) return 'done';
   return satisfied(courses[code]?.prereq, done) ? 'ready' : 'locked';
 }
@@ -25,25 +65,19 @@ export function courseStatus(code, courses, done) {
  * Edges point from prerequisite to course. AND prerequisites connect straight
  * into the course (every incoming line is required). OR groups get a small
  * "one of" node, and an AND nested inside an OR gets an "all of" node.
- *
- * @param {object} opts
- * @param {number} opts.maxDepth  stop expanding past this many levels (Infinity = all)
- * @param {boolean} opts.hideTaken  don't expand courses already taken
- * @param {Set<string>} opts.expanded  courses to expand even past maxDepth
- * @param {(code: string) => object[]} opts.offeredIn  terms a course runs in
  */
 export function buildGraph(
-  target,
-  courses,
-  done,
-  { maxDepth = Infinity, hideTaken = true, expanded = new Set(), offeredIn = () => [] } = {},
-) {
-  const nodes = new Map();
-  const edges = [];
+  target: string,
+  courses: Courses,
+  done: Taken,
+  { maxDepth = Infinity, hideTaken = true, expanded = new Set(), offeredIn = () => [] }: GraphOptions = {},
+): { nodes: GraphNode[]; edges: GraphEdge[] } {
+  const nodes = new Map<string, Omit<GraphNode, 'position'>>();
+  const edges: GraphEdge[] = [];
   // Identical groups (e.g. "one of MATH 150, MATH 151") share one node.
-  const junctions = new Map();
+  const junctions = new Map<string, string>();
 
-  function addEdge(source, targetId, met) {
+  function addEdge(source: string, targetId: string, met: boolean) {
     if (edges.some((e) => e.source === source && e.target === targetId)) return;
     edges.push({
       id: `${source}->${targetId}`,
@@ -53,18 +87,19 @@ export function buildGraph(
     });
   }
 
-  const shouldExpand = (code, depth) =>
-    courses[code]?.prereq &&
+  const shouldExpand = (code: string, depth: number | undefined): boolean =>
+    !!courses[code]?.prereq &&
+    depth !== undefined &&
     (depth < maxDepth || expanded.has(code)) &&
     !(hideTaken && done.has(code));
 
   // Breadth-first pass so each course gets the depth of its shortest path
   // to the target, which decides where the depth cutoff lands.
-  const depthOf = new Map([[target, 0]]);
+  const depthOf = new Map<string, number>([[target, 0]]);
   const queue = [target];
   while (queue.length) {
-    const code = queue.shift();
-    const depth = depthOf.get(code);
+    const code = queue.shift()!;
+    const depth = depthOf.get(code)!;
     if (!shouldExpand(code, depth)) continue;
     for (const ref of codesIn(courses[code].prereq)) {
       if (!depthOf.has(ref)) {
@@ -74,7 +109,7 @@ export function buildGraph(
     }
   }
 
-  function visitCourse(code) {
+  function visitCourse(code: string) {
     if (nodes.has(code)) return;
     const course = courses[code];
     const expand = shouldExpand(code, depthOf.get(code));
@@ -91,11 +126,11 @@ export function buildGraph(
         offered: offeredIn(code),
       },
     });
-    if (expand) connect(course.prereq, code, true);
+    if (expand) connect(course.prereq!, code, true);
   }
 
   // Wire `tree` into the node `parentId`.
-  function connect(tree, parentId, parentIsCourse) {
+  function connect(tree: Prereq, parentId: string, parentIsCourse: boolean) {
     if (typeof tree === 'string') {
       visitCourse(tree);
       addEdge(tree, parentId, done.has(tree));
@@ -116,14 +151,15 @@ export function buildGraph(
     const key = JSON.stringify(tree);
     let id = junctions.get(key);
     if (!id) {
-      id = `j${junctions.size}`;
+      const newId = `j${junctions.size}`;
+      id = newId;
       junctions.set(key, id);
       nodes.set(id, {
         id,
         type: 'junction',
         data: { label: tree.op === 'or' ? 'one of' : 'all of', met },
       });
-      args.forEach((a) => connect(a, id, false));
+      args.forEach((a) => connect(a, newId, false));
     }
     addEdge(id, parentId, met);
   }
@@ -132,13 +168,14 @@ export function buildGraph(
   return layout([...nodes.values()], edges);
 }
 
-function codesIn(tree, out = []) {
+/** Every course code mentioned anywhere in a prerequisite tree. */
+export function codesIn(tree: Prereq | null | undefined, out: string[] = []): string[] {
   if (typeof tree === 'string') out.push(tree);
   else if (tree) tree.args.forEach((a) => codesIn(a, out));
   return out;
 }
 
-function layout(nodes, edges) {
+function layout(nodes: Omit<GraphNode, 'position'>[], edges: GraphEdge[]) {
   const g = new dagre.graphlib.Graph();
   g.setGraph({ rankdir: 'LR', nodesep: 18, ranksep: 70, marginx: 20, marginy: 20 });
   g.setDefaultEdgeLabel(() => ({}));
@@ -148,10 +185,10 @@ function layout(nodes, edges) {
   dagre.layout(g);
 
   return {
-    nodes: nodes.map((n) => {
+    nodes: nodes.map((n): GraphNode => {
       const { x, y, width, height } = g.node(n.id);
       // dagre gives centres; Svelte Flow wants top-left corners.
-      return { ...n, position: { x: x - width / 2, y: y - height / 2 } };
+      return { ...n, position: { x: x - width / 2, y: y - height / 2 } } as GraphNode;
     }),
     edges,
   };

@@ -6,7 +6,7 @@
 
   import data from './data/courses.json';
   import offeringData from './data/offerings.json';
-  import { buildGraph, courseStatus } from './lib/graph.js';
+  import { buildGraph, courseStatus } from './lib/graph';
   import CourseNode from './lib/CourseNode.svelte';
   import JunctionNode from './lib/JunctionNode.svelte';
   import FitOnChange from './lib/FitOnChange.svelte';
