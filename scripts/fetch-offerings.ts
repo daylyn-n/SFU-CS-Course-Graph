@@ -14,12 +14,8 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import type { Block, CourseData, Offerings, Section, Term } from '../src/lib/types.ts';
 import { OUTLINES_API, getJson as getJsonFrom, pool } from './sfu-api.ts';
+import { currentTerm, nextTerm, type TermRef } from './terms.ts';
 
-type Season = 'spring' | 'summer' | 'fall';
-interface TermRef {
-  year: number;
-  season: Season;
-}
 /** An entry in an outlines API list (years, terms, departments, courses). */
 interface ListItem {
   text: string;
@@ -52,20 +48,9 @@ const MAX_TERMS = Number(process.argv[2] ?? 3);
 const CONCURRENCY = 10;
 const COURSES = new URL('../public/data/courses.json', import.meta.url);
 const OUT = new URL('../public/data/offerings.json', import.meta.url);
-const SEASONS: Season[] = ['spring', 'summer', 'fall'];
 const DAYS = ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'];
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 const getJson = (path: string) => getJsonFrom(OUTLINES_API, path);
-
-// SFU terms: Spring Jan–Apr, Summer May–Aug, Fall Sep–Dec.
-function currentTerm(date = new Date()): TermRef {
-  return { year: date.getFullYear(), season: SEASONS[Math.floor(date.getMonth() / 4)] };
-}
-
-function nextTerm({ year, season }: TermRef): TermRef {
-  const i = SEASONS.indexOf(season);
-  return i === 2 ? { year: year + 1, season: 'spring' } : { year, season: SEASONS[i + 1] };
-}
 
 // The current term plus following terms, as long as SFU has published them.
 async function availableTerms(): Promise<Term[]> {

@@ -4,12 +4,16 @@
 //
 // Usage: node scripts/fetch-courses.ts [year/term] [dept ...]
 //   e.g. node scripts/fetch-courses.ts 2026/fall cmpt macm math stat
+// With no term given, uses the current term's calendar (or the latest one SFU
+// has published, see calendarTerm). The term is saved in courses.json, and
+// fetch-details and fetch-programs build from that same term.
 // With no departments given, fetches every department SFU publishes outlines for.
 
 import { writeFile, mkdir } from 'node:fs/promises';
 import type { Course, Prereq } from '../src/lib/types.ts';
 import { parsePrereqs } from './parse-prereqs.ts';
 import { CALENDAR_API, OUTLINES_API, getJson as getJsonFrom, missingPaths, pool } from './sfu-api.ts';
+import { calendarTerm } from './terms.ts';
 
 /** A department in the outlines API's current/current list. */
 interface OutlineDept {
@@ -29,7 +33,8 @@ interface CalendarCourse {
   prerequisites?: string;
 }
 
-const [term = '2026/fall', ...deptArgs] = process.argv.slice(2);
+const [termArg, ...deptArgs] = process.argv.slice(2);
+const term = termArg || (await calendarTerm());
 const OUT = new URL('../public/data/courses.json', import.meta.url);
 const getJson = (path: string) => getJsonFrom(CALENDAR_API, `${term}/courses/${path}`);
 

@@ -6,17 +6,19 @@
 // The app only ever downloads the chosen program's file.
 //
 // Usage: node scripts/fetch-programs.ts [year/term]   e.g. 2026/fall
+// With no term given, uses the calendar term public/data/courses.json was
+// built from, so programs and courses always come from the same calendar.
 
 import { mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { convertProgram, shortCredential, type RawProgram } from '../src/lib/programs/convert.ts';
 import { CURATED_CALENDAR_IDS, calendarUrl, programIdFromValue, type ProgramIndexEntry } from '../src/lib/programs/ids.ts';
 import { CALENDAR_API, getJson as getJsonFrom, pool } from './sfu-api.ts';
 
-const [term = '2026/fall'] = process.argv.slice(2);
-const [year, season] = term.split('/');
-const calendarName = `${season.charAt(0).toUpperCase()}${season.slice(1)} ${year}`;
 const OUT = new URL('../public/data/programs/', import.meta.url);
 const COURSES = new URL('../public/data/courses.json', import.meta.url);
+const term: string = process.argv[2] || JSON.parse(await readFile(COURSES, 'utf8')).term;
+const [year, season] = term.split('/');
+const calendarName = `${season.charAt(0).toUpperCase()}${season.slice(1)} ${year}`;
 const getJson = (path: string) => getJsonFrom(CALENDAR_API, `${term}/${path}`);
 
 interface Area {
