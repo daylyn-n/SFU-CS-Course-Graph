@@ -1,7 +1,7 @@
 <script lang="ts">
   import { untrack } from 'svelte';
-  import { SvelteSet } from 'svelte/reactivity';
-  import { SvelteFlow, Background, Controls } from '@xyflow/svelte';
+  import { SvelteMap, SvelteSet } from 'svelte/reactivity';
+  import { SvelteFlow, Background, Controls, ControlButton } from '@xyflow/svelte';
   import '@xyflow/svelte/dist/style.css';
 
   import data from './data/courses.json';
@@ -60,11 +60,17 @@
   const expanded = new SvelteSet<string>();
 
   const graph = $derived(buildGraph(target, courses, done, { maxDepth, hideTaken, expanded, offeredIn }));
+  // Where the user has dragged blocks to. Kept across re-layouts (ticking a
+  // box, expanding) and cleared when the target changes.
+  const moved = new SvelteMap<string, { x: number; y: number }>();
+  const placed = $derived(
+    graph.nodes.map((n) => (moved.has(n.id) ? { ...n, position: moved.get(n.id)! } : n)),
+  );
   // Svelte Flow needs writable arrays, so mirror the derived graph into state.
-  let nodes = $state.raw(untrack(() => graph.nodes));
+  let nodes = $state.raw(untrack(() => placed));
   let edges = $state.raw(untrack(() => graph.edges));
   $effect.pre(() => {
-    nodes = graph.nodes;
+    nodes = placed;
     edges = graph.edges;
   });
   const progress = $derived.by(() => {
@@ -91,6 +97,7 @@
     target = code;
     selected = code;
     expanded.clear();
+    moved.clear();
   }
 
   function toggleDone(code: string) {
@@ -130,15 +137,26 @@
         bind:edges
         {nodeTypes}
         fitView
-        nodesDraggable={false}
+        nodesDraggable
         nodesConnectable={false}
         elementsSelectable={false}
         minZoom={0.2}
         onnodeclick={({ node }) => node.type === 'course' && (selected = node.id)}
+        onnodedragstop={({ nodes: dragged }) => {
+          for (const n of dragged) moved.set(n.id, { ...n.position });
+        }}
         proOptions={{ hideAttribution: true }}
       >
         <Background gap={24} />
-        <Controls showLock={false} />
+        <Controls showLock={false}>
+          {#if moved.size}
+            <ControlButton onclick={() => moved.clear()} title="Reset layout" aria-label="Reset layout">
+              <svg viewBox="0 0 24 24" aria-hidden="true"
+                ><path d="M4 12a8 8 0 1 0 2.3-5.6M4 4v4h4" fill="none" stroke="currentColor" stroke-width="2.2" /></svg
+              >
+            </ControlButton>
+          {/if}
+        </Controls>
         <FitOnChange key={layoutKey} />
       </SvelteFlow>
       <div class="legend">
@@ -147,7 +165,7 @@
         <span><i class="locked"></i>Not yet</span>
         <span><i class="missing"></i>Not in data</span>
         <span><TermPills terms={terms} /> offered (filled = this term)</span>
-        <span class="hint">Tick a box to mark it taken · <b>+</b> shows more</span>
+        <span class="hint">Tick a box to mark it taken · <b>+</b> shows more · drag to rearrange</span>
       </div>
     {:else if view === 'explore'}
       <ExploreView
