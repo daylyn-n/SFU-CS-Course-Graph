@@ -13,6 +13,11 @@
   import PrereqList from './lib/PrereqList.svelte';
   import TermPills from './lib/TermPills.svelte';
   import Header from './lib/Header.svelte';
+  import CommandPalette from './lib/CommandPalette.svelte';
+  import ShareBanner from './lib/ShareBanner.svelte';
+  import ShareMenu from './lib/ShareMenu.svelte';
+  import ChartSnapshot from './lib/ChartSnapshot.svelte';
+  import { decodeShareHash } from './lib/share';
 
   const courses = data.courses;
   const nodeTypes = { course: CourseNode, junction: JunctionNode };
@@ -33,8 +38,8 @@
   }
 
   function codeFromHash() {
-    const code = decodeURIComponent(location.hash.slice(1)).replace('-', ' ');
-    return code in courses ? code : null;
+    const code = decodeShareHash(location.hash).target;
+    return code && code in courses ? code : null;
   }
 
   function loadTaken() {
@@ -135,6 +140,7 @@
         <Background gap={24} />
         <Controls showLock={false} />
         <FitOnChange key={layoutKey} />
+        <ChartSnapshot />
       </SvelteFlow>
       <div class="legend">
         <span><i class="done"></i>Taken</span>
@@ -230,6 +236,8 @@
       <p class="muted">Tick courses you've finished and the chart shows what you can take next.</p>
     {/if}
 
+    <ShareMenu {target} {done} onshowchart={() => (view = 'graph')} />
+
     <p class="source">
       Data: SFU Academic Calendar ({data.term.replace('/', ' ')}) and course outlines, fetched
       {new Date(offeringData.fetched).toLocaleDateString()}. Prerequisites are parsed from the
@@ -238,3 +246,6 @@
     </p>
   </aside>
 </main>
+
+<CommandPalette {courses} {target} {done} onpick={setTarget} bind:view />
+<ShareBanner {done} onpick={setTarget} />

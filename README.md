@@ -14,6 +14,9 @@ npm run dev
 ```
 
 Link straight to a course with the URL hash, e.g. `http://localhost:5173/#CMPT-410`.
+Share links can carry taken courses too (`#CMPT-410?taken=CMPT120,MACM101`); the
+app asks before importing them. Press Cmd/Ctrl+K for the command palette.
+`npm test` runs the unit tests.
 
 ## Course data
 
