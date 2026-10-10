@@ -13,6 +13,7 @@
   import PrereqList from './lib/PrereqList.svelte';
   import TermPills from './lib/TermPills.svelte';
   import Header from './lib/Header.svelte';
+  import DegreeView from './lib/DegreeView.svelte';
 
   const courses = data.courses;
   const nodeTypes = { course: CourseNode, junction: JunctionNode };
@@ -118,7 +119,7 @@
 />
 
 <main>
-  <section class="canvas" class:list={view === 'list'}>
+  <section class="canvas" class:list={view === 'list' || view === 'degree'}>
     {#if view === 'graph'}
       <SvelteFlow
         bind:nodes
@@ -144,6 +145,17 @@
         <span><TermPills terms={terms} /> offered (filled = this term)</span>
         <span class="hint">Tick a box to mark it taken · <b>+</b> shows more</span>
       </div>
+    {:else if view === 'degree'}
+      <DegreeView
+        {courses}
+        {done}
+        {offeredIn}
+        onselect={(c) => (selected = c)}
+        ontarget={(c) => {
+          setTarget(c);
+          view = matchMedia('(max-width: 700px)').matches ? 'list' : 'graph';
+        }}
+      />
     {:else}
       <ul class="tree">
         <PrereqList
