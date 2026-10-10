@@ -18,6 +18,8 @@
   --locked-border: #c4c4c8;
   --locked-bg: #ffffff;
   --term: var(--sfu-red);
+  --unknown: #b26a00;
+  --unknown-bg: #fff6e6;
   color-scheme: light;
 }
 
@@ -35,8 +37,10 @@
     --done-bg: #1c3325;
     --ready: #6e9ff0;
     --ready-bg: #1d2a42;
-    --locked-border: #4a4a52;
-    --locked-bg: #26262b;
+    --locked-border: #5c5458;
+    --locked-bg: #2b2729;
+    --unknown: #e7a94b;
+    --unknown-bg: #3a2c16;
     --term: #f2788a;
     color-scheme: dark;
   }
@@ -44,6 +48,12 @@
 
 * {
   box-sizing: border-box;
+}
+
+.boot {
+  margin: auto;
+  color: var(--muted);
+  font-size: 15px;
 }
 
 html,
@@ -151,6 +161,11 @@ main {
   border-style: dashed;
 }
 
+.legend i.unknown {
+  border-color: var(--unknown);
+  background: var(--unknown-bg);
+}
+
 aside {
   width: 320px;
   flex-shrink: 0;
@@ -196,6 +211,147 @@ aside h3 {
 
 .status.ready {
   color: var(--ready);
+}
+
+.status.unknown {
+  color: var(--unknown);
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 8px 0 0;
+}
+
+.badge {
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--ready);
+  background: var(--ready-bg);
+}
+
+.badge b {
+  color: var(--ready);
+}
+
+.desc {
+  margin: 10px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.desc.clamped {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.seat {
+  font-size: 12.5px;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.seat-open {
+  color: var(--done);
+}
+
+.seat-tight {
+  color: var(--unknown);
+}
+
+.seat-full {
+  color: var(--accent-text);
+}
+
+.gosfu {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent-text);
+  text-decoration: none;
+}
+
+.gosfu:hover {
+  text-decoration: underline;
+}
+
+.muted.small {
+  font-size: 12.5px;
+  margin-bottom: 6px;
+}
+
+.next-or {
+  margin: 4px 0 0;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+
+.next-item.alt {
+  margin-left: 10px;
+}
+
+.notice {
+  margin: 10px 0 0;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 13px;
+  background: var(--ready-bg);
+  border: 1px solid var(--ready);
+  animation: pop 0.25s ease-out;
+}
+
+.notice.warn {
+  background: var(--unknown-bg);
+  border-color: var(--unknown);
+}
+
+.link-btn {
+  all: unset;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--accent-text);
+  margin-left: 4px;
+}
+
+.link-btn:hover {
+  text-decoration: underline;
+}
+
+@keyframes pop {
+  from {
+    transform: translateY(-4px);
+    opacity: 0;
+  }
+}
+
+.add-taken {
+  display: flex;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.add-taken input {
+  flex: 1;
+  min-width: 0;
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+}
+
+.error {
+  margin: 6px 0 0;
+  font-size: 12px;
+  color: var(--accent-text);
 }
 
 .actions {
@@ -305,6 +461,42 @@ aside h2 {
   opacity: 0.75;
 }
 
+.next {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.next-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 8px;
+  text-align: left;
+  padding: 6px 10px;
+  border-color: var(--ready);
+  background: var(--ready-bg);
+}
+
+.next-item:hover {
+  border-color: var(--accent);
+}
+
+.next-title {
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.next-terms {
+  display: flex;
+  gap: 3px;
+  font-size: 11px;
+}
+
 /* Svelte Flow theming */
 .svelte-flow {
   --xy-background-color: var(--bg);
@@ -324,11 +516,36 @@ aside h2 {
 
 .svelte-flow__node {
   cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.svelte-flow__node:focus-visible {
+  outline: none;
+}
+
+.svelte-flow__node:focus-visible .course {
+  box-shadow: 0 0 0 3px var(--accent);
 }
 
 @media (max-width: 700px) {
+  html,
+  body,
+  #app {
+    height: auto;
+    min-height: 100%;
+  }
+
   main {
     flex-direction: column;
+  }
+
+  .canvas.list {
+    overflow: visible;
+    min-height: 0;
+  }
+
+  .canvas:not(.list) {
+    height: 70vh;
   }
 
   .canvas {

@@ -59,6 +59,11 @@
     border-color: var(--ready);
     background: var(--ready-bg);
   }
+  .course.unknown {
+    border-color: var(--unknown);
+    border-style: dashed;
+    background: var(--unknown-bg);
+  }
   .course.done {
     border-color: var(--done);
     background: var(--done-bg);

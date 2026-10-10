@@ -7,8 +7,11 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "fetch-data": "node scripts/fetch-courses.mjs && node scripts/fetch-offerings.mjs",
-    "fetch-offerings": "node scripts/fetch-offerings.mjs"
+    "fetch-data": "node scripts/fetch-courses.mjs && node scripts/fetch-details.mjs && node scripts/fetch-offerings.mjs && node scripts/fetch-seats.mjs",
+    "fetch-offerings": "node scripts/fetch-offerings.mjs",
+    "test": "node --test 'scripts/*.test.mjs' 'src/**/*.test.mjs'",
+    "fetch-details": "node scripts/fetch-details.mjs",
+    "fetch-seats": "node scripts/fetch-seats.mjs"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^7.3.1",
