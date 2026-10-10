@@ -261,21 +261,43 @@
   {terms}
   onpick={setTarget}
   isOffered={(code) => offeredIn(code).length > 0}
-  ondock={() => {
-    view = 'graph';
-    dockOpen = true;
-  }}
   bind:view
-  bind:maxDepth
-  bind:hideTaken
 />
 
 {#if view === 'schedule'}
   <ScheduleBuilder {courses} {terms} {offerings} done={known} onopen={showOnMap} />
+  <button
+    class="dock-fab"
+    onclick={() => {
+      view = 'graph';
+      dockOpen = true;
+    }}
+    title="Show the schedule under the prerequisite map">Dock under map ↙</button
+  >
 {:else}
 <main>
-  <section class="canvas" class:list={view !== 'graph'}>
+  <section class="canvas" class:list={view !== 'graph'} class:graph={view === 'graph'}>
+    {#snippet viewOptions()}
+      <!-- Chart/List options live with the chart, not in the header, so the
+           header (and its tabs) look the same on every view. -->
+      <div class="view-bar">
+        <label>
+          Levels
+          <select bind:value={maxDepth}>
+            {#each [1, 2, 3, 4] as d}<option value={d}>{d}</option>{/each}
+            <option value={Infinity}>All</option>
+          </select>
+        </label>
+        <label class="switch-label">
+          <input type="checkbox" bind:checked={hideTaken} />
+          <span class="switch" aria-hidden="true"></span>
+          Hide prereqs of taken courses
+        </label>
+      </div>
+    {/snippet}
     {#if view === 'graph'}
+      {@render viewOptions()}
+      <div class="flow">
       <SvelteFlow
         bind:nodes
         bind:edges
@@ -305,6 +327,7 @@
         <span><TermPills terms={terms} /> offered (filled = this term)</span>
         <span class="hint">Tick a box to mark it taken · <b>+</b> shows more</span>
       </div>
+      </div>
     {:else if view === 'explore'}
       <ExploreView
         {courses}
@@ -321,6 +344,7 @@
     {:else if view === 'plan'}
       <PlanView {target} {courses} done={known} {terms} {offerings} {selected} onselect={select} />
     {:else}
+      {@render viewOptions()}
       <ul class="tree">
         <PrereqList
           tree={target}
