@@ -13,6 +13,8 @@
   import PrereqList from './lib/PrereqList.svelte';
   import TermPills from './lib/TermPills.svelte';
   import Header from './lib/Header.svelte';
+  import TimetableView from './lib/TimetableView.svelte';
+  import AddToTimetable from './lib/AddToTimetable.svelte';
 
   const courses = data.courses;
   const nodeTypes = { course: CourseNode, junction: JunctionNode };
@@ -144,6 +146,8 @@
         <span><TermPills terms={terms} /> offered (filled = this term)</span>
         <span class="hint">Tick a box to mark it taken · <b>+</b> shows more</span>
       </div>
+    {:else if view === 'timetable'}
+      <TimetableView {courses} {terms} {offerings} onselect={(c) => (selected = c)} />
     {:else}
       <ul class="tree">
         <PrereqList
@@ -189,6 +193,7 @@
         {#each sections ?? [] as s (s.section)}
           <div class="section">
             <div class="section-head">
+              <AddToTimetable code={selected} termId={term.id} section={s.section} />
               <b>{s.section}</b>
               {[s.campus, s.delivery].filter(Boolean).join(' · ')}
             </div>
