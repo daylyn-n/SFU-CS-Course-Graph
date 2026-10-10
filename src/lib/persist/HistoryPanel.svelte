@@ -41,7 +41,7 @@
       load();
     } else if (!open && dialog.open) dialog.close();
   });
-  // Reload if the owner changes while open (signing in or out).
+  // Reload if the owner changes while open.
   $effect(() => {
     owner;
     if (dialog?.open) load();

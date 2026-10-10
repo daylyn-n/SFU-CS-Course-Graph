@@ -30,9 +30,6 @@
   import ShareMenu from './lib/ShareMenu.svelte';
   import ChartSnapshot from './lib/ChartSnapshot.svelte';
   import { decodeShareHash } from './lib/share';
-  import CourseRatings from './lib/ratings/CourseRatings.svelte';
-  import ProfRating from './lib/ratings/ProfRating.svelte';
-  import { setRatingsData } from './lib/ratings/context';
   import { inferTaken, untick } from './lib/implied';
   import { flash } from './lib/shareActions.svelte';
   import { done, notTaken, settings, getDoc } from './lib/persist/store.svelte';
@@ -40,15 +37,7 @@
   import { installUndoShortcuts } from './lib/persist/undo.svelte';
   import HistoryPanel from './lib/persist/HistoryPanel.svelte';
   import SaveError from './lib/persist/SaveError.svelte';
-  import { authState, isAuthConfigured } from './lib/account/client';
-  import AccountButton from './lib/account/AccountButton.svelte';
-  import SignInDialog from './lib/account/SignInDialog.svelte';
-  import CopyPrompt from './lib/account/CopyPrompt.svelte';
-  import ProgramPrompt from './lib/account/ProgramPrompt.svelte';
-  import SaveHint from './lib/account/SaveHint.svelte';
-  import { sync, answerCopy, retrySync, signOutHere, deleteCloudData } from './lib/sync/controller.svelte';
-  import { exportProgress } from './lib/shareActions.svelte';
-  import { loadProgramIndex, pickerOptions } from './lib/programs/load';
+  import { loadProgramIndex } from './lib/programs/load';
   import Welcome from './lib/Welcome.svelte';
   import { scheduleState } from './lib/schedule/store.svelte';
 
@@ -63,15 +52,13 @@
 
   const { terms, offerings } = untrack(() => offeringData);
   setScheduleData({ terms, offerings });
-  setRatingsData({ terms, offerings });
 
   // Version history: snapshots when edits settle and before bulk changes.
   startAutosnap();
   let historyOpen = $state(false);
-  const accounts = isAuthConfigured();
 
   // First visit: a welcome screen before the app. Skipped for anyone who
-  // already has progress or an account, and for share links (the sender
+  // already has progress, and for share links (the sender
   // wants them to see the chart). A per-device preference, not synced.
   const WELCOMED_KEY = 'sfu-prereqs:welcomed';
   const codes = Object.keys(courses);
@@ -82,7 +69,6 @@
     return (
       done.size > 0 ||
       scheduleState.slots.some((s) => s.courses.length) ||
-      !!authState.user ||
       /[?&]taken=/.test(location.hash)
     );
   }
@@ -96,14 +82,6 @@
   let programCount = $state(368);
   $effect(() => {
     if (!welcomed) loadProgramIndex().then((i) => i.length && (programCount = i.length));
-  });
-  let signInOpen = $state(false);
-  // Program list for the sign-up question, fetched only when it's asked.
-  let programChoices = $state<{ id: string; name: string; faculty?: string }[]>([]);
-  $effect(() => {
-    if (sync.programPrompt && !programChoices.length) {
-      loadProgramIndex().then((index) => (programChoices = pickerOptions(index)));
-    }
   });
   // Ctrl/Cmd+Z everywhere except text fields and while a dialog (the command
   // palette, history, course details) is open.
@@ -343,12 +321,7 @@
     courseCount={codes.length}
     {programCount}
     {terms}
-    {accounts}
     onstart={finishWelcome}
-    onsignin={() => {
-      finishWelcome();
-      signInOpen = true;
-    }}
   />
 {:else}
 <SaveError {target} />
@@ -360,23 +333,7 @@
   onpick={setTarget}
   isOffered={(code) => offeredIn(code).length > 0}
   bind:view
->
-  {#snippet account()}
-    {#if accounts}
-      <AccountButton
-        status={authState.user ? sync.status : 'idle'}
-        lastSyncedAt={sync.lastSyncedAt}
-        onsignin={() => (signInOpen = true)}
-        onhistory={() => (historyOpen = true)}
-        onbackup={() => exportProgress(target)}
-        onsignout={signOutHere}
-        ondeletedata={deleteCloudData}
-        onretry={retrySync}
-        onreload={() => location.reload()}
-      />
-    {/if}
-  {/snippet}
-</Header>
+/>
 
 {#if view === 'schedule'}
   <ScheduleBuilder {courses} {terms} {offerings} done={known} onopen={showOnMap} />
@@ -531,8 +488,6 @@
       {/if}
     {/key}
 
-    {#if sel}<CourseRatings code={selected} />{/if}
-
     <h3>Next steps toward {target}</h3>
     {#if known.has(target)}
       <p class="muted">You've taken {target}. Nice!</p>
@@ -590,12 +545,9 @@
             {/if}
             <div class="profs">
               {#each s.instructors ?? [] as name}
-                <span class="prof">
-                  <a href={rmpUrl(name)} target="_blank" rel="noopener" title="Search Rate My Professors"
-                    >{name} <span class="rmp">RMP ↗</span></a
-                  >
-                  <ProfRating {name} course={selected} />
-                </span>
+                <a href={rmpUrl(name)} target="_blank" rel="noopener" title="Search Rate My Professors"
+                  >{name} <span class="rmp">RMP ↗</span></a
+                >
               {:else}
                 <span class="muted">Instructor TBA</span>
               {/each}
@@ -710,24 +662,7 @@
 {/if}
 
 <CommandPalette {courses} {target} {done} onpick={setTarget} bind:view onhistory={() => (historyOpen = true)} />
-<HistoryPanel bind:open={historyOpen} owner={authState.user?.id ?? null} syncing={!!authState.user} />
+<HistoryPanel bind:open={historyOpen} owner={null} syncing={false} />
 {/if}
 
-{#if accounts}
-  <SignInDialog bind:open={signInOpen} askProgram={false} />
-  <CopyPrompt open={sync.copyPrompt} onanswer={answerCopy} />
-  {#if programChoices.length}
-    <ProgramPrompt
-      bind:open={sync.programPrompt}
-      programs={programChoices}
-      value={settings.program}
-      onpick={(id) => {
-        settings.program = id;
-        sync.programPrompt = false;
-      }}
-      onskip={() => (sync.programPrompt = false)}
-    />
-  {/if}
-  {#if !authState.user}<SaveHint onsignin={() => (signInOpen = true)} />{/if}
-{/if}
 {#if welcomed}<ShareBanner {done} onpick={setTarget} />{/if}

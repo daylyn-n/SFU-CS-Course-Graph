@@ -6,13 +6,10 @@
     courseCount: number;
     programCount?: number;
     terms: Term[];
-    /** accounts are set up, so offer signing in too */
-    accounts: boolean;
     onstart: () => void;
-    onsignin?: () => void;
   }
 
-  let { courseCount, programCount = 368, terms, accounts, onstart, onsignin }: Props = $props();
+  let { courseCount, programCount = 368, terms, onstart }: Props = $props();
 
   const termText = $derived(terms.map((t) => t.label).join(' and '));
   const fmt = (n: number) => n.toLocaleString('en-CA');
@@ -76,9 +73,7 @@
           <svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6z" /><path d="M8.5 12l2.5 2.5 4.5-5" /></svg>
         </span>
         <h2>Never lose progress</h2>
-        <p>
-          Saved as you go, with undo and version history.{#if accounts}{' '}Sign in to keep it on every device.{/if}
-        </p>
+        <p>Saved in your browser as you go, with undo, version history and backups you can download.</p>
       </li>
     </ul>
 
@@ -87,9 +82,6 @@
         Let’s get started
         <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h11M11 5.5 15.5 10 11 14.5" /></svg>
       </button>
-      {#if accounts && onsignin}
-        <button class="secondary" onclick={onsignin}>I have an account · Sign in</button>
-      {/if}
     </div>
 
     <p class="fine">
@@ -263,8 +255,7 @@
     transform: translateY(-2px);
     box-shadow: 0 12px 28px rgb(60 0 10 / 0.4);
   }
-  .start:focus-visible,
-  .secondary:focus-visible {
+  .start:focus-visible {
     outline: 3px solid #fff;
     outline-offset: 3px;
   }
@@ -281,19 +272,8 @@
   .start:hover svg {
     transform: translateX(3px);
   }
-  .secondary {
-    padding: 12px 20px;
-    border-radius: 999px;
-    border: 1.5px solid rgb(255 255 255 / 0.6);
-    background: transparent;
-    color: #fff;
-    font-size: 15px;
-    font-weight: 650;
-    cursor: pointer;
-  }
-  .secondary:hover {
-    background: rgb(255 255 255 / 0.12);
-  }
+
+
 
   .fine {
     max-width: 640px;
@@ -312,8 +292,7 @@
       gap: 10px;
       margin: 24px 0;
     }
-    .start,
-    .secondary {
+    .start {
       width: 100%;
       justify-content: center;
     }

@@ -35,7 +35,7 @@ app asks before importing them. Press Cmd/Ctrl+K for the command palette.
 - **Side panel**: the course's description and WQB/breadth designation, the
   calendar's own prerequisite text, "Next steps" (the cheapest path to the
   target given what you've taken), sections with seat snapshots and Rate My
-  Professors links, ratings, and what the course leads to.
+  Professors links, and what the course leads to.
 - **Explore**: everything you can take next, by department and term.
 - **Plan**: a term-by-term plan toward the target course.
 - **Degree**: progress against your program's requirements, for all 368 SFU
@@ -57,12 +57,11 @@ app asks before importing them. Press Cmd/Ctrl+K for the command palette.
   prerequisites through it, with Undo.
 - **Never lose progress**: undo/redo (Ctrl/Cmd+Z), version history with
   automatic snapshots before anything destructive, full backups, open tabs
-  kept in sync, and a warning if saving fails. With an account (below),
-  everything syncs across devices.
+  kept in sync, and a warning if saving fails.
 
-Without an account, everything is saved in this browser (localStorage, plus
-version history in IndexedDB). See `docs/accounts-design.md` for how saving,
-history and sync work.
+Everything is saved in this browser (localStorage, plus version history in
+IndexedDB); there are no accounts. Download a backup to move to another
+device. See `docs/accounts-design.md` for how saving and history work.
 
 ## Course data
 
@@ -97,64 +96,6 @@ npm run fetch-seats       # just refresh seat counts (skips if SFU hasn't posted
 Rate My Professors links are searches for the instructor's name at SFU (school
 ID 1482), not direct profile links, because RMP has no public API.
 
-## Ratings
-
-Courses can be rated on **Easy** and **Useful**, and instructors on **Clear** and
-**Engaging**, each on a 1–5 scale and shown as a percentage (1 = 0%, 3 = 50%,
-5 = 100%), with an optional thumbs up/down, short written review, term and
-prof/course. A prof's ratings are pooled across every course they teach. The
-code lives in `src/lib/ratings/`; `aggregate.ts` does the maths and is unit
-tested (`npm test`).
-
-By default ratings are saved in the visitor's own browser (localStorage), so
-each person only sees their own. To share them between everyone, connect a
-free [Supabase](https://supabase.com) project:
-
-1. Create a project, open **SQL Editor**, paste in `supabase/schema.sql` and run it.
-   This makes the `ratings` table, its row-level security and three functions
-   (`upsert_rating`, `delete_rating`, `my_rating_ids`).
-2. In **Project Settings → API**, copy the project URL and the `anon` public key.
-3. `cp .env.example .env.local` and fill in `VITE_SUPABASE_URL` and
-   `VITE_SUPABASE_ANON_KEY` (set the same two variables in your host's build
-   settings when deploying).
-4. Restart `npm run dev` / rebuild. The side panel stops saying ratings are
-   saved in this browser only.
-
-There are no accounts. Each browser gets a random id stored in localStorage
-that only the write functions ever see, so it's one rating per course or prof
-per browser and nobody can edit anyone else's. Clearing site data loses the
-ability to edit old ratings (they stay up). The Supabase library is only
-downloaded when those variables are set.
-
-## Accounts and sync
-
-Optional, through the same Supabase project as ratings. With
-`VITE_SUPABASE_URL`/`VITE_SUPABASE_ANON_KEY` set, a **Sign in** button
-appears: students sign in with a 6-digit code sent by email (no passwords),
-and their taken courses, schedules and program sync across devices. Signing
-in on a device that already has progress asks before copying it into the
-account; a "shared computer" option wipes the device on sign-out.
-
-**Before going live:**
-1. Run `supabase/schema.sql` in the SQL editor (or `npx supabase db push`).
-2. **Set up custom SMTP** (Authentication → Emails, e.g. Resend's free tier).
-   Supabase's built-in sender only allows a few emails an hour.
-3. Set the **Magic Link** and **Confirm signup** email templates to show the
-   code, as in `supabase/templates/otp.html` (`{{ .Token }}`).
-4. Add the site's URL to **Site URL** and **Redirect URLs**.
-5. Optional Google sign-in: enable the Google provider, then build with
-   `VITE_AUTH_GOOGLE=1`.
-
-**Local development** with a full Supabase (needs Docker):
-
-```sh
-npx supabase start     # API :54321, Studio :54323, email inbox :54324
-cp .env.example .env.local   # has the local URL and anon key
-npm run dev
-npx vitest run --config scripts/e2e/vitest.config.ts   # sync tests against the real DB
-npx supabase stop
-```
-
 ## Code map
 
 - `src/App.svelte`: page layout, chart, side panel
@@ -163,15 +104,32 @@ npx supabase stop
 - `src/lib/fuzzy.ts` / `search.ts`: course search used everywhere
 - `src/lib/schedule/`: schedule builder (`schedule.ts` is the pure logic)
 - `src/lib/explore.ts`, `planner.ts`, `degree.ts`: Explore, Plan and Degree views
-- `src/lib/programs/`: converting and lazy-loading SFU program requirements
+- `src/lib/programs/`: converting and lazy-loading SFU program requirements,
+  and the program picker
 - `src/lib/implied.ts`: filling in and unticking prerequisites
 - `src/lib/persist/`: the saved document, history, undo, autosnapshots
-- `src/lib/sync/`, `src/lib/account/`: sync engine, sign-in and account UI
-- `supabase/`: database migrations and local config
-- `src/lib/ratings/`, `share.ts`: ratings and sharing
+- `src/lib/share.ts`: share links
 - `scripts/`: data fetching and the prerequisite parser
 
 ## Deploy
 
 `npm run build` produces a static site in `dist/` that works on GitHub Pages,
 Netlify, Vercel, etc.
+
+## Archived features
+
+In-site ratings (courses and profs) and accounts with email sign-in and
+cross-device sync (via Supabase) were removed to keep the site fully static;
+Rate My Professors links cover ratings. The last version with them is kept at
+the tag `archive-accounts-ratings` (also the branch
+`archive/accounts-and-ratings`), including the Supabase schema, the sync
+engine and their tests. To bring them back:
+
+```sh
+git checkout archive-accounts-ratings -- src/lib/account src/lib/sync src/lib/ratings supabase scripts/e2e .env.example
+npm install @supabase/supabase-js
+```
+
+then re-wire them in `src/main.ts`, `src/App.svelte`, `Header.svelte` and
+`Welcome.svelte` (compare with `git diff archive-accounts-ratings -- src`).
+The saved data still has an `owner` field, so nothing needs migrating.

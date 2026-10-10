@@ -4,3 +4,6 @@ dist
 .playwright-mcp/
 .env.local
 .env.*.local
+
+# Local Supabase working files (accounts/ratings are archived: see README)
+/supabase/

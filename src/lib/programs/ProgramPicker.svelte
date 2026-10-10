@@ -1,7 +1,7 @@
-<!-- "Which program are you in?": a searchable list grouped by faculty. Used as a sign-in step and on its own (ProgramPrompt). -->
+<!-- "Which program are you in?": a searchable list grouped by faculty. Used in the Degree tab, inline and in ProgramPrompt. -->
 <script lang="ts">
   import { tick } from 'svelte';
-  import { groupPrograms, type ProgramOption } from './programs';
+  import { groupPrograms, type ProgramOption } from './search';
 
   interface Props {
     programs: ProgramOption[];

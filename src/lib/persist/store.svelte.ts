@@ -284,7 +284,7 @@ export function automatic(fn: () => void): void {
   if (json !== saved) autoJson = json;
 }
 
-/** Mark whose data this is (on sign-in) or clear it (shared-computer sign-out). */
+/** Mark whose data this is. Used by the archived accounts feature (sign-in/out). */
 export function setOwner(owner: string | null): void {
   if (doc.owner === owner) return;
   doc = { ...doc, owner };
