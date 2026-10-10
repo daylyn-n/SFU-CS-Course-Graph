@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Handle, Position, type Node, type NodeProps } from '@xyflow/svelte';
-  import TermPills from './TermPills.svelte';
+  import OfferBadge from './OfferBadge.svelte';
   import { getActions } from './context';
   import type { CourseNodeData } from './graph';
 
@@ -20,8 +20,10 @@
     : data.title}
 >
   <Handle type="target" position={Position.Left} />
+  <!-- The checkbox and + only show on hover, focus or selection (App styles
+       the selected node), but stay in the tab order for keyboard users. -->
   <input
-    class="check nodrag"
+    class="check ctl nodrag"
     type="checkbox"
     checked={data.status === 'done'}
     onclick={(e) => e.stopPropagation()}
@@ -29,17 +31,18 @@
     aria-label={data.inferred ? `${data.code} is assumed taken; untick if you didn't take it` : `Mark ${data.code} as taken`}
   />
   <div class="text">
-    <div class="code">{data.code} <TermPills terms={data.offered} /></div>
+    <div class="code">{data.code} <OfferBadge offered={data.offered} terms={actions.terms} /></div>
     <div class="title">{data.title}</div>
   </div>
   {#if data.collapsed}
     <button
-      class="more nodrag"
+      class="more ctl nodrag"
       onclick={(e) => {
         e.stopPropagation();
         actions.expand(data.code);
       }}
-      title="Show prerequisites">+</button
+      title="Show prerequisites"
+      aria-label="Show prerequisites of {data.code}">+</button
     >
   {/if}
   <Handle type="source" position={Position.Right} />
@@ -48,7 +51,7 @@
 <style>
   .course {
     position: relative;
-    width: 200px;
+    width: 224px;
     height: 60px;
     box-sizing: border-box;
     display: flex;
@@ -73,9 +76,6 @@
   .course.done.assumed {
     border-style: dashed;
     background: color-mix(in srgb, var(--done-bg) 55%, var(--locked-bg));
-  }
-  .course.done.assumed .check {
-    opacity: 0.6;
   }
   .course.done {
     border-color: var(--done);
@@ -105,6 +105,9 @@
     text-overflow: ellipsis;
   }
   .check {
+    position: absolute;
+    top: 8px;
+    right: 8px;
     width: 16px;
     height: 16px;
     margin: 0;
@@ -129,8 +132,16 @@
     z-index: 1;
   }
   .more:hover {
-    border-color: var(--accent);
-    color: var(--accent);
+    border-color: var(--text);
+  }
+  .ctl {
+    opacity: 0;
+    transition: opacity 0.12s;
+  }
+  .course:hover .ctl,
+  .course:focus-within .ctl,
+  :global(.svelte-flow__node:focus-visible) .ctl {
+    opacity: 1;
   }
   :global(.svelte-flow__handle) {
     opacity: 0;

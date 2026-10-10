@@ -14,6 +14,8 @@
     onnomatch?: ((query: string, suggestions: SearchHit[]) => void) | null;
     oninput?: (() => void) | null;
     limit?: number;
+    /** codes to offer while the box is focused and empty */
+    suggestions?: string[];
   }
 
   let {
@@ -26,12 +28,16 @@
     onnomatch = null, // (query, suggestions) => void, when Enter finds nothing
     oninput = null,
     limit = 8,
+    suggestions = [],
   }: Props = $props();
 
   const id = `ci-${Math.random().toString(36).slice(2, 8)}`;
   let open = $state(false);
   let active = $state(-1);
-  const results = $derived(open ? searchCourses(value, courses, limit) : []);
+  const empty = $derived(!value.trim());
+  const results = $derived(
+    !open ? [] : empty ? suggestions.map((code) => ({ code })) : searchCourses(value, courses, limit),
+  );
 
   function pick(code: string) {
     onpick(code);
@@ -81,7 +87,8 @@
     {onkeydown}
   />
   {#if open && results.length}
-    <ul class="results" id="{id}-list" role="listbox">
+    <ul class="results" id="{id}-list" role="listbox" aria-label={empty ? 'Suggestions' : undefined}>
+      {#if empty}<li class="heading" role="presentation">Try</li>{/if}
       {#each results as r, i (r.code)}
         <li
           id="{id}-{i}"
@@ -149,6 +156,15 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+  li.heading {
+    padding: 4px 10px 2px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    cursor: default;
   }
   li.active {
     background: var(--bg);
