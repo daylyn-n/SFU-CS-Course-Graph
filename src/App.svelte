@@ -35,7 +35,11 @@
   import { setRatingsData } from './lib/ratings/context';
   import { inferTaken, untick } from './lib/implied';
   import { flash } from './lib/shareActions.svelte';
-  import { done, notTaken, settings } from './lib/persist/store.svelte';
+  import { done, notTaken, settings, getDoc } from './lib/persist/store.svelte';
+  import { startAutosnap } from './lib/persist/autosnap';
+  import { installUndoShortcuts } from './lib/persist/undo.svelte';
+  import HistoryPanel from './lib/persist/HistoryPanel.svelte';
+  import SaveError from './lib/persist/SaveError.svelte';
 
   interface Props {
     data: CourseData;
@@ -49,6 +53,13 @@
   const { terms, offerings } = untrack(() => offeringData);
   setScheduleData({ terms, offerings });
   setRatingsData({ terms, offerings });
+
+  // Version history: snapshots when edits settle and before bulk changes.
+  startAutosnap();
+  let historyOpen = $state(false);
+  // Ctrl/Cmd+Z everywhere except text fields and while a dialog (the command
+  // palette, history, course details) is open.
+  $effect(() => installUndoShortcuts(() => !!document.querySelector('dialog[open]')));
 
   // Show "Added X to Schedule 1" briefly after each add.
   let showNotice = $state(false);
@@ -279,6 +290,7 @@
   }}
 />
 
+<SaveError {target} />
 <Header
   {courses}
   {target}
@@ -600,7 +612,13 @@
     </form>
     {#if takenError}<p class="error">{takenError}</p>{/if}
 
-    <ShareMenu {target} {done} onshowchart={() => (view = 'graph')} />
+    <ShareMenu
+      {target}
+      {done}
+      onshowchart={() => (view = 'graph')}
+      onhistory={() => (historyOpen = true)}
+      onpick={setTarget}
+    />
 
     <p class="data-source">
       Data: SFU Academic Calendar ({data.term.replace('/', ' ')}) and course outlines, fetched
@@ -613,5 +631,6 @@
 <ScheduleDock {courses} {terms} {offerings} done={known} bind:open={dockOpen} onexpand={() => (view = 'schedule')} onopen={setTarget} />
 {/if}
 
-<CommandPalette {courses} {target} {done} onpick={setTarget} bind:view />
+<CommandPalette {courses} {target} {done} onpick={setTarget} bind:view onhistory={() => (historyOpen = true)} />
+<HistoryPanel bind:open={historyOpen} owner={getDoc().owner} syncing={false} />
 <ShareBanner {done} onpick={setTarget} />
