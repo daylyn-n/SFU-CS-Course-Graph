@@ -1,10 +1,12 @@
 import { describe, expect, it } from 'vitest';
 import { evaluateProgram, inSet, type Program, type RequirementResult } from './degree';
 import { PROGRAMS } from '../data/programs';
-import type { Courses } from './types';
-import data from '../data/courses.json';
+import { readFileSync } from 'node:fs';
+import type { CourseData, Courses } from './types';
 
-const catalog = data.courses as Courses;
+// The real all-SFU catalog the app loads at runtime.
+const data: CourseData = JSON.parse(readFileSync(new URL('../../public/data/courses.json', import.meta.url), 'utf8'));
+const catalog: Courses = data.courses;
 
 /** Tiny catalog: every code gets 3 units unless listed. */
 function cat(codes: string[], units: Record<string, string> = {}): Courses {

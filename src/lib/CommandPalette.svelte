@@ -19,7 +19,7 @@
     { id: 'list', label: 'List' },
     { id: 'explore', label: 'Explore' },
     { id: 'plan', label: 'Plan' },
-    { id: 'timetable', label: 'Timetable' },
+    { id: 'schedule', label: 'Schedule' },
     { id: 'degree', label: 'Degree' },
   ];
 

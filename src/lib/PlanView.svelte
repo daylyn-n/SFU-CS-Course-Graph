@@ -43,6 +43,9 @@
 
   const plan = $derived(planCourses(target, courses, done, { terms, offerings, maxPerTerm: perTerm }));
   const unconfirmed = $derived(plan.terms.some((t) => t.courses.some((c) => !c.confirmed)));
+  const anyUnknown = $derived(
+    plan.terms.some((t) => t.courses.some((c) => courseStatus(c.code, courses, done) === 'unknown')),
+  );
   const plural = (n: number, word: string) => `${n} ${word}${n === 1 ? '' : 's'}`;
 </script>
 
@@ -107,6 +110,7 @@
 
     <div class="key">
       <span><i class="ready"></i>Can take now</span>
+      {#if anyUnknown}<span><i class="unknown"></i>Check requirements</span>{/if}
       <span><i class="locked"></i>After earlier terms</span>
       {#if unconfirmed}<span><span class="unconfirmed">?</span>Unconfirmed offering</span>{/if}
       {#if plan.missing.length}<span><i class="missing"></i>Not in data</span>{/if}
@@ -261,6 +265,10 @@
     border-color: var(--ready);
     background: var(--ready-bg);
   }
+  .course.unknown {
+    border-color: var(--unknown);
+    background: var(--unknown-bg);
+  }
   .course.is-target {
     border-color: var(--accent);
   }
@@ -332,6 +340,10 @@
   .key i.ready {
     border-color: var(--ready);
     background: var(--ready-bg);
+  }
+  .key i.unknown {
+    border-color: var(--unknown);
+    background: var(--unknown-bg);
   }
   .key i.missing {
     border-style: dashed;

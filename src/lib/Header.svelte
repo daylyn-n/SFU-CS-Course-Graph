@@ -1,12 +1,19 @@
 <script lang="ts">
+  import { matchCourse, searchCourses } from './search';
+  import CourseInput from './CourseInput.svelte';
   import type { Courses, Term, View } from './types';
 
   interface Props {
     courses: Courses;
     target: string;
+    /** counts for the courses on the map */
     progress: { done: number; ready: number; locked: number };
     terms: Term[];
     onpick: (code: string) => void;
+    /** is the course running in an upcoming term? (filters the quick picks) */
+    isOffered?: ((code: string) => boolean) | null;
+    /** dock the schedule under the map (shown on the Schedule tab) */
+    ondock?: (() => void) | null;
     view: View;
     maxDepth: number;
     hideTaken: boolean;
@@ -18,26 +25,42 @@
     progress, // { done, ready, locked } counts for the courses on the map
     terms,
     onpick,
+    isOffered = null,
+    ondock = null,
     view = $bindable(),
     maxDepth = $bindable(),
     hideTaken = $bindable(),
   }: Props = $props();
 
+  // Quick picks, skipping any that aren't in the data or not running soon.
   // svelte-ignore state_referenced_locally
-  const codes = Object.keys(courses);
-  const PICKS = ['CMPT 225', 'CMPT 300', 'CMPT 310', 'CMPT 354', 'CMPT 410'].filter((c) => c in courses);
+  const PICKS = ['CMPT 225', 'CMPT 276', 'CMPT 300', 'CMPT 310', 'CMPT 354', 'CMPT 410', 'MACM 316']
+    .filter((c) => c in courses && (!isOffered || isOffered(c)))
+    .slice(0, 5);
 
   let search = $state('');
-  let input: HTMLInputElement;
+  let input = $state<HTMLInputElement>();
+
+  let message = $state('');
 
   function submitSearch() {
-    const m = search.trim().toUpperCase().match(/^([A-Z]{2,5})\s*(\d{3}[A-Z]?)/);
-    const code = m && `${m[1]} ${m[2]}`;
-    if (code && code in courses) {
+    const code = matchCourse(search, courses);
+    if (code) {
       onpick(code);
       search = '';
-      input.blur();
+      message = '';
+      input?.blur();
+      return;
     }
+    showNoMatch(search, searchCourses(search, courses, 3));
+  }
+
+  function showNoMatch(query: string, hits: { code: string }[]) {
+    message = !query.trim()
+      ? ''
+      : hits.length
+        ? `Pick one: ${hits.map((h) => h.code).join(', ')}${hits.length === 3 ? '…' : ''}`
+        : `No course matches "${query.trim()}"`;
   }
 
   // "/" jumps to the search box, like on GitHub or YouTube.
@@ -49,7 +72,7 @@
       (el?.tagName === 'INPUT' && !['checkbox', 'radio', 'button'].includes((el as HTMLInputElement).type));
     if (e.key === '/' && !typing) {
       e.preventDefault();
-      input.focus();
+      input?.focus();
     }
   }
 
@@ -60,7 +83,8 @@
 <svelte:window {onkeydown} />
 
 <header class="hero">
-  <svg class="pattern" aria-hidden="true">
+  <div class="pattern-clip" aria-hidden="true">
+  <svg class="pattern">
     <defs>
       <pattern id="net" width="140" height="90" patternUnits="userSpaceOnUse">
         <path d="M10 20 C45 20 45 60 80 60 S115 25 150 25 M80 60 L80 100 M-10 70 C20 70 30 20 10 20" />
@@ -71,6 +95,7 @@
     </defs>
     <rect width="200%" height="100%" fill="url(#net)" />
   </svg>
+  </div>
 
   <div class="row top">
     <div class="brand">
@@ -92,21 +117,23 @@
       }}
     >
       <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M20 20l-4-4" /></svg>
-      <input
-        bind:this={input}
-        list="course-list"
-        placeholder="Where do you want to go? e.g. CMPT 410"
+      <CourseInput
+        {courses}
         bind:value={search}
-        oninput={() => codes.includes(search.split(' — ')[0]) && submitSearch()}
-        aria-label="Course to look up"
+        bind:input
+        placeholder="Search by code or name, e.g. CMPT 410 or machine learning"
+        label="Course to look up"
+        onpick={(code) => {
+          message = '';
+          onpick(code);
+          input?.blur();
+        }}
+        oninput={() => (message = '')}
+        onnomatch={showNoMatch}
       />
       <kbd>/</kbd>
-      <datalist id="course-list">
-        {#each codes as code}
-          <option value="{code} — {courses[code].title}"></option>
-        {/each}
-      </datalist>
       <button type="submit">Map it</button>
+      {#if message}<div class="message" role="status">{message}</div>{/if}
     </form>
   </div>
 
@@ -137,21 +164,28 @@
         <button class:on={view === 'list'} onclick={() => (view = 'list')}>List</button>
         <button class:on={view === 'explore'} onclick={() => (view = 'explore')}>Explore</button>
         <button class:on={view === 'plan'} onclick={() => (view = 'plan')}>Plan</button>
-        <button class:on={view === 'timetable'} onclick={() => (view = 'timetable')}>Timetable</button>
+        <button class:on={view === 'schedule'} onclick={() => (view = 'schedule')}>Schedule</button>
         <button class:on={view === 'degree'} onclick={() => (view = 'degree')}>Degree</button>
       </div>
-      <label>
-        Levels
-        <select bind:value={maxDepth}>
-          {#each [1, 2, 3, 4] as d}<option value={d}>{d}</option>{/each}
-          <option value={Infinity}>All</option>
-        </select>
-      </label>
-      <label class="toggle">
-        <input type="checkbox" bind:checked={hideTaken} />
-        <span class="switch" aria-hidden="true"></span>
-        Hide what's behind taken
-      </label>
+      {#if view === 'schedule' && ondock}
+        <button class="dock-btn" onclick={ondock} title="Show the schedule under the prerequisite map">
+          Dock under map ↙
+        </button>
+      {/if}
+      {#if view === 'graph' || view === 'list'}
+        <label>
+          Levels
+          <select bind:value={maxDepth}>
+            {#each [1, 2, 3, 4] as d}<option value={d}>{d}</option>{/each}
+            <option value={Infinity}>All</option>
+          </select>
+        </label>
+        <label class="toggle">
+          <input type="checkbox" bind:checked={hideTaken} />
+          <span class="switch" aria-hidden="true"></span>
+          Hide prereqs of taken courses
+        </label>
+      {/if}
     </div>
   </div>
 </header>
@@ -159,7 +193,6 @@
 <style>
   .hero {
     position: relative;
-    overflow: hidden;
     padding: 14px 20px 12px;
     color: #fff;
     background:
@@ -170,6 +203,13 @@
     z-index: 10;
   }
 
+  /* Clips the drifting pattern without clipping dropdowns in the header. */
+  .pattern-clip {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
   .pattern {
     position: absolute;
     inset: 0;
@@ -204,6 +244,9 @@
     flex-wrap: wrap;
     align-items: center;
     gap: 10px 22px;
+  }
+  .row.top {
+    z-index: 2; /* search dropdown sits above the row below */
   }
   .row.bottom {
     margin-top: 12px;
@@ -271,7 +314,7 @@
     stroke-width: 2.5;
     stroke-linecap: round;
   }
-  .search input {
+  .search :global(input) {
     flex: 1;
     min-width: 0;
     border: none;
@@ -281,8 +324,21 @@
     padding: 8px 10px;
     font-size: 15px;
   }
-  .search input::placeholder {
+  .search :global(input::placeholder) {
     color: #8a8283;
+  }
+  .message {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 14px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: #fff;
+    color: var(--sfu-red);
+    font-size: 12.5px;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgb(60 0 10 / 0.25);
+    z-index: 20;
   }
   kbd {
     font: 600 11px ui-monospace, monospace;
@@ -429,6 +485,18 @@
     background: #fff;
     color: var(--sfu-red);
   }
+  .dock-btn {
+    border: 1px solid rgb(255 255 255 / 0.55);
+    border-radius: 999px;
+    padding: 4px 12px;
+    background: rgb(255 255 255 / 0.1);
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .dock-btn:hover {
+    background: rgb(255 255 255 / 0.22);
+  }
   select {
     border: 1px solid rgb(255 255 255 / 0.45);
     border-radius: 999px;
@@ -479,6 +547,18 @@
   }
 
   @media (max-width: 700px) {
+    /* Six tabs don't fit a phone: let the row scroll sideways. */
+    .controls {
+      max-width: 100%;
+    }
+    .seg {
+      max-width: 100%;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .seg button {
+      flex-shrink: 0;
+    }
     .hero {
       padding: 12px 16px 10px;
     }
@@ -496,7 +576,20 @@
       flex-basis: 100%;
       margin-left: 0;
     }
-    kbd {
+    .message {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 14px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: #fff;
+    color: var(--sfu-red);
+    font-size: 12.5px;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgb(60 0 10 / 0.25);
+    z-index: 20;
+  }
+  kbd {
       display: none;
     }
     .progress {

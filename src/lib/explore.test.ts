@@ -117,3 +117,23 @@ describe('helpers', () => {
     expect(sortEntries([...list], 'level').map((x) => x.code)).toEqual(['CMPT 120', 'MACM 101', 'CMPT 310']);
   });
 });
+
+describe('non-course requirements', () => {
+  const pre = { other: 'BC Pre-Calculus 12' };
+  const cat: Courses = {
+    'MATH 100': course(),
+    'MATH 150': course(or(pre, 'MATH 100')),
+    'PHYS 120': course(and('MATH 150', { other: 'Physics program students', only: true })),
+  };
+
+  it('lists a course open through Pre-Calculus 12 as ready, flagged to check', () => {
+    const { ready } = explore(cat, new Set());
+    expect(ready.find((e) => e.code === 'MATH 150')).toMatchObject({ check: true, missing: [] });
+    expect(ready.find((e) => e.code === 'MATH 100')?.check).toBe(false);
+  });
+
+  it('counts other leaves as met when measuring progress', () => {
+    expect(coursesNeeded(pre, new Set())).toBe(0);
+    expect(explore(cat, new Set()).almost.map((e) => e.code)).toEqual(['PHYS 120']);
+  });
+});

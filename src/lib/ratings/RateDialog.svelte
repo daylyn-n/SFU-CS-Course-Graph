@@ -9,6 +9,8 @@
   let dialog: HTMLDialogElement;
   const req = $derived(ratings.dialog);
   const dims = $derived(req ? DIMENSIONS[req.kind] : DIMENSIONS.course);
+  // Recomputed whenever the dialog opens, by which time the term data is in.
+  const options = $derived(req ? termOptions() : []);
 
   let scores = $state<(Score | null)[]>([null, null]);
   let liked = $state<boolean | null>(null);
@@ -132,8 +134,8 @@
           Term
           <select bind:value={term}>
             <option value="">Not saying</option>
-            {#each termOptions as t (t.id)}<option value={t.id}>{t.label}</option>{/each}
-            {#if term && !termOptions.some((t) => t.id === term)}<option value={term}>{term}</option>{/if}
+            {#each options as t (t.id)}<option value={t.id}>{t.label}</option>{/each}
+            {#if term && !options.some((t) => t.id === term)}<option value={term}>{term}</option>{/if}
           </select>
         </label>
       </div>

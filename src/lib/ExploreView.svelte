@@ -146,6 +146,9 @@
               <b class="code">{e.code}</b>
               <span class="terms"><TermPills terms={offeredIn(e.code)} /></span>
               <span class="units">{course.units} units</span>
+              {#if e.check}
+                <span class="check" title="Also needs something that isn't an SFU course; see the calendar">Check requirements</span>
+              {/if}
             </span>
             <span class="title">{course.title}</span>
             {#if e.missing.length}
@@ -377,6 +380,11 @@
   .units {
     font-size: 12px;
     color: var(--muted);
+  }
+  .check {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--unknown);
   }
   .title {
     font-size: 13.5px;

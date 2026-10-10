@@ -1,5 +1,5 @@
 import { codesIn } from './graph';
-import type { Courses, Offerings, Prereq, Taken, Term } from './types';
+import type { Courses, Offerings, OtherReq, Prereq, Taken, Term } from './types';
 
 export interface PlanOptions {
   /** terms that have offering data, as in offerings.json */
@@ -138,6 +138,8 @@ export function chooseCourses(
     const out = none();
     if (t == null) return out;
     if (typeof t === 'string') return course(t, have);
+    // Non-course requirements (Pre-Calculus 12, a program) add no courses.
+    if (isOther(t)) return out;
     if (t.op === 'and') {
       // Settle the fixed requirements first, then the choices.
       const ordered = [...t.args].sort((a, b) => +isOr(a) - +isOr(b));
@@ -149,9 +151,12 @@ export function chooseCourses(
       const need = tree(arg, have);
       const added = [...need.edges.keys()];
       const unoffered = added.filter((c) => !courses[c] || !isOffered(c)).length;
-      const score = [+(need.loops.size > 0), added.length, unoffered];
+      // Most students have Pre-Calculus 12 and the like, so those are free,
+      // but "or permission" and program-only routes shouldn't beat courses.
+      const hard = isOther(arg) && (!!arg.only || /permission|equivalent|admission/i.test(arg.other));
+      const score = [+(need.loops.size > 0), +hard, added.length, unoffered];
       if (!best || lexLess(score, best.score)) best = { need, score };
-      if (score[0] === 0 && score[1] === 0) break; // nothing more to add
+      if (score[0] === 0 && score[1] === 0 && score[2] === 0) break; // nothing more to add
     }
     return best ? best.need : out;
   }
@@ -161,8 +166,10 @@ export function chooseCourses(
 }
 
 function isOr(t: Prereq): boolean {
-  return typeof t !== 'string' && t.op === 'or';
+  return typeof t !== 'string' && !isOther(t) && t.op === 'or';
 }
+
+const isOther = (t: Prereq): t is OtherReq => typeof t === 'object' && 'other' in t;
 
 function merge(into: Need, from: Need) {
   // Keep the first entry for a course: later ones were told it was covered.

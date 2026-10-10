@@ -1,21 +1,27 @@
 // Choices for the "taken with" / "which course" / "term" selects in the rate
 // dialog, worked out from the offerings data.
-import offeringData from '../../data/offerings.json';
 import type { Offerings, Term } from '../types';
 
-const offerings = offeringData.offerings as Offerings;
-const terms = offeringData.terms as Term[];
+// Loaded at runtime (public/data/offerings.json); empty until setRatingsData.
+let offerings: Offerings = {};
+let terms: Term[] = [];
+
+/** Hand over the term/offering data once it has loaded. */
+export function setRatingsData(d: { terms: Term[]; offerings: Offerings }): void {
+  offerings = d.offerings;
+  terms = d.terms;
+}
 
 /** Everyone listed as teaching a course in the published terms. */
 export function instructorsOf(code: string): string[] {
-  const names = Object.values(offerings[code] ?? {}).flatMap((sections) => sections.flatMap((s) => s.instructors));
+  const names = Object.values(offerings[code] ?? {}).flatMap((sections) => sections.flatMap((s) => s.instructors ?? []));
   return [...new Set(names)].sort();
 }
 
 /** Courses a prof is listed as teaching in the published terms. */
 export function coursesTaughtBy(name: string): string[] {
   return Object.entries(offerings)
-    .filter(([, byTerm]) => Object.values(byTerm).some((ss) => ss.some((s) => s.instructors.includes(name))))
+    .filter(([, byTerm]) => Object.values(byTerm).some((ss) => ss.some((s) => s.instructors?.includes(name))))
     .map(([code]) => code)
     .sort();
 }
@@ -44,7 +50,9 @@ export function recentTerms(from: string, count: number): { id: string; label: s
 }
 
 /** Terms someone could have taken a course in: this term and the last three years. */
-export const termOptions = recentTerms((terms.find((t) => t.current) ?? terms[0])?.id ?? '', 10);
+export function termOptions(): { id: string; label: string }[] {
+  return recentTerms((terms.find((t) => t.current) ?? terms[0])?.id ?? '', 10);
+}
 
 /** "2026/fall" -> "Fall 2026"; anything else is shown as is. */
 export function termLabel(id: string): string {

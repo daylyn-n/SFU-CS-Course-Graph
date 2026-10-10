@@ -40,7 +40,13 @@
   const result = $derived(evaluateProgram(program, done, courses));
   const pct = $derived(Math.round(result.fraction * 100));
   // Courses with all prerequisites met come first, then ones running soon.
-  const rank: Record<Status, number> = { ready: 0, locked: 1, done: 2 };
+  const rank: Record<Status, number> = { ready: 0, unknown: 1, locked: 2, done: 3 };
+  const STATE_LABEL: Record<Status, string> = {
+    done: 'Taken',
+    ready: 'Can take now',
+    unknown: 'Check requirements',
+    locked: 'Prerequisites missing',
+  };
 
   function suggestions(r: RequirementResult): { code: string; status: Status }[] {
     return r.candidates
@@ -143,7 +149,7 @@
                   {@const code = r.req.code}
                   {@const st = courseStatus(code, courses, done)}
                   <div class="course-line">
-                    <span class="state {st}">{st === 'ready' ? 'Can take now' : 'Prerequisites missing'}</span>
+                    <span class="state {st}">{STATE_LABEL[st]}</span>
                     <TermPills terms={offeredIn(code)} />
                     <button class="map-link" onclick={() => ontarget(code)}>Map prerequisites →</button>
                   </div>
@@ -413,6 +419,10 @@
     color: var(--ready);
     font-weight: 600;
   }
+  .state.unknown {
+    color: var(--unknown);
+    font-weight: 600;
+  }
   .map-link {
     all: unset;
     cursor: pointer;
@@ -457,6 +467,12 @@
     border-color: var(--ready);
     color: var(--ready);
     background: var(--ready-bg);
+  }
+  .sugg.unknown .chip,
+  .sugg.unknown .map {
+    border-color: var(--unknown);
+    color: var(--unknown);
+    background: var(--unknown-bg);
   }
   .map {
     display: inline-flex;

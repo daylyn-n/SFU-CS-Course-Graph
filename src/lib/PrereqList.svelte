@@ -20,8 +20,9 @@
     flat?: boolean;
   }
 
-  // tree: a course code string or { op, args }. `flat` is set for a course's
-  // own prerequisites, where an AND just means "list them all" with no header.
+  // tree: a course code string, { other: label } for a non-course alternative,
+  // or { op, args }. `flat` is set for a course's own prerequisites, where an
+  // AND just means "list them all" with no header.
   let {
     tree,
     courses,
@@ -47,6 +48,8 @@
     onexpand,
     offeredIn,
   });
+  // High school courses come with "(or equivalent)" in the calendar.
+  const otherText = (label: string) => (/\b1[12]$|^(AP|IB) /.test(label) ? `${label} (or equivalent)` : label);
 </script>
 
 {#if typeof tree === 'string'}
@@ -67,13 +70,17 @@
       {#if showable && !open}
         <button class="more" onclick={() => onexpand(tree)} title="Show prerequisites">+</button>
       {/if}
-      <span class="title">{course?.title ?? 'Not in loaded data'}</span>
+      <span class="title">{course?.title ?? 'Not in catalog'}</span>
     </div>
     {#if open}
       <ul>
         <Self tree={course.prereq!} {...shared} ancestors={[...ancestors, tree]} flat />
       </ul>
     {/if}
+  </li>
+{:else if 'other' in tree}
+  <li>
+    <div class="row other" title="Not tracked here: check it yourself">{otherText(tree.other)}</div>
   </li>
 {:else if tree.op === 'and' && flat}
   {#each tree.args as arg}
@@ -125,6 +132,9 @@
   .row.ready .link {
     color: var(--ready);
   }
+  .row.unknown .link {
+    color: var(--unknown);
+  }
   .row.done .link {
     color: var(--done);
   }
@@ -149,6 +159,14 @@
     align-self: center;
   }
   @media (max-width: 700px) {
+    .row input {
+      width: 20px;
+      height: 20px;
+    }
+    .more {
+      width: 28px;
+      height: 28px;
+    }
     ul {
       padding-left: 12px;
       margin-left: 6px;
@@ -158,6 +176,11 @@
       column-gap: 6px;
       row-gap: 0;
     }
+  }
+  .row.other {
+    color: var(--muted);
+    font-style: italic;
+    padding-left: 22px;
   }
   .group {
     font-size: 12px;

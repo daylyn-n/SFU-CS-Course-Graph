@@ -1,4 +1,4 @@
-import { codesIn, satisfied } from './graph';
+import { codesIn, courseStatus, satisfied } from './graph';
 import type { Courses, Prereq, Taken } from './types';
 
 /** course code -> courses that mention it as a prerequisite */
@@ -14,6 +14,11 @@ export interface ExploreEntry {
   score: number;
   /** For "almost ready" courses: taking any one of these makes it ready. Empty when ready. */
   missing: string[];
+  /**
+   * Ready only if a requirement that isn't an SFU course is met (Pre-Calculus
+   * 12, "60 units"): courseStatus 'unknown'.
+   */
+  check?: boolean;
 }
 
 export interface ExploreResult {
@@ -43,6 +48,9 @@ export function reverseIndex(courses: Courses): ReverseIndex {
 export function coursesNeeded(tree: Prereq | null | undefined, done: Taken): number {
   if (tree == null) return 0;
   if (typeof tree === 'string') return done.has(tree) ? 0 : 1;
+  // Non-course requirements (Pre-Calculus 12, a program) are assumed met
+  // here, as they are for the 'unknown' status: no courses needed.
+  if ('other' in tree) return 0;
   const costs = tree.args.map((a) => coursesNeeded(a, done));
   return tree.op === 'and' ? costs.reduce((a, b) => a + b, 0) : Math.min(...costs);
 }
@@ -61,8 +69,9 @@ export function unlockScore(
   const closer: string[] = [];
   for (const next of index.get(code) ?? []) {
     const tree = courses[next].prereq;
-    if (done.has(next) || satisfied(tree, done)) continue;
-    if (satisfied(tree, after)) unlocks.push(next);
+    // Non-course requirements count as met (true), like the 'unknown' status.
+    if (done.has(next) || satisfied(tree, done, true)) continue;
+    if (satisfied(tree, after, true)) unlocks.push(next);
     else if (coursesNeeded(tree, after) < coursesNeeded(tree, done)) closer.push(next);
   }
   return { unlocks, closer, score: unlocks.length + closer.length };
@@ -78,12 +87,13 @@ export function explore(courses: Courses, done: Taken, index: ReverseIndex = rev
   for (const [code, course] of Object.entries(courses)) {
     if (done.has(code)) continue;
     const tree = course.prereq;
-    if (satisfied(tree, done)) {
-      ready.push({ code, ...unlockScore(code, courses, done, index), missing: [] });
+    const status = courseStatus(code, courses, done);
+    if (status === 'ready' || status === 'unknown') {
+      ready.push({ code, ...unlockScore(code, courses, done, index), missing: [], check: status === 'unknown' });
       continue;
     }
     const candidates = new Set(codesIn(tree).filter((c) => !done.has(c) && c !== code));
-    const missing = [...candidates].filter((c) => satisfied(tree, plus(done, c))).sort();
+    const missing = [...candidates].filter((c) => satisfied(tree, plus(done, c), true)).sort();
     if (missing.length) almost.push({ code, ...unlockScore(code, courses, done, index), missing });
   }
   return { ready, almost };

@@ -69,6 +69,16 @@ describe('chooseCourses', () => {
     expect([...deps.keys()].sort()).toEqual(['B', 'T']);
   });
 
+  it('takes Pre-Calculus 12 as given but not "or permission"', () => {
+    const courses = {
+      A: course(),
+      T: course(or({ other: 'BC Pre-Calculus 12' }, 'A')),
+      U: course(or({ other: 'permission of the instructor' }, 'A')),
+    };
+    expect([...chooseCourses('T', courses, new Set()).deps.keys()]).toEqual(['T']);
+    expect([...chooseCourses('U', courses, new Set()).deps.keys()].sort()).toEqual(['A', 'U']);
+  });
+
   it('survives prerequisite loops and reports them', () => {
     const courses = { A: course('B'), B: course('A'), T: course('A') };
     const { deps, cycles } = chooseCourses('T', courses, new Set());
