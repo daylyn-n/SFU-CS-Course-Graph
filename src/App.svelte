@@ -33,7 +33,8 @@
   import CourseRatings from './lib/ratings/CourseRatings.svelte';
   import ProfRating from './lib/ratings/ProfRating.svelte';
   import { setRatingsData } from './lib/ratings/context';
-  import { inferTaken } from './lib/implied';
+  import { inferTaken, untick } from './lib/implied';
+  import { flash } from './lib/shareActions.svelte';
   import { done, notTaken, settings } from './lib/persist/store.svelte';
 
   interface Props {
@@ -165,12 +166,36 @@
     expanded.clear();
   }
 
-  // Ticking a box. Unticking a filled-in course means "I didn't take this",
-  // which moves the guess to another route.
+  // Ticking a box. Unticking also unticks what only had its prerequisites
+  // through that course; unticking a filled-in guess means "I didn't take
+  // this", which moves the guess to another route (see implied.ts).
   function toggleDone(code: string) {
-    if (done.has(code)) done.delete(code);
-    else if (implied.has(code)) notTaken.add(code);
+    if (done.has(code) || implied.has(code)) unmark(code);
     else markTaken(code);
+  }
+
+  function unmark(code: string) {
+    const was = { taken: [...done], notTaken: [...notTaken] };
+    const r = untick(courses, done, notTaken, code, settings.assumePrereqs);
+    replaceSet(done, r.taken);
+    replaceSet(notTaken, r.notTaken);
+    if (r.cascaded.length) {
+      const list = r.cascaded.length === 1 ? r.cascaded[0] : `${r.cascaded.slice(0, -1).join(', ')} and ${r.cascaded.at(-1)}`;
+      flash(`Also unticked ${list}, which needed ${code}.`, {
+        action: {
+          label: 'Undo',
+          run: () => {
+            replaceSet(done, was.taken);
+            replaceSet(notTaken, was.notTaken);
+          },
+        },
+      });
+    }
+  }
+
+  function replaceSet(set: Set<string>, values: string[]) {
+    set.clear();
+    for (const v of values) set.add(v);
   }
 
   function markTaken(code: string) {
@@ -393,7 +418,7 @@
       {#if selImplied}
         <!-- Filled in from another course: confirm it, or say it's wrong. -->
         <button class="primary" onclick={() => markTaken(selected)}>I took this</button>
-        <button onclick={() => notTaken.add(selected)}>I didn't take this</button>
+        <button onclick={() => unmark(selected)}>I didn't take this</button>
       {:else}
         <button class="primary" onclick={() => toggleDone(selected)}>
           {done.has(selected) ? 'Unmark as taken' : 'Mark as taken'}

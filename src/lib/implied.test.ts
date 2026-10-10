@@ -1,6 +1,6 @@
 import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-import { inferTaken } from './implied';
+import { inferTaken, untick } from './implied';
 import type { Courses, CourseData, Prereq } from './types';
 
 const or = (...args: Prereq[]): Prereq => ({ op: 'or', args });
@@ -116,5 +116,59 @@ describe('inferTaken', () => {
     expect(m.has('ENSC 251')).toBe(false);
     // High-school options are assumed for first-year math, so no MATH 100.
     expect(m.has('MATH 100')).toBe(false);
+  });
+});
+
+describe('untick', () => {
+  const sorted = (a: string[]) => [...a].sort();
+
+  it('unticks the courses a beginner course opened up (the 120 → 125 → 225 case)', () => {
+    const r = untick(courses, new Set(['CMPT 120', 'CMPT 125', 'CMPT 225']), new Set(), 'CMPT 120');
+    expect(r.cascaded).toEqual(['CMPT 125', 'CMPT 225']);
+    expect(r.taken).toEqual([]);
+    // Nothing left needs CMPT 120, so no "not taken" mark lingers.
+    expect(r.notTaken).toEqual([]);
+  });
+
+  it('keeps a course that is still covered another way', () => {
+    const r = untick(courses, new Set(['CMPT 120', 'CMPT 130', 'CMPT 125']), new Set(), 'CMPT 120');
+    expect(r.cascaded).toEqual([]);
+    expect(sorted(r.taken)).toEqual(['CMPT 125', 'CMPT 130']);
+  });
+
+  it('cascades through several levels', () => {
+    const r = untick(courses, new Set(['CMPT 225', 'STAT 271', 'CMPT 310']), new Set(), 'CMPT 225');
+    expect(r.cascaded).toEqual(['CMPT 310']);
+    expect(r.taken).toEqual(['STAT 271']);
+  });
+
+  it('a wrong guess switches route instead of cascading', () => {
+    // CMPT 125 is only our guess for CMPT 225's prerequisite.
+    const r = untick(courses, new Set(['CMPT 225']), new Set(), 'CMPT 125');
+    expect(r.cascaded).toEqual([]);
+    expect(r.taken).toEqual(['CMPT 225']);
+    expect(r.notTaken).toEqual(['CMPT 125']);
+    expect(inferTaken(courses, new Set(r.taken), new Set(r.notTaken)).has('CMPT 125')).toBe(false);
+  });
+
+  it('a filled-in course with no other route unticks what needed it', () => {
+    // CMPT 225 is required (certain) for CMPT 310; saying you didn't take it
+    // means CMPT 310 can't have been taken either.
+    const r = untick(courses, new Set(['CMPT 310']), new Set(), 'CMPT 225');
+    expect(r.cascaded).toEqual(['CMPT 310']);
+    expect(r.taken).toEqual([]);
+    expect(r.notTaken).toEqual([]);
+  });
+
+  it('unticked courses do not come back as assumed', () => {
+    const r = untick(courses, new Set(['CMPT 120', 'CMPT 125', 'CMPT 225']), new Set(), 'CMPT 120');
+    const implied = inferTaken(courses, new Set(r.taken), new Set(r.notTaken));
+    expect(implied.has('CMPT 120')).toBe(false);
+  });
+
+  it('leaves unrelated ticks and marks alone', () => {
+    const r = untick(courses, new Set(['CMPT 120', 'CMPT 125', 'BUS 100']), new Set(['ENSC 251']), 'CMPT 120');
+    expect(r.taken).toEqual(['BUS 100']);
+    expect(r.notTaken).toEqual(['ENSC 251']);
   });
 });

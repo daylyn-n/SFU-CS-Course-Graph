@@ -120,3 +120,75 @@ export function inferTaken(courses: Courses, taken: Taken, notTaken: Taken = new
   }
   return result;
 }
+
+/**
+ * Untick `code`, and with it every ticked course that only had its
+ * prerequisites through it. Ticking CMPT 120, 125 and 225 then unticking
+ * CMPT 120 also unticks CMPT 125 (it needed 120 or 130, and 130 isn't taken)
+ * and so CMPT 225. A course that's still covered another way stays.
+ *
+ * For a filled-in guess (not ticked), unticking means "I didn't take this":
+ * it's recorded in notTaken so the guess moves to another route, and only
+ * if no route is left do the courses that needed it get unticked.
+ */
+export function untick(
+  courses: Courses,
+  taken: Taken,
+  notTaken: Taken,
+  code: string,
+  /** false when filling in prerequisites is switched off: only ticks count */
+  infer = true,
+): { taken: string[]; notTaken: string[]; cascaded: string[] } {
+  const impliedBefore = infer ? inferTaken(courses, taken, notTaken) : new Map<string, Implied>();
+  const before = new Set([...taken, ...impliedBefore.keys()]);
+  const ticked = new Set(taken);
+  ticked.delete(code);
+  // Treat the course (and anything cascaded) as not taken while checking, or
+  // the inference would just fill it straight back in.
+  const excluded = new Set([...notTaken, code]);
+  const cascaded: string[] = [];
+
+  // A course you ticked yourself: what relied on it lost its basis, so check
+  // against what was already known, minus anything filled in through the
+  // removed courses, with no new guesses (otherwise CMPT 125 would just be
+  // re-guessed as taken through CMPT 130). A wrong guess, though, may move to
+  // another route: that's the point of unticking it.
+  const strict = taken.has(code);
+  const after = () => {
+    if (!strict) return new Set([...ticked, ...(infer ? inferTaken(courses, ticked, excluded).keys() : [])]);
+    const dropped = new Set(excluded);
+    for (let changed = true; changed; ) {
+      changed = false;
+      for (const [c, info] of impliedBefore) {
+        if (!dropped.has(c) && dropped.has(info.via)) {
+          dropped.add(c);
+          changed = true;
+        }
+      }
+    }
+    return new Set([...ticked, ...[...impliedBefore.keys()].filter((c) => !dropped.has(c))]);
+  };
+
+  for (;;) {
+    const now = after();
+    const broken = [...ticked].filter((c) => {
+      const tree = courses[c]?.prereq;
+      return tree != null && satisfied(tree, before) && !satisfied(tree, now);
+    });
+    if (!broken.length) break;
+    for (const c of broken) {
+      ticked.delete(c);
+      excluded.add(c);
+      cascaded.push(c);
+    }
+  }
+
+  // Keep a "not taken" mark only where it's still needed: for `code` if
+  // something remaining would otherwise fill it back in. Cascaded courses
+  // aren't needed by anything left, so they don't get one.
+  const keep = new Set(notTaken);
+  for (const c of cascaded) keep.delete(c);
+  keep.delete(code);
+  if (infer && inferTaken(courses, ticked, keep).has(code)) keep.add(code);
+  return { taken: [...ticked], notTaken: [...keep], cascaded: cascaded.sort((a, b) => number(a) - number(b) || a.localeCompare(b)) };
+}
